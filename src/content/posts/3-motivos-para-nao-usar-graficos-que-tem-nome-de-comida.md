@@ -1,5 +1,5 @@
 ---
-titulo: Motivos para não usar gráficos que tem nome de comida — pizza, donut e spaghetti
+titulo: 3 Motivos para não usar gráficos que tem nome de comida — pizza, donut e spaghetti
 autores:
   - daniel-souza
 publicado_em: 2016-03-11
