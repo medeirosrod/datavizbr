@@ -1,0 +1,22 @@
+{
+  "bastidores": {
+    "nome": "Bastidores",
+    "descricao": "Como uma visualização foi feita: processo, decisões, ferramentas. Making-ofs em primeira pessoa de quem produz dataviz no Brasil.",
+    "cor": "#000000"
+  },
+  "panorama": {
+    "nome": "Panorama",
+    "descricao": "Quem faz, o que está acontecendo, quem ganhou o quê. Mapeamentos, perfis, cobertura de eventos e premiações da cena brasileira.",
+    "cor": "#000000"
+  },
+  "praticas": {
+    "nome": "Práticas",
+    "descricao": "Princípios, técnicas e ferramentas aplicáveis. De acessibilidade em gráficos a tutoriais de software.",
+    "cor": "#000000"
+  },
+  "ensaios": {
+    "nome": "Ensaios",
+    "descricao": "Reflexão sobre o campo: o papel da dataviz, ética, futuro, posicionamento.",
+    "cor": "#000000"
+  }
+}

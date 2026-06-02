@@ -1,0 +1,280 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const series = await getCollection('series');
+
+  return series.map((serie) => ({
+    params: { id: serie.id },
+    props: { serie },
+  }));
+}
+
+interface Props {
+  serie: any;
+}
+
+const { serie } = Astro.props;
+
+// Buscar posts desta série
+const allPosts = await getCollection('posts');
+const postsDaSerie = allPosts
+  .filter(post => post.data.serie?.id === serie.id && !post.data.rascunho)
+  .sort((a, b) => (a.data.ordem_na_serie || 0) - (b.data.ordem_na_serie || 0));
+
+const formatarData = (date: Date): string => {
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date(date));
+};
+---
+
+<BaseLayout title={serie.data.titulo} description={serie.data.descricao}>
+  <section class="serie-page">
+    <div class="container serie-container">
+
+      <header class="serie-header">
+        {serie.data.capa && (
+          <figure class="serie-capa">
+            <img src={serie.data.capa.src} alt={serie.data.titulo} />
+          </figure>
+        )}
+
+        <div class="serie-info">
+          <h1 class="serie-titulo">{serie.data.titulo}</h1>
+          <p class="serie-status">
+            {serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento'} · {postsDaSerie.length} {postsDaSerie.length === 1 ? 'parte' : 'partes'}
+          </p>
+          <p class="serie-descricao">{serie.data.descricao}</p>
+        </div>
+      </header>
+
+      {postsDaSerie.length > 0 && (
+        <section class="serie-posts">
+          <h2 class="posts-titulo">Posts desta série</h2>
+          <div class="posts-grid">
+            {postsDaSerie.map((post, idx) => (
+              <article class="post-card">
+                <div class="post-numero">Parte {(post.data.ordem_na_serie || idx + 1)}</div>
+
+                {post.data.capa && (
+                  <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
+                )}
+
+                <div class="post-card-body">
+                  <h3 class="post-titulo">
+                    <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
+                  </h3>
+
+                  {post.data.descricao && (
+                    <p class="post-excerpt">{post.data.descricao}</p>
+                  )}
+
+                  <div class="post-foot">
+                    <span>{post.data.autores[0]?.id}</span>
+                    <span class="dot"></span>
+                    <span>{formatarData(post.data.publicado_em)}</span>
+                  </div>
+                </div>
+
+                <a href={`/posts/${post.id}`} class="post-link">Ler →</a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .serie-page {
+    padding-block: var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .serie-container {
+    max-width: 960px;
+  }
+
+  .serie-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+    align-items: center;
+    margin-bottom: var(--space-32);
+  }
+
+  .serie-capa {
+    border-radius: var(--radius-large);
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .serie-capa img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .serie-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .serie-titulo {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .serie-status {
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    margin: 0;
+  }
+
+  .serie-descricao {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .serie-posts {
+    margin-top: var(--space-32);
+  }
+
+  .posts-titulo {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-16);
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-12);
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    overflow: hidden;
+    transition: box-shadow 160ms ease;
+    position: relative;
+  }
+
+  .post-card:hover {
+    box-shadow: var(--elev-2);
+  }
+
+  .post-numero {
+    position: absolute;
+    top: var(--space-8);
+    right: var(--space-8);
+    background: var(--color-primary);
+    color: white;
+    font-size: var(--fs-caption);
+    font-weight: 700;
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-relaxed);
+    z-index: 1;
+  }
+
+  .post-thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+  }
+
+  .post-card-body {
+    padding: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    flex: 1;
+  }
+
+  .post-titulo {
+    font-size: var(--fs-body-lg);
+    font-weight: 700;
+    line-height: var(--lh-h4);
+    letter-spacing: var(--ls-h4);
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .post-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .post-titulo a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-excerpt {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    margin: 0;
+    flex: 1;
+  }
+
+  .post-foot {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    margin: 0;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--fg-meta);
+    border-radius: 50%;
+  }
+
+  .post-link {
+    align-self: flex-start;
+    font-size: var(--fs-caption);
+    font-weight: 600;
+    color: var(--color-primary);
+    border-bottom: none;
+    padding: var(--space-4) var(--space-10);
+    margin: 0 var(--space-10) var(--space-10) var(--space-10);
+  }
+
+  .post-link:hover {
+    color: var(--color-primary-hover);
+  }
+
+  @media (max-width: 768px) {
+    .serie-header {
+      grid-template-columns: 1fr;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

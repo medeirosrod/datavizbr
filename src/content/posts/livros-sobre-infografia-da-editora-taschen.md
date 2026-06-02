@@ -1,0 +1,20 @@
+---
+titulo: "Livros sobre infografia da editora Taschen"
+autores:
+  - rodrigo-medeiros
+publicado_em: 2018-02-24
+secao: ensaios
+tags: []
+arquivo: true
+medium_url_original: "https://medium.com/datavizbr/livros-sobre-infografia-51289249656a"
+publicado_originalmente_em: 2018-02-24
+---
+
+Rafael Ancara e Fabiano de Miranda, do Pensar Infográfico, fizeram um vídeo no canal deles sobre os livros de Infografia, editados em português, da Editora Taschen. São quatro livros:
+
+- Information Graphics
+- Fritz Khan
+- Understanding the World
+- National Geographic Infographics
+
+Aproveitem para dar uma olhada no vídeo, se inscrever no canal deles porque vão aparecer outros vídeos sobre infografia e visualização de dados ainda neste ano de 2018! Vida longa ao Pensar Infográfico, vida longa aos pesquisadores que compartilham seus conhecimentos em português nesta área em crescimento aqui no Brasil.

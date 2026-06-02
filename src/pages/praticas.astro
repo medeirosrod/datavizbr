@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .filter(post => post.data.secao === 'praticas' && !post.data.rascunho)
+  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+
+const formatarData = (date: Date): string => {
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date(date));
+};
+---
+
+<BaseLayout title="Práticas">
+  <section class="section-page">
+    <div class="container">
+      <header class="section-header">
+        <h1>Práticas</h1>
+        <p class="section-subtitle">Técnicas, ferramentas e princípios aplicáveis</p>
+      </header>
+
+      <div class="posts-list">
+        {posts.map((post) => (
+          <article class="post-item">
+            <div class="post-item-header">
+              <h2 class="post-item-titulo">
+                <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
+              </h2>
+              <p class="post-item-meta">
+                <span>{post.data.autores[0]?.id}</span>
+                <span class="dot"></span>
+                <span>{formatarData(post.data.publicado_em)}</span>
+              </p>
+            </div>
+            {post.data.descricao && (
+              <p class="post-item-excerpt">{post.data.descricao}</p>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-page {
+    padding-block: var(--space-40);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-24);
+    max-width: 800px;
+  }
+
+  .section-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-subtitle {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+    max-width: 800px;
+  }
+
+  .post-item {
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-item-header {
+    margin-bottom: var(--space-6);
+  }
+
+  .post-item-titulo {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-4);
+  }
+
+  .post-item-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .post-item-titulo a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-item-meta {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+  }
+
+  .dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--fg-meta);
+    border-radius: 50%;
+  }
+
+  .post-item-excerpt {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,314 @@
+---
+// Componente para o gráfico D3 no hero
+---
+
+<div class="hero-chart-wrap reveal" id="chartWrap">
+  <div class="hero-chart-header">
+    <div class="hero-chart-caption">
+      <strong>Posts publicados por ano</strong>
+      <span>datavizbr · 2017–2025</span>
+    </div>
+    <div class="hero-chart-legend">
+      <span class="legend-item">
+        <span class="legend-dot orange"></span>
+        Posts
+      </span>
+      <span class="legend-item">
+        <span class="legend-dot purple"></span>
+        Autores
+      </span>
+    </div>
+  </div>
+  <div class="hero-chart" id="chart"></div>
+  <div class="chart-tooltip" id="tooltip"></div>
+</div>
+
+<style>
+  .hero-chart-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5/4;
+    background: linear-gradient(135deg, var(--dvb-orange-50) 0%, var(--dvb-purple-50) 100%);
+    border-radius: var(--radius-large);
+    border: 1px solid var(--border-default);
+    padding: var(--space-12);
+    box-shadow: var(--elev-2);
+    overflow: hidden;
+  }
+
+  .hero-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-chart-caption {
+    font-size: var(--fs-caption);
+    font-weight: 600;
+    color: var(--fg-label);
+    line-height: 1.3;
+  }
+
+  .hero-chart-caption strong {
+    display: block;
+    color: var(--fg-heading);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .hero-chart-legend {
+    display: flex;
+    gap: var(--space-6);
+    font-size: var(--fs-micro);
+    color: var(--fg-meta);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .legend-dot.orange {
+    background: var(--dvb-orange);
+  }
+
+  .legend-dot.purple {
+    background: var(--dvb-purple);
+  }
+</style>
+
+<script>
+  // Exportar função para renderizar o chart
+  // D3 está disponível via script CDN como window.d3
+
+  declare global {
+    interface Window {
+      renderChart: () => void;
+    }
+  }
+
+  window.renderChart = function() {
+    if (typeof d3 === 'undefined') {
+      console.warn('D3 not loaded yet');
+      return;
+    }
+
+    const container = document.getElementById('chart');
+    const tooltip = document.getElementById('tooltip');
+    const wrapper = document.getElementById('chartWrap');
+
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const rect = container.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+
+    const margin = { top: 12, right: 28, bottom: 30, left: 36 };
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+
+    const svg = d3.select('#chart')
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', `0 0 ${width} ${height}`);
+
+    const defs = svg.append('defs');
+    const grad = defs.append('linearGradient')
+      .attr('id', 'gradOrange')
+      .attr('x1', '0%').attr('y1', '0%')
+      .attr('x2', '0%').attr('y2', '100%');
+    grad.append('stop').attr('offset', '0%').attr('stop-color', '#e67e2c').attr('stop-opacity', 0.4);
+    grad.append('stop').attr('offset', '100%').attr('stop-color', '#e67e2c').attr('stop-opacity', 0.02);
+
+    const g = svg.append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    // Dados dinâmicos (será preenchido por JavaScript depois)
+    const data = window.chartData || [
+      { ano: 2017, posts: 8,  autores: 3 },
+      { ano: 2018, posts: 12, autores: 5 },
+      { ano: 2019, posts: 15, autores: 7 },
+      { ano: 2020, posts: 22, autores: 11 },
+      { ano: 2021, posts: 28, autores: 14 },
+      { ano: 2022, posts: 18, autores: 12 },
+      { ano: 2023, posts: 24, autores: 16 },
+      { ano: 2024, posts: 26, autores: 18 },
+      { ano: 2025, posts: 14, autores: 9 }
+    ];
+
+    const xScale = d3.scaleLinear()
+      .domain(d3.extent(data, d => d.ano) as [number, number])
+      .range([0, innerWidth]);
+
+    const yScale = d3.scaleLinear()
+      .domain([0, (d3.max(data, d => d.posts) || 0) * 1.15])
+      .range([innerHeight, 0]);
+
+    const yTicks = yScale.ticks(4);
+    g.selectAll('.grid-line')
+      .data(yTicks)
+      .enter()
+      .append('line')
+      .attr('class', 'grid-line')
+      .attr('x1', 0)
+      .attr('x2', innerWidth)
+      .attr('y1', (d: any) => yScale(d))
+      .attr('y2', (d: any) => yScale(d));
+
+    const xAxis = g.append('g')
+      .attr('transform', `translate(0,${innerHeight})`);
+
+    xAxis.append('line')
+      .attr('class', 'axis-line')
+      .attr('x1', 0).attr('x2', innerWidth);
+
+    xAxis.selectAll('.x-tick')
+      .data(data)
+      .enter()
+      .append('text')
+      .attr('class', 'axis-text')
+      .attr('x', (d: any) => xScale(d.ano))
+      .attr('y', 16)
+      .attr('text-anchor', 'middle')
+      .text((d: any) => `'${String(d.ano).slice(-2)}`);
+
+    g.selectAll('.y-tick')
+      .data(yTicks)
+      .enter()
+      .append('text')
+      .attr('class', 'axis-text')
+      .attr('x', -8)
+      .attr('y', (d: any) => yScale(d) + 3)
+      .attr('text-anchor', 'end')
+      .text((d: any) => d);
+
+    const lineGen = d3.line<any>()
+      .x(d => xScale(d.ano))
+      .y(d => yScale(d.posts))
+      .curve(d3.curveMonotoneX);
+
+    const lineGenSecondary = d3.line<any>()
+      .x(d => xScale(d.ano))
+      .y(d => yScale(d.autores))
+      .curve(d3.curveMonotoneX);
+
+    const areaGen = d3.area<any>()
+      .x(d => xScale(d.ano))
+      .y0(innerHeight)
+      .y1(d => yScale(d.posts))
+      .curve(d3.curveMonotoneX);
+
+    const area = g.append('path')
+      .datum(data)
+      .attr('class', 'data-area')
+      .attr('d', areaGen)
+      .attr('opacity', 0);
+
+    const line = g.append('path')
+      .datum(data)
+      .attr('class', 'data-line')
+      .attr('d', lineGen);
+
+    const lineLength = line.node()?.getTotalLength() || 0;
+    line
+      .attr('stroke-dasharray', `${lineLength} ${lineLength}`)
+      .attr('stroke-dashoffset', lineLength);
+
+    const lineSec = g.append('path')
+      .datum(data)
+      .attr('class', 'data-line-secondary')
+      .attr('d', lineGenSecondary);
+
+    const lineSecLength = lineSec.node()?.getTotalLength() || 0;
+    lineSec
+      .attr('stroke-dasharray', `${lineSecLength} ${lineSecLength}`)
+      .attr('stroke-dashoffset', lineSecLength);
+
+    const points = g.selectAll('.data-point')
+      .data(data)
+      .enter()
+      .append('circle')
+      .attr('class', 'data-point')
+      .attr('cx', (d: any) => xScale(d.ano))
+      .attr('cy', (d: any) => yScale(d.posts))
+      .attr('r', 0);
+
+    const pointsSecondary = g.selectAll('.data-point-secondary')
+      .data(data)
+      .enter()
+      .append('circle')
+      .attr('class', 'data-point-secondary')
+      .attr('cx', (d: any) => xScale(d.ano))
+      .attr('cy', (d: any) => yScale(d.autores))
+      .attr('r', 0);
+
+    points
+      .on('mouseenter', function(event: any, d: any) {
+        const cx = +d3.select(this).attr('cx') + margin.left;
+        const cy = +d3.select(this).attr('cy') + margin.top;
+
+        tooltip!.innerHTML = `
+          <strong>${d.ano}</strong>
+          ${d.posts} posts · ${d.autores} autores
+        `;
+        tooltip!.style.left = (cx - tooltip!.offsetWidth / 2) + 'px';
+        tooltip!.style.top = (cy - tooltip!.offsetHeight - 12) + 'px';
+        tooltip!.style.opacity = '1';
+      })
+      .on('mouseleave', () => {
+        tooltip!.style.opacity = '0';
+      });
+
+    // GSAP animations
+    if (typeof gsap !== 'undefined') {
+      const tl = gsap.timeline({ delay: 0.6 });
+
+      tl.to(line.node(), {
+        strokeDashoffset: 0,
+        duration: 1.8,
+        ease: 'power2.inOut'
+      });
+
+      tl.to(area.node(), {
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power2.out'
+      }, '-=1.4');
+
+      tl.to(lineSec.node(), {
+        strokeDashoffset: 0,
+        duration: 1.4,
+        ease: 'power2.inOut'
+      }, '-=1');
+
+      tl.to(points.nodes(), {
+        r: 4.5,
+        duration: 0.4,
+        stagger: 0.08,
+        ease: 'back.out(2)'
+      }, '-=0.8');
+
+      tl.to(pointsSecondary.nodes(), {
+        r: 2.5,
+        duration: 0.3,
+        stagger: 0.06,
+        ease: 'power2.out'
+      }, '-=1.2');
+    }
+  };
+</script>

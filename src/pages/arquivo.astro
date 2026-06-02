@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .filter(post => !post.data.rascunho)
+  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+
+const formatarData = (date: Date): string => {
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date(date));
+};
+
+// Agrupar posts por ano
+const postsPorAno: Record<number, typeof posts> = {};
+posts.forEach(post => {
+  const ano = new Date(post.data.publicado_em).getFullYear();
+  if (!postsPorAno[ano]) postsPorAno[ano] = [];
+  postsPorAno[ano].push(post);
+});
+---
+
+<BaseLayout title="Arquivo">
+  <section class="section-page">
+    <div class="container">
+      <header class="section-header">
+        <h1>Arquivo</h1>
+        <p class="section-subtitle">Todos os posts publicados</p>
+      </header>
+
+      <div class="arquivo-content">
+        {Object.entries(postsPorAno).map(([ano, postsDoAno]) => (
+          <section class="ano-section">
+            <h2 class="ano-title">{ano}</h2>
+            <div class="posts-list">
+              {postsDoAno.map((post) => (
+                <article class="post-item">
+                  <div class="post-item-header">
+                    <div class="post-item-secao">
+                      <span class={`badge badge-${post.data.secao}`}>
+                        {post.data.secao.charAt(0).toUpperCase() + post.data.secao.slice(1)}
+                      </span>
+                    </div>
+                    <h3 class="post-item-titulo">
+                      <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
+                    </h3>
+                  </div>
+                  <p class="post-item-meta">
+                    <span>{post.data.autores[0]?.id}</span>
+                    <span class="dot"></span>
+                    <span>{formatarData(post.data.publicado_em)}</span>
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-page {
+    padding-block: var(--space-40);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-32);
+    max-width: 800px;
+  }
+
+  .section-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-subtitle {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+  }
+
+  .arquivo-content {
+    max-width: 800px;
+  }
+
+  .ano-section {
+    margin-bottom: var(--space-24);
+  }
+
+  .ano-title {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-12);
+    padding-top: var(--space-12);
+    border-top: 1px solid var(--border-default);
+  }
+
+  .ano-section:first-child .ano-title {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .post-item {
+    padding-bottom: var(--space-8);
+  }
+
+  .post-item-header {
+    margin-bottom: var(--space-4);
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  .post-item-secao {
+    flex-shrink: 0;
+    margin-top: var(--space-2);
+  }
+
+  .post-item-titulo {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--ls-body);
+    font-weight: 600;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .post-item-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .post-item-titulo a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-item-meta {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    margin: 0;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--fg-meta);
+    border-radius: 50%;
+  }
+</style>

@@ -1,49 +1,780 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroChart from '../components/HeroChart.astro';
+import { getCollection } from 'astro:content';
+
+// Buscar todos os posts não arquivados e não em rascunho, ordenados por data
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .filter(post => !post.data.rascunho && !post.data.arquivo)
+  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+
+// Post em destaque (primeiro com destaque=true, ou o mais recente)
+const featured = posts.find(p => p.data.destaque) || posts[0];
+const recentPosts = posts.slice(1, 5);
+
+// Posts por seção
+const postsPorSecao = {
+  bastidores: posts.filter(p => p.data.secao === 'bastidores').slice(0, 2),
+  panorama: posts.filter(p => p.data.secao === 'panorama').slice(0, 2),
+  praticas: posts.filter(p => p.data.secao === 'praticas').slice(0, 2),
+  ensaios: posts.filter(p => p.data.secao === 'ensaios').slice(0, 2),
+};
+
+// Buscar séries
+const allSeries = await getCollection('series');
+const series = allSeries.sort((a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime()).slice(0, 2);
+
+// Função auxiliar para formatar data
+const formatarData = (date: Date): string => {
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date(date));
+};
+
+// Função para calcular tempo de leitura (estimativa simples)
+const tempoLeitura = (slug: string): number => {
+  // Aproximadamente 200 palavras por minuto
+  const wordsPerMinute = 200;
+  // Isso é uma aproximação - em produção você teria o conteúdo real
+  return Math.ceil(3); // placeholder
+};
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<BaseLayout>
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 1 — IDENTIDADE + GRÁFICO D3
+  ════════════════════════════════════════════ -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- COLUNA ESQUERDA — TEXTO -->
+        <div class="hero-text">
+          <p class="t-eyebrow hero-eyebrow reveal">Visualização de dados · Em português · Desde 2017</p>
+          <h1 class="hero-title" data-anim="split-words">
+            Bastidores, panorama, práticas e ensaios sobre dataviz no Brasil.
+          </h1>
+          <p class="hero-lead reveal">
+            O datavizbr reúne quem faz, pesquisa e escreve sobre visualização de dados em português —
+            making-ofs, mapeamentos da cena brasileira e reflexões sobre o campo.
+          </p>
+        </div>
+
+        <!-- COLUNA DIREITA — GRÁFICO D3.JS -->
+        <HeroChart />
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 2 — EM DESTAQUE
+  ════════════════════════════════════════════ -->
+  {featured && (
+    <section class="section destaque-section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Em destaque</h2>
+        </div>
+        <article class="destaque">
+          <div class="destaque-capa">
+            {featured.data.capa ? (
+              <img src={featured.data.capa.src} alt={featured.data.capa_alt || featured.data.titulo} />
+            ) : (
+              <div class="destaque-capa-placeholder" aria-hidden="true"></div>
+            )}
+          </div>
+          <div class="destaque-conteudo">
+            <div class="destaque-meta">
+              <span class={`badge badge-${featured.data.secao}`}>{featured.data.secao.charAt(0).toUpperCase() + featured.data.secao.slice(1)}</span>
+              <span class="t-caption">{tempoLeitura(featured.slug)} min de leitura</span>
+            </div>
+            <h2 class="destaque-titulo">
+              <a href={`/posts/${featured.id}`}>
+                {featured.data.titulo}
+              </a>
+            </h2>
+            <p class="destaque-excerpt">
+              {featured.data.descricao || featured.data.subtitulo}
+            </p>
+            <div class="destaque-autor">
+              <div class="autor-avatar" aria-hidden="true">{featured.data.autores[0]?.id?.substring(0, 2).toUpperCase() || 'DR'}</div>
+              <div>
+                <div class="autor-nome">{featured.data.autores[0]?.id}</div>
+                <div class="t-caption">{formatarData(featured.data.publicado_em)}</div>
+              </div>
+            </div>
+            <a href={`/posts/${featured.id}`} class="destaque-cta">
+              Ler texto →
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+  )}
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 3 — ÚLTIMOS POSTS
+  ════════════════════════════════════════════ -->
+  <section class="section ultimos-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Recentes</h2>
+        <a href="/arquivo" class="section-head-link">Ver arquivo completo →</a>
+      </div>
+      <div class="posts-grid stagger-children">
+        {recentPosts.map((post, idx) => (
+          <article class="post-card" style={`--stagger-index: ${idx}`}>
+            {post.data.capa ? (
+              <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
+            ) : (
+              <div class="post-thumb post-thumb-placeholder" aria-hidden="true"></div>
+            )}
+            <div class="post-card-body">
+              <div class="post-meta"><span class={`badge badge-${post.data.secao}`}>{post.data.secao.charAt(0).toUpperCase() + post.data.secao.slice(1)}</span></div>
+              <h3 class="post-titulo">
+                <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
+              </h3>
+              <p class="post-excerpt">
+                {post.data.descricao || post.data.subtitulo}
+              </p>
+              <div class="post-foot">
+                <span>{post.data.autores[0]?.id}</span><span class="dot"></span><span>{formatarData(post.data.publicado_em)}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 4 — NAVEGUE POR SEÇÃO
+  ════════════════════════════════════════════ -->
+  <section class="section secoes-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Navegue pelo acervo</h2>
+      </div>
+      <div class="secoes-grid stagger-children">
+
+        <div class="secao-card secao-card-bastidores" style="--stagger-index: 0">
+          <div class="secao-card-header">
+            <span class="secao-card-nome">Bastidores</span>
+            <span class="secao-card-count">Making-ofs</span>
+          </div>
+          <p class="secao-card-descricao">
+            Como uma visualização foi feita: processo, decisões, ferramentas.
+            Em primeira pessoa de quem produz dataviz no Brasil.
+          </p>
+          <ul class="secao-card-posts">
+            {postsPorSecao.bastidores.map((post) => (
+              <li><a href={`/posts/${post.id}`}>{post.data.titulo}</a></li>
+            ))}
+          </ul>
+          <a href="/bastidores" class="secao-card-cta">Ver todos →</a>
+        </div>
+
+        <div class="secao-card secao-card-panorama" style="--stagger-index: 1">
+          <div class="secao-card-header">
+            <span class="secao-card-nome">Panorama</span>
+            <span class="secao-card-count">Mapeamentos</span>
+          </div>
+          <p class="secao-card-descricao">
+            Quem faz, o que está acontecendo, quem ganhou o quê.
+            Perfis, eventos e premiações da cena brasileira.
+          </p>
+          <ul class="secao-card-posts">
+            {postsPorSecao.panorama.map((post) => (
+              <li><a href={`/posts/${post.id}`}>{post.data.titulo}</a></li>
+            ))}
+          </ul>
+          <a href="/panorama" class="secao-card-cta">Ver todos →</a>
+        </div>
+
+        <div class="secao-card secao-card-praticas" style="--stagger-index: 2">
+          <div class="secao-card-header">
+            <span class="secao-card-nome">Práticas</span>
+            <span class="secao-card-count">Técnicas</span>
+          </div>
+          <p class="secao-card-descricao">
+            Princípios, técnicas e ferramentas aplicáveis.
+            De acessibilidade em gráficos a tutoriais de software.
+          </p>
+          <ul class="secao-card-posts">
+            {postsPorSecao.praticas.map((post) => (
+              <li><a href={`/posts/${post.id}`}>{post.data.titulo}</a></li>
+            ))}
+          </ul>
+          <a href="/praticas" class="secao-card-cta">Ver todos →</a>
+        </div>
+
+        <div class="secao-card secao-card-ensaios" style="--stagger-index: 3">
+          <div class="secao-card-header">
+            <span class="secao-card-nome">Ensaios</span>
+            <span class="secao-card-count">Reflexões</span>
+          </div>
+          <p class="secao-card-descricao">
+            Reflexão sobre o campo: o papel da dataviz,
+            ética, futuro e posicionamento.
+          </p>
+          <ul class="secao-card-posts">
+            {postsPorSecao.ensaios.map((post) => (
+              <li><a href={`/posts/${post.id}`}>{post.data.titulo}</a></li>
+            ))}
+          </ul>
+          <a href="/ensaios" class="secao-card-cta">Ver todos →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 5 — SÉRIES
+  ════════════════════════════════════════════ -->
+  <section class="section series-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Séries</h2>
+        <a href="/series" class="section-head-link">Ver todas →</a>
+      </div>
+      <div class="series-grid stagger-children">
+        {series.map((serie, idx) => {
+          const statusText = serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento';
+          const postsDaSerie = allPosts.filter(p => p.data.serie?.id === serie.id);
+          const corClass = serie.data.cor ? `serie-capa-${serie.data.cor}` : 'serie-capa-laranja';
+          return (
+            <a href={`/series/${serie.data.titulo.toLowerCase().replace(/\s+/g, '-')}`} class="serie-card" style={`--stagger-index: ${idx}`}>
+              {serie.data.capa ? (
+                <img src={serie.data.capa.src} alt={serie.data.titulo} class="serie-card-capa" />
+              ) : (
+                <div class={`serie-card-capa ${corClass}`} aria-hidden="true"></div>
+              )}
+              <div class="serie-card-body">
+                <div class="serie-card-meta">
+                  <span class="badge badge-serie">Série</span>
+                  <span class="t-caption">{statusText} · {postsDaSerie.length} {postsDaSerie.length === 1 ? 'parte' : 'partes'}</span>
+                </div>
+                <h3 class="serie-card-titulo">{serie.data.titulo}</h3>
+                <p class="serie-card-descricao">
+                  {serie.data.descricao}
+                </p>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 6 — SOBRE + NEWSLETTER
+  ════════════════════════════════════════════ -->
+  <section class="sobre-newsletter">
+    <div class="container sobre-newsletter-inner">
+
+      <div class="sobre-bloco">
+        <p class="t-eyebrow">O projeto</p>
+        <h2 class="sobre-titulo">Dataviz em português, desde 2017.</h2>
+        <p class="sobre-texto">
+          O datavizbr nasceu como espaço pra compartilhar experiências sobre
+          visualização de dados em português. Ao longo dos anos reuniu autores
+          convidados, séries temáticas e, em 2023, organizou o livro
+          <em>Dataviz em perspectiva</em> com Júlia Giannella.
+        </p>
+        <a href="/sobre" class="btn btn-quiet">Conheça o projeto →</a>
+      </div>
+
+      <div class="newsletter-bloco">
+        <p class="t-eyebrow">Newsletter</p>
+        <h2 class="newsletter-titulo">Uma vez por mês, no seu email.</h2>
+        <p class="newsletter-texto">
+          No primeiro domingo do mês, uma curadoria do que rolou na cena
+          brasileira de dataviz — sem spam, sem patrocínio.
+        </p>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input
+            class="input"
+            type="email"
+            placeholder="seu@email.com"
+            aria-label="Seu endereço de email"
+          />
+          <button class="btn btn-primary" type="submit">Inscrever</button>
+        </form>
+        <p class="newsletter-disclaimer t-caption">
+          Você pode cancelar a qualquer momento.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ── HERO GRID ──────────────────────────────── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-24);
+    align-items: center;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .hero-eyebrow {
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-title {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .hero-lead {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  /* ── UTILITÁRIOS ────────────────────────────── */
+  .section {
+    padding-block: var(--space-40);
+    border-bottom: 1px solid var(--border-default);
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-16);
+  }
+  .section-head-link {
+    font-size: var(--fs-body-sm);
+    font-weight: 500;
+    color: var(--fg-meta);
+    border-bottom: none;
+  }
+  .section-head-link:hover { color: var(--color-primary); }
+
+  /* ── HERO ───────────────────────────────────── */
+  .hero {
+    padding-block: var(--space-40) var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+  }
+  .hero-eyebrow { margin-bottom: var(--space-8); }
+  .hero-title {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    max-width: 760px;
+    margin-bottom: var(--space-8);
+  }
+  .hero-lead {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    max-width: 580px;
+  }
+
+  /* ── DESTAQUE ───────────────────────────────── */
+  .destaque {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+    align-items: center;
+  }
+  .destaque-capa-placeholder {
+    aspect-ratio: 4/3;
+    border-radius: var(--radius-large);
+    background: linear-gradient(135deg, var(--dvb-orange-100) 0%, var(--dvb-purple-100) 100%);
+    box-shadow: var(--elev-3);
+  }
+  .destaque-meta {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+    margin-bottom: var(--space-7);
+  }
+  .destaque-titulo {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-8);
+  }
+  .destaque-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+  .destaque-titulo a:hover { color: var(--color-primary); }
+  .destaque-excerpt {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin-bottom: var(--space-10);
+  }
+  .destaque-autor {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+    margin-bottom: var(--space-10);
+  }
+  .autor-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--dvb-orange), var(--dvb-purple));
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: var(--fs-micro);
+    flex-shrink: 0;
+  }
+  .autor-nome {
+    font-size: var(--fs-body-sm);
+    font-weight: 600;
+    color: var(--fg-heading);
+  }
+  .destaque-cta {
+    display: inline-block;
+    font-size: var(--fs-body-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+    border-bottom: none;
+  }
+  .destaque-cta:hover { color: var(--color-primary-hover); }
+
+  /* ── GRID DE POSTS ──────────────────────────── */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-12);
+  }
+  .post-card { display: flex; flex-direction: column; }
+  .post-thumb {
+    aspect-ratio: 16/10;
+    border-radius: var(--radius-relaxed);
+    border: 1px solid var(--border-default);
+    overflow: hidden;
+    margin-bottom: var(--space-7);
+    transition: box-shadow 160ms ease;
+  }
+  .post-thumb-placeholder { background: var(--bg-soft); }
+  .post-card:hover .post-thumb { box-shadow: var(--elev-2); }
+  .post-card-body { display: flex; flex-direction: column; flex: 1; gap: var(--space-3); }
+  .post-meta { margin-bottom: var(--space-2); }
+  .post-titulo {
+    font-size: var(--fs-body-lg);
+    font-weight: 700;
+    line-height: var(--lh-h4);
+    letter-spacing: var(--ls-h4);
+    color: var(--fg-heading);
+  }
+  .post-titulo a { color: inherit; border-bottom: none; }
+  .post-titulo a:hover { color: var(--color-primary); }
+  .post-excerpt {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    flex: 1;
+  }
+  .post-foot {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    margin-top: var(--space-4);
+  }
+
+  /* ── SEÇÕES ─────────────────────────────────── */
+  .secoes-section { background: var(--bg-soft); }
+  .secoes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+
+  /* card como div, não âncora — evita conflito com estilos de link global */
+  .secao-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    padding: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    transition: box-shadow 160ms ease;
+  }
+  .secao-card:hover { box-shadow: var(--elev-2); }
+
+  /* borda esquerda colorida — usa box-shadow pra não interferir no border */
+  .secao-card-bastidores { box-shadow: inset 3px 0 0 var(--dvb-orange); }
+  .secao-card-panorama   { box-shadow: inset 3px 0 0 var(--dvb-purple); }
+  .secao-card-praticas   { box-shadow: inset 3px 0 0 var(--dvb-ink-3); }
+  .secao-card-ensaios    { box-shadow: inset 3px 0 0 var(--dvb-purple-deep); }
+
+  .secao-card:hover.secao-card-bastidores { box-shadow: inset 3px 0 0 var(--dvb-orange), var(--elev-2); }
+  .secao-card:hover.secao-card-panorama   { box-shadow: inset 3px 0 0 var(--dvb-purple), var(--elev-2); }
+  .secao-card:hover.secao-card-praticas   { box-shadow: inset 3px 0 0 var(--dvb-ink-3), var(--elev-2); }
+  .secao-card:hover.secao-card-ensaios    { box-shadow: inset 3px 0 0 var(--dvb-purple-deep), var(--elev-2); }
+
+  .secao-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .secao-card-nome {
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--fg-heading);
+  }
+  .secao-card-count {
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    font-family: var(--font-mono);
+  }
+  .secao-card-descricao {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    flex: 1;
+  }
+  .secao-card-posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border-default);
+    padding-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .secao-card-posts li a {
+    font-size: var(--fs-body-sm);
+    color: var(--fg-body);
+    border-bottom: none;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .secao-card-posts li a:hover { color: var(--color-primary); }
+  .secao-card-cta {
+    font-size: var(--fs-caption);
+    font-weight: 500;
+    color: var(--fg-meta);
+    border-bottom: none;
+    margin-top: auto;
+    align-self: flex-start;
+  }
+  .secao-card:hover .secao-card-cta { color: var(--color-primary); }
+
+  /* ── SÉRIES ─────────────────────────────────── */
+  .series-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-12);
+  }
+.serie-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-large);
+  overflow: visible;        /* era hidden — cortava sombra e borda */
+  color: inherit;
+  transition: box-shadow 160ms ease;
+}
+.serie-card-capa {
+  aspect-ratio: 16/7;
+  border-radius: var(--radius-large) var(--radius-large) 0 0;  /* arredonda só o topo */
+  overflow: hidden;         /* clip da imagem fica só na capa */
+}
+  .serie-card:hover { box-shadow: var(--elev-3); color: inherit; }
+  .serie-capa-laranja {
+    background: linear-gradient(135deg, var(--dvb-orange-100) 0%, var(--dvb-orange-50) 100%);
+  }
+  .serie-capa-roxa {
+    background: linear-gradient(135deg, var(--dvb-purple-100) 0%, var(--dvb-purple-50) 100%);
+  }
+  .serie-card-body {
+    padding: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .serie-card-meta { display: flex; gap: var(--space-6); align-items: center; }
+  .serie-card-titulo {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+  }
+  .serie-card:hover .serie-card-titulo { color: var(--color-primary); }
+  .serie-card-descricao {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+  }
+
+  /* ── SOBRE + NEWSLETTER ─────────────────────── */
+.sobre-newsletter { padding-block: var(--space-40) var(--space-48); }
+  .sobre-newsletter-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-24);
+    align-items: start;
+	overflow: visible;
+  }
+  .sobre-bloco,
+.newsletter-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  overflow: visible;
+}
+  .sobre-titulo,
+  .newsletter-titulo {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+  }
+  .sobre-texto,
+  .newsletter-texto {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+  }
+  .newsletter-form {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+  .newsletter-form .input { flex: 1; }
+  .newsletter-disclaimer { color: var(--fg-meta); margin-top: var(--space-3); }
+
+  /* sobrescreve btn-quiet só na home */
+.sobre-bloco .btn-quiet {
+  align-self: flex-start;
+  border-color: var(--border-strong);
+  margin-bottom: var(--space-4);
+  padding-bottom: calc(var(--space-5) + 1px);
+}
+  /* ── RESPONSIVO ─────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero-grid               { grid-template-columns: 1fr; gap: var(--space-16); }
+    .posts-grid              { grid-template-columns: repeat(2, 1fr); }
+    .destaque                { grid-template-columns: 1fr; }
+    .destaque-capa           { display: none; }
+  }
+  @media (max-width: 640px) {
+    .hero-title              { font-size: var(--fs-h2); }
+    .posts-grid              { grid-template-columns: 1fr; }
+    .secoes-grid             { grid-template-columns: 1fr; }
+    .series-grid             { grid-template-columns: 1fr; }
+    .sobre-newsletter-inner  { grid-template-columns: 1fr; }
+    .newsletter-form         { flex-direction: column; }
+  }
+
+</style>
+
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+
+<script is:inline>
+  // Importar função de inicialização
+  function initAnimations() {
+    // Scroll Progress
+    const scrollBar = document.getElementById('scrollProgress');
+    if (scrollBar) {
+      window.addEventListener('scroll', () => {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / scrollHeight) * 100;
+        scrollBar.style.width = scrolled + '%';
+      });
+    }
+
+    // Nav Scroll
+    const nav = document.getElementById('nav');
+    if (nav) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.classList.add('nav-scrolled');
+        } else {
+          nav.classList.remove('nav-scrolled');
+        }
+      });
+    }
+
+    // Reveal Animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Stagger children
+    document.querySelectorAll('.stagger-children').forEach(container => {
+      Array.from(container.children).forEach((child, i) => {
+        child.style.setProperty('--stagger-index', String(i));
+      });
+      observer.observe(container);
+    });
+
+    // Split Words
+    if (typeof gsap !== 'undefined') {
+      document.querySelectorAll('[data-anim="split-words"]').forEach(el => {
+        const text = el.textContent;
+        const words = text?.split(' ') || [];
+        el.innerHTML = words.map(w =>
+          `<span class="word-wrapper"><span class="word">${w}</span></span>`
+        ).join(' ');
+
+        gsap.from(el.querySelectorAll('.word'), {
+          opacity: 0,
+          y: '100%',
+          duration: 0.8,
+          stagger: 0.04,
+          ease: 'power3.out',
+        });
+      });
+    }
+
+    // Render chart
+    if (typeof window.renderChart === 'function') {
+      window.renderChart();
+    }
+  }
+
+  // Inicializar
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAnimations);
+  } else {
+    initAnimations();
+  }
+</script>

@@ -1,0 +1,251 @@
+---
+// src/layouts/BaseLayout.astro
+import { SITE, NAV_PRINCIPAL, NAV_RODAPE, REDES } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = SITE.descricao,
+  ogImage = '/og-default.png',
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${SITE.nome}` : `${SITE.nome} — ${SITE.tagline}`;
+const canonicalURL = new URL(Astro.url.pathname, SITE.url);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO básico -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, SITE.url)} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={SITE.nome} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, SITE.url)} />
+
+    <!-- RSS -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE.nome} — RSS`}
+      href={new URL('/rss.xml', SITE.url)}
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+
+  <body>
+
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="/" class="nav-logo-link" aria-label={SITE.nome}>
+          <img class="nav-logo" src="/logo.svg" alt={SITE.nome} />
+        </a>
+
+        <div class="nav-links">
+          {NAV_PRINCIPAL.map((item) => (
+            <a
+              href={item.url}
+              class:list={['nav-link', { active: Astro.url.pathname.startsWith(item.url) }]}
+            >
+              {item.texto}
+            </a>
+          ))}
+        </div>
+
+        <a href="/newsletter" class="btn btn-primary btn-sm nav-cta">
+          Newsletter
+        </a>
+      </div>
+    </nav>
+
+    <!-- CONTEÚDO DA PÁGINA -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- FOOTER -->
+    <footer data-theme="roxo-dark" class="footer" style="background: var(--dvb-purple-deep);">
+      <div class="footer-inner container">
+
+        <div class="footer-brand">
+          <a href="/" aria-label={SITE.nome}>
+            <img src="/logo-branco.svg" alt={SITE.nome} class="footer-logo" />
+          </a>
+          <p class="footer-blurb">{SITE.descricao}</p>
+
+          <div class="footer-redes">
+            {REDES.instagram && (
+              <a href={REDES.instagram} aria-label="Instagram" class="footer-rede-link">
+                Instagram
+              </a>
+            )}
+            {REDES.twitter && (
+              <a href={REDES.twitter} aria-label="Bluesky / Twitter" class="footer-rede-link">
+                Bluesky
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Conteúdo</h4>
+          <ul>
+            <li><a href="/bastidores">Bastidores</a></li>
+            <li><a href="/panorama">Panorama</a></li>
+            <li><a href="/praticas">Práticas</a></li>
+            <li><a href="/ensaios">Ensaios</a></li>
+            <li><a href="/series">Séries</a></li>
+            <li><a href="/arquivo">Arquivo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Sobre</h4>
+          <ul>
+            {NAV_RODAPE.map((item) => (
+              <li><a href={item.url}>{item.texto}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Publicações</h4>
+          <ul>
+            <li><a href="/livros">Livros</a></li>
+            <li><a href="/livros/dataviz-em-perspectiva">Dataviz em perspectiva</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom container">
+        <span>© {new Date().getFullYear()} datavizbr · Conteúdo sob <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></span>
+        <span>Feito em Recife · IBM Plex Sans</span>
+      </div>
+    </footer>
+
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-default);
+  }
+  .nav-inner {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding: 14px var(--padding-x);
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
+  }
+  .nav-logo-link { border-bottom: none; }
+  .nav-logo { height: 22px; }
+  .nav-links {
+    display: flex;
+    gap: var(--space-16);
+    margin-left: auto;
+  }
+  .nav-link {
+    color: var(--fg-label);
+    font-size: var(--fs-body-sm);
+    font-weight: 500;
+    border-bottom: none;
+    transition: color 120ms ease;
+  }
+  .nav-link:hover,
+  .nav-link.active { color: var(--color-primary); }
+  .nav-cta { margin-left: var(--space-4); }
+
+  /* FOOTER */
+  .footer { padding: var(--space-32) 0 var(--space-24); }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--space-24);
+    margin-bottom: var(--space-24);
+  }
+  .footer-logo { height: 24px; margin-bottom: var(--space-7); }
+  .footer-blurb {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    max-width: 280px;
+    margin-bottom: var(--space-8);
+  }
+  .footer-redes { display: flex; gap: var(--space-8); }
+  .footer-rede-link {
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    border-bottom: none;
+  }
+  .footer-rede-link:hover { color: var(--color-primary); }
+  .footer-col h4 {
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    color: var(--fg-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    margin-bottom: var(--space-8);
+  }
+  .footer-col ul { display: flex; flex-direction: column; gap: var(--space-5); }
+  .footer-col ul a {
+    color: var(--fg-body);
+    font-size: var(--fs-body-sm);
+    border-bottom: none;
+  }
+  .footer-col ul a:hover { color: var(--color-primary); }
+  .footer-bottom {
+    padding-top: var(--space-12);
+    border-top: 1px solid var(--border-default);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+  }
+  .footer-bottom a { color: var(--fg-meta); border-bottom-color: var(--border-default); }
+  .footer-bottom a:hover { color: var(--color-primary); }
+
+  /* RESPONSIVO */
+  @media (max-width: 768px) {
+    .nav-links { display: none; } /* implementar menu mobile depois */
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: var(--space-16); }
+    .footer-bottom { flex-direction: column; gap: var(--space-4); text-align: center; }
+  }
+  @media (max-width: 480px) {
+    .footer-inner { grid-template-columns: 1fr; }
+  }
+</style>

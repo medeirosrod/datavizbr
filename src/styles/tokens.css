@@ -1,0 +1,181 @@
+/* =============================================================================
+   DATAVIZBR — TOKENS
+   Extraído diretamente do colors_and_type.css do design system oficial.
+   Este é o único arquivo onde valores visuais são definidos.
+   ============================================================================= */
+
+/* --------------------------------------------------------------------------
+   FONTES — IBM Plex Sans + Source Code Pro (Google Fonts)
+   Carregados via Google Fonts CDN para máxima compatibilidade
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Source+Code+Pro:wght@400;500;700&display=swap');
+
+/* Fallback se Google Fonts não carregar */
+@supports not (font-family: 'IBM Plex Sans') {
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'Courier New', monospace;
+  }
+}
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 500; font-style: normal;  src: url('/fonts/IBMPlexSans-Medium.ttf') format('truetype');           font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 500; font-style: italic;  src: url('/fonts/IBMPlexSans-MediumItalic.ttf') format('truetype');    font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 600; font-style: normal;  src: url('/fonts/IBMPlexSans-SemiBold.ttf') format('truetype');        font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 600; font-style: italic;  src: url('/fonts/IBMPlexSans-SemiBoldItalic.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 700; font-style: normal;  src: url('/fonts/IBMPlexSans-Bold.ttf') format('truetype');            font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 700; font-style: italic;  src: url('/fonts/IBMPlexSans-BoldItalic.ttf') format('truetype');      font-display: swap; }
+
+/* --------------------------------------------------------------------------
+   TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+
+  /* MARCA */
+  --dvb-orange:        #e67e2c;
+  --dvb-orange-hover:  #c8651a;
+  --dvb-orange-deep:   #9a4a0d;
+  --dvb-orange-300:    #f4b07a;
+  --dvb-orange-100:    #fce8d6;
+  --dvb-orange-50:     #fef5ec;
+
+  --dvb-purple:        #552b7b;
+  --dvb-purple-hover:  #3f1f5d;
+  --dvb-purple-deep:   #2a1640;
+  --dvb-purple-300:    #9c7bbf;
+  --dvb-purple-100:    #ead8f7;
+  --dvb-purple-50:     #f6eefb;
+
+  --dvb-ink:           #1a0f24;
+  --dvb-ink-2:         #3a2a48;
+  --dvb-ink-3:         #6b5d76;
+  --dvb-ink-4:         #948aa0;
+  --dvb-line:          #e8e3ee;
+  --dvb-line-strong:   #d2c9dd;
+  --dvb-bg:            #ffffff;
+  --dvb-bg-soft:       #faf8fc;
+  --dvb-bg-card:       #ffffff;
+
+  /* STATUS */
+  --dvb-success:       #15be53;
+  --dvb-success-bg:    rgba(21, 190, 83, 0.12);
+  --dvb-success-text:  #0d8a3c;
+  --dvb-error:         #c83838;
+  --dvb-error-bg:      rgba(200, 56, 56, 0.10);
+
+  /* SOMBRAS */
+  --shadow-soft:  rgba(85, 43, 123, 0.06);
+  --shadow-near:  rgba(26, 15, 36, 0.10);
+  --shadow-far:   rgba(85, 43, 123, 0.20);
+
+  /* PAPÉIS SEMÂNTICOS — tema laranja (padrão) */
+  --color-primary:        var(--dvb-orange);
+  --color-primary-hover:  var(--dvb-orange-hover);
+  --color-primary-deep:   var(--dvb-orange-deep);
+  --color-primary-tint:   var(--dvb-orange-100);
+  --color-primary-soft:   var(--dvb-orange-50);
+
+  --color-secondary:        var(--dvb-purple);
+  --color-secondary-hover:  var(--dvb-purple-hover);
+  --color-secondary-tint:   var(--dvb-purple-100);
+
+  --fg-heading:    var(--dvb-ink);
+  --fg-label:      var(--dvb-ink-2);
+  --fg-body:       var(--dvb-ink-3);
+  --fg-meta:       var(--dvb-ink-4);
+  --fg-link:       var(--dvb-orange);
+  --fg-on-primary: #ffffff;
+
+  --bg-page:        var(--dvb-bg);
+  --bg-soft:        var(--dvb-bg-soft);
+  --bg-card:        var(--dvb-bg-card);
+
+  --border-default: var(--dvb-line);
+  --border-strong:  var(--dvb-line-strong);
+  --border-focus:   var(--dvb-orange);
+
+  /* ELEVAÇÃO */
+  --elev-0: none;
+  --elev-1: 0 2px 6px var(--shadow-soft);
+  --elev-2: 0 12px 28px rgba(85, 43, 123, 0.08);
+  --elev-3:
+    rgba(85, 43, 123, 0.20) 0px 30px 45px -30px,
+    rgba(26, 15, 36, 0.10)  0px 18px 36px -18px;
+  --elev-4:
+    rgba(42, 22, 64, 0.28)  0px 14px 21px -14px,
+    rgba(26, 15, 36, 0.10)  0px  8px 17px  -8px;
+  --focus-ring: 0 0 0 3px rgba(230, 126, 44, 0.25);
+
+  /* RAIOS */
+  --radius-micro:       1px;
+  --radius-standard:    4px;
+  --radius-comfortable: 5px;
+  --radius-relaxed:     6px;
+  --radius-large:       8px;
+
+  /* ESPAÇAMENTO (base 8px) */
+  --space-px:  1px;   --space-1:   2px;   --space-2:   4px;   --space-3:   6px;
+  --space-4:   8px;   --space-5:  10px;   --space-6:  12px;   --space-7:  14px;
+  --space-8:  16px;   --space-10: 20px;   --space-12: 24px;   --space-16: 32px;
+  --space-20: 40px;   --space-24: 48px;   --space-32: 64px;   --space-40: 80px;
+  --space-48: 96px;
+
+  /* TIPOGRAFIA */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'Source Code Pro', SFMono-Regular, ui-monospace, Menlo, monospace;
+  --feat-display: "kern", "calt", "liga";
+  --feat-tabular: "tnum";
+
+  --fs-display: 56px;   --lh-display: 1.05;  --ls-display: -1.6px;
+  --fs-h1:      44px;   --lh-h1:      1.10;  --ls-h1:      -1.0px;
+  --fs-h2:      32px;   --lh-h2:      1.15;  --ls-h2:      -0.6px;
+  --fs-h3:      24px;   --lh-h3:      1.20;  --ls-h3:      -0.3px;
+  --fs-h4:      20px;   --lh-h4:      1.25;  --ls-h4:      -0.15px;
+  --fs-body-lg: 19px;   --lh-body-lg: 1.55;
+  --fs-body:    16px;   --lh-body:    1.60;
+  --fs-body-sm: 14px;   --lh-body-sm: 1.50;
+  --fs-caption: 13px;   --lh-caption: 1.40;
+  --fs-micro:   11px;   --lh-micro:   1.35;
+  --fs-code:    13px;   --lh-code:    1.70;
+
+  /* LAYOUT */
+  --max-width:      1080px;
+  --content-width:   720px;
+  --padding-x:        32px;
+
+  /* SEÇÕES EDITORIAIS */
+  --cor-bastidores: var(--dvb-orange);
+  --cor-panorama:   var(--dvb-purple);
+  --cor-praticas:   var(--dvb-ink-3);
+  --cor-ensaios:    var(--dvb-purple-deep);
+}
+
+/* TEMA ROXO */
+[data-theme="roxo"] {
+  --color-primary:        var(--dvb-purple);
+  --color-primary-hover:  var(--dvb-purple-hover);
+  --color-primary-deep:   var(--dvb-purple-deep);
+  --color-primary-tint:   var(--dvb-purple-100);
+  --color-primary-soft:   var(--dvb-purple-50);
+  --color-secondary:        var(--dvb-orange);
+  --color-secondary-hover:  var(--dvb-orange-hover);
+  --color-secondary-tint:   var(--dvb-orange-100);
+  --fg-link:      var(--dvb-purple);
+  --border-focus: var(--dvb-purple);
+  --focus-ring:   0 0 0 3px rgba(85, 43, 123, 0.25);
+}
+
+/* TEMA ROXO ESCURO — footer e faixa de newsletter */
+[data-theme="roxo-dark"] {
+  --color-primary:       var(--dvb-orange);
+  --color-primary-hover: var(--dvb-orange-300);
+  --fg-heading:          #ffffff;
+  --fg-label:            rgba(255, 255, 255, 0.85);
+  --fg-body:             rgba(255, 255, 255, 0.75);
+  --fg-meta:             rgba(255, 255, 255, 0.55);
+  --fg-link:             var(--dvb-orange);
+  --fg-on-primary:       var(--dvb-purple-deep);
+  --bg-page:             var(--dvb-purple);
+  --bg-card:             rgba(255, 255, 255, 0.06);
+  --border-default:      rgba(255, 255, 255, 0.14);
+  --border-strong:       rgba(255, 255, 255, 0.25);
+  --border-focus:        var(--dvb-orange);
+}

@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allSeries = await getCollection('series');
+const series = allSeries.sort((a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime());
+const allPosts = await getCollection('posts');
+
+const formatarData = (date: Date): string => {
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date(date));
+};
+---
+
+<BaseLayout title="Séries">
+  <section class="section-page">
+    <div class="container">
+      <header class="section-header">
+        <h1>Séries</h1>
+        <p class="section-subtitle">Coleções temáticas de posts</p>
+      </header>
+
+      <div class="series-list">
+        {series.map((serie) => {
+          const postsDaSerie = allPosts.filter(p => p.data.serie?.id === serie.id);
+          const statusText = serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento';
+          return (
+            <article class="serie-item">
+              <div class="serie-item-header">
+                <div>
+                  <h2 class="serie-item-titulo">
+                    <a href={`/series/${serie.id}`}>{serie.data.titulo}</a>
+                  </h2>
+                  <p class="serie-item-meta">
+                    <span>{statusText}</span>
+                    <span class="dot"></span>
+                    <span>{postsDaSerie.length} {postsDaSerie.length === 1 ? 'parte' : 'partes'}</span>
+                  </p>
+                </div>
+              </div>
+              <p class="serie-item-descricao">{serie.data.descricao}</p>
+              {postsDaSerie.length > 0 && (
+                <div class="serie-posts">
+                  <h3 class="serie-posts-titulo">Posts nesta série:</h3>
+                  <ul class="serie-posts-list">
+                    {postsDaSerie
+                      .sort((a, b) => (a.data.ordem_na_serie || 0) - (b.data.ordem_na_serie || 0))
+                      .map((post, idx) => (
+                        <li>
+                          <a href={`/posts/${post.id}`}>
+                            {post.data.ordem_na_serie && <span class="post-number">{post.data.ordem_na_serie}.</span>}
+                            {post.data.titulo}
+                          </a>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-page {
+    padding-block: var(--space-40);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-24);
+    max-width: 800px;
+  }
+
+  .section-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-subtitle {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+  }
+
+  .series-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+    max-width: 800px;
+  }
+
+  .serie-item {
+    padding-bottom: var(--space-16);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .serie-item:last-child {
+    border-bottom: none;
+  }
+
+  .serie-item-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .serie-item-titulo {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-4);
+  }
+
+  .serie-item-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .serie-item-titulo a:hover {
+    color: var(--color-primary);
+  }
+
+  .serie-item-meta {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    margin: 0;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--fg-meta);
+    border-radius: 50%;
+  }
+
+  .serie-item-descricao {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+    margin-bottom: var(--space-10);
+  }
+
+  .serie-posts {
+    background: var(--bg-soft);
+    padding: var(--space-10);
+    border-radius: var(--radius-relaxed);
+  }
+
+  .serie-posts-titulo {
+    font-size: var(--fs-caption);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    color: var(--fg-meta);
+    margin-bottom: var(--space-6);
+  }
+
+  .serie-posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .serie-posts-list li {
+    font-size: var(--fs-body-sm);
+  }
+
+  .serie-posts-list a {
+    color: var(--fg-body);
+    border-bottom: none;
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .serie-posts-list a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-number {
+    font-weight: 600;
+    color: var(--fg-meta);
+    min-width: 24px;
+    text-align: right;
+  }
+</style>

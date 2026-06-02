@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allAutores = await getCollection('autores');
+const autores = allAutores
+  .filter(autor => autor.data.ativo)
+  .sort((a, b) => {
+    if (a.data.papel === 'curadoria') return -1;
+    if (b.data.papel === 'curadoria') return 1;
+    if (a.data.papel === 'recorrente') return -1;
+    return 1;
+  });
+---
+
+<BaseLayout title="Autores">
+  <section class="section-page">
+    <div class="container">
+      <header class="section-header">
+        <h1>Autores</h1>
+        <p class="section-subtitle">Quem escreve sobre dataviz no datavizbr</p>
+      </header>
+
+      <div class="autores-grid">
+        {autores.map((autor) => (
+          <article class="autor-card">
+            {autor.data.foto && (
+              <img src={autor.data.foto.src} alt={autor.data.nome} class="autor-foto" />
+            )}
+            <div class="autor-conteudo">
+              <h2 class="autor-nome">{autor.data.nome}</h2>
+              <p class="autor-role">{autor.data.papel}</p>
+              <p class="autor-quem">{autor.data.quem_e}</p>
+
+              {autor.data.trabalhando_em && (
+                <p class="autor-info">
+                  <span class="label">Trabalhando em:</span>
+                  {autor.data.trabalhando_em}
+                </p>
+              )}
+
+              {autor.data.redes || (autor.data.twitter || autor.data.instagram || autor.data.linkedin) && (
+                <div class="autor-redes">
+                  {autor.data.twitter && (
+                    <a href={`https://twitter.com/${autor.data.twitter}`} class="rede-link" title="Twitter">
+                      Twitter
+                    </a>
+                  )}
+                  {autor.data.instagram && (
+                    <a href={`https://instagram.com/${autor.data.instagram}`} class="rede-link" title="Instagram">
+                      Instagram
+                    </a>
+                  )}
+                  {autor.data.linkedin && (
+                    <a href={autor.data.linkedin} class="rede-link" title="LinkedIn">
+                      LinkedIn
+                    </a>
+                  )}
+                  {autor.data.site && (
+                    <a href={autor.data.site} class="rede-link" title="Site">
+                      Site
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-page {
+    padding-block: var(--space-40);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-32);
+    max-width: 800px;
+  }
+
+  .section-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-subtitle {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+  }
+
+  .autores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-16);
+  }
+
+  .autor-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    overflow: hidden;
+    transition: box-shadow 160ms ease;
+  }
+
+  .autor-card:hover {
+    box-shadow: var(--elev-2);
+  }
+
+  .autor-foto {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+  }
+
+  .autor-conteudo {
+    padding: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .autor-nome {
+    font-size: var(--fs-body-lg);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .autor-role {
+    font-size: var(--fs-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    color: var(--color-primary);
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .autor-quem {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .autor-info {
+    font-size: var(--fs-body-sm);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--fg-heading);
+  }
+
+  .autor-redes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-default);
+  }
+
+  .rede-link {
+    font-size: var(--fs-caption);
+    font-weight: 500;
+    color: var(--color-primary);
+    border-bottom: none;
+  }
+
+  .rede-link:hover {
+    color: var(--color-primary-hover);
+  }
+
+  @media (max-width: 768px) {
+    .autores-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
