@@ -158,31 +158,41 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
   <script is:inline>
-    // Animar hover nos links do menu com D3.js
-    document.querySelectorAll('.nav-link').forEach(link => {
-      const svg = link.querySelector('.nav-link-underline');
-      const line = d3.select(svg).select('line');
+    // Aguardar D3 e GSAP carregarem antes de inicializar
+    function initNavAnimation() {
+      if (typeof d3 === 'undefined' || typeof gsap === 'undefined') {
+        setTimeout(initNavAnimation, 50);
+        return;
+      }
 
-      if (!line.node()) return;
+      // Animar hover nos links do menu com D3.js
+      document.querySelectorAll('.nav-link').forEach(link => {
+        const svg = link.querySelector('.nav-link-underline');
+        const line = d3.select(svg).select('line');
 
-      // Hover: animar com GSAP
-      link.addEventListener('mouseenter', () => {
-        const svgWidth = svg.getBoundingClientRect().width;
-        gsap.to(line.node(), {
-          attr: { x2: svgWidth },
-          duration: 0.4,
-          ease: 'power2.out'
+        if (!line.node()) return;
+
+        // Hover: animar com GSAP
+        link.addEventListener('mouseenter', () => {
+          const svgWidth = svg.getBoundingClientRect().width;
+          gsap.to(line.node(), {
+            attr: { x2: svgWidth },
+            duration: 0.4,
+            ease: 'power2.out'
+          });
+        });
+
+        link.addEventListener('mouseleave', () => {
+          gsap.to(line.node(), {
+            attr: { x2: 0 },
+            duration: 0.3,
+            ease: 'power2.in'
+          });
         });
       });
+    }
 
-      link.addEventListener('mouseleave', () => {
-        gsap.to(line.node(), {
-          attr: { x2: 0 },
-          duration: 0.3,
-          ease: 'power2.in'
-        });
-      });
-    });
+    initNavAnimation();
   </script>
 
   </body>
