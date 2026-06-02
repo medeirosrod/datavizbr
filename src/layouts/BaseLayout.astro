@@ -75,7 +75,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
             >
               {item.texto}
               <svg class="nav-link-underline" viewBox="0 0 100 2" preserveAspectRatio="none">
-                <line x1="0" y1="1" x2="100" y2="1" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" />
+                <line x1="0" y1="1" x2="0" y2="1" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" />
               </svg>
             </a>
           ))}
@@ -165,9 +165,6 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 
       if (!line.node()) return;
 
-      // Estado inicial: linha com width 0
-      line.attr('x1', 0).attr('x2', 0);
-
       // Hover: animar com GSAP
       link.addEventListener('mouseenter', () => {
         const svgWidth = svg.getBoundingClientRect().width;
@@ -185,12 +182,6 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
           ease: 'power2.in'
         });
       });
-
-      // Se é link ativo, manter a linha visível
-      if (link.classList.contains('active')) {
-        const svgWidth = svg.getBoundingClientRect().width;
-        line.attr('x1', 0).attr('x2', svgWidth);
-      }
     });
   </script>
 
