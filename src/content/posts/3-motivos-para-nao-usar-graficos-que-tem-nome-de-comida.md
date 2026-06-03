@@ -6,6 +6,8 @@ publicado_em: 2016-03-11
 secao: praticas
 descricao: Você ainda usa gráficos de pizza nas suas apresentações? A polêmica é antiga, mas a ciência por trás da visualização de dados não mente.
 destaque: true
+capa: ./_capas/img-01.png
+capa_alt: Comparação entre gráfico de pizza e gráfico de barras
 tags: [Dataviz, Share2016poa, Data Visualization,Porto Alegre]
 ---
 
