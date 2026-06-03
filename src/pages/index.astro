@@ -2,6 +2,7 @@
 // src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroChart from '../components/HeroChart.astro';
+import AutorNome from '../components/AutorNome.astro';
 import { getCollection } from 'astro:content';
 
 // Buscar todos os posts não arquivados e não em rascunho, ordenados por data
@@ -102,7 +103,7 @@ const tempoLeitura = (slug: string): number => {
             <div class="destaque-autor">
               <div class="autor-avatar" aria-hidden="true">{featured.data.autores[0]?.id?.substring(0, 2).toUpperCase() || 'DR'}</div>
               <div>
-                <div class="autor-nome">{featured.data.autores[0]?.id}</div>
+                <div class="autor-nome"><AutorNome autorId={featured.data.autores[0]?.id} /></div>
                 <div class="t-caption">{formatarData(featured.data.publicado_em)}</div>
               </div>
             </div>
@@ -141,7 +142,7 @@ const tempoLeitura = (slug: string): number => {
                 {post.data.descricao || post.data.subtitulo}
               </p>
               <div class="post-foot">
-                <span>{post.data.autores[0]?.id}</span><span class="dot"></span><span>{formatarData(post.data.publicado_em)}</span>
+                <span><AutorNome autorId={post.data.autores[0]?.id} /></span><span class="dot"></span><span>{formatarData(post.data.publicado_em)}</span>
               </div>
             </div>
           </article>

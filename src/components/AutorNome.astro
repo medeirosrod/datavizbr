@@ -1,0 +1,12 @@
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  autorId: string;
+}
+
+const { autorId } = Astro.props;
+const autor = await getEntry('autores', autorId);
+---
+
+{autor?.data.nome || autorId}

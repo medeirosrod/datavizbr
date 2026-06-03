@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AutorNome from '../components/AutorNome.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('posts');
@@ -31,7 +32,7 @@ const formatarData = (date: Date): string => {
                 <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
               </h2>
               <p class="post-item-meta">
-                <span>{post.data.autores[0]?.id}</span>
+                <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
                 <span class="dot"></span>
                 <span>{formatarData(post.data.publicado_em)}</span>
               </p>

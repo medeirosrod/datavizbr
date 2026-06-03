@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import AutorNome from '../components/AutorNome.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -42,7 +43,7 @@ const formatarData = (date: Date): string => {
           {post.data.autores.map((autor, idx) => (
             <>
               <a href={`/autores#${autor.id}`} class="autor-link">
-                {autor.id}
+                <AutorNome autorId={autor.id} />
               </a>
               {idx < post.data.autores.length - 1 && ', '}
             </>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AutorNome from '../../components/AutorNome.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -73,7 +74,7 @@ const formatarData = (date: Date): string => {
                   )}
 
                   <div class="post-foot">
-                    <span>{post.data.autores[0]?.id}</span>
+                    <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
                     <span class="dot"></span>
                     <span>{formatarData(post.data.publicado_em)}</span>
                   </div>
