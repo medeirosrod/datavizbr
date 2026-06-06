@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE, REDES } from '../../consts';
+---
+
+<BaseLayout
+  title="Contato"
+  description="Entre em contato com a curadoria do datavizbr."
+>
+  <section class="page-section">
+    <div class="container">
+
+      <header class="page-header">
+        <p class="t-eyebrow">Fale conosco</p>
+        <h1>Contato</h1>
+        <p class="page-lead">
+          Dúvidas, sugestões, propostas de parceria ou erros que encontrou no site —
+          fique à vontade para entrar em contato.
+        </p>
+      </header>
+
+      <div class="contato-grid">
+
+        <div class="contato-bloco">
+          <h2>Email</h2>
+          <p>A forma mais direta de falar com a curadoria:</p>
+          <a href={`mailto:${SITE.email_contato}`} class="contato-email">
+            {SITE.email_contato}
+          </a>
+          <p class="contato-aviso">Respondemos em até duas semanas.</p>
+        </div>
+
+        {(REDES.instagram || REDES.twitter) && (
+          <div class="contato-bloco">
+            <h2>Redes sociais</h2>
+            <p>Você também pode nos encontrar em:</p>
+            <ul class="redes-list">
+              {REDES.instagram && (
+                <li>
+                  <a href={REDES.instagram} target="_blank" rel="noopener noreferrer">
+                    Instagram @datavizbr
+                  </a>
+                </li>
+              )}
+              {REDES.twitter && (
+                <li>
+                  <a href={REDES.twitter} target="_blank" rel="noopener noreferrer">
+                    Twitter / Bluesky
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
+
+        <div class="contato-bloco">
+          <h2>Quer escrever no datavizbr?</h2>
+          <p>
+            Se você quer propor um texto, leia primeiro a página de colaboração —
+            ela explica o que publicamos e como funciona o processo editorial.
+          </p>
+          <a href="/sobre/escrever" class="btn btn-quiet">Como escrever no datavizbr →</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-section {
+    padding-block: var(--space-40);
+  }
+
+  .page-header {
+    max-width: 680px;
+    margin-bottom: var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+    padding-bottom: var(--space-24);
+  }
+
+  .page-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-block: var(--space-6) var(--space-10);
+  }
+
+  .page-lead {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .contato-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-24);
+    max-width: 680px;
+  }
+
+  .contato-bloco {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding-bottom: var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .contato-bloco:last-child {
+    border-bottom: none;
+  }
+
+  .contato-bloco h2 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .contato-bloco p {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .contato-email {
+    font-size: var(--fs-body-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .contato-aviso {
+    font-size: var(--fs-body-sm);
+    color: var(--fg-meta);
+    margin: 0;
+  }
+
+  .redes-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .redes-list a {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+</style>

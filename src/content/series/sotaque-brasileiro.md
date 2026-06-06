@@ -5,6 +5,7 @@ status: "encerrada"
 iniciada_em: 2021-01-01
 encerrada_em: 2021-12-31
 cor: "laranja"
+capa: ./_capas/vdsb-02.png
 ---
 
 Série de posts sobre a cena de visualização de dados em português no Brasil.

@@ -1,0 +1,310 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const livros = await getCollection('livros');
+  return livros.map(livro => ({
+    params: { slug: livro.id },
+    props: { livro },
+  }));
+}
+
+const { livro } = Astro.props;
+const { Content } = await render(livro);
+
+const allAutores = await getCollection('autores');
+const organizadores = livro.data.organizadores
+  .map(ref => allAutores.find(a => a.id === ref.id))
+  .filter(Boolean);
+---
+
+<BaseLayout
+  title={livro.data.titulo}
+  description={livro.data.sinopse}
+>
+  <article class="livro-page">
+    <div class="container">
+
+      <div class="livro-hero">
+        <div class="livro-capa-wrap">
+          <img
+            src={livro.data.capa.src}
+            alt={livro.data.capa_alt}
+            class="livro-capa"
+          />
+        </div>
+
+        <div class="livro-header">
+          <div class="livro-meta">
+            <span class="livro-ano">{livro.data.ano}</span>
+            {livro.data.editora && (
+              <>
+                <span class="dot"></span>
+                <span>{livro.data.editora}</span>
+              </>
+            )}
+            {livro.data.paginas && (
+              <>
+                <span class="dot"></span>
+                <span>{livro.data.paginas} páginas</span>
+              </>
+            )}
+            <span class="dot"></span>
+            <span class={`acesso acesso-${livro.data.tipo_acesso}`}>
+              {livro.data.tipo_acesso === 'gratuito' ? 'Acesso gratuito' : 'Pago'}
+            </span>
+          </div>
+
+          <h1 class="livro-titulo">{livro.data.titulo}</h1>
+          {livro.data.subtitulo && (
+            <p class="livro-subtitulo">{livro.data.subtitulo}</p>
+          )}
+
+          {organizadores.length > 0 && (
+            <p class="livro-organizadores">
+              Organizado por{' '}
+              {organizadores.map((o, i) => (
+                <>
+                  <strong>{o?.data.nome}</strong>
+                  {i < organizadores.length - 2 && ', '}
+                  {i === organizadores.length - 2 && ' e '}
+                </>
+              ))}
+            </p>
+          )}
+
+          <p class="livro-sinopse">{livro.data.sinopse}</p>
+
+          {livro.data.links.length > 0 && (
+            <div class="livro-ctas">
+              {livro.data.links.map(link => (
+                <a
+                  href={link.url}
+                  class={link.tipo === 'download_pdf' ? 'btn btn-primary' : 'btn btn-quiet'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+
+          <div class="livro-formatos">
+            <span class="formatos-label">Disponível em:</span>
+            {livro.data.formato.map(f => (
+              <span class="formato-tag">{f.toUpperCase()}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {livro.data.sumario && livro.data.sumario.length > 0 && (
+        <section class="sumario-section">
+          <h2>Sumário</h2>
+          <ol class="sumario-list">
+            {livro.data.sumario.map(cap => (
+              <li class="sumario-item">
+                <span class="cap-titulo">{cap.titulo}</span>
+                {cap.paginas && <span class="cap-paginas">{cap.paginas}</span>}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {livro.body && (
+        <section class="livro-conteudo">
+          <Content />
+        </section>
+      )}
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .livro-page {
+    padding-block: var(--space-40);
+  }
+
+  .livro-hero {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--space-24);
+    align-items: start;
+    margin-bottom: var(--space-40);
+    padding-bottom: var(--space-40);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .livro-capa {
+    width: 100%;
+    border-radius: var(--radius-relaxed);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--elev-3);
+    display: block;
+  }
+
+  .livro-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .livro-meta {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    flex-wrap: wrap;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--fg-meta);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .acesso-gratuito {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .livro-titulo {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .livro-subtitulo {
+    font-size: var(--fs-body-lg);
+    color: var(--fg-meta);
+    margin: 0;
+  }
+
+  .livro-organizadores {
+    font-size: var(--fs-body);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .livro-sinopse {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .livro-ctas {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .livro-formatos {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .formatos-label {
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+  }
+
+  .formato-tag {
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    font-family: var(--font-mono);
+    background: var(--bg-soft);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-pill);
+    padding: 2px var(--space-4);
+    color: var(--fg-meta);
+  }
+
+  .sumario-section {
+    max-width: 680px;
+    margin-bottom: var(--space-32);
+  }
+
+  .sumario-section h2 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-10);
+  }
+
+  .sumario-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: cap;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sumario-item {
+    counter-increment: cap;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-6);
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--border-default);
+    font-size: var(--fs-body-sm);
+  }
+
+  .sumario-item:last-child {
+    border-bottom: none;
+  }
+
+  .cap-titulo {
+    color: var(--fg-body);
+  }
+
+  .cap-paginas {
+    color: var(--fg-meta);
+    font-size: var(--fs-caption);
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+  }
+
+  .livro-conteudo {
+    max-width: 680px;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+  }
+
+  .livro-conteudo :global(p) {
+    margin-bottom: var(--space-6);
+  }
+
+  .livro-conteudo :global(em) {
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .livro-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .livro-capa {
+      max-width: 200px;
+    }
+  }
+</style>

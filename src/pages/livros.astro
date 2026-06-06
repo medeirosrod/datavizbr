@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allLivros = await getCollection('livros');
+const livros = allLivros.sort((a, b) => b.data.ano - a.data.ano);
+---
+
+<BaseLayout
+  title="Livros"
+  description="Publicações do datavizbr sobre visualização de dados em português."
+>
+  <section class="page-section">
+    <div class="container">
+
+      <header class="page-header">
+        <h1>Livros</h1>
+        <p class="page-subtitle">Publicações do datavizbr</p>
+      </header>
+
+      {livros.length === 0 ? (
+        <p class="vazio">Nenhum livro publicado ainda.</p>
+      ) : (
+        <div class="livros-list">
+          {livros.map((livro) => (
+            <article class="livro-card">
+              <a href={`/livros/${livro.id}`} class="livro-capa-link">
+                <img
+                  src={livro.data.capa.src}
+                  alt={livro.data.capa_alt}
+                  class="livro-capa"
+                />
+              </a>
+              <div class="livro-info">
+                <div class="livro-meta">
+                  <span class="livro-ano">{livro.data.ano}</span>
+                  <span class="dot"></span>
+                  <span class="livro-acesso livro-acesso-{livro.data.tipo_acesso}">
+                    {livro.data.tipo_acesso === 'gratuito' ? 'Acesso gratuito' : 'Pago'}
+                  </span>
+                </div>
+                <h2 class="livro-titulo">
+                  <a href={`/livros/${livro.id}`}>{livro.data.titulo}</a>
+                </h2>
+                {livro.data.subtitulo && (
+                  <p class="livro-subtitulo">{livro.data.subtitulo}</p>
+                )}
+                <p class="livro-sinopse">{livro.data.sinopse}</p>
+                <div class="livro-links">
+                  {livro.data.links.map(link => (
+                    <a
+                      href={link.url}
+                      class="btn btn-primary"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                  <a href={`/livros/${livro.id}`} class="btn btn-quiet">Ver detalhes →</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-section {
+    padding-block: var(--space-40);
+  }
+
+  .page-header {
+    margin-bottom: var(--space-32);
+  }
+
+  .page-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .page-subtitle {
+    font-size: var(--fs-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .vazio {
+    font-size: var(--fs-body);
+    color: var(--fg-meta);
+  }
+
+  .livros-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-32);
+    max-width: 860px;
+  }
+
+  .livro-card {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-20);
+    align-items: start;
+    padding-bottom: var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .livro-card:last-child {
+    border-bottom: none;
+  }
+
+  .livro-capa-link {
+    display: block;
+    border-bottom: none;
+  }
+
+  .livro-capa {
+    width: 100%;
+    border-radius: var(--radius-relaxed);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--elev-2);
+    display: block;
+  }
+
+  .livro-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .livro-meta {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+  }
+
+  .dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--fg-meta);
+    border-radius: 50%;
+  }
+
+  .livro-acesso-gratuito {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .livro-titulo {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .livro-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .livro-titulo a:hover {
+    color: var(--color-primary);
+  }
+
+  .livro-subtitulo {
+    font-size: var(--fs-body-lg);
+    color: var(--fg-meta);
+    margin: 0;
+    margin-top: calc(-1 * var(--space-4));
+  }
+
+  .livro-sinopse {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .livro-links {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+  }
+
+  @media (max-width: 640px) {
+    .livro-card {
+      grid-template-columns: 1fr;
+    }
+
+    .livro-capa {
+      max-width: 200px;
+    }
+  }
+</style>

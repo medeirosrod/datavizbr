@@ -1,229 +1,206 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AutorNome from '../../components/AutorNome.astro';
+import { getSecaoLabel } from '../../consts';
+import { getCollection } from 'astro:content';
 
-// Gera rotas para todas as tags únicas
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts', ({ data }) => !data.rascunho && !data.arquivo);
 
   const tagsSet = new Set<string>();
-  allPosts.forEach(post => {
-    post.data.tags.forEach(tag => tagsSet.add(tag));
-  });
+  allPosts.forEach(post => post.data.tags.forEach(tag => tagsSet.add(tag)));
 
   return Array.from(tagsSet).map(tag => ({
     params: { slug: tag },
-    props: { tag }
+    props: { tag },
   }));
 }
 
-interface Props {
-  tag: string;
-}
-
+interface Props { tag: string; }
 const { tag } = Astro.props;
 
-// Carrega posts com esta tag específica
 const allPosts = await getCollection('posts', ({ data }) => !data.rascunho && !data.arquivo);
-const taggedPosts = allPosts
+const posts = allPosts
   .filter(post => post.data.tags.includes(tag))
   .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
 
-const title = `Posts em "${tag}"`;
-const description = `${taggedPosts.length} post${taggedPosts.length !== 1 ? 's' : ''} com a tag "${tag}"`;
+const formatarData = (date: Date): string => {
+  return new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(new Date(date));
+};
 ---
 
-<BaseLayout title={title} description={description}>
-  <main class="container">
-    <div class="section-header">
-      <a href="/tags" class="back-link">← Voltar para tags</a>
-      <h1 class="reveal">{tag}</h1>
-      <p class="lead reveal">{taggedPosts.length} {taggedPosts.length === 1 ? 'post' : 'posts'}</p>
-    </div>
+<BaseLayout
+  title={`#${tag}`}
+  description={`${posts.length} ${posts.length === 1 ? 'post' : 'posts'} com a tag "${tag}" no datavizbr.`}
+>
+  <section class="section-page">
+    <div class="container">
 
-    {taggedPosts.length > 0 ? (
-      <div class="posts-grid stagger-children">
-        {taggedPosts.map(post => (
-          <article class="post-card">
+      <header class="section-header">
+        <a href="/tags" class="voltar">← Todas as tags</a>
+        <h1>#{tag}</h1>
+        <p class="section-subtitle">
+          {posts.length} {posts.length === 1 ? 'post' : 'posts'}
+        </p>
+      </header>
+
+      <div class="posts-list">
+        {posts.map(post => (
+          <article class="post-item">
             <div class="post-meta">
-              <span class="post-section">{post.data.secao}</span>
-              <time class="post-date">
-                {new Date(post.data.publicado_em).toLocaleDateString('pt-BR', {
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: '2-digit'
-                })}
-              </time>
+              <span class={`badge badge-${post.data.secao}`}>
+                {getSecaoLabel(post.data.secao)}
+              </span>
+              <span class="post-data t-caption">{formatarData(post.data.publicado_em)}</span>
             </div>
-            <h2 class="post-title">
+            <h2 class="post-titulo">
               <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
             </h2>
             {post.data.descricao && (
-              <p class="post-description">{post.data.descricao}</p>
+              <p class="post-descricao">{post.data.descricao}</p>
             )}
-            <div class="post-tags">
-              {post.data.tags.map(t => (
-                <a href={`/tags/${t}`} class={`tag ${t === tag ? 'active' : ''}`}>
-                  {t}
-                </a>
-              ))}
+            <div class="post-footer">
+              <span class="t-caption"><AutorNome autorId={post.data.autores[0]?.id} /></span>
+              {post.data.tags.length > 1 && (
+                <div class="post-tags">
+                  {post.data.tags.map(t => (
+                    <a
+                      href={`/tags/${t}`}
+                      class:list={['post-tag', { 'post-tag-ativa': t === tag }]}
+                    >
+                      #{t}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </article>
         ))}
       </div>
-    ) : (
-      <div class="empty-state reveal">
-        <p>Nenhum post encontrado com esta tag.</p>
-      </div>
-    )}
-  </main>
+
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .back-link {
-    display: inline-block;
-    margin-bottom: var(--space-6);
-    color: var(--color-primary);
-    text-decoration: none;
-    font-size: var(--fs-sm);
-    transition: color var(--motion-fast) ease;
-  }
-
-  .back-link:hover {
-    color: var(--color-primary-dark);
-  }
-
-  .section-header {
-    margin-bottom: var(--space-20);
-    padding-bottom: var(--space-16);
+  .section-page {
+    padding-block: var(--space-40);
     border-bottom: 1px solid var(--border-default);
   }
 
-  h1 {
-    font-size: var(--fs-display);
-    font-weight: 700;
-    margin-bottom: var(--space-6);
-    color: var(--fg-heading);
+  .section-header {
+    margin-bottom: var(--space-32);
+    max-width: 800px;
   }
 
-  .lead {
-    font-size: var(--fs-lg);
+  .voltar {
+    display: inline-block;
+    font-size: var(--fs-body-sm);
+    font-weight: 500;
     color: var(--fg-meta);
+    margin-bottom: var(--space-10);
   }
 
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: var(--space-8);
-    margin-bottom: var(--space-20);
+  .voltar:hover {
+    color: var(--color-primary);
   }
 
-  .post-card {
-    padding: var(--space-6);
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-medium);
-    transition: all var(--motion-fast) ease;
+  .section-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-subtitle {
+    font-size: var(--fs-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .posts-list {
     display: flex;
     flex-direction: column;
+    gap: 0;
+    max-width: 800px;
   }
 
-  .post-card:hover {
-    background: var(--bg-hover);
-    border-color: var(--border-hover);
+  .post-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-block: var(--space-16);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
   }
 
   .post-meta {
     display: flex;
+    gap: var(--space-6);
     align-items: center;
-    gap: var(--space-4);
-    margin-bottom: var(--space-4);
-    font-size: var(--fs-caption);
   }
 
-  .post-section {
-    display: inline-block;
-    padding: 2px 6px;
-    background: var(--dvb-orange-100);
-    color: var(--dvb-orange-900);
-    border-radius: 3px;
-    font-weight: 600;
-    text-transform: capitalize;
-  }
-
-  .post-date {
+  .post-data {
     color: var(--fg-meta);
   }
 
-  .post-title {
-    font-size: var(--fs-lg);
-    font-weight: 600;
-    margin-bottom: var(--space-3);
-    line-height: 1.4;
-  }
-
-  .post-title a {
+  .post-titulo {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
     color: var(--fg-heading);
-    text-decoration: none;
-    transition: color var(--motion-fast) ease;
+    margin: 0;
   }
 
-  .post-title a:hover {
+  .post-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .post-titulo a:hover {
     color: var(--color-primary);
   }
 
-  .post-description {
-    color: var(--fg-meta);
-    font-size: var(--fs-sm);
-    margin-bottom: var(--space-4);
-    flex-grow: 1;
+  .post-descricao {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
   }
 
   .post-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-top: auto;
+    gap: var(--space-3);
   }
 
-  .tag {
-    display: inline-block;
-    padding: 4px 8px;
-    background: var(--fg-secondary);
-    color: var(--bg-primary);
-    border-radius: 3px;
-    font-size: var(--fs-micro);
-    text-decoration: none;
-    transition: all var(--motion-fast) ease;
-    text-transform: lowercase;
-  }
-
-  .tag:hover {
-    background: var(--color-primary);
-  }
-
-  .tag.active {
-    background: var(--color-primary);
-    font-weight: 600;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: var(--space-20);
+  .post-tag {
+    font-size: var(--fs-caption);
     color: var(--fg-meta);
+    border-bottom: none;
   }
 
-  @media (max-width: 768px) {
-    .posts-grid {
-      grid-template-columns: 1fr;
-    }
+  .post-tag:hover {
+    color: var(--color-primary);
+  }
 
-    h1 {
-      font-size: var(--fs-2xl);
-    }
-
-    .lead {
-      font-size: var(--fs-base);
-    }
+  .post-tag-ativa {
+    color: var(--color-primary);
+    font-weight: 600;
   }
 </style>

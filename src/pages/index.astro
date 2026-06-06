@@ -3,6 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroChart from '../components/HeroChart.astro';
 import AutorNome from '../components/AutorNome.astro';
+import { getSecaoLabel } from '../consts';
 import { getCollection } from 'astro:content';
 
 // Buscar todos os posts não arquivados e não em rascunho, ordenados por data
@@ -89,7 +90,7 @@ const tempoLeitura = (slug: string): number => {
           </div>
           <div class="destaque-conteudo">
             <div class="destaque-meta">
-              <span class={`badge badge-${featured.data.secao}`}>{featured.data.secao.charAt(0).toUpperCase() + featured.data.secao.slice(1)}</span>
+              <span class={`badge badge-${featured.data.secao}`}>{getSecaoLabel(featured.data.secao)}</span>
               <span class="t-caption">{tempoLeitura(featured.slug)} min de leitura</span>
             </div>
             <h2 class="destaque-titulo">
@@ -134,7 +135,7 @@ const tempoLeitura = (slug: string): number => {
               <div class="post-thumb post-thumb-placeholder" aria-hidden="true"></div>
             )}
             <div class="post-card-body">
-              <div class="post-meta"><span class={`badge badge-${post.data.secao}`}>{post.data.secao.charAt(0).toUpperCase() + post.data.secao.slice(1)}</span></div>
+              <div class="post-meta"><span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span></div>
               <h3 class="post-titulo">
                 <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
               </h3>
@@ -248,7 +249,7 @@ const tempoLeitura = (slug: string): number => {
           const postsDaSerie = allPosts.filter(p => p.data.serie?.id === serie.id);
           const corClass = serie.data.cor ? `serie-capa-${serie.data.cor}` : 'serie-capa-laranja';
           return (
-            <a href={`/series/${serie.data.titulo.toLowerCase().replace(/\s+/g, '-')}`} class="serie-card" style={`--stagger-index: ${idx}`}>
+            <a href={`/series/${serie.id}`} class="serie-card" style={`--stagger-index: ${idx}`}>
               {serie.data.capa ? (
                 <img src={serie.data.capa.src} alt={serie.data.titulo} class="serie-card-capa" />
               ) : (
@@ -650,6 +651,7 @@ const tempoLeitura = (slug: string): number => {
   flex-direction: column;
   gap: var(--space-6);
   overflow: visible;
+  margin-bottom: var(--space-4);
 }
   .sobre-titulo,
   .newsletter-titulo {

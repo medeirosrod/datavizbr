@@ -10,6 +10,7 @@ tags:
   - dataviz
   - brasil
 descricao: "Quarta parte do mapeamento da cena brasileira de visualização de dados."
+capa: ./_capas/vdsb-04.png
 ---
 
 Continuando nossa série sobre visualização de dados no Brasil chegamos a terceira categoria — Jornalismo de dados. Lembrando que na primeira parte falamos sobre a história da Infografia no Brasil nos últimos 25 anos, na segunda parte falamos sobre a primeira categoria de trabalhos envolvendo Arte e as interfaces físicas e na segunda categoria sobre Design e Computação.

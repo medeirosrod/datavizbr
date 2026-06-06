@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../consts';
+---
+
+<BaseLayout
+  title="Escrever no datavizbr"
+  description="Saiba como contribuir com um texto para o datavizbr — o que publicamos, como funciona o processo e como entrar em contato."
+>
+  <section class="page-section">
+    <div class="container">
+
+      <header class="page-header">
+        <p class="t-eyebrow">Colabore</p>
+        <h1>Escreva no datavizbr</h1>
+        <p class="page-lead">
+          O datavizbr é feito por quem faz, pesquisa e pensa dataviz no Brasil.
+          Se você tem algo a compartilhar, pode propor um texto.
+        </p>
+      </header>
+
+      <div class="content-prose">
+
+        <h2>O que publicamos</h2>
+        <p>Textos em português sobre visualização de dados, organizados em quatro seções:</p>
+        <ul>
+          <li>
+            <strong>Bastidores</strong> — o making-of de uma visualização sua: o que você
+            queria comunicar, as decisões que tomou, o que funcionou (e o que não funcionou).
+          </li>
+          <li>
+            <strong>Panorama</strong> — mapeamentos da cena: perfis de profissionais, eventos,
+            premiações, o que está acontecendo no campo no Brasil e na América Latina.
+          </li>
+          <li>
+            <strong>Práticas</strong> — técnicas, ferramentas, princípios. Tutoriais, análises
+            de abordagens, boas práticas de acessibilidade e design.
+          </li>
+          <li>
+            <strong>Ensaios</strong> — reflexão sobre o campo: ética, posicionamento,
+            o papel da dataviz na sociedade, perspectivas sobre o futuro.
+          </li>
+        </ul>
+
+        <h2>O que buscamos</h2>
+        <p>
+          Textos com voz autoral, escritos por quem tem experiência direta com o assunto.
+          Não precisam ser longos — o ideal é que sejam densos e específicos, com um
+          ponto de vista claro e exemplos concretos.
+        </p>
+        <p>
+          Damos preferência para textos inéditos, mas podemos discutir republicações de
+          textos já publicados em Medium, newsletters ou blogs pessoais.
+        </p>
+
+        <h2>Como propor</h2>
+        <p>
+          Mande um email para <a href={`mailto:${SITE.email_contato}`}>{SITE.email_contato}</a>
+          com o assunto <strong>"Proposta de texto"</strong>. Inclua:
+        </p>
+        <ol>
+          <li>Uma breve apresentação sua (quem você é, onde trabalha ou pesquisa)</li>
+          <li>A ideia do texto em dois ou três parágrafos</li>
+          <li>A seção onde você imagina que o texto se encaixaria</li>
+          <li>Um ou dois exemplos de textos seus já publicados, se tiver</li>
+        </ol>
+        <p>
+          A curadoria responde em até duas semanas.
+        </p>
+
+        <h2>Processo editorial</h2>
+        <p>
+          Se a proposta for aprovada, combinamos um prazo e você envia o texto completo.
+          Fazemos uma revisão editorial (clareza, estrutura, consistência) e devolvemos com
+          sugestões antes da publicação.
+        </p>
+        <p>
+          O datavizbr não paga por contribuições — é um projeto independente, sem fins
+          lucrativos. Em troca, oferecemos edição cuidadosa, distribuição para uma audiência
+          especializada e permanência no acervo.
+        </p>
+
+      </div>
+
+      <div class="cta-contato">
+        <a href={`mailto:${SITE.email_contato}`} class="btn btn-primary">
+          Enviar proposta por email
+        </a>
+        <a href="/sobre/contato" class="btn btn-quiet">Outras formas de contato</a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-section {
+    padding-block: var(--space-40);
+  }
+
+  .page-header {
+    max-width: 680px;
+    margin-bottom: var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+    padding-bottom: var(--space-24);
+  }
+
+  .page-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-block: var(--space-6) var(--space-10);
+  }
+
+  .page-lead {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .content-prose {
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-bottom: var(--space-32);
+  }
+
+  .content-prose h2 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-4);
+  }
+
+  .content-prose p,
+  .content-prose ul,
+  .content-prose ol {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .content-prose ul,
+  .content-prose ol {
+    padding-left: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .cta-contato {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    margin-top: var(--space-8);
+  }
+</style>

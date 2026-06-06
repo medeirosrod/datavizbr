@@ -10,6 +10,7 @@ tags:
   - dataviz
   - brasil
 descricao: "Terceira parte do mapeamento da cena brasileira de visualização de dados."
+capa: ./_capas/vdsb-03.png
 ---
 
 Continuando nossa série sobre visualização de dados no Brasil chegamos a segunda categoria — Design e Computação — onde incluímos os trabalhos de Ciência de Dados. Lembrando que na primeira parte falamos sobre a história da Infografia no Brasil nos últimos 25 anos e na segunda parte falamos sobre a primeira categoria de trabalhos envolvendo Arte e as interfaces físicas.

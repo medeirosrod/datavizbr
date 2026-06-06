@@ -10,6 +10,7 @@ tags:
   - dataviz
   - brasil
 descricao: "Segunda parte do mapeamento da cena brasileira de visualização de dados."
+capa: ./_capas/vdsb-02.png
 ---
 
 A convite da Sara Mesquita e da Caroline Doyé do Datavis Lisboa fizemos uma live sobre visualização de dados no Brasil. A partir disso resolvemos começar uma série de textos complementares aos assuntos que foram discutidos na live, caso você não tenha visto já lançamos a parte 1 focado na história dos últimos 25 anos da infografia no Brasil.

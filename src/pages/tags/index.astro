@@ -1,11 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-// Carrega todos os posts publicados
 const allPosts = await getCollection('posts', ({ data }) => !data.rascunho && !data.arquivo);
 
-// Extrai todas as tags únicas e conta posts por tag
 const tagsMap = new Map<string, number>();
 allPosts.forEach(post => {
   post.data.tags.forEach(tag => {
@@ -13,117 +11,95 @@ allPosts.forEach(post => {
   });
 });
 
-// Converte para array e ordena por contagem (descendente)
 const tags = Array.from(tagsMap.entries())
   .map(([slug, count]) => ({ slug, count }))
   .sort((a, b) => b.count - a.count);
-
-const title = 'Tags';
-const description = 'Explore posts por tags';
 ---
 
-<BaseLayout title={title} description={description}>
-  <main class="container">
-    <div class="section-header">
-      <h1 class="reveal">Tags</h1>
-      <p class="lead reveal">Explore todos os posts organizados por tópicos</p>
-    </div>
+<BaseLayout title="Tags" description="Explore os posts do datavizbr por tópicos.">
+  <section class="section-page">
+    <div class="container">
 
-    {tags.length > 0 ? (
-      <div class="tags-grid stagger-children">
+      <header class="section-header">
+        <h1>Tags</h1>
+        <p class="section-subtitle">
+          {tags.length} {tags.length === 1 ? 'tópico' : 'tópicos'} em {allPosts.length} posts
+        </p>
+      </header>
+
+      <div class="tags-grid">
         {tags.map(({ slug, count }) => (
           <a href={`/tags/${slug}`} class="tag-card">
-            <div class="tag-name">{slug}</div>
-            <div class="tag-count">{count} {count === 1 ? 'post' : 'posts'}</div>
+            <span class="tag-nome">{slug}</span>
+            <span class="tag-count">{count} {count === 1 ? 'post' : 'posts'}</span>
           </a>
         ))}
       </div>
-    ) : (
-      <div class="empty-state reveal">
-        <p>Nenhuma tag encontrada ainda.</p>
-      </div>
-    )}
-  </main>
+
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .section-header {
-    margin-bottom: var(--space-20);
-    padding-bottom: var(--space-16);
+  .section-page {
+    padding-block: var(--space-40);
     border-bottom: 1px solid var(--border-default);
   }
 
-  h1 {
-    font-size: var(--fs-display);
-    font-weight: 700;
-    margin-bottom: var(--space-6);
-    color: var(--fg-heading);
+  .section-header {
+    margin-bottom: var(--space-32);
+    max-width: 800px;
   }
 
-  .lead {
-    font-size: var(--fs-lg);
-    color: var(--fg-meta);
-    max-width: 60rem;
+  .section-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-subtitle {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
   }
 
   .tags-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--space-6);
-    margin-bottom: var(--space-20);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
   }
 
   .tag-card {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: var(--space-8);
-    background: var(--bg-secondary);
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-8);
+    background: var(--bg-card);
     border: 1px solid var(--border-default);
-    border-radius: var(--radius-medium);
-    text-decoration: none;
-    color: var(--fg-default);
-    transition: all var(--motion-fast) ease;
-    min-height: 120px;
+    border-radius: var(--radius-pill);
+    color: inherit;
+    transition: box-shadow 160ms ease, border-color 160ms ease;
   }
 
   .tag-card:hover {
-    background: var(--bg-hover);
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
+    box-shadow: var(--elev-1);
+    border-color: var(--color-primary);
+    color: inherit;
   }
 
-  .tag-name {
-    font-size: var(--fs-base);
+  .tag-nome {
+    font-size: var(--fs-body-sm);
     font-weight: 600;
     color: var(--fg-heading);
-    word-break: break-word;
   }
 
   .tag-count {
     font-size: var(--fs-caption);
     color: var(--fg-meta);
-    margin-top: var(--space-3);
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: var(--space-20);
-    color: var(--fg-meta);
-  }
-
-  @media (max-width: 768px) {
-    .tags-grid {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: var(--space-4);
-    }
-
-    h1 {
-      font-size: var(--fs-2xl);
-    }
-
-    .lead {
-      font-size: var(--fs-base);
-    }
+    font-family: var(--font-mono);
   }
 </style>

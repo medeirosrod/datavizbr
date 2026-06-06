@@ -34,3 +34,14 @@ export const NAV_RODAPE = [
   { texto: 'RSS',      url: '/rss.xml'        },
   { texto: 'Arquivo',  url: '/arquivo'        },
 ];
+
+export const SECOES_LABELS = {
+  bastidores: 'Bastidores',
+  panorama: 'Panorama',
+  praticas: 'Práticas',
+  ensaios: 'Ensaios',
+} as const;
+
+export const getSecaoLabel = (secao: string): string => {
+  return SECOES_LABELS[secao as keyof typeof SECOES_LABELS] || secao.charAt(0).toUpperCase() + secao.slice(1);
+};

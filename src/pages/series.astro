@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AutorNome from '../components/AutorNome.astro';
 import { getCollection } from 'astro:content';
 
 const allSeries = await getCollection('series');
@@ -14,70 +15,101 @@ const formatarData = (date: Date): string => {
 };
 ---
 
-<BaseLayout title="Séries">
-  <section class="section-page">
-    <div class="container">
-      <header class="section-header">
-        <h1>Séries</h1>
-        <p class="section-subtitle">Coleções temáticas de posts</p>
-      </header>
+<BaseLayout title="Séries" description="Coleções temáticas de posts do datavizbr.">
+  <div class="series-page">
 
-      <div class="series-list">
-        {series.map((serie) => {
-          const postsDaSerie = allPosts.filter(p => p.data.serie?.id === serie.id);
-          const statusText = serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento';
-          return (
-            <article class="serie-item">
-              <div class="serie-item-header">
-                <div>
-                  <h2 class="serie-item-titulo">
-                    <a href={`/series/${serie.id}`}>{serie.data.titulo}</a>
-                  </h2>
-                  <p class="serie-item-meta">
-                    <span>{statusText}</span>
-                    <span class="dot"></span>
-                    <span>{postsDaSerie.length} {postsDaSerie.length === 1 ? 'parte' : 'partes'}</span>
-                  </p>
-                </div>
-              </div>
-              <p class="serie-item-descricao">{serie.data.descricao}</p>
-              {postsDaSerie.length > 0 && (
-                <div class="serie-posts">
-                  <h3 class="serie-posts-titulo">Posts nesta série:</h3>
-                  <ul class="serie-posts-list">
-                    {postsDaSerie
-                      .sort((a, b) => (a.data.ordem_na_serie || 0) - (b.data.ordem_na_serie || 0))
-                      .map((post, idx) => (
-                        <li>
-                          <a href={`/posts/${post.id}`}>
-                            {post.data.ordem_na_serie && <span class="post-number">{post.data.ordem_na_serie}.</span>}
-                            {post.data.titulo}
-                          </a>
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-            </article>
-          );
-        })}
-      </div>
+    <div class="container">
+      <header class="page-header">
+        <h1>Séries</h1>
+        <p class="page-subtitle">Conjunto de artigos sobre uma temática específica e aprofundada.</p>
+      </header>
     </div>
-  </section>
+
+    {series.map((serie) => {
+      const postsDaSerie = allPosts
+        .filter(p => p.data.serie?.id === serie.id && !p.data.rascunho)
+        .sort((a, b) => (a.data.ordem_na_serie || 0) - (b.data.ordem_na_serie || 0));
+
+      const statusText = serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento';
+      const corClass = `serie-capa-${serie.data.cor || 'laranja'}`;
+
+      return (
+        <section class="serie-bloco">
+          <div class="container serie-container">
+
+            <header class="serie-header">
+              <a href={`/series/${serie.id}`} class="serie-capa-link">
+                {serie.data.capa ? (
+                  <figure class="serie-capa">
+                    <img src={serie.data.capa.src} alt={serie.data.titulo} />
+                  </figure>
+                ) : (
+                  <div class={`serie-capa-placeholder ${corClass}`} aria-hidden="true"></div>
+                )}
+              </a>
+
+              <div class="serie-info">
+                <p class="serie-meta">
+                  <span class="badge badge-serie">Série</span>
+                  <span class="serie-status">{statusText} · {postsDaSerie.length} {postsDaSerie.length === 1 ? 'parte' : 'partes'}</span>
+                </p>
+                <h2 class="serie-titulo">
+                  <a href={`/series/${serie.id}`}>{serie.data.titulo}</a>
+                </h2>
+                <p class="serie-descricao">{serie.data.descricao}</p>
+                <a href={`/series/${serie.id}`} class="serie-cta">Ver série completa →</a>
+              </div>
+            </header>
+
+            {postsDaSerie.length > 0 && (
+              <div class="posts-grid">
+                {postsDaSerie.map((post, idx) => (
+                  <article class="post-card">
+                    <div class="post-numero">Parte {post.data.ordem_na_serie || idx + 1}</div>
+                    {post.data.capa ? (
+                      <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
+                    ) : (
+                      <div class={`post-thumb post-thumb-placeholder ${corClass}`} aria-hidden="true"></div>
+                    )}
+                    <div class="post-card-body">
+                      <h3 class="post-titulo">
+                        <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
+                      </h3>
+                      {post.data.descricao && (
+                        <p class="post-excerpt">{post.data.descricao}</p>
+                      )}
+                      <div class="post-foot">
+                        <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
+                        <span class="dot"></span>
+                        <span>{formatarData(post.data.publicado_em)}</span>
+                      </div>
+                    </div>
+                    <a href={`/posts/${post.id}`} class="post-link">Ler →</a>
+                  </article>
+                ))}
+              </div>
+            )}
+
+          </div>
+        </section>
+      );
+    })}
+
+  </div>
 </BaseLayout>
 
 <style>
-  .section-page {
-    padding-block: var(--space-40);
+  .series-page {
+    padding-block: var(--space-40) var(--space-48);
+  }
+
+  .page-header {
+    padding-bottom: var(--space-32);
     border-bottom: 1px solid var(--border-default);
+    margin-bottom: 0;
   }
 
-  .section-header {
-    margin-bottom: var(--space-24);
-    max-width: 800px;
-  }
-
-  .section-header h1 {
+  .page-header h1 {
     font-size: var(--fs-h1);
     line-height: var(--lh-h1);
     letter-spacing: var(--ls-h1);
@@ -86,57 +118,220 @@ const formatarData = (date: Date): string => {
     margin-bottom: var(--space-6);
   }
 
-  .section-subtitle {
+  .page-subtitle {
     font-size: var(--fs-body-lg);
     line-height: var(--lh-body-lg);
     color: var(--fg-body);
+    margin: 0;
   }
 
-  .series-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-24);
-    max-width: 800px;
-  }
-
-  .serie-item {
-    padding-bottom: var(--space-16);
+  .serie-bloco {
+    padding-block: var(--space-40);
     border-bottom: 1px solid var(--border-default);
   }
 
-  .serie-item:last-child {
+  .serie-bloco:last-child {
     border-bottom: none;
   }
 
-  .serie-item-header {
-    margin-bottom: var(--space-8);
+  .serie-container {
+    max-width: 960px;
   }
 
-  .serie-item-titulo {
-    font-size: var(--fs-h3);
-    line-height: var(--lh-h3);
-    letter-spacing: var(--ls-h3);
+  /* ── HEADER ─────────────────────────────────── */
+  .serie-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+    align-items: center;
+    margin-bottom: var(--space-24);
+  }
+
+  .serie-capa-link {
+    display: block;
+    border-bottom: none;
+  }
+
+  .serie-capa {
+    border-radius: var(--radius-large);
+    overflow: hidden;
+    margin: 0;
+    box-shadow: var(--elev-2);
+    transition: box-shadow 160ms ease;
+  }
+
+  .serie-capa:hover {
+    box-shadow: var(--elev-3);
+  }
+
+  .serie-capa img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .serie-capa-placeholder {
+    aspect-ratio: 4/3;
+    border-radius: var(--radius-large);
+    box-shadow: var(--elev-2);
+    transition: box-shadow 160ms ease;
+  }
+
+  .serie-capa-link:hover .serie-capa-placeholder {
+    box-shadow: var(--elev-3);
+  }
+
+  .serie-capa-laranja {
+    background: linear-gradient(135deg, var(--dvb-orange-100) 0%, var(--dvb-orange-50) 100%);
+  }
+
+  .serie-capa-roxa {
+    background: linear-gradient(135deg, var(--dvb-purple-100) 0%, var(--dvb-purple-50) 100%);
+  }
+
+  .serie-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .serie-meta {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+    margin: 0;
+  }
+
+  .serie-status {
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+  }
+
+  .serie-titulo {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
     font-weight: 700;
     color: var(--fg-heading);
-    margin-bottom: var(--space-4);
+    margin: 0;
   }
 
-  .serie-item-titulo a {
+  .serie-titulo a {
     color: inherit;
     border-bottom: none;
   }
 
-  .serie-item-titulo a:hover {
+  .serie-titulo a:hover {
     color: var(--color-primary);
   }
 
-  .serie-item-meta {
+  .serie-descricao {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .serie-cta {
+    align-self: flex-start;
+    font-size: var(--fs-body-sm);
+    font-weight: 600;
+    color: var(--color-primary);
+    border-bottom: none;
+  }
+
+  .serie-cta:hover {
+    color: var(--color-primary-hover);
+  }
+
+  /* ── POSTS GRID ─────────────────────────────── */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-10);
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    overflow: hidden;
+    transition: box-shadow 160ms ease;
+    position: relative;
+  }
+
+  .post-card:hover {
+    box-shadow: var(--elev-2);
+  }
+
+  .post-numero {
+    position: absolute;
+    top: var(--space-6);
+    left: var(--space-6);
+    background: rgba(0,0,0,.55);
+    color: #fff;
+    font-size: var(--fs-caption);
+    font-weight: 700;
+    padding: var(--space-2) var(--space-5);
+    border-radius: var(--radius-pill);
+    backdrop-filter: blur(4px);
+    z-index: 1;
+  }
+
+  .post-thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+  }
+
+  .post-thumb-placeholder {
+    aspect-ratio: 16/10;
+  }
+
+  .post-card-body {
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    flex: 1;
+  }
+
+  .post-titulo {
+    font-size: var(--fs-body);
+    font-weight: 700;
+    line-height: var(--lh-h4);
+    letter-spacing: var(--ls-h4);
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .post-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .post-titulo a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-excerpt {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    margin: 0;
+    flex: 1;
+  }
+
+  .post-foot {
     display: flex;
     gap: var(--space-4);
     align-items: center;
     font-size: var(--fs-caption);
     color: var(--fg-meta);
-    margin: 0;
   }
 
   .dot {
@@ -147,56 +342,33 @@ const formatarData = (date: Date): string => {
     border-radius: 50%;
   }
 
-  .serie-item-descricao {
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    color: var(--fg-body);
-    margin-bottom: var(--space-10);
-  }
-
-  .serie-posts {
-    background: var(--bg-soft);
-    padding: var(--space-10);
-    border-radius: var(--radius-relaxed);
-  }
-
-  .serie-posts-titulo {
+  .post-link {
+    align-self: flex-start;
     font-size: var(--fs-caption);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-    color: var(--fg-meta);
-    margin-bottom: var(--space-6);
-  }
-
-  .serie-posts-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .serie-posts-list li {
-    font-size: var(--fs-body-sm);
-  }
-
-  .serie-posts-list a {
-    color: var(--fg-body);
-    border-bottom: none;
-    display: flex;
-    gap: var(--space-4);
-  }
-
-  .serie-posts-list a:hover {
-    color: var(--color-primary);
-  }
-
-  .post-number {
     font-weight: 600;
-    color: var(--fg-meta);
-    min-width: 24px;
-    text-align: right;
+    color: var(--color-primary);
+    border-bottom: none;
+    padding: var(--space-3) var(--space-8) var(--space-8);
+  }
+
+  .post-link:hover {
+    color: var(--color-primary-hover);
+  }
+
+  /* ── RESPONSIVO ─────────────────────────────── */
+  @media (max-width: 768px) {
+    .serie-header {
+      grid-template-columns: 1fr;
+    }
+
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

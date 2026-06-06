@@ -1,29 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AutorNome from '../components/AutorNome.astro';
+import { getSecaoLabel } from '../consts';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('posts');
 const posts = allPosts
   .filter(post => !post.data.rascunho)
   .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
-
-const formatarData = (date: Date): string => {
-  return new Intl.DateTimeFormat('pt-BR', {
-    month: 'long',
-    year: 'numeric'
-  }).format(new Date(date));
-};
-
-const allAutores = await getCollection('autores');
-const autores = allAutores
-  .filter(autor => autor.data.ativo)
-  .sort((a, b) => {
-    if (a.data.papel === 'curadoria') return -1;
-    if (b.data.papel === 'curadoria') return 1;
-    if (a.data.papel === 'recorrente') return -1;
-    return 1;
-  });
 
 // Agrupar posts por ano
 const postsPorAno: Record<number, typeof posts> = {};
@@ -32,9 +16,21 @@ posts.forEach(post => {
   if (!postsPorAno[ano]) postsPorAno[ano] = [];
   postsPorAno[ano].push(post);
 });
+
+// Ordenar anos descendentes
+const anosOrdenados = Object.keys(postsPorAno)
+  .map(Number)
+  .sort((a, b) => b - a);
+
+const formatarData = (date: Date): string => {
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date(date));
+};
 ---
 
-<BaseLayout title="Arquivo">
+<BaseLayout title="Arquivo" description="Todos os posts publicados no datavizbr.">
   <section class="section-page">
     <div class="container">
       <header class="section-header">
@@ -42,28 +38,56 @@ posts.forEach(post => {
         <p class="section-subtitle">Todos os posts publicados</p>
       </header>
 
-      <div class="arquivo-content">
-        {Object.entries(postsPorAno).map(([ano, postsDoAno]) => (
-          <section class="ano-section">
+      <div class="filtros">
+        <div class="filtro-grupo">
+          <label for="filtro-ano" class="filtro-label">Filtrar por ano:</label>
+          <select id="filtro-ano" class="filtro-select">
+            <option value="todos">Todos os anos</option>
+            {anosOrdenados.map(ano => (
+              <option value={ano}>{ano}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filtro-grupo">
+          <label for="filtro-ordem" class="filtro-label">Ordenar:</label>
+          <select id="filtro-ordem" class="filtro-select">
+            <option value="recente">Mais recente</option>
+            <option value="antigo">Mais antigo</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="arquivo-container" class="arquivo-content">
+        {anosOrdenados.map(ano => (
+          <section class="ano-section" data-year={ano}>
             <h2 class="ano-title">{ano}</h2>
-            <div class="posts-list">
-              {postsDoAno.map((post) => (
-                <article class="post-item">
-                  <div class="post-item-header">
-                    <div class="post-item-secao">
+            <div class="posts-grid" data-posts={postsPorAno[ano].map(p => p.id).join(',')}>
+              {postsPorAno[ano].map((post) => (
+                <article class="post-card" data-id={post.id}>
+                  {post.data.capa ? (
+                    <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
+                  ) : (
+                    <div class="post-thumb post-thumb-placeholder" aria-hidden="true"></div>
+                  )}
+                  <div class="post-card-body">
+                    <div class="post-meta">
                       <span class={`badge badge-${post.data.secao}`}>
-                        {post.data.secao.charAt(0).toUpperCase() + post.data.secao.slice(1)}
+                        {getSecaoLabel(post.data.secao)}
                       </span>
                     </div>
-                    <h3 class="post-item-titulo">
+                    <h3 class="post-titulo">
                       <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
                     </h3>
+                    {post.data.descricao && (
+                      <p class="post-excerpt">{post.data.descricao}</p>
+                    )}
+                    <div class="post-foot">
+                      <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
+                      <span class="dot"></span>
+                      <span>{formatarData(post.data.publicado_em)}</span>
+                    </div>
                   </div>
-                  <p class="post-item-meta">
-                    <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
-                    <span class="dot"></span>
-                    <span>{formatarData(post.data.publicado_em)}</span>
-                  </p>
                 </article>
               ))}
             </div>
@@ -72,6 +96,39 @@ posts.forEach(post => {
       </div>
     </div>
   </section>
+
+  <script>
+    const filtroAno = document.getElementById('filtro-ano') as HTMLSelectElement;
+    const filtroOrdem = document.getElementById('filtro-ordem') as HTMLSelectElement;
+    const container = document.getElementById('arquivo-container') as HTMLElement;
+
+    function aplicarFiltros() {
+      const anoSelecionado = filtroAno.value;
+      const ordemSelecionada = filtroOrdem.value;
+
+      const secoes = container.querySelectorAll('.ano-section');
+      secoes.forEach(secao => {
+        const ano = secao.getAttribute('data-year');
+        const exibir = anoSelecionado === 'todos' || ano === anoSelecionado;
+        (secao as HTMLElement).style.display = exibir ? 'block' : 'none';
+      });
+
+      // Reordenar cards dentro de cada grid visível
+      const grids = container.querySelectorAll('.posts-grid');
+      grids.forEach(grid => {
+        const cards = Array.from(grid.querySelectorAll('.post-card')) as HTMLElement[];
+        if (ordemSelecionada === 'antigo') {
+          cards.reverse();
+        }
+        cards.forEach(card => {
+          (grid as HTMLElement).appendChild(card);
+        });
+      });
+    }
+
+    filtroAno.addEventListener('change', aplicarFiltros);
+    filtroOrdem.addEventListener('change', aplicarFiltros);
+  </script>
 </BaseLayout>
 
 <style>
@@ -81,7 +138,7 @@ posts.forEach(post => {
   }
 
   .section-header {
-    margin-bottom: var(--space-32);
+    margin-bottom: var(--space-24);
     max-width: 800px;
   }
 
@@ -98,73 +155,147 @@ posts.forEach(post => {
     font-size: var(--fs-body-lg);
     line-height: var(--lh-body-lg);
     color: var(--fg-body);
+    margin: 0;
   }
 
+  /* ── FILTROS ────────────────────────────────── */
+  .filtros {
+    display: flex;
+    gap: var(--space-12);
+    margin-bottom: var(--space-32);
+    align-items: flex-end;
+  }
+
+  .filtro-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .filtro-label {
+    font-size: var(--fs-body-sm);
+    font-weight: 600;
+    color: var(--fg-heading);
+  }
+
+  .filtro-select {
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--fs-body-sm);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    background: var(--bg-card);
+    color: var(--fg-heading);
+    cursor: pointer;
+  }
+
+  .filtro-select:hover {
+    border-color: var(--color-primary);
+  }
+
+  .filtro-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.1);
+  }
+
+  /* ── ANOS ────────────────────────────────────── */
   .arquivo-content {
-    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-40);
   }
 
   .ano-section {
-    margin-bottom: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+    padding-bottom: var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .ano-section:last-child {
+    border-bottom: none;
   }
 
   .ano-title {
-    font-size: var(--fs-h3);
-    line-height: var(--lh-h3);
-    letter-spacing: var(--ls-h3);
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
     font-weight: 700;
-    color: var(--fg-heading);
-    margin-bottom: var(--space-12);
-    padding-top: var(--space-12);
-    border-top: 1px solid var(--border-default);
-  }
-
-  .ano-section:first-child .ano-title {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .posts-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-12);
-  }
-
-  .post-item {
-    padding-bottom: var(--space-8);
-  }
-
-  .post-item-header {
-    margin-bottom: var(--space-4);
-    display: flex;
-    gap: var(--space-6);
-    align-items: flex-start;
-  }
-
-  .post-item-secao {
-    flex-shrink: 0;
-    margin-top: var(--space-2);
-  }
-
-  .post-item-titulo {
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    letter-spacing: var(--ls-body);
-    font-weight: 600;
     color: var(--fg-heading);
     margin: 0;
   }
 
-  .post-item-titulo a {
+  /* ── GRID ────────────────────────────────────── */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-12);
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    overflow: hidden;
+    transition: box-shadow 160ms ease;
+  }
+
+  .post-card:hover {
+    box-shadow: var(--elev-2);
+  }
+
+  .post-thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+  }
+
+  .post-thumb-placeholder {
+    background: linear-gradient(135deg, var(--dvb-ink-3) 0%, var(--dvb-ink-2) 100%);
+  }
+
+  .post-card-body {
+    padding: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    flex: 1;
+  }
+
+  .post-meta {
+    margin: 0;
+  }
+
+  .post-titulo {
+    font-size: var(--fs-body-lg);
+    font-weight: 700;
+    line-height: var(--lh-h4);
+    letter-spacing: var(--ls-h4);
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .post-titulo a {
     color: inherit;
     border-bottom: none;
   }
 
-  .post-item-titulo a:hover {
+  .post-titulo a:hover {
     color: var(--color-primary);
   }
 
-  .post-item-meta {
+  .post-excerpt {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    margin: 0;
+    flex: 1;
+  }
+
+  .post-foot {
     display: flex;
     gap: var(--space-4);
     align-items: center;
@@ -179,5 +310,24 @@ posts.forEach(post => {
     height: 4px;
     background: var(--fg-meta);
     border-radius: 50%;
+  }
+
+  /* ── RESPONSIVO ──────────────────────────────– */
+  @media (max-width: 900px) {
+    .filtros {
+      flex-direction: column;
+      gap: var(--space-6);
+      align-items: flex-start;
+    }
+
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

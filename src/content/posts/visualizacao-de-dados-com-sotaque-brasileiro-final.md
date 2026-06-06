@@ -10,6 +10,7 @@ tags:
   - dataviz
   - brasil
 descricao: "Conclusão do mapeamento da cena brasileira de visualização de dados."
+capa: ./_capas/vdsb-05.png
 ---
 
 E começamos 2021 finalizando nossa série sobre visualização de dados no Brasil com as últimas categorias — Comunidades e Grupos de pesquisas. Lembro que essa série iniciou depois em uma live no Datavis Lisboa na qual falei sobre a evolução da comunidade de visualização de dados no Brasil nos últimos 10 anos.

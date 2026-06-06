@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Newsletter"
+  description="Uma vez por mês, uma curadoria do que rolou na cena brasileira de dataviz — sem spam, sem patrocínio."
+>
+  <section class="page-section">
+    <div class="container">
+
+      <div class="newsletter-layout">
+
+        <header class="page-header">
+          <p class="t-eyebrow">Newsletter</p>
+          <h1>Uma vez por mês, no seu email.</h1>
+          <p class="page-lead">
+            No primeiro domingo do mês, uma curadoria do que rolou na cena
+            brasileira de dataviz — links, projetos, ferramentas e textos
+            do acervo que merecem atenção. Sem spam. Sem patrocínio.
+          </p>
+        </header>
+
+        <div class="newsletter-form-bloco">
+          <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
+            <label for="email-input" class="form-label">Seu endereço de email</label>
+            <div class="form-row">
+              <input
+                id="email-input"
+                class="input"
+                type="email"
+                placeholder="seu@email.com"
+                required
+                aria-required="true"
+              />
+              <button class="btn btn-primary" type="submit">Inscrever</button>
+            </div>
+            <p class="form-disclaimer t-caption">
+              Você pode cancelar a qualquer momento. Os dados não são compartilhados
+              com terceiros.
+            </p>
+          </form>
+        </div>
+
+        <div class="o-que-esperar">
+          <h2>O que esperar</h2>
+          <ul class="features-list">
+            <li>
+              <span class="feature-icon" aria-hidden="true">📅</span>
+              <div>
+                <strong>Frequência mensal</strong>
+                <p>Primeiro domingo de cada mês. Um email, uma curadoria.</p>
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon" aria-hidden="true">🇧🇷</span>
+              <div>
+                <strong>Foco no Brasil</strong>
+                <p>Projetos, publicações e acontecimentos da cena brasileira de dataviz.</p>
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon" aria-hidden="true">📖</span>
+              <div>
+                <strong>Textos do acervo</strong>
+                <p>Links para posts recentes e clássicos do datavizbr que merecem revisita.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-section {
+    padding-block: var(--space-40);
+  }
+
+  .newsletter-layout {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-32);
+  }
+
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .page-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .page-lead {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .newsletter-form-bloco {
+    background: var(--bg-soft);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    padding: var(--space-16);
+  }
+
+  .form-label {
+    display: block;
+    font-size: var(--fs-body-sm);
+    font-weight: 600;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .form-row {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .form-row .input {
+    flex: 1;
+  }
+
+  .form-disclaimer {
+    color: var(--fg-meta);
+    margin-top: var(--space-6);
+  }
+
+  .o-que-esperar h2 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-10);
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  .features-list li {
+    display: flex;
+    gap: var(--space-8);
+    align-items: flex-start;
+  }
+
+  .feature-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .features-list strong {
+    display: block;
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-2);
+  }
+
+  .features-list p {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  @media (max-width: 480px) {
+    .form-row {
+      flex-direction: column;
+    }
+  }
+</style>

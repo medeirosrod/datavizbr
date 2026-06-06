@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allAutores = await getCollection('autores');
+const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
+---
+
+<BaseLayout
+  title="Sobre"
+  description="O datavizbr reúne quem faz, pesquisa e escreve sobre visualização de dados em português, desde 2017."
+>
+  <section class="page-section">
+    <div class="container">
+
+      <header class="page-header">
+        <p class="t-eyebrow">O projeto</p>
+        <h1>Sobre o datavizbr</h1>
+        <p class="page-lead">
+          Um espaço para compartilhar experiências sobre visualização de dados
+          em português — making-ofs, mapeamentos da cena brasileira e reflexões
+          sobre o campo, desde 2017.
+        </p>
+      </header>
+
+      <div class="content-prose">
+
+        <h2>O que é</h2>
+        <p>
+          O datavizbr nasceu em 2017 como um blog pessoal de <strong>Rodrigo Medeiros</strong>
+          para documentar o trabalho com visualização de dados no contexto brasileiro.
+          Ao longo do tempo, cresceu para reunir colaboradores recorrentes e convidados
+          que, de diferentes perspectivas, escrevem sobre dataviz em português.
+        </p>
+        <p>
+          O acervo está organizado em quatro seções:
+        </p>
+        <ul>
+          <li><strong>Bastidores</strong> — making-ofs de visualizações: processo, decisões, ferramentas.</li>
+          <li><strong>Panorama</strong> — quem faz, o que está acontecendo, perfis e premiações da cena brasileira.</li>
+          <li><strong>Práticas</strong> — princípios, técnicas e tutoriais aplicáveis.</li>
+          <li><strong>Ensaios</strong> — reflexão sobre o campo: ética, futuro e posicionamento.</li>
+        </ul>
+
+        <h2>O livro</h2>
+        <p>
+          Em 2023, o datavizbr organizou <em>Dataviz em perspectiva</em>, em parceria com
+          Júlia Giannella — uma coletânea com capítulos de diferentes autores sobre o
+          estado da arte da visualização de dados no Brasil e na América Latina.
+          O livro está disponível gratuitamente em PDF.
+        </p>
+        <p>
+          <a href="/livros/dataviz-em-perspectiva">Conheça o livro →</a>
+        </p>
+
+        <h2>Curadoria</h2>
+        {curadores.map(c => (
+          <p>
+            <strong>{c.data.nome}</strong> — {c.data.quem_e}
+          </p>
+        ))}
+
+      </div>
+
+      <div class="sobre-links">
+        <a href="/sobre/escrever" class="sobre-link-card">
+          <span class="sobre-link-titulo">Escrever no datavizbr</span>
+          <span class="sobre-link-desc">Saiba como contribuir com um texto →</span>
+        </a>
+        <a href="/sobre/contato" class="sobre-link-card">
+          <span class="sobre-link-titulo">Contato</span>
+          <span class="sobre-link-desc">Fale com a curadoria →</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-section {
+    padding-block: var(--space-40);
+  }
+
+  .page-header {
+    max-width: 680px;
+    margin-bottom: var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+    padding-bottom: var(--space-24);
+  }
+
+  .page-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-block: var(--space-6) var(--space-10);
+  }
+
+  .page-lead {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .content-prose {
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-bottom: var(--space-32);
+  }
+
+  .content-prose h2 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-4);
+  }
+
+  .content-prose p,
+  .content-prose ul {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .content-prose ul {
+    padding-left: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .sobre-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+    max-width: 680px;
+  }
+
+  .sobre-link-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-10);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    color: inherit;
+    transition: box-shadow 160ms ease;
+  }
+
+  .sobre-link-card:hover {
+    box-shadow: var(--elev-2);
+    color: inherit;
+  }
+
+  .sobre-link-titulo {
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--fg-heading);
+  }
+
+  .sobre-link-desc {
+    font-size: var(--fs-body-sm);
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 600px) {
+    .sobre-links {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
