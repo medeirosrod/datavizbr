@@ -1,7 +1,7 @@
 ---
 titulo: "Visualizando os dados do COVID-19 humanamente"
 autores:
-  - eliza-fernandes
+  - eliza-fagundes
 publicado_em: 2020-05-08
 secao: ensaios
 tags: ["COVID-19", "Dados", "Dataviz", "Design", "Entrevista"]
