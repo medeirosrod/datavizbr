@@ -1,6 +1,6 @@
 ---
 nome: Vinícius C. Barqueiro
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/vinicius-c-barqueiro.png
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

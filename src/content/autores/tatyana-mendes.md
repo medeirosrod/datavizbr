@@ -1,6 +1,6 @@
 ---
 nome: Tatyana Mendes
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/tatyana-mendes.png
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

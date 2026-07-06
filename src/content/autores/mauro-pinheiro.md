@@ -1,6 +1,6 @@
 ---
 nome: Mauro Pinheiro
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/mauro-pinheiro.png
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

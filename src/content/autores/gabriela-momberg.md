@@ -1,6 +1,6 @@
 ---
 nome: Gabriela Momberg
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/gabriela-momberg.png
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

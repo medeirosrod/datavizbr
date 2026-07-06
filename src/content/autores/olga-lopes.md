@@ -1,6 +1,6 @@
 ---
 nome: Olga Lopes
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/olga-lopes.png
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

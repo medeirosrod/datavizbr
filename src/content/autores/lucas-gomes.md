@@ -1,6 +1,6 @@
 ---
 nome: Lucas Gomes
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/lucas-gomes.png
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

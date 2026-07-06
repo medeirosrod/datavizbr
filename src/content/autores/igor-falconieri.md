@@ -1,6 +1,6 @@
 ---
 nome: Igor Falconieri
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/igor-falconieri.png
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

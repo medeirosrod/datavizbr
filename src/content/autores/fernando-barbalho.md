@@ -1,6 +1,6 @@
 ---
 nome: Fernando Barbalho
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/fernando-barbalho.png
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true
