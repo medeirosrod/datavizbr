@@ -1,7 +1,7 @@
 ---
 titulo: "Visualização de dados: decisões estratégicas para a transformação digital"
 autores:
-  - ricardo-brasileiro
+  - ricardo-brazileiro
 publicado_em: 2021-01-09
 secao: ensaios
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
