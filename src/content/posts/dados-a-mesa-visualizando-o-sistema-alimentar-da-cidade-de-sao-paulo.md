@@ -9,7 +9,6 @@ medium_url_original: "https://medium.com/datavizbr/dados-à-mesa-visualizando-o-
 publicado_originalmente_em: 2022-01-05
 capa: ../../assets/blog/dados-a-mesa-visualizando-o-sistema-alimentar-da-cidade-de-sao-paulo/01.jpeg
 capa_alt: "Capa do post Dados à Mesa: visualizando o sistema alimentar da cidade de São Paulo"
-destaque: true
 order_homepage: 1
 ---
 

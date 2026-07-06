@@ -59,6 +59,7 @@ const posts = defineCollection({
       tags: z.array(z.string()).default([]),
       destaque: z.boolean().default(false),
       destaque_na_secao: z.boolean().default(false),
+      order_homepage: z.number().optional(),
       capa: image().optional(),
       capa_alt: z.string().optional(),
       arquivo: z.boolean().default(false),
