@@ -6,10 +6,10 @@ import AutorNome from '../components/AutorNome.astro';
 import { getSecaoLabel } from '../consts';
 import { getCollection } from 'astro:content';
 
-// Buscar todos os posts não arquivados e não em rascunho, ordenados por data
+// Buscar todos os posts (exceto rascunhos), ordenados por data
 const allPosts = await getCollection('posts');
 const posts = allPosts
-  .filter(post => !post.data.rascunho && !post.data.arquivo)
+  .filter(post => !post.data.rascunho)
   .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
 
 // Post em destaque (primeiro com destaque=true, ou o mais recente)
