@@ -6,10 +6,11 @@ const allAutores = await getCollection('autores');
 const autores = allAutores
   .filter(autor => autor.data.ativo)
   .sort((a, b) => {
-    if (a.data.papel === 'curadoria') return -1;
-    if (b.data.papel === 'curadoria') return 1;
-    if (a.data.papel === 'recorrente') return -1;
-    return 1;
+    // Rodrigo Medeiros sempre primeiro
+    if (a.id === 'rodrigo-medeiros') return -1;
+    if (b.id === 'rodrigo-medeiros') return 1;
+    // Depois em ordem alfabética por nome
+    return a.data.nome.localeCompare(b.data.nome, 'pt-BR');
   });
 ---
 
