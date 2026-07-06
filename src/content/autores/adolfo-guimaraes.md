@@ -1,7 +1,7 @@
 ---
 nome: Adolfo Guimarães
 foto: ./_fotos/placeholder.svg
-quem_e: Professor e Pesquisador na área de Ciência da Computação. Áreas de interesse: machine learning, data science e dataviz.
+quem_e: "Professor e Pesquisador na área de Ciência da Computação. Áreas de interesse: machine learning, data science e dataviz."
 papel: recorrente
 ativo: true
 ---
