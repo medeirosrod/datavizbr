@@ -51,16 +51,6 @@ const formatarData = (date: Date): string => {
         </div>
       </header>
 
-      <!-- Imagem de capa -->
-      {post.data.capa && (
-        <figure class="post-capa">
-          <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} />
-          {post.data.capa_alt && (
-            <figcaption>{post.data.capa_alt}</figcaption>
-          )}
-        </figure>
-      )}
-
       <!-- Conteúdo do post -->
       <div class="post-conteudo">
         <slot />
@@ -155,25 +145,6 @@ const formatarData = (date: Date): string => {
 
   .autor-link:hover {
     color: var(--color-primary-hover);
-  }
-
-  .post-capa {
-    margin: var(--space-20) 0;
-    border-radius: var(--radius-large);
-    overflow: hidden;
-  }
-
-  .post-capa img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .post-capa figcaption {
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-    padding: var(--space-6) 0;
-    font-style: italic;
   }
 
   .post-conteudo {
