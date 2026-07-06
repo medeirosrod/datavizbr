@@ -3,11 +3,13 @@ titulo: "Brasileiro participa da Outlier Conference 2023"
 autores:
   - rodrigo-medeiros
 publicado_em: 2023-04-27
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Dados", "Dataviz", "Design", "Evento", "Jornalismo"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/brasileiro-participa-da-outlier-conference-2023-6b37e368119f"
 publicado_originalmente_em: 2023-04-27
+capa: ../../assets/blog/brasileiro-participa-da-outlier-conference-2023/01.png
+capa_alt: Capa do post Brasileiro participa da Outlier Conference 2023
 ---
 
 Rodolfo Almeida vai participar da conferência da Data Visualization Society contando sobre sua pesquisa de mestrado, que analisa como a crise climática é representada por meio das visualizações de dados.

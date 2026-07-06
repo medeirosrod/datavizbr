@@ -4,10 +4,12 @@ autores:
   - rodrigo-medeiros
 publicado_em: 2020-01-28
 secao: ensaios
-tags: []
+tags: ["Dados", "Dataviz", "Design", "Eleições", "Jornalismo"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/é-oficial-a-visualização-de-dados-chegou-a-grande-mídia-fd4fd3871761"
 publicado_originalmente_em: 2020-01-28
+capa: ../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/01.png
+capa_alt: "Capa do post É oficial: a visualização de dados chegou a grande mídia."
 ---
 
 *por Elijah Meeks publicado pela FastCompany e originalmente no Nightingale / traduzido por Rodrigo Medeiros*
@@ -18,6 +20,8 @@ Sempre há algo acontecendo no campo da visualização de dados, mas até recent
 
 **O Primeiro Presidente da Visualização de Dados**
 
+![Comparação de visualização de dados entre presidentes americanos](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/03.png)
+
 Quando Donald Trump foi eleito, ele emoldurou e pendurou na Casa Branca um mapa dos Estados Unidos que implicava que ele foi eleito por uma enorme maioria dos votos. O que era importante para Trump era o valor retórico da visualização de dados geoespaciais — não o conjunto de dados subjacente.
 
 Em setembro de 2019, confrontado com um mapa oficial do alcance dos efeitos do furacão Dorian — um que contradiz suas alegações sobre quais estados poderiam ser afetados — ele decidiu desenhar no mapa um pouco mais de alcance. Os dados não o apoiavam, mas Trump sabia que se ele pudesse mudar a visualização, isso era tudo o que importava.
@@ -26,9 +30,15 @@ Trump é um sinal de que "a visualização é o dado" para muitas pessoas. À me
 
 **Visualização de Dados Reflexiva**
 
+![Ilustração sobre visualização de dados reflexiva](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/04.png)
+
 O livro "Am I Overthinking This?" de Michelle Rial sinaliza uma mudança fundamental em direção ao ato de criar visualização de dados como uma maneira independente de imputar significado. Ela criou uma série de gráficos à mão em seu estilo inigualável, que destaca as contradições, medos e complexidades da vida moderna de uma maneira que o texto simplesmente não consegue.
 
+![Exemplos de gráficos do livro "Am I Overthinking This?" de Michelle Rial](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/05.png)
+
 **A Imparável Giorgia Lupi**
+
+![Ilustração sobre Giorgia Lupi e seu trabalho em visualização de dados](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/06.png)
 
 Giorgia Lupi ao longo de sua carreira evitou toda linha de raciocínio técnico para criar um caminho que aborda a visualização de dados tradicional, data art, design e data humanism. Em 2019, Lupi teve suas duas conquistas mais significativas: ela iniciou uma linha de moda e ingressou na Pentagram, a maior consultoria de design independente do mundo.
 

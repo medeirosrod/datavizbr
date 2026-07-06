@@ -3,11 +3,13 @@ titulo: "Entrevista com Bernardo Loureiro"
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-08-04
-secao: bastidores
-tags: []
+secao: panorama
+tags: ["Dados", "Dataviz", "Design", "Entrevista", "Mapa"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-bernardo-loureiro-b62090ce40b1"
 publicado_originalmente_em: 2019-08-04
+capa: ../../assets/blog/entrevista-com-bernardo-loureiro/01.png
+capa_alt: Capa do post Entrevista com Bernardo Loureiro
 ---
 
 Essa semana tivemos a oportunidade de entrevistar o Bernardo Loureiro, do Medida SP, um laboratório de visualização urbana.

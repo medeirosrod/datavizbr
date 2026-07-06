@@ -3,11 +3,13 @@ titulo: "CIDI 2023 com trilha sobre visualização de dados"
 autores:
   - rodrigo-medeiros
 publicado_em: 2023-04-26
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Dados", "Dataviz", "Design", "Evento", "Jornalismo"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/cidi-2023-com-trilha-sobre-visualização-de-dados-a9b7b28f083d"
 publicado_originalmente_em: 2023-04-26
+capa: ../../assets/blog/cidi-2023-com-trilha-sobre-visualizacao-de-dados/01.png
+capa_alt: Capa do post CIDI 2023 com trilha sobre visualização de dados
 ---
 
 Congresso Internacional de Design da Informação agora conta com uma trilha específica para a visualização de dados.

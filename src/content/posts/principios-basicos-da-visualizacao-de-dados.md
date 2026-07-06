@@ -4,10 +4,12 @@ autores:
   - deborah-mesquita
 publicado_em: 2017-11-01
 secao: praticas
-tags: []
+tags: ["Cultura", "Dados", "Dataviz", "Design", "Urbanismo"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/princípios-básicos-da-visualização-de-dados-5ebc7150fc81"
 publicado_originalmente_em: 2017-11-01
+capa: ../../assets/blog/principios-basicos-da-visualizacao-de-dados/01.png
+capa_alt: Capa do post Princípios básicos da Visualização de Dados
 ---
 
 A terminologia da área de Visualização é algo que confunde bastante gente que (como eu) está ingressando na área. Por ser um campo relativamente novo é de se esperar que isso ocorra mesmo. Neste texto vamos explorar um pouco dos conceitos básicos e falar sobre algumas ~polêmicas~ da área.

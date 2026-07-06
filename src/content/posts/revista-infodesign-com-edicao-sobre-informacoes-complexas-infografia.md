@@ -3,11 +3,13 @@ titulo: "Revista Infodesign com edição sobre informações complexas & infogra
 autores:
   - rodrigo-medeiros
 publicado_em: 2018-01-05
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Dataviz", "Design", "Educação", "Jornalismo"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/revista-infodesign-com-edição-sobre-informações-complexas-infografia-753d92975716"
 publicado_originalmente_em: 2018-01-05
+capa: ../../assets/blog/revista-infodesign-com-edicao-sobre-informacoes-complexas-infografia/01.png
+capa_alt: Capa do post Revista Infodesign com edição sobre informações complexas & infografia
 ---
 
 Começamos bem 2018 com a publicação do volume 14, número 3 de 2017 da Revista InfoDesign — revista brasileira de design da informação. Essa é uma edição dedicada à informações complexas e infografia.

@@ -3,11 +3,13 @@ titulo: "Giorgia Lupi e os dados."
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-07-01
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/giorgia-lupi-e-os-dados-da8b4b961662"
 publicado_originalmente_em: 2017-07-01
+capa: ../../assets/blog/giorgia-lupi-e-os-dados/01.jpeg
+capa_alt: Capa do post Giorgia Lupi e os dados.
 ---
 
 Quando encontrei o projeto Dear Data, criado pela Giorgia Lupi e Stefanie Posavec, na web pela primeira vez em 2015 a reação foi achar aquilo incrivelmente lindo. Mas o que representa? Como assim usar visualização de dados sem utilizar "nenhuma tecnologia"?

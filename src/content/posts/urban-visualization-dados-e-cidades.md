@@ -3,11 +3,13 @@ titulo: "Urban Visualization: dados e cidades."
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-11-26
-secao: praticas
-tags: []
+secao: panorama
+tags: ["Clima", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/urban-visualization-dados-e-cidades-7b490d339b7b"
 publicado_originalmente_em: 2017-11-26
+capa: ../../assets/blog/urban-visualization-dados-e-cidades/01.jpeg
+capa_alt: "Capa do post Urban Visualization: dados e cidades."
 ---
 
 A intersecção das ferramentas de visualização de dados e a quantidade de dados gerados nas cidades fez aparecer vários projetos categorizados como urban visualization. Estes projetos fazem uma série de análises, críticas e questionamentos que são super importantes para nosso tempo, onde temos mais empoderamento para o cidadão, a partir dos uso das redes sociais.

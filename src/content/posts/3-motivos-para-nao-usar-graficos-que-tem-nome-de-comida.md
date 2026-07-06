@@ -5,7 +5,7 @@ autores:
 publicado_em: 2016-03-11
 secao: praticas
 descricao: Você ainda usa gráficos de pizza nas suas apresentações? A polêmica é antiga, mas a ciência por trás da visualização de dados não mente.
-destaque: true
+destaque: false
 capa: ./_capas/img-01.png
 capa_alt: Comparação entre gráfico de pizza e gráfico de barras
 tags: [Dataviz, Share2016poa, Data Visualization,Porto Alegre]
@@ -21,13 +21,7 @@ Isso deixou algumas pessoas reclamando que o conteúdo principal poderia ter sid
 
 Não é a primeira vez que recebo respostas negativas quando insisto que gráficos de pizza são terríveis e devem ser abolidos. Até entendo alguns motivos para a resistência: é bem prático para quem faz relatórios continuar usando um recurso que está facilmente disponível em todas as ferramentas de analytics e sai em dois cliques no excel.
 
-A polêmica que me motivou a escrever este artigo surgiu após apresentar este slide da palestra.
-
-![Comparação: Pizza vs Barra](../../assets/blog/3-motivos-para-nao-usar-graficos-que-tem-nome-de-comida/img-01.png)
-
 Resolvi então aprofundar um pouco mais e explicar os três motivos simples para você evitar usar gráficos de pizza:
-
-![Este gráfico compara a opinião de alunos sobre ciência antes (esquerda) e depois (direita) de um determinado programa](../../assets/blog/3-motivos-para-nao-usar-graficos-que-tem-nome-de-comida/img-02.png)
 
 **Agora, antes de continuar, tente responder: qual é o aumento percentual de pessoas mais interessadas em ciência após o programa?**
 

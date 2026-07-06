@@ -1,0 +1,452 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { getPostsPorAutor, getLivrosPorAutor, papelNoLivro } from '../../lib/data';
+import { getSecaoLabel } from '../../consts';
+
+export async function getStaticPaths() {
+  const autores = await getCollection('autores');
+  return autores.map(autor => ({
+    params: { id: autor.id },
+    props: { autor },
+  }));
+}
+
+interface Props {
+  autor: any;
+}
+
+const { autor } = Astro.props;
+
+const posts = await getPostsPorAutor(autor.id);
+const livros = await getLivrosPorAutor(autor.id);
+
+const papelLabel: Record<string, string> = {
+  curadoria: 'Curadoria',
+  recorrente: 'Autor recorrente',
+  convidado: 'Autor convidado',
+};
+
+const formatarData = (date: Date): string => {
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'long',
+    year: 'numeric'
+  }).format(new Date(date));
+};
+---
+
+<BaseLayout
+  title={autor.data.nome}
+  description={autor.data.quem_e}
+>
+  <article class="autor-page">
+    <div class="container">
+
+      <header class="autor-hero">
+        {autor.data.foto && (
+          <div class="autor-foto-wrap">
+            <img src={autor.data.foto.src} alt={autor.data.nome} class="autor-foto" />
+          </div>
+        )}
+
+        <div class="autor-info">
+          <h1 class="autor-nome">{autor.data.nome}</h1>
+          <p class="autor-papel">{papelLabel[autor.data.papel] || autor.data.papel}</p>
+          <p class="autor-quem">{autor.data.quem_e}</p>
+
+          <div class="autor-detalhes">
+            {autor.data.desde && (
+              <p class="autor-desde">
+                Escreve desde {formatarData(autor.data.desde)}
+              </p>
+            )}
+
+            {autor.data.trabalhando_em && (
+              <p class="autor-info-item">
+                <span class="info-label">Trabalhando em:</span>
+                {autor.data.trabalhando_em}
+              </p>
+            )}
+
+            {autor.data.trabalho_favorito && (
+              <p class="autor-info-item">
+                <span class="info-label">Trabalho favorito:</span>
+                <a href={autor.data.trabalho_favorito.url} target="_blank" rel="noopener noreferrer">
+                  {autor.data.trabalho_favorito.titulo}
+                </a>
+              </p>
+            )}
+
+            {autor.data.por_que_escreveu && (
+              <p class="autor-info-item">
+                <span class="info-label">Por que escreveu:</span>
+                {autor.data.por_que_escreveu}
+              </p>
+            )}
+          </div>
+
+          {(autor.data.site || autor.data.twitter || autor.data.instagram || autor.data.linkedin) && (
+            <div class="autor-redes">
+              {autor.data.site && (
+                <a href={autor.data.site} class="btn btn-quiet" target="_blank" rel="noopener noreferrer">
+                  Site
+                </a>
+              )}
+              {autor.data.twitter && (
+                <a href={`https://twitter.com/${autor.data.twitter}`} class="btn btn-quiet" target="_blank" rel="noopener noreferrer">
+                  Twitter
+                </a>
+              )}
+              {autor.data.instagram && (
+                <a href={`https://instagram.com/${autor.data.instagram}`} class="btn btn-quiet" target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a>
+              )}
+              {autor.data.linkedin && (
+                <a href={autor.data.linkedin} class="btn btn-quiet" target="_blank" rel="noopener noreferrer">
+                  LinkedIn
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+      </header>
+
+      {posts.length > 0 && (
+        <section class="autor-posts">
+          <h2>{posts.length} {posts.length === 1 ? 'post publicado' : 'posts publicados'}</h2>
+          <div class="posts-grid">
+            {posts.map(post => (
+              <article class={`post-card card-${post.data.secao}`}>
+                <div class="post-card-body">
+                  <div class="post-meta">
+                    <span class={`badge badge-${post.data.secao}`}>
+                      {getSecaoLabel(post.data.secao)}
+                    </span>
+                    <span class="post-data">{formatarData(post.data.publicado_em)}</span>
+                  </div>
+                  <h3 class="post-titulo">
+                    <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
+                  </h3>
+                  {post.data.descricao && (
+                    <p class="post-excerpt">{post.data.descricao}</p>
+                  )}
+                  {post.data.tags.length > 0 && (
+                    <div class="post-tags">
+                      {post.data.tags.map(tag => (
+                        <a href={`/tags/${tag}`} class="tag">#{tag}</a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {livros.length > 0 && (
+        <section class="autor-livros">
+          <h2>{livros.length === 1 ? 'Livro' : 'Livros'}</h2>
+          <div class="livros-list">
+            {livros.map(livro => {
+              const papel = papelNoLivro(livro, autor.id);
+              return (
+                <a href={`/livros/${livro.id}`} class="livro-card">
+                  <img src={livro.data.capa.src} alt={livro.data.capa_alt} class="livro-capa" />
+                  <div class="livro-card-body">
+                    <span class="livro-papel">
+                      {papel === 'organizador' ? 'Organizador' : 'Autor de capítulo'}
+                    </span>
+                    <h3 class="livro-titulo">{livro.data.titulo}</h3>
+                    <span class="livro-ano">{livro.data.ano}</span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .autor-page {
+    padding-block: var(--space-40);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .autor-hero {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-20);
+    align-items: start;
+    margin-bottom: var(--space-40);
+    padding-bottom: var(--space-32);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .autor-foto-wrap {
+    border-radius: var(--radius-relaxed);
+    overflow: hidden;
+    border: 1px solid var(--border-default);
+    box-shadow: var(--elev-2);
+  }
+
+  .autor-foto {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+  }
+
+  .autor-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .autor-nome {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .autor-papel {
+    font-size: var(--fs-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .autor-quem {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .autor-detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .autor-desde {
+    font-size: var(--fs-body-sm);
+    color: var(--fg-meta);
+    margin: 0;
+  }
+
+  .autor-info-item {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .info-label {
+    font-weight: 600;
+    color: var(--fg-heading);
+  }
+
+  .autor-info-item a {
+    color: var(--color-primary);
+  }
+
+  .autor-redes {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+  }
+
+  .autor-posts h2,
+  .autor-livros h2 {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-bottom: var(--space-16);
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-12);
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-top: 4px solid transparent;
+    border-radius: var(--radius-relaxed);
+    overflow: hidden;
+    transition: box-shadow 160ms ease;
+  }
+
+  .post-card:hover {
+    box-shadow: var(--elev-2);
+  }
+
+  .post-card-body {
+    padding: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    flex: 1;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .post-data {
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+  }
+
+  .post-titulo {
+    font-size: var(--fs-body);
+    font-weight: 700;
+    line-height: var(--lh-h4);
+    letter-spacing: var(--ls-h4);
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .post-titulo a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .post-titulo a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-excerpt {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-body);
+    margin: 0;
+    flex: 1;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .card-bastidores {
+    border-top-color: var(--cor-bastidores);
+    background: linear-gradient(180deg, var(--dvb-orange-50) 0%, var(--bg-card) 40%);
+  }
+
+  .card-panorama {
+    border-top-color: var(--cor-panorama);
+    background: linear-gradient(180deg, var(--dvb-purple-50) 0%, var(--bg-card) 40%);
+  }
+
+  .card-ensaios {
+    border-top-color: var(--cor-ensaios);
+    background: linear-gradient(180deg, var(--dvb-purple-50) 0%, var(--bg-card) 40%);
+  }
+
+  .card-praticas {
+    border-top-color: var(--cor-praticas);
+    background: linear-gradient(180deg, var(--dvb-purple-50) 0%, var(--bg-card) 40%);
+  }
+
+  .livros-list {
+    display: flex;
+    gap: var(--space-12);
+    flex-wrap: wrap;
+  }
+
+  .livro-card {
+    display: flex;
+    gap: var(--space-8);
+    width: 100%;
+    max-width: 400px;
+    padding: var(--space-8);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-relaxed);
+    color: inherit;
+    transition: box-shadow 160ms ease;
+  }
+
+  .livro-card:hover {
+    box-shadow: var(--elev-2);
+    color: inherit;
+  }
+
+  .livro-capa {
+    width: 80px;
+    height: auto;
+    border-radius: var(--radius-default);
+    border: 1px solid var(--border-default);
+    flex-shrink: 0;
+  }
+
+  .livro-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    justify-content: center;
+  }
+
+  .livro-papel {
+    font-size: var(--fs-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .livro-titulo {
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .livro-ano {
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 900px) {
+    .posts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .autor-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .autor-foto-wrap {
+      max-width: 200px;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -27,7 +27,7 @@ Rodolfo é um profissional super premiado. Ganhou o prêmio Cláudio Abramo Jour
 
 Ele fez a ilustração e animação da reportagem que o Núcleo Jornalismo publicou em janeiro deste ano sobre os alertas que o IBAMA fez diariamente ao Ministério do Meio Ambiente sobre a falta de recursos para ações contra o mancha de óleo no Nordeste, já considerado o maior desastre ambiental do Brasil. Um detalhe técnico a respeito desse trabalho é a tendência da criação mais vertical, bem na linha do conceito de design mobile-first, dando ênfase na navegação por aparelhos móveis. Esse é um detalhe que vocês vão perceber nos outros projetos mencionados nessa categoria, porque dessa forma também facilita a contação da história (storytelling) jornalística.
 
-Fonte: Núcleo Jornalismo
+*Fonte: Núcleo Jornalismo*
 Vinicius Sueiro
 
 Vinicius é designer. Atualmente ele trabalha numa ONG Sueca chamada Datastory.org e é mestrando em design de interação na Malmö University.
@@ -38,7 +38,10 @@ Vinicius participou da equipe que desenvolveu o projeto No Epicentro, da Agênci
 
 Vamos comentar um pouco o trabalho que ele fez parte da equipe ainda no Estadão. Na matéria premiada Simulação mostra quais crianças são adotadas (e quais não são) no Brasil explorou o uso de metáforas visuais e explica um pouco no seu portfolio: “Em busca de uma abordagem mais sensível, optamos por uma metáfora visual e representamos cada criança como uma pequena planta que cresce com o passar dos anos”.
 
-Fonte: Portfolio do Vinicius
+![Simulação de crianças para adoção no Brasil visualizadas como plantas](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/03.gif)
+
+*Fonte: Portfolio do Vinicius*
+
 Rodrigo Menegat
 
 Rodrigo é jornalista, se formou na Universidade Estadual de Ponta Grossa e fez especialização em jornalismo de dados na Universidade de Columbia, em Nova York. Fez parte da equipe de infografia digital do Estadão até agosto de 2020.
@@ -50,13 +53,16 @@ Em 2017, Menegat também ganhou o Information is Beautiful Awards, em parceria c
 
 “No gráfico abaixo, cada compra feita em uma churrascaria é representada por um ponto. Eles ficam mais brilhantes de acordo com a concentração em uma faixa de gastos. Destacamos alguns churrascos especialmente extravagantes, que custaram mais de R$ 6.000.”
 
+![Gráfico de gastos do governo em churrascos por Sueiro e Menegat](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/04.jpeg)
 
-Fonte: Sueiro e Menegat
+*Fonte: Sueiro e Menegat*
 Carol Cavaleiro
 
 Carol é designer. Começou sua carreira como jornalista visual na Folha de São Paulo, depois passou pelo Estadão, UOL, Metro, O Globo. Hoje lidera a parte de inovação do Aos Fatos — primeira agência de checagem de fatos multiplataforma do Brasil. Carol escreveu para o datavizbr sobre sua experiência de ser júri no Malofiej27.
 
 O projeto que vamos comentar por aqui é o “Na busca do Candidato”. Foi realizado em parceria com o Google News Lab e ganhou a medalha de bronze na 40º premiação do Society for News Design. Carol apresentou o case do projeto na segunda edição do dataviz.Rio
+
+![Visualização “Na busca do Candidato” mostrando interesse de busca por candidatos presidenciais](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/05.jpeg)
 
 O projeto cria uma narrativa sobre as eleições presidenciais brasileiras de 2018, por meio dos dados do Google Trends. A visualização proposta permite visualizar o interesse de busca por cada candidato ao longo do tempo, assim como conhecer os termos relacionados aos presidenciáveis ao longo de suas campanhas.
 
@@ -66,6 +72,7 @@ Cecília é jornalista de dados. Já trabalhou no Estadão, atualmente trabalha 
 
 Logo no seu primeiro projeto na equipe do Estadão Dados, Cecília fez uma reportagem sobre roubo de celulares em São Paulo. O projeto foi nomeado na shortlist da categoria Journalistic do Cityvis Award 2018, uma premiação de projetos de visualização urbana (urban visualization). Ela conta um pouco sobre o projeto na entrevista que fizemos aqui o datavizbr.
 
+![Mapa de roubos de celulares em São Paulo por Cecília Lago](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/06.gif)
 
 Gabriel Zanlorenssi
 
@@ -73,13 +80,21 @@ Gabriel é graduado em Ciências Sociais pela USP e tem mestrado em Ciência Pol
 
 Já entrevistamos o Gabriel aqui no datavizbr, onde ele conta sua experiência na área de visulização de dados e o dia-a-dia do trabalho no Nexo. Na matéria “1 milhão de casos: a linha do tempo do coronavírus no Brasil”, Gabriel teve participação também da Caroline Souza, Gabriel Maia e do Lucas Gomes. Nessa matéria a equipe faz uma linha da pandemia da Covid-19 e relata as declarações e ações do Presidente nessas datas. Assim como o visto no trabalho do Rodoldo Almeida, aqui também o uso da narrativa em formato vertical para contar a história.
 
+![Linha do tempo da COVID-19 no Brasil por Gabriel Zanlorenssi e equipe Nexo](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/07.jpeg)
 
-Fonte: NEXO
+*Fonte: NEXO*
 Simon Ducroquet
 
 Simon é jornalista visual na Folha de São Paulo. O trabalho dele é focado em multimedia storytelling — um mix de motion graphics, visualização de dados e cartografia GIS. Anteriormente ele fez parte da equipe do NEXO e da Fusion TV.
 
 O trabalho do Simon é super premiado. Ele já ganhou várias medalha no Malofief: de ouro (2019, 2016), de prata (2014) e bronze (2020, 2013, 2011). Ganhou uma medalha de prata e duas medalhas de bronze no ÑH2016 Award, ganhou prêmios de excelência no SND em 2014, 2011 e 2010, além do Prêmio Folha de Jornalismo em 2012 e 2011. Recentemente a matéria sobre o caminho dos impostos no Brasil ganhou medalha de bronze nesse ano no #malofiej28.
 
+![Visualização do caminho dos impostos no Brasil por Simon Ducroquet](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/08.png)
 
-Espero que vocês tenham gostado do material apresentado e não esquece de seguir a gente no twitter e no instagram. Continuaremos em breve com a quarta parte dessa série sobre Jornalismo de Dados.
+![Trabalho em visualização de dados - projeto 1](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/09.jpeg)
+
+![Trabalho em visualização de dados - projeto 2](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/10.jpeg)
+
+![Trabalho em visualização de dados - projeto 3](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-4/11.jpeg)
+
+Espero que vocês tenham gostado do material apresentado e não esquece de seguir a gente no twitter e no instagram. Continuaremos em breve com a quinta parte dessa série sobre Jornalismo de Dados.

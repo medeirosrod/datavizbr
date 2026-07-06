@@ -3,11 +3,13 @@ titulo: "Livros sobre infografia da editora Taschen"
 autores:
   - rodrigo-medeiros
 publicado_em: 2018-02-24
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/livros-sobre-infografia-51289249656a"
 publicado_originalmente_em: 2018-02-24
+capa: ../../assets/blog/livros-sobre-infografia-da-editora-taschen/01.png
+capa_alt: Capa do post Livros sobre infografia da editora Taschen
 ---
 
 Rafael Ancara e Fabiano de Miranda, do Pensar Infográfico, fizeram um vídeo no canal deles sobre os livros de Infografia, editados em português, da Editora Taschen. São quatro livros:

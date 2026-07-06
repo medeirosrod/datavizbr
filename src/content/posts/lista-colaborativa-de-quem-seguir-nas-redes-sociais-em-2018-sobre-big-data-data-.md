@@ -4,10 +4,12 @@ autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-20
 secao: panorama
-tags: []
+tags: ["Cultura", "Dados", "Dataviz", "Design", "Educação"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/lista-colaborativa-de-quem-seguir-nas-redes-sociais-em-2018-sobre-big-data-data-science-f776dbf333b3"
 publicado_originalmente_em: 2017-12-20
+capa: ../../assets/blog/lista-colaborativa-de-quem-seguir-nas-redes-sociais-em-2018-sobre-big-data-data-/01.png
+capa_alt: Capa do post Lista colaborativa de quem seguir nas redes sociais em 2018 sobre big data, data science, jornalismo de dados e visualização de dados.
 ---
 
 Desde 2009 venho pesquisando sobre visualização de dados e, obviamente, muita coisa mudou no mercado, apareceram muitas outras palavrinhas como big data, data science e jornalismo de dados. Em 2017 criei o @datavizbr e com isso fui ajustando meu gosto de pesquisar sobre o assunto com uma curadoria de pessoas para seguir nas redes sociais e convidar para os eventos. Aos poucos fui criando pequenas listas e espero que com ajuda de vocês a gente possa aumentar.

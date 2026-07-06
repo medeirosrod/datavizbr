@@ -4,10 +4,12 @@ autores:
   - rodrigo-medeiros
 publicado_em: 2022-03-31
 secao: bastidores
-tags: []
+tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-carol-seixas-sobre-o-projeto-bordados-2d9c4740f90a"
 publicado_originalmente_em: 2022-03-31
+capa: ../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/01.png
+capa_alt: Capa do post Entrevista com Carol Seixas sobre o projeto borDADOS
 ---
 
 Um pouco antes de começar a pandemia enviei umas perguntas para Carol para ela contar um pouco da experiência dela na Especialização utilizando visualização de dados e bordado.
@@ -38,13 +40,23 @@ Considerando que hoje vivemos a realidade do Big Data, entendo que minhas intera
 
 Carol: Bordar, em específico, faz parte da minha vida desde pequena pois venho de uma família de bordadeiras. Aprendi pequena a fazer ponto-cruz com minha mãe, uma tremenda artista nessa área, e muitos anos depois me encontrei nesse universo através do bordado livre.
 
-Para a pesquisa com meus colegas, fiz através do Google Forms. Em seguida, me preocupei em avaliar quais dados iria utilizar e como. Para a base dos projetos, fiz os esboços e as artes no programa Adobe Illustrator. Quando fiquei satisfeita, imprimi no tamanho que gostaria de fazer e passei para o tecido com um lápis comum. Para a aquarela, utilizei tintas de aquarela para tecido diluídas com água. E para os bordados, utilizei linhas próprias de bordados com 2 tipos de pontos diferentes: para os caminhos e redes sociais usei o ponto atrás e para o de migração, utilizei o ponto nó francês.
+![Carol bordando no Parque Taquaral](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/03.jpeg)
+
+Para a pesquisa com meus colegas, fiz através do Google Forms. Em seguida, me preocupei em avaliar quais dados iria utilizar e como. Para a base dos projetos, fiz os esboços e as artes no programa Adobe Illustrator. Quando fiquei satisfeita, imprimi no tamanho que gostaria de fazer e passei para o tecido com um lápis comum.
+
+![Processo de pintura do algodão cru com mapa do Brasil](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/04.png)
+
+Para a aquarela, utilizei tintas de aquarela para tecido diluídas com água. E para os bordados, utilizei linhas próprias de bordados com 2 tipos de pontos diferentes: para os caminhos e redes sociais usei o ponto atrás e para o de migração, utilizei o ponto nó francês.
+
+![Os 3 quadros levados à banca](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/05.png)
 
 **Rodrigo: Percebo no seu trabalho uma influência do data humanism da Giorgia Lupi e do projeto Dear Data.**
 
 Carol: Sim, com certeza. O trabalho delas foi a grande base para o que propus.
 
 Acredito que vivemos em uma bolha social, onde dados são trabalhados de maneira bastante elitizada, distanciando o ser humano comum — que não ironicamente — é quem fornece os dados usados.
+
+![Quadros de tempo de uso das redes sociais e migração dos colegas](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/06.png)
 
 Ao preparar a monografia, li alguns textos de Byung-Chul Han em que ele cita o filósofo alemão Friedrich Nietzsche para criticar a hiperatenção e a hiperatividade. Em "Humano, demasiado humano", Nietzsche argumenta que a vida humana acaba quando elementos contemplativos são expulsos dela. Como alternativa à vida hiperativa, Han oferece a ideia de uma "vida contemplativa", na qual os indivíduos sabem dizer "não" ao excesso de estímulos.
 

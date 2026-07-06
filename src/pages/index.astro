@@ -18,10 +18,17 @@ const recentPosts = posts.slice(1, 5);
 
 // Posts por seção
 const postsPorSecao = {
-  bastidores: posts.filter(p => p.data.secao === 'bastidores').slice(0, 2),
-  panorama: posts.filter(p => p.data.secao === 'panorama').slice(0, 2),
-  praticas: posts.filter(p => p.data.secao === 'praticas').slice(0, 2),
-  ensaios: posts.filter(p => p.data.secao === 'ensaios').slice(0, 2),
+  bastidores: posts.filter(p => p.data.secao === 'bastidores').slice(0, 3),
+  panorama: posts.filter(p => p.data.secao === 'panorama').slice(0, 3),
+  praticas: posts.filter(p => p.data.secao === 'praticas').slice(0, 3),
+  ensaios: posts.filter(p => p.data.secao === 'ensaios').slice(0, 3),
+};
+
+const contagemPorSecao = {
+  bastidores: posts.filter(p => p.data.secao === 'bastidores').length,
+  panorama: posts.filter(p => p.data.secao === 'panorama').length,
+  praticas: posts.filter(p => p.data.secao === 'praticas').length,
+  ensaios: posts.filter(p => p.data.secao === 'ensaios').length,
 };
 
 // Buscar séries
@@ -155,80 +162,117 @@ const tempoLeitura = (slug: string): number => {
   <!-- ═══════════════════════════════════════════
        BLOCO 4 — NAVEGUE POR SEÇÃO
   ════════════════════════════════════════════ -->
-  <section class="section secoes-section">
+  <section class="acervo-section">
     <div class="container">
-      <div class="section-head">
-        <h2>Navegue pelo acervo</h2>
+      <div class="acervo-header">
+        <div>
+          <p class="t-eyebrow acervo-eyebrow">Acervo desde 2017</p>
+          <h2 class="acervo-titulo">Navegue pelo acervo</h2>
+        </div>
+        <p class="acervo-subtitulo">Quatro seções, uma comunidade.</p>
       </div>
-      <div class="secoes-grid stagger-children">
 
-        <div class="secao-card secao-card-bastidores" style="--stagger-index: 0">
-          <div class="secao-card-header">
-            <span class="secao-card-nome">Bastidores</span>
-            <span class="secao-card-count">Making-ofs</span>
-          </div>
-          <p class="secao-card-descricao">
-            Como uma visualização foi feita: processo, decisões, ferramentas.
-            Em primeira pessoa de quem produz dataviz no Brasil.
-          </p>
-          <ul class="secao-card-posts">
-            {postsPorSecao.bastidores.map((post) => (
-              <li><a href={`/posts/${post.id}`}>{post.data.titulo}</a></li>
-            ))}
-          </ul>
-          <a href="/bastidores" class="secao-card-cta">Ver todos →</a>
-        </div>
+      <div class="acervo-grid">
 
-        <div class="secao-card secao-card-panorama" style="--stagger-index: 1">
-          <div class="secao-card-header">
-            <span class="secao-card-nome">Panorama</span>
-            <span class="secao-card-count">Mapeamentos</span>
+        <a href="/bastidores" class="acervo-card acervo-card--bastidores">
+          <div class="acervo-card-bg" aria-hidden="true"></div>
+          <div class="acervo-card-inner">
+            <div class="acervo-card-top">
+              <span class="acervo-card-num">{String(contagemPorSecao.bastidores).padStart(2, '0')}</span>
+              <span class="acervo-card-tag">Making-ofs</span>
+            </div>
+            <div class="acervo-card-mid">
+              <h3 class="acervo-card-nome">Bastidores</h3>
+              <p class="acervo-card-desc">
+                Como uma visualização foi feita — processo, decisões e ferramentas em primeira pessoa.
+              </p>
+            </div>
+            <ul class="acervo-card-lista">
+              {postsPorSecao.bastidores.map((post) => (
+                <li>
+                  <span class="acervo-lista-bullet" aria-hidden="true">→</span>
+                  <span class="acervo-lista-titulo">{post.data.titulo}</span>
+                </li>
+              ))}
+            </ul>
+            <span class="acervo-card-cta">Explorar seção →</span>
           </div>
-          <p class="secao-card-descricao">
-            Quem faz, o que está acontecendo, quem ganhou o quê.
-            Perfis, eventos e premiações da cena brasileira.
-          </p>
-          <ul class="secao-card-posts">
-            {postsPorSecao.panorama.map((post) => (
-              <li><a href={`/posts/${post.id}`}>{post.data.titulo}</a></li>
-            ))}
-          </ul>
-          <a href="/panorama" class="secao-card-cta">Ver todos →</a>
-        </div>
+        </a>
 
-        <div class="secao-card secao-card-praticas" style="--stagger-index: 2">
-          <div class="secao-card-header">
-            <span class="secao-card-nome">Práticas</span>
-            <span class="secao-card-count">Técnicas</span>
+        <a href="/panorama" class="acervo-card acervo-card--panorama">
+          <div class="acervo-card-bg" aria-hidden="true"></div>
+          <div class="acervo-card-inner">
+            <div class="acervo-card-top">
+              <span class="acervo-card-num">{String(contagemPorSecao.panorama).padStart(2, '0')}</span>
+              <span class="acervo-card-tag">Mapeamentos</span>
+            </div>
+            <div class="acervo-card-mid">
+              <h3 class="acervo-card-nome">Panorama</h3>
+              <p class="acervo-card-desc">
+                Quem faz, o que está acontecendo, quem ganhou o quê na cena brasileira.
+              </p>
+            </div>
+            <ul class="acervo-card-lista">
+              {postsPorSecao.panorama.map((post) => (
+                <li>
+                  <span class="acervo-lista-bullet" aria-hidden="true">→</span>
+                  <span class="acervo-lista-titulo">{post.data.titulo}</span>
+                </li>
+              ))}
+            </ul>
+            <span class="acervo-card-cta">Explorar seção →</span>
           </div>
-          <p class="secao-card-descricao">
-            Princípios, técnicas e ferramentas aplicáveis.
-            De acessibilidade em gráficos a tutoriais de software.
-          </p>
-          <ul class="secao-card-posts">
-            {postsPorSecao.praticas.map((post) => (
-              <li><a href={`/posts/${post.id}`}>{post.data.titulo}</a></li>
-            ))}
-          </ul>
-          <a href="/praticas" class="secao-card-cta">Ver todos →</a>
-        </div>
+        </a>
 
-        <div class="secao-card secao-card-ensaios" style="--stagger-index: 3">
-          <div class="secao-card-header">
-            <span class="secao-card-nome">Ensaios</span>
-            <span class="secao-card-count">Reflexões</span>
+        <a href="/praticas" class="acervo-card acervo-card--praticas">
+          <div class="acervo-card-bg" aria-hidden="true"></div>
+          <div class="acervo-card-inner">
+            <div class="acervo-card-top">
+              <span class="acervo-card-num">{String(contagemPorSecao.praticas).padStart(2, '0')}</span>
+              <span class="acervo-card-tag">Técnicas</span>
+            </div>
+            <div class="acervo-card-mid">
+              <h3 class="acervo-card-nome">Práticas</h3>
+              <p class="acervo-card-desc">
+                Princípios, ferramentas e tutoriais aplicáveis — de acessibilidade a software.
+              </p>
+            </div>
+            <ul class="acervo-card-lista">
+              {postsPorSecao.praticas.map((post) => (
+                <li>
+                  <span class="acervo-lista-bullet" aria-hidden="true">→</span>
+                  <span class="acervo-lista-titulo">{post.data.titulo}</span>
+                </li>
+              ))}
+            </ul>
+            <span class="acervo-card-cta">Explorar seção →</span>
           </div>
-          <p class="secao-card-descricao">
-            Reflexão sobre o campo: o papel da dataviz,
-            ética, futuro e posicionamento.
-          </p>
-          <ul class="secao-card-posts">
-            {postsPorSecao.ensaios.map((post) => (
-              <li><a href={`/posts/${post.id}`}>{post.data.titulo}</a></li>
-            ))}
-          </ul>
-          <a href="/ensaios" class="secao-card-cta">Ver todos →</a>
-        </div>
+        </a>
+
+        <a href="/ensaios" class="acervo-card acervo-card--ensaios">
+          <div class="acervo-card-bg" aria-hidden="true"></div>
+          <div class="acervo-card-inner">
+            <div class="acervo-card-top">
+              <span class="acervo-card-num">{String(contagemPorSecao.ensaios).padStart(2, '0')}</span>
+              <span class="acervo-card-tag">Reflexões</span>
+            </div>
+            <div class="acervo-card-mid">
+              <h3 class="acervo-card-nome">Ensaios</h3>
+              <p class="acervo-card-desc">
+                O papel da dataviz, ética, futuro e posicionamento no campo.
+              </p>
+            </div>
+            <ul class="acervo-card-lista">
+              {postsPorSecao.ensaios.map((post) => (
+                <li>
+                  <span class="acervo-lista-bullet" aria-hidden="true">→</span>
+                  <span class="acervo-lista-titulo">{post.data.titulo}</span>
+                </li>
+              ))}
+            </ul>
+            <span class="acervo-card-cta">Explorar seção →</span>
+          </div>
+        </a>
 
       </div>
     </div>
@@ -504,89 +548,243 @@ const tempoLeitura = (slug: string): number => {
     margin-top: var(--space-4);
   }
 
-  /* ── SEÇÕES ─────────────────────────────────── */
-  .secoes-section { background: var(--bg-soft); }
-  .secoes-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-8);
+  /* ── ACERVO (redesign) ─────────────────────── */
+  .acervo-section {
+    padding-block: var(--space-48) var(--space-48);
+    background: var(--dvb-ink);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
-  /* card como div, não âncora — evita conflito com estilos de link global */
-  .secao-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    padding: var(--space-10);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    transition: box-shadow 160ms ease;
-  }
-  .secao-card:hover { box-shadow: var(--elev-2); }
-
-  /* borda esquerda colorida — usa box-shadow pra não interferir no border */
-  .secao-card-bastidores { box-shadow: inset 3px 0 0 var(--dvb-orange); }
-  .secao-card-panorama   { box-shadow: inset 3px 0 0 var(--dvb-purple); }
-  .secao-card-praticas   { box-shadow: inset 3px 0 0 var(--dvb-ink-3); }
-  .secao-card-ensaios    { box-shadow: inset 3px 0 0 var(--dvb-purple-deep); }
-
-  .secao-card:hover.secao-card-bastidores { box-shadow: inset 3px 0 0 var(--dvb-orange), var(--elev-2); }
-  .secao-card:hover.secao-card-panorama   { box-shadow: inset 3px 0 0 var(--dvb-purple), var(--elev-2); }
-  .secao-card:hover.secao-card-praticas   { box-shadow: inset 3px 0 0 var(--dvb-ink-3), var(--elev-2); }
-  .secao-card:hover.secao-card-ensaios    { box-shadow: inset 3px 0 0 var(--dvb-purple-deep), var(--elev-2); }
-
-  .secao-card-header {
+  .acervo-header {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-end;
+    margin-bottom: var(--space-20);
+    gap: var(--space-12);
   }
-  .secao-card-nome {
-    font-size: var(--fs-body);
-    font-weight: 700;
-    color: var(--fg-heading);
-  }
-  .secao-card-count {
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
+  .acervo-eyebrow {
+    color: rgba(255,255,255,0.45);
     font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    font-size: var(--fs-micro);
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
   }
-  .secao-card-descricao {
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-body-sm);
-    color: var(--fg-body);
-    flex: 1;
-  }
-  .secao-card-posts {
-    list-style: none;
-    padding: 0;
+  .acervo-titulo {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-weight: 700;
+    color: #fff;
     margin: 0;
-    border-top: 1px solid var(--border-default);
-    padding-top: var(--space-6);
+  }
+  .acervo-subtitulo {
+    font-size: var(--fs-body-lg);
+    color: rgba(255,255,255,0.45);
+    margin: 0;
+    max-width: 220px;
+    text-align: right;
+    line-height: 1.4;
+  }
+
+  .acervo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .acervo-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-large);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    text-decoration: none;
+    color: inherit;
+    min-height: 420px;
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  }
+  .acervo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+    border-color: rgba(255,255,255,0.18);
+    color: inherit;
+  }
+
+  /* fundo decorativo com gradiente de cor */
+  .acervo-card-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .acervo-card:hover .acervo-card-bg { opacity: 1; }
+
+  .acervo-card--bastidores { background: #1f1028; }
+  .acervo-card--bastidores .acervo-card-bg {
+    background: linear-gradient(160deg, rgba(230,126,44,0.15) 0%, transparent 60%);
+  }
+  .acervo-card--bastidores .acervo-card-num { color: var(--dvb-orange); }
+  .acervo-card--bastidores .acervo-card-nome { color: var(--dvb-orange-300); }
+  .acervo-card--bastidores:hover .acervo-card-cta { color: var(--dvb-orange); }
+  .acervo-card--bastidores .acervo-lista-bullet { color: var(--dvb-orange); }
+  .acervo-card--bastidores::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--dvb-orange);
+  }
+
+  .acervo-card--panorama { background: #1a1030; }
+  .acervo-card--panorama .acervo-card-bg {
+    background: linear-gradient(160deg, rgba(85,43,123,0.3) 0%, transparent 60%);
+  }
+  .acervo-card--panorama .acervo-card-num { color: var(--dvb-purple-300); }
+  .acervo-card--panorama .acervo-card-nome { color: var(--dvb-purple-300); }
+  .acervo-card--panorama:hover .acervo-card-cta { color: var(--dvb-purple-300); }
+  .acervo-card--panorama .acervo-lista-bullet { color: var(--dvb-purple-300); }
+  .acervo-card--panorama::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--dvb-purple);
+  }
+
+  .acervo-card--praticas { background: #1a1528; }
+  .acervo-card--praticas .acervo-card-bg {
+    background: linear-gradient(160deg, rgba(107,93,118,0.25) 0%, transparent 60%);
+  }
+  .acervo-card--praticas .acervo-card-num { color: rgba(255,255,255,0.5); }
+  .acervo-card--praticas .acervo-card-nome { color: rgba(255,255,255,0.9); }
+  .acervo-card--praticas:hover .acervo-card-cta { color: rgba(255,255,255,0.8); }
+  .acervo-card--praticas .acervo-lista-bullet { color: rgba(255,255,255,0.4); }
+  .acervo-card--praticas::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--dvb-ink-3);
+  }
+
+  .acervo-card--ensaios { background: #0e0a18; }
+  .acervo-card--ensaios .acervo-card-bg {
+    background: linear-gradient(160deg, rgba(42,22,64,0.6) 0%, transparent 60%);
+  }
+  .acervo-card--ensaios .acervo-card-num { color: rgba(156,123,191,0.7); }
+  .acervo-card--ensaios .acervo-card-nome { color: rgba(156,123,191,1); }
+  .acervo-card--ensaios:hover .acervo-card-cta { color: var(--dvb-purple-300); }
+  .acervo-card--ensaios .acervo-lista-bullet { color: rgba(156,123,191,0.6); }
+  .acervo-card--ensaios::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--dvb-purple-deep);
+  }
+
+  .acervo-card-inner {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-8) var(--space-8) var(--space-10);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--space-7);
+  }
+
+  .acervo-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .acervo-card-num {
+    font-size: 2.8rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    opacity: 0.9;
+    transition: opacity 220ms ease;
+  }
+  .acervo-card:hover .acervo-card-num { opacity: 1; }
+
+  .acervo-card-tag {
+    font-size: var(--fs-micro);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.06);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: var(--space-2);
+  }
+
+  .acervo-card-mid {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
   }
-  .secao-card-posts li a {
+  .acervo-card-nome {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: var(--ls-h3);
+    transition: color 220ms ease;
+  }
+  .acervo-card-desc {
     font-size: var(--fs-body-sm);
-    color: var(--fg-body);
-    border-bottom: none;
-    line-height: 1.4;
+    line-height: var(--lh-body-sm);
+    color: rgba(255,255,255,0.5);
+    margin: 0;
+  }
+
+  .acervo-card-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: var(--space-6);
+  }
+  .acervo-card-lista li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+  .acervo-lista-bullet {
+    font-size: var(--fs-micro);
+    flex-shrink: 0;
+    margin-top: 2px;
+    opacity: 0.7;
+    font-weight: 600;
+    transition: opacity 220ms ease;
+  }
+  .acervo-card:hover .acervo-lista-bullet { opacity: 1; }
+  .acervo-lista-titulo {
+    font-size: var(--fs-body-sm);
+    color: rgba(255,255,255,0.6);
+    line-height: 1.35;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: color 220ms ease;
   }
-  .secao-card-posts li a:hover { color: var(--color-primary); }
-  .secao-card-cta {
+  .acervo-card:hover .acervo-lista-titulo { color: rgba(255,255,255,0.8); }
+
+  .acervo-card-cta {
     font-size: var(--fs-caption);
-    font-weight: 500;
-    color: var(--fg-meta);
-    border-bottom: none;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
     margin-top: auto;
-    align-self: flex-start;
+    transition: color 220ms ease;
+    letter-spacing: 0.03em;
   }
-  .secao-card:hover .secao-card-cta { color: var(--color-primary); }
 
   /* ── SÉRIES ─────────────────────────────────── */
   .series-grid {
@@ -683,19 +881,25 @@ const tempoLeitura = (slug: string): number => {
   padding-bottom: calc(var(--space-5) + 1px);
 }
   /* ── RESPONSIVO ─────────────────────────────── */
+  @media (max-width: 1100px) {
+    .acervo-grid             { grid-template-columns: repeat(2, 1fr); }
+  }
   @media (max-width: 900px) {
     .hero-grid               { grid-template-columns: 1fr; gap: var(--space-16); }
     .posts-grid              { grid-template-columns: repeat(2, 1fr); }
     .destaque                { grid-template-columns: 1fr; }
     .destaque-capa           { display: none; }
+    .acervo-header           { flex-direction: column; align-items: flex-start; }
+    .acervo-subtitulo        { text-align: left; max-width: 100%; }
   }
   @media (max-width: 640px) {
     .hero-title              { font-size: var(--fs-h2); }
     .posts-grid              { grid-template-columns: 1fr; }
-    .secoes-grid             { grid-template-columns: 1fr; }
+    .acervo-grid             { grid-template-columns: 1fr; }
     .series-grid             { grid-template-columns: 1fr; }
     .sobre-newsletter-inner  { grid-template-columns: 1fr; }
     .newsletter-form         { flex-direction: column; }
+    .acervo-card             { min-height: unset; }
   }
 
 </style>

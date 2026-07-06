@@ -3,11 +3,13 @@ titulo: "Visualização de dados no CIDI"
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-02
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-no-cidi-2015-b75490a32462"
 publicado_originalmente_em: 2017-12-02
+capa: ../../assets/blog/visualizacao-de-dados-no-cidi/01.jpeg
+capa_alt: Capa do post Visualização de dados no CIDI
 ---
 
 Fui ao CIDI (Congresso Internacional de Design da Informação) pela primeira vez em 2015. O evento já acontece há algum tempo e sempre mostra o que tem mais se destacado nas pesquisas em design no Brasil, porém esse ano algo me empolgou demais para saber o que estava acontecendo.

@@ -81,6 +81,26 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
         <a href="/newsletter" class="btn btn-primary btn-sm nav-cta">
           Newsletter
         </a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+
+      <div class="nav-mobile" id="navMobile">
+        <div class="nav-mobile-inner">
+          {NAV_PRINCIPAL.map((item) => (
+            <a
+              href={item.url}
+              class:list={['nav-mobile-link', { active: Astro.url.pathname.startsWith(item.url) }]}
+            >
+              {item.texto}
+            </a>
+          ))}
+          <a href="/newsletter" class="btn btn-primary nav-mobile-cta">Newsletter</a>
+        </div>
       </div>
     </nav>
 
@@ -146,11 +166,33 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 
       <div class="footer-bottom container">
         <span>© {new Date().getFullYear()} datavizbr · Conteúdo sob <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></span>
-        <span>Feito em Recife · IBM Plex Sans</span>
+        <span>Feito orgulhosamente em Recife</span>
       </div>
     </footer>
 
 
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const mobile = document.getElementById('navMobile');
+
+    if (toggle && mobile) {
+      toggle.addEventListener('click', () => {
+        const open = mobile.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+
+      mobile.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobile.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Abrir menu');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  </script>
   </body>
 </html>
 
@@ -209,6 +251,87 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
   .nav-link.active { color: var(--color-primary); }
   .nav-cta { margin-left: var(--space-4); }
 
+  /* MOBILE TOGGLE */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-3);
+    margin-left: auto;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-toggle-bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--fg-heading);
+    border-radius: 1px;
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* MOBILE OVERLAY */
+  .nav-mobile {
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: 59px;
+    background: var(--bg-canvas);
+    z-index: 9;
+    padding: var(--space-16) var(--padding-x);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 220ms ease, transform 220ms ease;
+    overflow-y: auto;
+  }
+
+  .nav-mobile.open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-mobile-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: var(--max-width);
+    margin-inline: auto;
+  }
+
+  .nav-mobile-link {
+    display: block;
+    padding: var(--space-6) 0;
+    font-size: var(--fs-body-lg);
+    font-weight: 600;
+    color: var(--fg-heading);
+    border-bottom: 1px solid var(--border-default);
+    border-bottom: none;
+  }
+
+  .nav-mobile-link:hover,
+  .nav-mobile-link.active {
+    color: var(--color-primary);
+  }
+
+  .nav-mobile-cta {
+    margin-top: var(--space-8);
+    text-align: center;
+  }
+
   /* FOOTER */
   .footer { padding: var(--space-32) 0 var(--space-24); }
   .footer-inner {
@@ -261,7 +384,12 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 
   /* RESPONSIVO */
   @media (max-width: 768px) {
-    .nav-links { display: none; } /* implementar menu mobile depois */
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-mobile { display: block; pointer-events: none; }
+    .nav-mobile.open { pointer-events: auto; }
+
     .footer-inner { grid-template-columns: 1fr 1fr; gap: var(--space-16); }
     .footer-bottom { flex-direction: column; gap: var(--space-4); text-align: center; }
   }

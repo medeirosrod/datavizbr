@@ -4,10 +4,12 @@ autores:
   - marck-ai
 publicado_em: 2020-11-21
 secao: ensaios
-tags: []
+tags: ["Clima", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/estética-dos-dados-e-representação-visual-da-complexidade-92fc66eaba4e"
 publicado_originalmente_em: 2020-11-21
+capa: ../../assets/blog/estetica-dos-dados-e-representacao-visual-da-complexidade/01.jpeg
+capa_alt: Capa do post Estética dos dados e representação visual da complexidade
 ---
 
 Existe um certo fascínio estético por imagens visualmente complexas. A popularidade das visualizações de dados pode ser explicada não apenas por fenômenos como a big data, mas também por elementos estéticos relacionados a uma noção de unidade e organização visual na forma de imagens intricadas, complexas e esteticamente indulgentes e intrigantes.
@@ -37,6 +39,8 @@ Fractais são padrões recorrentes encontrados na natureza que expressam autosse
 **Exemplos notáveis**
 
 - **The Open Project Internet Map** (Barret Lyon, 2003): representação visual das múltiplas conexões que constituem a rede de servidores da Internet. Exibido no MoMA e no Museu de Ciência de Boston.
+
+*Figura 2 — Imagem das redes classe C que formam as conexões da Internet em 8 de julho de 2009. Fonte: [time.com](https://time.com/3952373/internet-opte-project/)*
 
 - **Distellamap** (Ben Fry, 2005): visualização do funcionamento do código em Assembler de jogos clássicos do Atari 2600, onde cada instrução é representada visualmente.
 

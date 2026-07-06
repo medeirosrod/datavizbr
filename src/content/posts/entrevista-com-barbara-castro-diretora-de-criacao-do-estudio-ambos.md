@@ -3,11 +3,13 @@ titulo: "Entrevista com Barbara Castro, diretora de criação do estúdio Ambos&
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-10-07
-secao: bastidores
-tags: []
+secao: panorama
+tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-barbara-castro-diretora-de-criação-do-estúdio-ambos-af639579be47"
 publicado_originalmente_em: 2019-10-07
+capa: ../../assets/blog/entrevista-com-barbara-castro-diretora-de-criacao-do-estudio-ambos/02.png
+capa_alt: Capa do post Entrevista com Barbara Castro, diretora de criação do estúdio Ambos&&.
 ---
 
 Essa semana tivemos a oportunidade de entrevistar Barbara Castro, diretora de criação do estúdio Ambos&&, que se dedica a concepção e execução de instalações interativas, exposições e visualização de dados.
@@ -33,6 +35,8 @@ Ainda vejo uma dicotomia entre abordagens mais artísticas ou mais informativas.
 A questão da autoria não está restrita ao campo da linguagem visual, mas também a própria coleta, curiosidade e necessidade de investigação de um tema. Vejo projetos do data_labe, uma iniciativa de jornalismo de dados no complexo da Maré, com uma veia muito autoral também. Eles empregam e questionam os dados e toda a metodologia com muita propriedade.
 
 **Como foi o processo da exposição Existência Numérica?**
+
+*Instalação Disritmia, de Bárbara Castro.*
 
 Eu e Luiz estávamos nos dedicando ao setor cultural criando exposições e instalações interativas desde 2014. Queríamos dados no nível individual, como um pulso do coração ou um nome, ao coletivo, como dados de uma nação. Nossa primeira escolha foi convidar o Pedro Miguel Cruz, pois sua obra tem a capacidade singular de representar dados de forma poética. A exposição teve pouco mais de 25 mil visitantes em dois meses.
 

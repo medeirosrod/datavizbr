@@ -4,10 +4,14 @@ autores:
   - carolina-leslie
 publicado_em: 2020-06-19
 secao: ensaios
-tags: []
+serie: entendendo-o-agora
+ordem_na_serie: 3
+tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entendendo-o-agora-dataviz-em-tempos-de-coronavírus-parte-3-5ae96cc7ac11"
 publicado_originalmente_em: 2020-06-19
+capa: ../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/05.png
+capa_alt: Capa do post Entendendo o agora — Dataviz em tempos de Coronavírus parte 3
 ---
 
 Quando falamos em Dataviz em tempos de Coronavírus lembramos logo de mapas mostrando o avanço da pandemia, curvas exponenciais comparando crescimento de casos e número de vítimas. Mas, para além do retrato trazido pelos números diretos da pandemia, o impacto do vírus e da restrição de contato social permitem muitas outras leituras e contagens.
@@ -20,6 +24,8 @@ Neste terceiro post da série mostro alguns exemplos interessantes de outros ân
 
 O Nexo perguntou como a quarentena mudou as buscas por receitas no Brasil. Brownie e pão foram os campeões de audiência.
 
+![Gráfico animado do Nexo mostrando o aumento das buscas por receitas no Brasil durante a quarentena](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/02.gif)
+
 **Padrão de disseminação de informação**
 
 O NYTimes mapeou o fluxo de compartilhamento de uma notícia inverídica, adotada por grupos de direita nos EUA, e viu como o conceito, partindo apenas de duas fontes, se espalhou.
@@ -28,7 +34,11 @@ O NYTimes mapeou o fluxo de compartilhamento de uma notícia inverídica, adotad
 
 A queda no número de voos foi mostrada por Reuters, NYTimes e The Guardian. A indústria de cruzeiros também sofreu um impacto drástico.
 
+![Mapa da Bloomberg com a posição dos navios de cruzeiro no mundo entre 31 de janeiro e 3 de abril de 2020](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/03.jpeg)
+
 Os padrões de locomoção locais foram muito discutidos como forma de avaliação da adesão à quarentena. Apple e Google lançaram relatórios mostrando a evolução dos deslocamentos em diversas cidades do mundo.
+
+![Gráfico da Bloomberg mostrando que os estados americanos reduziram deslocamentos bem antes dos lockdowns oficiais](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/04.jpeg)
 
 **Impacto econômico**
 
@@ -51,3 +61,5 @@ Mona Chalabi criou uma ilustração sensível sobre a população de NY, ressalt
 Os efeitos no ambiente têm sido comentados como um possível lado bom da pandemia. As cidades ficaram mais limpas, com diminuição da quantidade de gases poluentes na atmosfera. Imagens de satélite mostram que a mancha de poluição em SP se reduziu na quarentena.
 
 Porém a Bloomberg, colocando os dados em perspectiva, tem uma visão menos otimista. Apesar do lockdown ter gerado a maior queda de emissão de CO2 já registrada, em perspectiva a diminuição terá pouco efeito na desaceleração do aquecimento global.
+
+![Gráfico da Bloomberg mostrando que a concentração de CO2 na atmosfera continuará subindo apesar da queda de emissões na pandemia](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/06.png)

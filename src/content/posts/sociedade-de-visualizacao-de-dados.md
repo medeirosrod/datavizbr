@@ -3,11 +3,13 @@ titulo: "Sociedade de Visualização de Dados"
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-03-13
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Dados", "Dataviz", "Design", "Evento", "Interação"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/sociedade-de-visualização-de-dados-5795905ce6b7"
 publicado_originalmente_em: 2019-03-13
+capa: ../../assets/blog/sociedade-de-visualizacao-de-dados/01.png
+capa_alt: Capa do post Sociedade de Visualização de Dados
 ---
 
 Nos últimos meses surgiu na comunidade de visualização de dados o anúncio da criação da Sociedade de Visualização de dados, mais ou menos no padrão de outras comunidades como a IxDA para design de interação, com o intuito de fazer divulgar para a sociedade de maneira mais eficiente do que seria a área. A Julia Giannella traduziu o texto original do anúncio:

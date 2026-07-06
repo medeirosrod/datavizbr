@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Página não encontrada"
+  description="A página que você procura não existe no datavizbr."
+>
+  <section class="page-section">
+    <div class="container">
+
+      <header class="page-header">
+        <p class="t-eyebrow">Erro 404</p>
+        <h1>Página não encontrada</h1>
+        <p class="page-lead">
+          A página que você procura pode ter sido removida, renomeada ou
+          nunca existiu. Volte ao início para encontrar o que precisa.
+        </p>
+      </header>
+
+      <div class="acoes">
+        <a href="/" class="btn btn-primary">Voltar ao início</a>
+        <a href="/arquivo" class="btn btn-quiet">Ver arquivo de posts</a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-section {
+    padding-block: var(--space-48) var(--space-48);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header {
+    max-width: 600px;
+    margin-bottom: var(--space-24);
+  }
+
+  .page-header h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin-block: var(--space-6) var(--space-10);
+  }
+
+  .page-lead {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    margin: 0;
+  }
+
+  .acoes {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+</style>

@@ -3,11 +3,13 @@ titulo: "Visualização de dados no youtube e em português"
 autores:
   - rodrigo-medeiros
 publicado_em: 2020-06-14
-secao: bastidores
-tags: []
+secao: panorama
+tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-em-português-39f27ca2257c"
 publicado_originalmente_em: 2020-06-14
+capa: ../../assets/blog/visualizacao-de-dados-no-youtube-e-em-portugues/01.jpeg
+capa_alt: Capa do post Visualização de dados no youtube e em português
 ---
 
 Como publiquei no twitter recentemente a criação de conteúdo sobre visualização de dados em português é um ato político e de resistência. Aumentar o alcance desse conteúdo é nossa missão e desejo desde sempre no datavizbr.

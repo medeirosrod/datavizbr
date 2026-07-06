@@ -3,11 +3,13 @@ titulo: "Um relato pessoal sobre design, infografia e a desigualdade brasileira"
 autores:
   - lucas-gomes
 publicado_em: 2022-06-14
-secao: bastidores
-tags: []
+secao: ensaios
+tags: ["Cultura", "Dados", "Dataviz", "Design", "Educação"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira-80844ddff84d"
 publicado_originalmente_em: 2022-06-14
+capa: ../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/01.png
+capa_alt: Capa do post Um relato pessoal sobre design, infografia e a desigualdade brasileira
 ---
 
 Uma história para além dos dados, por alguém que está acostumado a usar dados para contar histórias
@@ -22,26 +24,66 @@ Eu nasci em 1994 em Nilópolis, uma cidade-satélite da capital carioca, a cerca
 
 Desde que me entendo por gente, era uma criança interessada no desenho e em contar história com imagens e desenhos explicativos. Esse interesse ajudou às pessoas que me criaram a me incentivar e investir nos materiais de desenhos que era possível comprar e em qualquer coisa que fosse uma luz nessa trajetória.
 
+*Os sebos e as bibliotecas públicas foram essenciais na minha história. Minhas primeiras referências para além da TV aberta eram achados do sebo e revistas que encontrava na biblioteca da escola.*
+
 Nessa mesma década acompanhei, sem saber, algumas das peças que explicam o nosso cenário hoje: o aumento da percepção da violência, a ascensão das igrejas evangélicas e as políticas de alívio à pobreza dos governos petistas, que trouxe uma oportunidade da minha mãe fazer uma faculdade de Pedagogia pelo ProUni.
 
 **Acessos**
 
 Em 2008, passei em uma repescagem para estudar em uma escola de ensino técnico próxima ao centro do Rio de Janeiro. Na Faetec, tive o meu primeiro contato com o trabalho de designer. Ali, no último ano, recebi a orientação de fazer a faculdade de Design na Escola de Belas Artes da UFRJ.
 
+![Primeiro infográfico criado pelo autor na faculdade](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/03.jpeg)
+
+*Este foi o primeiro infográfico que criei enquanto estava na faculdade. 2015. O tema livre me levou, pela primeira vez, a retratar um dos problemas que enfrentava todos os dias.*
+
 Em 2012, na minha segunda tentativa, consegui ingressar na UFRJ, mais uma vez na repescagem, dessa vez na última de todas e graças a um sistema de cotas recém-implementadas voltadas para estudantes de baixa-renda. Conheci a disparidade no acesso à educação, com meus colegas de classe com recursos que nem o meu parente mais rico tinha acesso.
 
 Essa disparidade também se refletia nas referências artísticas, na minha linguagem, no tempo de deslocamento da minha casa até a faculdade e no meu acesso aos museus e encontros sociais. O principal aspecto era a escassez de grana, o que me levou a procurar emprego no primeiro ano de faculdade.
+
+![Visualização produzida durante os anos de faculdade](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/04.png)
+
+![Linha do tempo de leituras e eventos da época da faculdade](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/05.png)
+
+*Durante os principais eventos da cidade eu me dividia entre transporte, estágio e faculdade sem poder olhar muito bem para o que acontecia ao lado. Mas também foi nessa época que li os clássicos que estão entre os meus livros favoritos até hoje.*
 
 É por volta de 2016 que entendi que a minha maior afinidade, entre as tantas especializações que existem no design: a infografia. Assim, decidi fazer um grande trabalho de conclusão de curso que me abrisse as portas. Por oito meses gastei todos os meus finais de semana na sua produção, num livro paradidático que contemplou a produção do texto, das ilustrações e dos infográficos que apoiavam a narrativa.
 
 Em 2017 apresento meu projeto final e consigo fazer ele ser conhecido pelos editores do jornal O Globo. Graças a um amigo que trabalhava lá, consegui conhecer a equipe de profissionais daquele que no momento era o único grande jornal do estado do Rio de Janeiro.
 
+![Animação do livro do trabalho de conclusão de curso](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/06.gif)
+
+*Meu trabalho de conclusão foi um livro ilustrado com infográficos que ao serem revelados, revelavam nossa desigualdade com infográficos. No [meu site](https://golucas.com.br/sufoco) tem mais do projeto.*
+
+*Minha página favorita mostra dados sobre mobilidade urbana. Lembro até hoje da conversa com o Ary Moraes (co-orientador do TCC) que rendeu essa ideia.*
+
 **Reflexos**
 
 No final de 2017, fui chamado para um trabalho temporário no jornal Extra, a publicação popular do O Globo. Fui efetivado semanas antes do fim do contrato. Ali reuni condições de sair da comunidade onde morava e fui morar em um bairro de classe média do Rio de Janeiro — esse foi o salto de qualidade de vida de maior impacto da minha vida. Meu dia tinha quatro horas a mais, sem o peso transporte.
+
+![Gráfico sobre a mudança de rotina após sair da comunidade](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/08.png)
+
+*Gráfico inspirado na visualização criada por [Alli Torban](https://twitter.com/AlliTorban/status/1490400095191379976).*
+
+![Infográfico sobre os 50 anos de Woodstock publicado no jornal O Globo](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/09.png)
+
+![Detalhe do infográfico sobre os 50 anos de Woodstock](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/10.png)
+
+*Uma matéria sobre os [50 anos de Woodstock](https://oglobo.globo.com/cultura/woodstock-50-anos-que-foi-quando-onde-ocorreu-23876765), baseada em visualização de dados foi uma das minhas últimas colaborações no Jornal O Globo.*
 
 Em 2019, consegui chegar à redação que eu mais visava trabalhar na época da faculdade: o Nexo Jornal. Foi também a primeira vez que passei em um processo seletivo grande. Além disso, precisava me mudar para São Paulo.
 
 Não por acaso, os meus trabalhos no Nexo com maior destaque estão relacionados com a minha história. O projeto sobre o marco de 100 mil mortes na pandemia está diretamente relacionado com minha vivência nos trens do Rio. O projeto das mãozinhas, como gosto de me referir a "História ilustrada de um saber", foi todo pensado para que pessoas pudessem ler no transporte público, um conteúdo de qualidade em poucos minutos.
 
+![Projeto Compositoras do Brasil e do Samba](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/11.png)
+
+*[Compositoras do Brasil](https://golucas.com.br/compositoras) e do Samba foi outro projeto que produzi no Nexo com raízes profundas no meu histórico de vida e de referências que carrego.*
+
+![Animação do projeto Compositoras do Brasil e do Samba](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/12.gif)
+
 Meu ciclo de trabalho no Nexo se encerrou depois de dois anos e meio. Novamente estou trabalhando em uma redação, o JOTA, que despertou meu interesse pelo uso de tecnologia não só no seu conteúdo, mas em todo o seu processo de trabalho.
+
+![Foto do autor, Lucas Gomes](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/13.jpeg)
+
+![Autorretrato ilustrado do autor](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/14.png)
+
+*Esse sou eu e ao lado a representação que fiz para eu mesmo.*

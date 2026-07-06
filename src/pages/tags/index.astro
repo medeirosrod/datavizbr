@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const allPosts = await getCollection('posts', ({ data }) => !data.rascunho && !data.arquivo);
+const allPosts = await getCollection('posts', ({ data }) => !data.rascunho);
 
 const tagsMap = new Map<string, number>();
 allPosts.forEach(post => {

@@ -3,11 +3,13 @@ titulo: "Data Visualization Lisboa: o nosso pequeno mundo à distância"
 autores:
   - salome-esteves
 publicado_em: 2022-03-08
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/data-visualization-lisboa-o-nosso-pequeno-mundo-à-distância-8019936f96eb"
 publicado_originalmente_em: 2022-03-08
+capa: ../../assets/blog/data-visualization-lisboa-o-nosso-pequeno-mundo-a-distancia/01.jpeg
+capa_alt: "Capa do post Data Visualization Lisboa: o nosso pequeno mundo à distância"
 ---
 
 Este não é um ensaio sobre como a pandemia de Covid-19 nos levou a todos a confinar nos nossos computadores. Este é um ensaio sobre como, paradoxalmente, a nossa comunidade se aproximou durante estes dois anos, apesar das dezenas, centenas, ou milhares de quilómetros entre cada uma das nossas bolhas.

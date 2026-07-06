@@ -3,11 +3,13 @@ titulo: "Entre.telas: como usamos dados para falar de cultura e entretenimento"
 autores:
   - gabriella-s-de-macedo
 publicado_em: 2022-03-02
-secao: ensaios
-tags: []
+secao: bastidores
+tags: ["Cultura", "Dados", "Dataviz", "Design", "Jornalismo"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento-822899185038"
 publicado_originalmente_em: 2022-03-02
+capa: ../../assets/blog/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento/01.png
+capa_alt: "Capa do post Entre.telas: como usamos dados para falar de cultura e entretenimento"
 ---
 
 A newsletter semanal em que trouxemos notícias culturais acompanhadas de visualizações de dados
@@ -27,6 +29,10 @@ Depois de prepararmos a estrutura, foi o momento de criar uma identidade visual 
 Produzimos 8 edições, disparadas nas manhãs de segunda-feira, entre outubro e dezembro de 2021. Ao longo da semana, escolhíamos as notícias e produzíamos o breve texto que seria enviado, para depois pensar na visualização que escolheríamos e ir atrás dos dados.
 
 Durante essas edições, passeamos por temas mais leves, como o Grammy, artistas que hitaram no Spotify e lançamentos de filmes e exposições. Mas também entramos em assuntos com maior relevância social, como a localização dos museus na cidade de São Paulo e o orçamento de projetos financiados pela Ancine ao longo dos anos.
+
+![Gráfico de barras com as áreas da ciência em que as mulheres são maioria, como odontologia, bioquímica, medicina e enfermagem](../../assets/blog/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento/03.png)
+
+![Gráfico de linha com os valores totais captados por projetos incentivados pela Ancine por ano, com forte queda a partir de 2016](../../assets/blog/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento/04.png)
 
 Usamos, em maioria, dados públicos, mas outros buscamos nas plataformas e empresas cabíveis. Em geral, tabulamos esses dados manualmente, e os gráficos foram produzidos usando o Flourish e o Illustrator.
 

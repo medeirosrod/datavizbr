@@ -4,10 +4,12 @@ autores:
   - rodrigo-medeiros
 publicado_em: 2019-07-11
 secao: ensaios
-tags: []
+tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-é-o-próximo-desafio-do-design-7780e05f43a2"
 publicado_originalmente_em: 2019-07-11
+capa: ../../assets/blog/visualizacao-de-dados-e-o-proximo-desafio-do-design/01.jpeg
+capa_alt: Capa do post Visualização de dados é o próximo desafio do design?
 ---
 
 *escrito por Stephanie Evergreen (tradução por Rodrigo Medeiros do datavizbr)*

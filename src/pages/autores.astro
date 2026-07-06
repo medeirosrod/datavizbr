@@ -23,12 +23,16 @@ const autores = allAutores
 
       <div class="autores-grid">
         {autores.map((autor) => (
-          <article class="autor-card">
-            {autor.data.foto && (
-              <img src={autor.data.foto.src} alt={autor.data.nome} class="autor-foto" />
-            )}
+          <article class="autor-card" id={autor.id}>
+            <a href={`/autores/${autor.id}`} class="autor-link-wrap" tabindex="-1" aria-hidden="true">
+              {autor.data.foto && (
+                <img src={autor.data.foto.src} alt={autor.data.nome} class="autor-foto" />
+              )}
+            </a>
             <div class="autor-conteudo">
-              <h2 class="autor-nome">{autor.data.nome}</h2>
+              <h2 class="autor-nome">
+                <a href={`/autores/${autor.id}`}>{autor.data.nome}</a>
+              </h2>
               <p class="autor-role">{autor.data.papel}</p>
               <p class="autor-quem">{autor.data.quem_e}</p>
 
@@ -109,16 +113,23 @@ const autores = allAutores
     border-radius: var(--radius-relaxed);
     overflow: hidden;
     transition: box-shadow 160ms ease;
+    scroll-margin-top: 80px;
   }
 
   .autor-card:hover {
     box-shadow: var(--elev-2);
   }
 
+  .autor-link-wrap {
+    display: block;
+    border-bottom: none;
+  }
+
   .autor-foto {
     width: 100%;
-    height: 240px;
+    aspect-ratio: 1;
     object-fit: cover;
+    display: block;
   }
 
   .autor-conteudo {
@@ -133,6 +144,15 @@ const autores = allAutores
     font-weight: 700;
     color: var(--fg-heading);
     margin: 0;
+  }
+
+  .autor-nome a {
+    color: inherit;
+    border-bottom: none;
+  }
+
+  .autor-nome a:hover {
+    color: var(--color-primary);
   }
 
   .autor-role {

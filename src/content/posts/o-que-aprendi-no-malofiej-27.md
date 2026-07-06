@@ -3,11 +3,13 @@ titulo: "O que aprendi no Malofiej 27"
 autores:
   - carol-cavaleiro
 publicado_em: 2019-04-14
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Clima", "Cultura", "Dataviz", "Design", "Educação"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/o-que-aprendi-no-malofiej-27-6ca575b8ae3c"
 publicado_originalmente_em: 2019-04-14
+capa: ../../assets/blog/o-que-aprendi-no-malofiej-27/02.png
+capa_alt: Capa do post O que aprendi no Malofiej 27
 ---
 
 Depois de semanas, já em clima tropical e tendo dormido o suficiente, começo a processar essa experiência incrível.
@@ -30,7 +32,9 @@ Sobre as medalhas: foram 92 ao todo, print e digital, para veículos de países 
 
 Para mim, trabalhos incríveis são aqueles que são fáceis de ler e de entender, que estão bem organizados, com gráficos de conteúdo e tamanhos corretos e que tratam de assuntos relevantes ao leitor. Trabalhos incríveis não deixam dúvidas sobre a mensagem que querem transmitir.
 
-O trabalho da National Geographic sobre a desnutrição infantil levou os prêmios Best of Show e Human Rights Best Graphic no impresso. No digital, o Best of Show foi sobre a poluição em Nova Deli, de Reuters, que também levou o Climate Change and Environmental Commitment Best Graphic.
+O trabalho da National Geographic sobre a desnutrição infantil levou os prêmios Best of Show e Human Rights Best Graphic no impresso. 
+
+No digital, o Best of Show foi sobre a poluição em Nova Deli, de Reuters, que também levou o Climate Change and Environmental Commitment Best Graphic.
 
 De toda essa experiência incrível, preciso dividir uma fragilidade. No momento em que recebi o convite para fazer parte do júri, o primeiro pensamento que cruzou minha cabeça foi "ah! Entrei na cota mulher do terceiro mundo". Sim, era a síndrome do impostor.
 

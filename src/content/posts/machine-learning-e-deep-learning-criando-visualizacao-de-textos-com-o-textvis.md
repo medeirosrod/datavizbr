@@ -4,10 +4,12 @@ autores:
   - juliana-freitas
 publicado_em: 2022-02-02
 secao: praticas
-tags: []
+tags: ["Dados", "Dataviz", "Design", "Evento", "Mapa"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/machine-learning-e-deep-learning-criando-visualização-de-textos-com-o-textvis-8e038da80902"
 publicado_originalmente_em: 2022-02-02
+capa: ../../assets/blog/machine-learning-e-deep-learning-criando-visualizacao-de-textos-com-o-textvis/01.png
+capa_alt: "Capa do post Machine Learning e Deep Learning: criando visualização de textos com o TextVis"
 ---
 
 Uma das formas mais complexas e ricas de trabalho com informações é o uso de Machine Learning e do Deep Learning para contar histórias por meio da visualização de dados. Existem alguns recursos para criar o data storytelling, dentre eles, o TextVis.
@@ -21,6 +23,8 @@ Alguns exemplos de aplicações de análise textual em gráficos por meio do Tex
 Story Explorer é uma abordagem de visualização para explorar séries temporais hierárquicas. As curvas de história visualizam a narrativa não linear de um filme mostrando a ordem em que os eventos são contados no filme e comparando-os com sua ordem cronológica real, resultando em padrões visuais possivelmente sinuosos na curva.
 
 O Story Explorer fornece uma interface de curadoria de scripts que permite aos usuários especificar a ordem cronológica dos eventos nos filmes. Foi utilizado para analisar 10 filmes não lineares populares e descrever o espectro de padrões narrativos encontrados.
+
+![Interface do Story Explorer exibindo a curva de história do filme Pulp Fiction, com personagens, locações e trechos do roteiro](../../assets/blog/machine-learning-e-deep-learning-criando-visualizacao-de-textos-com-o-textvis/03.png)
 
 **2. Popularidade de um tweet no tempo e no espaço**
 

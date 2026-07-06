@@ -3,11 +3,13 @@ titulo: "Comparando monografias de uma Universidade brasileira e uma Universidad
 autores:
   - deborah-mesquita
 publicado_em: 2017-12-12
-secao: ensaios
-tags: []
+secao: bastidores
+tags: ["Dados", "Dataviz", "Educação", "Jornalismo"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-americana-utilizando-nlp-14213b2d7fcd"
 publicado_originalmente_em: 2017-12-12
+capa: ../../assets/blog/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-america/01.png
+capa_alt: Capa do post Comparando monografias de uma Universidade brasileira e uma Universidade americana utilizando NLP
 ---
 
 As pessoas tendem a considerar um trabalho produzido por um estudante de uma Universidade da Ivy League um trabalho muito mais bem produzido do que um feito por um estudante de uma Universidade não tão conceituada.
@@ -37,6 +39,8 @@ TF(t) = (Número de vezes que o termo t aparece no documento) / (Número total d
 IDF(t) = log_e(Número total de documentos / Número de documentos com o termo t presente)
 
 Para cada abstract dos trabalhos das Universidades foram identificadas as 4 palavras com os scores mais altos do tf-idf, utilizando o CountVectorizer e o TfidfTransformer do scikit-learn.
+
+*Keywords da Carnegie Mellon*
 
 **Agrupando os trabalhos em clusters**
 

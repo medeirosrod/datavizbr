@@ -4,10 +4,14 @@ autores:
   - carolina-leslie
 publicado_em: 2020-05-07
 secao: ensaios
-tags: []
+serie: entendendo-o-agora
+ordem_na_serie: 1
+tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entendendo-o-agora-dataviz-em-tempos-de-coronavírus-9484233667fe"
 publicado_originalmente_em: 2020-05-07
+capa: ../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-1/02.png
+capa_alt: Capa do post Entendendo o agora — Dataviz em tempos de coronavírus parte 1
 ---
 
 Desde o início da quarentena, além de enlouquecer no "family office" e fazer pão de fermentação natural, tenho colecionado visualizações de informação sobre o avanço da epidemia de COVID-19.
@@ -29,7 +33,13 @@ Em 1918, na epidemia de influenza, as cidades da Filadélfia e St Louis tiveram 
 
 O CDC, Center for Disease Control americano, em um paper de 2007 sobre prevenção de pandemias, trouxe um gráfico explicando o impacto de ações de isolamento social na mitigação da crise.
 
+![Gráfico do CDC com os objetivos da mitigação comunitária: atrasar o pico do surto, reduzir a sobrecarga dos hospitais e diminuir o total de casos](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-1/03.jpeg)
+
+*CDC*
+
 Foi neste paper que Rosamund Pearce, jornalista de dados da The Economist, se inspirou para criar uma visualização. A matéria foi responsável por dar destaque ao conceito de diferentes curvas de contágio no contexto do coronavírus.
+
+![Gráfico da The Economist "Press down firmly" mostrando o impacto pretendido das medidas de distanciamento social sobre a curva de infecções](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-1/04.png)
 
 Na imagem do The Economist, porém, faltava um detalhe que faz toda diferença: a linha indicando a capacidade do sistema de saúde. Drew Harris, da Thomas Jefferson University, viu o artigo e fez uma nova versão, publicada em sua conta no Twitter, que viralizou e ganhou muitos outros formatos.
 

@@ -4,10 +4,12 @@ autores:
   - ricardo-cunha-lima
 publicado_em: 2020-04-01
 secao: ensaios
-tags: []
+tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/infográficos-que-ajudam-a-achatar-a-curva-do-coronavírus-f3e911d606e9"
 publicado_originalmente_em: 2020-04-01
+capa: ../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/01.jpeg
+capa_alt: Capa do post Infográficos que ajudam a \"achatar a curva\" da propagação do coronavírus
 ---
 
 *Gráficos são úteis, mas esses dois infográficos animados vão ainda mais longe para explicar por que devemos diminuir a propagação do coronavírus.*
@@ -18,17 +20,27 @@ O significado de "infografia" ainda é pouco conhecido. Um infográfico pode ser
 
 Nas últimas semanas, o termo "achatar a curva" foi usado por jornalistas diariamente se referindo a um gráfico de área que mostra diferentes expectativas sobre a quantidade de vítimas do vírus ao longo do tempo.
 
+*O gráfico de área sobre "achatar a curva" — versão do Jornal Nexo*
+
 Uma das maiores dificuldades para enfrentar as provações de uma pandemia é a incerteza. Os gráficos, por sua natureza quantitativa, têm uma função importante em motivar a população através da informação. A mensagem deste gráfico de área é simples: nós precisamos ficar abaixo da linha que marca a capacidade máxima do sistema de saúde.
 
 Apesar disso, um gráfico por si só não é o bastante. Gráficos são metáforas que podem não fazer parte do repertório da maioria.
 
 **1. VOX: Por Que Lutar Contra O Coronavírus Depende De Você**
 
+![Quadro do vídeo-infográfico da Vox sobre o coronavírus](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/03.jpeg)
+
 O primeiro vídeo-infográfico é do canal de vídeos jornalísticos Vox. A estratégia neste vídeo-infográfico do Vox foi usar formas esquemáticas, utilizando círculos coloridos e estruturas esquemáticas.
+
+![Animação da Vox com círculos coloridos representando pessoas se contagiando](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/04.gif)
 
 O círculo é o protagonista da história. Como o círculo é uma forma genérica, ele pode ser interpretado de maneiras diferentes: ele começa mostrando como as pessoas se contagiam, para depois virar um elemento quantitativo que representa as vítimas.
 
 Um dos momentos mais sofisticados da animação é quando círculos formam uma versão do gráfico de área sobre "achatar a curva". Eles criam um gráfico de área feito de círculos, simbolizando as vítimas, contidos em uma malha retangular, simbolizando um hospital. Dessa maneira eles mostram que os leitos do hospital serão insuficientes se a curva não for achatada.
+
+![Animação da Vox em que círculos coloridos formam um gráfico de área sobre achatar a curva](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/05.gif)
+
+![Continuação da animação da Vox com círculos contidos em uma malha retangular que simboliza um hospital](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/06.gif)
 
 Utilizando um mesmo elemento esquemático (o círculo), foi possível dar coesão à narrativa. Manter a atenção em uma coisa só ajuda o espectador a não perder o fio da meada.
 
@@ -36,9 +48,21 @@ Utilizando um mesmo elemento esquemático (o círculo), foi possível dar coesã
 
 O segundo vídeo-infografico é do canal Kurzgesagt, que significa em alemão "em poucas palavras". Desde 2014, este canal alemão tem revolucionado a infografia com vídeo-infográficos inteiramente animados, utilizando desenhos pictóricos simples, ricos em cores vivas e apelo visual.
 
+![Quadro do vídeo-infográfico do Kurzgesagt sobre o coronavírus](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/07.jpeg)
+
 Enquanto que o Vox enfocou quase exclusivamente em elementos esquemáticos, o Kurzgesagt variou sua abordagem entre esquemático e pictórico — além de adicionar uma boa dose de humor.
 
+![Animação do Kurzgesagt com o gráfico de área sobre achatar a curva sendo animado](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/08.gif)
+
+![Animação do Kurzgesagt comparando a propagação rápida e lenta do vírus com símbolos esquemáticos](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/09.gif)
+
+![Animação do Kurzgesagt com pictogramas sobre o acesso a tratamento médico](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/10.gif)
+
+![Animação do Kurzgesagt com gráfico de área acompanhado de pictogramas descrevendo cenários](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/11.gif)
+
 A estratégia do Kurzgesagt foi a repetição unida à variação, ou seja, o vídeo explicou praticamente a mesma coisa de maneiras diferentes. Repetir o argumento principal variando a abordagem pode ajudar o leitor/espectador a digerir a mensagem.
+
+![Cena bem-humorada do vídeo do Kurzgesagt sobre o coronavírus](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/12.gif)
 
 **Não existe a maneira correta de se comunicar**
 

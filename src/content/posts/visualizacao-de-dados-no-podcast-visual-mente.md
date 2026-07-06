@@ -3,11 +3,13 @@ titulo: "Visualização de dados no podcast visual+mente"
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-04
-secao: bastidores
-tags: []
+secao: panorama
+tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-no-podcast-visual-mente-ec67ae51c7ef"
 publicado_originalmente_em: 2017-12-04
+capa: ../../assets/blog/visualizacao-de-dados-no-podcast-visual-mente/01.png
+capa_alt: Capa do post Visualização de dados no podcast visual+mente
 ---
 
 O programa #59 do podcast visual+mente se dedicou a falar sobre visualização de dados. O programa comandado pela dupla Ancara e Ricardo Cunha Lima receberam Julia Gianella e Rodrigo Medeiros pra conversar sobre visualização de dados. A conversa busca dar um panorama dos projetos e pesquisas bacanas que os participantes conhecem, além de discussões envolvendo o debate entre visualização de dados x infografia.

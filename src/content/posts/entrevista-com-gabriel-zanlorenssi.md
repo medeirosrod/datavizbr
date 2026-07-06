@@ -3,11 +3,13 @@ titulo: "Entrevista com Gabriel Zanlorenssi"
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-07-24
-secao: bastidores
-tags: []
+secao: panorama
+tags: ["Cultura", "Dados", "Dataviz", "Design", "Educação"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-gabriel-zanlorenssi-16a977b02824"
 publicado_originalmente_em: 2019-07-24
+capa: ../../assets/blog/entrevista-com-gabriel-zanlorenssi/01.jpeg
+capa_alt: Capa do post Entrevista com Gabriel Zanlorenssi
 ---
 
 Agora em julho de 2019 começamos uma série de novos quadros no datavizbr. Traduções, entrevistas e tutoriais sobre a área de visualização de dados no Brasil serão parte dessa nova articulação com designers, jornalistas e programadores.

@@ -4,11 +4,13 @@ autores:
   - rodrigo-medeiros
 publicado_em: 2023-01-20
 secao: bastidores
-tags: []
+tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualizando-a-composição-ministerial-do-governo-lula-d0c92ed42378"
 publicado_originalmente_em: 2023-01-20
 rascunho: true
+capa: ../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/01.png
+capa_alt: Capa do post Visualizando a composição ministerial do Governo Lula
 ---
 
 Nesse texto vou explorar a construção de uma visualização para mostrar a composição ministerial do terceiro governo Lula. O objetivo da visualização é mostrar a composição a partir de três variáveis: partidos, gênero e raça.
@@ -33,6 +35,8 @@ Como o tipo de gráfico utilizado não é muito apropriado para comparar valores
 
 Cada ministro é representado por um ícone (círculo). Há uma diferença que permite identificar homens e mulheres: no ícone para mulheres foi dado um destaque com um círculo pontilhado ao redor do círculo principal. Foram evitados ícones representativos de homens e mulheres para não propagar estereótipos.
 
+![Comparação de ícones para homens e mulheres](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/03.png)
+
 **Cores utilizadas**
 
 Para a representação das cores dos partidos foi utilizada como base uma paleta de cores padrão do d3.js, ajustada em uma ferramenta de acessibilidade para verificar a acessibilidade das cores para pessoas com deficiência visual. Para as informações de gênero e raça, foram utilizadas cores distintas que atendem critérios de acessibilidade.
@@ -41,6 +45,14 @@ Para a representação das cores dos partidos foi utilizada como base uma paleta
 
 Os rótulos foram utilizados para identificar cada partido no arco e mostrar resumos percentuais de mulheres e pessoas negras e indígenas. Quando o mouse é passado nos partidos, esse percentual é atualizado por partido.
 
+![Visualização com rótulos e percentuais](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/04.png)
+
 A visualização possui interações para exibir informações mais completas quando o usuário quiser: visualizar o nome de todos os ministros, visualizar os ministros por partido, e visualizar as informações de um ministro específico.
 
+![Detalhe dos ministros por partido](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/05.png)
+
+![Informações específicas de ministro](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/06.png)
+
 Toda visualização foi criada utilizando d3.js e pode ser acessada no Observable HQ do autor.
+
+![Visualização completa em d3.js](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/07.png)

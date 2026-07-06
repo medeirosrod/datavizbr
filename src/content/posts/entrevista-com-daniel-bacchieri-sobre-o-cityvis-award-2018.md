@@ -3,11 +3,13 @@ titulo: "Entrevista com Daniel Bacchieri sobre o CityVis Award 2018"
 autores:
   - rodrigo-medeiros
 publicado_em: 2018-10-24
-secao: bastidores
-tags: []
+secao: panorama
+tags: ["Cultura", "Dados", "Dataviz", "Design", "Entrevista"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-2018-42db79aed447"
 publicado_originalmente_em: 2018-10-24
+capa: ../../assets/blog/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-2018/01.jpeg
+capa_alt: Capa do post Entrevista com Daniel Bacchieri sobre o CityVis Award 2018
 ---
 
 Recentemente saíram os projetos vencedores do Cityvis Award 2018 e tivemos dois projetos brasileiros no shortlist da categoria Journalistic, o Cellphone robberies (representado pela Cecília do Lago) e o StreetMusicMap (representado pelo Daniel Bacchieri). Então resolvi fazer uma entrevista com cada um deles para conhecermos mais do projeto e tentar entender a evolução da área no Brasil. Hoje vamos conversar com o Daniel.
@@ -18,11 +20,17 @@ Daniel: Criado em janeiro de 2014 por mim, Daniel Bacchieri, o StreetMusicMap é
 
 São Paulo disputa com Nova Iorque o maior número de vídeos no StreetMusicMap, seguido por Londres (Reino Unido), Rio (Brasil), Austin (Estados Unidos) e Istambul (Turquia). No ranking dos países, a ordem é: Estados Unidos, Brasil, Reino Unido, Itália, Alemanha e França.
 
+*Universidad Casa Grande — Equador/Divulgação (Joshua Antoine — violinista e jornalista Daniel Bacchieri — Guayaquil, Equador)*
+
 O StreetMusicMap foi o "case" que eu apresentei para ser aceito no Programa Avançado de Jornalismo Empreendedor do Tow-Knight Center da City University of New York — CUNY em 2017.
 
 Um feedback "além da música": Em 2014, uma assistente social que trabalhava na República Democrática do Congo enviou uma mensagem agradecendo a sequência de vídeos publicados com músicos africanos no Instagram do StreetMusicMap. Ela dizia que estava conseguindo explicar para alunos surdo-mudos as diferentes culturas do continente africano através da expressão corporal dos músicos.
 
 O StreetMusicMap também tem se destacado em diversas competições internacionais e nacionais: Prata na categoria Social Content & Marketing-Social Video no W³ Awards (2017); Finalista por dois anos no Webby Awards (categoria Social — Music), em 2017 & 2018; Vencedor na categoria "Música Que Conecta" do Prêmio Vivo Música Que Transforma 2016.
+
+![Captura de tela do perfil do StreetMusicMap no Instagram com vídeos de músicos de rua](../../assets/blog/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-2018/03.jpeg)
+
+*Instagram — StreetMusicMap*
 
 **Datavizbr: Quais as dificuldades que você teve para executar o projeto?**
 

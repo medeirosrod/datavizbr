@@ -3,11 +3,13 @@ titulo: "Visualização de dados na Campus Party Brasil"
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-07
-secao: ensaios
-tags: []
+secao: panorama
+tags: ["Cultura", "Dados", "Dataviz", "Design", "Educação"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-na-campus-party-brasil-249ea023308f"
 publicado_originalmente_em: 2017-12-07
+capa: ../../assets/blog/visualizacao-de-dados-na-campus-party-brasil/01.png
+capa_alt: Capa do post Visualização de dados na Campus Party Brasil
 ---
 
 Em 2015 e 2016 eu fiz a curadoria de design da Campus Party Brasil. Dividi essa curadoria em duas partes, uma mais voltada para UX e produtos digitais e outra totalmente voltada a visualização de dados. Esse post vai resumir as excelentes palestras e mesas redondas que tivemos no evento nesse período.

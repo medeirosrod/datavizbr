@@ -42,7 +42,7 @@ const formatarData = (date: Date): string => {
         <div class="post-autores">
           {post.data.autores.map((autor, idx) => (
             <>
-              <a href={`/autores#${autor.id}`} class="autor-link">
+              <a href={`/autores/${autor.id}`} class="autor-link">
                 <AutorNome autorId={autor.id} />
               </a>
               {idx < post.data.autores.length - 1 && ', '}

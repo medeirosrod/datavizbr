@@ -38,43 +38,62 @@ Em 2013 lançou o livro Infografia: História e Projeto e em 2015 o livro Design
 
 Mário Kanno
 
+![Retrato do infografista Mário Kanno](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/03.jpeg)
+
 Mário é antigo editor de infografia do Folha de São Paulo. Em 2018 publicou o livro Infografia dentro da série guia básico de didáticos da Editora Boreal.
 
 Enquanto editor de infografia no Folha de São Paulo, ele também teve um papel de formação de outros profissionais da equipe de infografia. O Mário também foi um dos responsáveis pela criação do saudoso evento brasileiro INFOLIDE que tinha como seu foco a infografia.
 
 O Mário também criou um perfil chamado Mostra de Infografia, onde compartilha trabalhos desenvolvidos no Brasil.
 
+![Infográfico Dossiê do Mosquito, sobre o Aedes aegypti, publicado na Folha de São Paulo](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/04.png)
 
 Luiz Iria
 
+![Retrato do infografista Luiz Iria](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/05.jpeg)
+
 Antigo editor de infografia da Superinteressante. Em 2013 desenvolveu o infográfico Golpe de Mestre com 9 páginas na revista e ganhou prêmio Malofiej daquele ano.
+
+![Infográfico Golpes de Mestres, de Luiz Iria, sobre artes marciais, publicado na Superinteressante](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/06.jpeg)
 
 Iria foi um dos infografistas que definiu o estilo pictórico brasileiro, segundo o pesquisador 
 Ricardo Cunha Lima
  na sua dissertação de mestrado. Você pode conhecer um pouco mais do perfil do Iria no site Visualoop.
 
+![Retrato do infografista Alessandro Alvim](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/07.jpeg)
 
 Alessandro Alvim
 Foi editor de infografia do O Globo e hoje é editor executivo visual da Ediora Globo. Em 2016 ganhou o prêmio de portfólio individual no Malofiej.
 
 O portfólio inscrito constava de seis infográficos, quatro deles ligados aos 450 anos do Rio e os outros dois sobre refugiados, como conta a matéria do O Globo. Você pode conhecer mais sobre Alvim no Visualoop, que mostrou o perfil dele.
 
+![Infográfico sobre a construção do Cristo Redentor, de Alessandro Alvim](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/08.png)
 
-Infografia sobre a construção do Cristo Redentor, no Rio de Janeiro.
+*Infografia sobre a construção do Cristo Redentor, no Rio de Janeiro.*
 
 Marcelo Pliger
 
+![Retrato do infografista Marcelo Pliger](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/09.jpeg)
+
 Editor da infografia na Folha de São Paulo, Marcelo é um infografista super premiado. Ganhou o Prêmio Petrobras de Jornalismo em 2018. Já foi premiado no Malofiej com medalha de prata em 2009 e 2010 e bronze em 2009 e 2014. Desde 2013 também é professor da ESPM — Escola Superior de Propaganda e Marketing nos cursos de graduação em design e em jornalismo. Aconselho também acompanhar o perfil dele no Visualoop.
 
+![Infográfico Difícil Viagem ao Centro da Terra, sobre a extração de petróleo no pré-sal](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/10.jpeg)
+
 Rubens Paiva
+
+![Retrato do infografista Rubens Paiva](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/11.jpeg)
 
 Ex editor de arte do Globo, o Rubens é também reconhecido como um dos melhores infografistas da sua geração e um formador de outros profissionais nas equipes que passou. Seu trabalho pode ser visualizar no seu portfólio no Flickr. Recenemente participou da criação de um infográfico interativo que mostrava as relações da família Bolsonaro.
 
 Renata Steffen
 
+![Retrato da infografista Renata Steffen](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/12.jpeg)
+
 Renata trabalhou na Revista Superinteressante e também foi uma das fundadoras do Infolide. Hoje ela é diretora criativa no Laboota (Laboratório de Conteúdo Visual). Já ganhou 4 prêmios Malofiej e foi jurada e palestrante na 16ª edição do prêmio. Ganhou dois Prêmios Esso de Jornalismo, em 2008 e 2009, pela Folha de São Paulo. Você pode acompanhar mais no perfil sobre ela no Visualoop.
 
 E vamos destacar aqui exatamente um dos trabalhos que não recebeu prêmio. É um infografia sobre a cirurgia de readequação sexual, onde Renata e sua equipe utilizaram de uma analogia com frutas para mostrar todo o procedimento. Como dito no episódio “Dados em tempos de pandemia” do podcast visual+mente: “esse infográfico é um marco”.
+
+![Infográfico sobre cirurgia de readequação sexual com analogia de frutas, de Renata Steffen e equipe na Superinteressante](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-1/13.jpeg)
 
 Espero que vocês tenham gostado do material apresentado e não esquece de seguir a gente no twitter e no instagram. Continuaremos em breve com a segunda parte dessa série.
 

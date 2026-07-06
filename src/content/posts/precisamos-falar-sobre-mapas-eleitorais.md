@@ -4,10 +4,12 @@ autores:
   - ricardo-cunha-lima
 publicado_em: 2020-11-08
 secao: ensaios
-tags: []
+tags: ["COVID-19", "Dados", "Dataviz", "Design", "Eleições"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/mapas-eleitorais-e71e632bc8ac"
 publicado_originalmente_em: 2020-11-08
+capa: ../../assets/blog/precisamos-falar-sobre-mapas-eleitorais/01.png
+capa_alt: Capa do post Precisamos falar sobre mapas eleitorais
 ---
 
 *Depois da enxurrada de gráficos de pandemia, somos mais uma vez tomados por visualizações, mas essa é a vez dos mapas eleitorais.*

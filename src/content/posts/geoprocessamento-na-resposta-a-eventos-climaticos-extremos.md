@@ -3,11 +3,13 @@ titulo: "Geoprocessamento na resposta a eventos climáticos extremos"
 autores:
   - elmo-neto
 publicado_em: 2024-05-17
-secao: ensaios
-tags: []
+secao: bastidores
+tags: ["Cultura", "Dados", "Dataviz", "Evento", "Jornalismo"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/geoprocessamento-na-resposta-a-eventos-climáticos-extremos-8682c21b33c6"
 publicado_originalmente_em: 2024-05-17
+capa: ../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/01.png
+capa_alt: Capa do post Geoprocessamento na resposta a eventos climáticos extremos
 ---
 
 **Localização**
@@ -29,17 +31,35 @@ As fontes de dados utilizadas foram:
 
 Carregando a camada de curvas de nível no QGIS, a curva que representa a cota de 91 metros é poligonizada até cobrir o limite norte do bairro atingido mais ao norte (Menino Jesus) e o limite sul do bairro atingido mais a sul (Bela Vista). Essa curva é escolhida por conta de coincidir com a entrada (coberta pela enchente) da ponte, entre 91 e 92 metros de cota.
 
+![Mapa da mancha de inundação gerada a partir da curva de nível de 91 metros no QGIS](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/03.png)
+
+![Foto aérea da inundação do Rio Vacacaí em São Gabriel](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/04.jpeg)
+
+*Foto de Borin Produções*
+
+![Gráfico dos bairros mais atingidos pela inundação, em ordem decrescente](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/05.png)
+
 Considerando um domicílio médio com família de 4 pessoas, a estimativa é de 1336 pessoas atingidas só na zona urbana do Rio Vacacaí. Lembrando que números de defesa civil e assistência social são imprescindíveis para complementar esta estimativa.
 
 Para avaliação da gravidade da inundação em diferentes domicílios, é feita a interseção da camada de lotes cadastrais com cada uma das cotas do Rio Vacacaí. Começando em 90 metros, um metro abaixo da cota atingida na última cheia, temos inundação de até 1 metro de profundidade; na cota de 89 metros, entre 1 e 2 metros de profundidade; e assim por diante.
+
+![Mapa dos lotes atingidos por diferentes profundidades de inundação](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/06.png)
+
+![Gráfico da quantidade de lotes atingidos por profundidade de inundação](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/07.png)
 
 **Mobilidade**
 
 A rota de transporte público mais afetada pela inundação do Rio Vacacaí é a rota circular que liga bairros do extremo leste da cidade com o extremo oeste: Bom Fim — Cidade Nova. Com a ponte Baltar — Bom Fim interditada, o ônibus não consegue atender os bairros Bom Fim, Morro do Sabiá, Medianeira e Pomares dentro de seu trajeto usual e a única solução é fazer o contorno pela Rodovia BR-290.
 
+![Mapa da rota de ônibus Bom Fim — Cidade Nova afetada pela interdição da ponte](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/08.png)
+
 **Zona Leste**
 
 Separados do Centro da cidade e de muitos dos estabelecimentos básicos de São Gabriel pelo Rio Vacacaí, os bairros do extremo leste tem a ponte entre o Bairro Baltar e o Bairro Bom Fim como o trajeto mais curto de ligação. Contabilizando bairros Bom Fim, Morro do Sabiá, Medianeira e núcleo urbano autônomo Pomares, há mais de 1200 domicílios atingidos indiretamente pela interdição da ponte.
+
+![Foto da ponte entre os bairros Baltar e Bom Fim interditada pela enchente](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/09.jpeg)
+
+![Mapa da zona leste de São Gabriel isolada pela interdição da ponte](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/10.png)
 
 **Considerações**
 

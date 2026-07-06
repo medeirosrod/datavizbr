@@ -35,12 +35,19 @@ Ricardo é um conhecido nome do mundo da Ciência de dados, fundador da Cappra, 
 
 O DATASKY é uma visualização interativa, onde as pessoas respondem como se sentem em relação a alguns tópicos sobre a cidade do Rio de Janeiro por meio de emojis. O projeto foi apresentado na exposição na DataCorpus.
 
+![Visualização interativa DATASKY, do CappraLab, com respostas por emojis sobre a cidade do Rio de Janeiro](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/03.png)
+
+![Pessoas interagindo com o projeto DATASKY na exposição Data Corpus](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/04.jpeg)
 
 Outra experiência conhecida do Cappra é o #DATALOVERS, uma exposição onde artistas foram convidados a expor obras baseadas em dados. Como o próprio autor descreve: “Uma exposição de arte que conta histórias através de dados, uma mistura de análise de comportamento com matemática, tudo representado de forma visual” e completa “É inegável que um dos principais aspectos envolvidos no nosso processo de consumo de informação é o aspecto visual. Muito mais do que um gráfico bonito, estou me referindo a contar histórias através de representações visuais. Transformar dados em histórias pode ser uma forma de arte.”
 
-Fonte: CappraLab
+![Obra da exposição #DATALOVERS, do CappraLab](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/05.jpeg)
+
+*Fonte: CappraLab*
 
 Ricardo Brazileiro
+
+![Retrato de Ricardo Brazileiro](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/06.jpeg)
 
 Ricardo tem uma trajetória no movimento open-source e experimentações em arte e cibernética e dedica-se à experiência entre culturas tradicionais e inovações tecnológicas. É um cientista nato, um artista muito interessado na interseção entre arte, computação física e sistemas criativos. Foi nesse contexto que pude acompanhar o trabalho dele e conhecer na época como parte do Laboratório de Computação e Arte - LABOCA, junto com Jarbas Jácome, Jeraman. Participamos do mesmo grupo de pesquisa na Universidade Federal de Pernambuco, o MusTIC.
 
@@ -49,21 +56,31 @@ O trabalho que vou descrever aqui é o Cotidiano Sensitivo ou 3CO e é uma inter
 
 Rodrigo Medeiros
 
+![Retrato de Rodrigo Medeiros](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/07.jpeg)
+
 Esse que vos escreve é Rodrigo Medeiros, designer de interação e que durante seu mestrado na Universidade do Minho desenvolveu a instalação Warning. Nesse tempo, de 2009 a 2011 Rodrigo se envolveu com a comunidade do software livre (open source) de Portugal e do Brasil, desenvolendo tecnologia de baixo custo para arte digital. O projeto foi exposto em Guimarães (Portugal), Belo Horizonte e Recife entre 2009 e 2012.
 
 O projeto Warning — Real Time Global Air Quality Display é uma instalação que recebe dados da internet a respeito da qualidade do ar de 30 cidades, em 5 continentes. A instalação dinamicamente representa estes dados em um monitor e numa estrutura física, através de um sistema de iluminação (LEDs) situado num espaço público. Este trabalho foi influenciado pela pesquisa, por um lado, sobre a arte digital em espaço público e, por outro, sobre a visualização de informação com foco em interfaces que não são baseadas em monitores, como as visualizações de ambientes.
 
 Esse conceito de visualizações de ambiente surgiu do trabalho do pesquisador Andrew Vande Moere e representa projetos que apresentam informações variáveis, de modo ao usuário/expectador possa não perceber ao se deparar com o artefato mas, aos poucos, começa a perceber detalhes que só com uma grande variação de tempo poderia “visualizar aqueles dados”. No caso do Warning, ela é uma instalação que a pessoa precisa de alguns dias para se acostumar em receber os dados, entender qual nuvem representa cada cidade e por aí tentar fazer algum tipo de conexão e análise da cidade / dado/ artefato.
 
-Warning no Interaction South America, 2011, Belo Horizonte.
+![Instalação Warning exposta no Interaction South America em Belo Horizonte](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/08.png)
 
-Warning na Exposição Vazão, Bcúbico, Recife.
+*Warning no Interaction South America, 2011, Belo Horizonte.*
+
+![Instalação Warning na Exposição Vazão, no espaço Bcúbico, em Recife](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/09.png)
+
+*Warning na Exposição Vazão, Bcúbico, Recife.*
 
 Douglas Luddens
+
+![Retrato de Douglas Luddens](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/10.jpeg)
 
 Douglas é designer gráfico e artista plástico do Rio de Janeiro. Ele é um dos alunos que passaram pelo labvis na EBA/UFRJ que vamos descrever o trabalho por aqui.
 
 O projeto se chama Escultura de dados: tráfico de escravos africanos. E como descrito no site do projeto: “O presente trabalho consiste em uma visualização de dados física. Insere-se no campo da arte e do design conhecido como data art, em visualização de dados. A presente escultura de dados mostra o tráfico de escravos africanos, considerando o número de homens e mulheres que cruzaram o Oceano Atlântico entre os séculos XV e XIX, tendo muitos deles morrido durante a travessia”.
+
+![Escultura de dados sobre o tráfico de escravos africanos, feita com miçangas coloridas](../../assets/blog/visualizacao-de-dados-com-sotaque-brasileiro-parte-2/11.jpeg)
 
 Com o esquema de cores, é possível acompanhar o volume de tráfico de cada país ou região da África. Cada miçanga colorida representa 10.0000 africanos que foram deslocados como escravos.
 

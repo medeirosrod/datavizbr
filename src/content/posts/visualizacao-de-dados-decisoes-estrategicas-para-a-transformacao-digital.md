@@ -3,11 +3,13 @@ titulo: "Visualização de dados: decisões estratégicas para a transformação
 autores:
   - ricardo-brasileiro
 publicado_em: 2021-01-09
-secao: panorama
-tags: []
+secao: ensaios
+tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
 arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-decisões-estratégicas-para-a-transformação-digital-f7089eba1550"
 publicado_originalmente_em: 2021-01-09
+capa: ../../assets/blog/visualizacao-de-dados-decisoes-estrategicas-para-a-transformacao-digital/02.png
+capa_alt: "Capa do post Visualização de dados: decisões estratégicas para a transformação digital"
 ---
 
 "Once a photograph of the Earth, taken from outside, is available a new idea as powerful as any in history will be let loose." — Fred Hoyle, 1948
