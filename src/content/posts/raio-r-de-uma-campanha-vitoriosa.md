@@ -10,7 +10,7 @@ medium_url_original: "https://medium.com/datavizbr/raio-r-de-uma-campanha-vitori
 publicado_originalmente_em: 2023-01-10
 capa: ../../assets/blog/raio-r-de-uma-campanha-vitoriosa/02.png
 capa_alt: Capa do post Raio-R de uma campanha vitoriosa
-order_homepage: 4
+order_homepage: 3
 ---
 
 O que os dados sobre gastos da campanha de Lula nos diz sobre a estratégia da candidatura?

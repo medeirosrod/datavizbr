@@ -9,7 +9,8 @@ medium_url_original: "https://medium.com/datavizbr/dados-à-mesa-visualizando-o-
 publicado_originalmente_em: 2022-01-05
 capa: ../../assets/blog/dados-a-mesa-visualizando-o-sistema-alimentar-da-cidade-de-sao-paulo/01.jpeg
 capa_alt: "Capa do post Dados à Mesa: visualizando o sistema alimentar da cidade de São Paulo"
-order_homepage: 3
+destaque: true
+order_homepage: 1
 ---
 
 Acredito que para começar um projeto de design da informação seja necessário o envolvimento com múltiplos campos do conhecimento. Desde que tenho discutido sobre segurança alimentar com pessoas à minha volta, não conheço alguém que não tenha se inspirado diante da ideia de transmitir e visibilizar dados relacionados ao tema, pelas mais diversas motivações: planejamento de políticas públicas, conscientização para o consumo responsável, mobilização política, articulação de ações sociais, entre outras possibilidades.
