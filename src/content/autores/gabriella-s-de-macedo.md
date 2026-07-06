@@ -1,6 +1,6 @@
 ---
 nome: Gabriella S. de Macedo
-foto: ./_fotos/gabriella-s-de-macedo.png
+foto: ./_fotos/placeholder.svg
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

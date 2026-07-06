@@ -1,6 +1,6 @@
 ---
 nome: Carol Cavaleiro
-foto: ./_fotos/carol-cavaleiro.png
+foto: ./_fotos/placeholder.svg
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true

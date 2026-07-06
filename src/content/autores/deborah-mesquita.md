@@ -1,6 +1,6 @@
 ---
 nome: Déborah Mesquita
-foto: ./_fotos/deborah-mesquita.png
+foto: ./_fotos/placeholder.svg
 quem_e: Colaborador da comunidade datavizbr.
 papel: recorrente
 ativo: true
