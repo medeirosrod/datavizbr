@@ -1,7 +1,7 @@
 ---
 nome: Fernando Hannaka
 foto: ./_fotos/placeholder.svg
-quem_e: Colaborador da comunidade datavizbr.
+quem_e: Project Manager, Analytics Translator.
 papel: recorrente
 ativo: true
 ---

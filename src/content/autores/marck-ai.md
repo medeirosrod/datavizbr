@@ -1,7 +1,7 @@
 ---
 nome: Marck AI
 foto: ./_fotos/marck-ai.png
-quem_e: Colaborador da comunidade datavizbr.
+quem_e: Designer Gráfico e Professor.
 papel: recorrente
 ativo: true
 ---
