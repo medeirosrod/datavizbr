@@ -1,6 +1,6 @@
 ---
 nome: Gabriela Momberg
-foto: ./_fotos/placeholder.svg
+foto: ./_fotos/gabriela-momberg.png
 quem_e: Design gráfico, cartografia e visualização de dados.
 papel: recorrente
 ativo: true
