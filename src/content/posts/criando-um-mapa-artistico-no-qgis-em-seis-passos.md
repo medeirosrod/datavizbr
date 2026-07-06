@@ -9,6 +9,7 @@ medium_url_original: "https://medium.com/datavizbr/criando-um-mapa-artístico-no
 publicado_originalmente_em: 2024-04-29
 capa: ../../assets/blog/criando-um-mapa-artistico-no-qgis-em-seis-passos/01.png
 capa_alt: Capa do post Criando um mapa artístico no QGIS em seis passos
+order_homepage: 2
 ---
 
 Tutorial para criar um mapa artístico de malha urbana

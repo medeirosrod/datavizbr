@@ -9,6 +9,7 @@ medium_url_original: "https://medium.com/datavizbr/um-relato-pessoal-sobre-desig
 publicado_originalmente_em: 2022-06-14
 capa: ../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/01.png
 capa_alt: Capa do post Um relato pessoal sobre design, infografia e a desigualdade brasileira
+order_homepage: 5
 ---
 
 Uma história para além dos dados, por alguém que está acostumado a usar dados para contar histórias

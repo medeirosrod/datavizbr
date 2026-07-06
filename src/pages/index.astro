@@ -6,14 +6,23 @@ import AutorNome from '../components/AutorNome.astro';
 import { getSecaoLabel } from '../consts';
 import { getCollection } from 'astro:content';
 
-// Buscar todos os posts (exceto rascunhos), ordenados por data
+// Buscar todos os posts (exceto rascunhos)
 const allPosts = await getCollection('posts');
-const posts = allPosts
-  .filter(post => !post.data.rascunho)
+
+// Separar posts com order_homepage dos demais
+const postsComOrdem = allPosts
+  .filter(post => !post.data.rascunho && post.data.order_homepage)
+  .sort((a, b) => (a.data.order_homepage || 999) - (b.data.order_homepage || 999));
+
+const postsRestantes = allPosts
+  .filter(post => !post.data.rascunho && !post.data.order_homepage)
   .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
 
-// Post em destaque (primeiro com destaque=true, ou o mais recente)
-const featured = posts.find(p => p.data.destaque) || posts[0];
+// Combinar: primeiro os com order_homepage, depois os demais
+const posts = [...postsComOrdem, ...postsRestantes];
+
+// Post em destaque (primeiro da lista) e recentes (próximos 4)
+const featured = posts[0];
 const recentPosts = posts.slice(1, 5);
 
 // Posts por seção

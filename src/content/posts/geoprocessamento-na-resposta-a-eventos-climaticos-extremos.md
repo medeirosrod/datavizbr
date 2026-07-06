@@ -9,6 +9,7 @@ medium_url_original: "https://medium.com/datavizbr/geoprocessamento-na-resposta-
 publicado_originalmente_em: 2024-05-17
 capa: ../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/01.png
 capa_alt: Capa do post Geoprocessamento na resposta a eventos climáticos extremos
+order_homepage: 1
 ---
 
 **Localização**
