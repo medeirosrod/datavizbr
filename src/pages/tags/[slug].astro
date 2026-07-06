@@ -5,7 +5,7 @@ import { getSecaoLabel } from '../../consts';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('posts', ({ data }) => !data.rascunho && !data.arquivo);
+  const allPosts = await getCollection('posts', ({ data }) => !data.rascunho);
 
   const tagsSet = new Set<string>();
   allPosts.forEach(post => post.data.tags.forEach(tag => tagsSet.add(tag)));
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 interface Props { tag: string; }
 const { tag } = Astro.props;
 
-const allPosts = await getCollection('posts', ({ data }) => !data.rascunho && !data.arquivo);
+const allPosts = await getCollection('posts', ({ data }) => !data.rascunho);
 const posts = allPosts
   .filter(post => post.data.tags.includes(tag))
   .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
