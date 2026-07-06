@@ -6,7 +6,7 @@
   <div class="hero-chart-header">
     <div class="hero-chart-caption">
       <strong>Posts publicados por ano</strong>
-      <span>datavizbr · 2017–2025</span>
+      <span>datavizbr · 2016–2024</span>
     </div>
     <div class="hero-chart-legend">
       <span class="legend-item">
@@ -138,17 +138,17 @@
     const g = svg.append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Dados dinâmicos (será preenchido por JavaScript depois)
+    // Dados reais do datavizbr
     const data = window.chartData || [
-      { ano: 2017, posts: 8,  autores: 3 },
-      { ano: 2018, posts: 12, autores: 5 },
-      { ano: 2019, posts: 15, autores: 7 },
-      { ano: 2020, posts: 22, autores: 11 },
-      { ano: 2021, posts: 28, autores: 14 },
-      { ano: 2022, posts: 18, autores: 12 },
-      { ano: 2023, posts: 24, autores: 16 },
-      { ano: 2024, posts: 26, autores: 18 },
-      { ano: 2025, posts: 14, autores: 9 }
+      { ano: 2016, posts: 1, autores: 1 },
+      { ano: 2017, posts: 10, autores: 2 },
+      { ano: 2018, posts: 4, autores: 1 },
+      { ano: 2019, posts: 9, autores: 2 },
+      { ano: 2020, posts: 18, autores: 10 },
+      { ano: 2021, posts: 5, autores: 5 },
+      { ano: 2022, posts: 9, autores: 8 },
+      { ano: 2023, posts: 3, autores: 2 },
+      { ano: 2024, posts: 2, autores: 2 }
     ];
 
     const xScale = d3.scaleLinear()
