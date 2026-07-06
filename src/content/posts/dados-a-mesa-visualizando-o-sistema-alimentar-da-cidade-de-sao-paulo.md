@@ -5,10 +5,9 @@ autores:
 publicado_em: 2022-01-05
 secao: bastidores
 tags: ["Clima", "Dados", "Dataviz", "Design", "Entrevista"]
-destaque: true
 medium_url_original: "https://medium.com/datavizbr/dados-à-mesa-visualizando-o-sistema-alimentar-da-cidade-de-são-paulo-d4e898049f5"
 publicado_originalmente_em: 2022-01-05
-capa: ../../assets/blog/dados-a-mesa-visualizando-o-sistema-alimentar-da-cidade-de-sao-paulo/02.png
+capa: ../../assets/blog/dados-a-mesa-visualizando-o-sistema-alimentar-da-cidade-de-sao-paulo/01.jpeg
 capa_alt: "Capa do post Dados à Mesa: visualizando o sistema alimentar da cidade de São Paulo"
 ---
 
