@@ -5,7 +5,6 @@ autores:
 publicado_em: 2024-05-17
 secao: bastidores
 tags: ["Cultura", "Dados", "Dataviz", "Evento", "Jornalismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/geoprocessamento-na-resposta-a-eventos-climáticos-extremos-8682c21b33c6"
 publicado_originalmente_em: 2024-05-17
 capa: ../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/01.png
@@ -68,3 +67,7 @@ Separados do Centro da cidade e de muitos dos estabelecimentos básicos de São 
 - Geometrias atualizadas de edificações, obtidas por cadastro manual ou segmentação por imagens aéreas/satélite, melhora ainda mais a análise.
 - Os dados do Censo 2010 nos setores censitários das áreas atingidas revelam renda per capita baixa na média dos domicílios, o que torna os danos causados ainda mais dramáticos.
 - Mais do que resposta a eventos climáticos extremos, o geoprocessamento pode e DEVE ser utilizado para planejamento urbano responsável de forma a minimizar danos emocionais e materiais da população, principalmente das que estão em situação de extrema vulnerabilidade socioambiental.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/geoprocessamento-na-resposta-a-eventos-climáticos-extremos-8682c21b33c6) e pode ser encontrado no link acima.*

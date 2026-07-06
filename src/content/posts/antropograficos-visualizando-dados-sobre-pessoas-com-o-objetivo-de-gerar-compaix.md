@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-10-07
 secao: ensaios
 tags: ["COVID-19", "Dados", "Dataviz", "Design", "Jornalismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/antropográficos-visualizando-dados-sobre-pessoas-com-o-objetivo-de-gerar-compaixão-e311fa815768"
 publicado_originalmente_em: 2020-10-07
 rascunho: true
@@ -54,3 +53,7 @@ O termo "anthropographics" surgiu em 2017, a partir do trabalho de Jeremy Boy e 
 Hoje percebemos que em alguns casos apenas informar não é suficiente ao criarmos visualizações de dados. Às vezes é preciso criar visualizações mais humanizadas, que façam os leitores perceberem as histórias que existem por trás dos dados.
 
 *Luiz Morais é doutor em Ciência da Computação pela Universidade Federal de Campina Grande e atualmente é pós-doutorando pela Inria, França. Ele é um dos pioneiros no estudo de antropográficos.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/antropográficos-visualizando-dados-sobre-pessoas-com-o-objetivo-de-gerar-compaixão-e311fa815768) e pode ser encontrado no link acima.*

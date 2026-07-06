@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-01-13
 secao: ensaios
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-o-que-mudou-em-10-anos-fd1e0fe7d69c"
 publicado_originalmente_em: 2022-01-13
 capa: ../../assets/blog/visualizacao-de-dados-o-que-mudou-em-10-anos/02.png
@@ -33,3 +32,7 @@ Um dos projetos mais impactantes nesse começo dessa "transição" para mim foi 
 Outro projeto que chamou muita atenção nessa época foi o Breathing Earth realizado pela Nadieh Bremer. Um projeto totalmente visualizável no navegador utilizando o framework javascript D3.
 
 A ideia desse post é deixar esse registro para que compreendamos a realidade atual e que possamos refletir como a área da visualização de dados, inclusive do ponto de vista da tecnologia, tem modificado, se estruturado e simplesmente… mudado.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualização-de-dados-o-que-mudou-em-10-anos-fd1e0fe7d69c) e pode ser encontrado no link acima.*

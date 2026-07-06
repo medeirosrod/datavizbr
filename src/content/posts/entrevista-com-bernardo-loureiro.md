@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-08-04
 secao: panorama
 tags: ["Dados", "Dataviz", "Design", "Entrevista", "Mapa"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-bernardo-loureiro-b62090ce40b1"
 publicado_originalmente_em: 2019-08-04
 capa: ../../assets/blog/entrevista-com-bernardo-loureiro/01.png
@@ -45,3 +44,7 @@ Se você gosta de mapas, QGIS é uma ótima porta de entrada para esse mundo. No
 Não há um caminho único, mas hoje em dia eu sugiro JavaScript se você quiser focar mais em visualizações interativas e desenvolvimento front-end. Se quiser algo mais para análise de dados sugiro pegar a trilha Python e Pandas.
 
 Mas para mim o mais importante de tudo é ter um projeto que você quer fazer, e tentar fazê-lo e ir aprendendo as ferramentas no caminho. É executando projetos que eu mais aprendo. Procure tutoriais e cursos focados em projetos e ao mesmo tempo tente fazer seus próprios projetos usando o que aprendeu. E não esqueça de tentar se divertir no caminho.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entrevista-com-bernardo-loureiro-b62090ce40b1) e pode ser encontrado no link acima.*

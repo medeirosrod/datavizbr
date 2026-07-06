@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-01-05
 secao: bastidores
 tags: ["Clima", "Dados", "Dataviz", "Design", "Entrevista"]
-arquivo: true
 destaque: true
 medium_url_original: "https://medium.com/datavizbr/dados-à-mesa-visualizando-o-sistema-alimentar-da-cidade-de-são-paulo-d4e898049f5"
 publicado_originalmente_em: 2022-01-05
@@ -70,3 +69,7 @@ Uma das reflexões que este trabalho suscita é a de que visualizar dados pressu
 ![Guardanapos estampados com nomes de distritos de São Paulo dispostos em círculo sobre mesa de madeira](../../assets/blog/dados-a-mesa-visualizando-o-sistema-alimentar-da-cidade-de-sao-paulo/11.jpeg)
 
 *Imagens produzidas pela autora*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/dados-à-mesa-visualizando-o-sistema-alimentar-da-cidade-de-são-paulo-d4e898049f5) e pode ser encontrado no link acima.*

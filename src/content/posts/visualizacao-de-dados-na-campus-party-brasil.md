@@ -5,7 +5,6 @@ autores:
 publicado_em: 2017-12-07
 secao: panorama
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Educação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-na-campus-party-brasil-249ea023308f"
 publicado_originalmente_em: 2017-12-07
 capa: ../../assets/blog/visualizacao-de-dados-na-campus-party-brasil/01.png
@@ -29,3 +28,7 @@ Os vídeos das palestras cobriram:
 Em 2011 também rolou uma palestra com o tema de visualização de dados e contou com Guilhermes Damian, Emiliano Urbim e Gabriel Gianordoli. O Gabriel Gianordoli, na minha opinião, é uma das referências na área de visualização de dados no mundo, já foi professor da Parsons School of Design, em Nova Iorque, e hoje trabalha no The Wall Street Journal.
 
 Conhece algum outro evento no Brasil e em países lusófonos que tem vídeo disponível para a gente compartilhar por aqui?
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualização-de-dados-na-campus-party-brasil-249ea023308f) e pode ser encontrado no link acima.*

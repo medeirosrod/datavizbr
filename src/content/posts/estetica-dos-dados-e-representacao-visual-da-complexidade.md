@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-11-21
 secao: ensaios
 tags: ["Clima", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/estética-dos-dados-e-representação-visual-da-complexidade-92fc66eaba4e"
 publicado_originalmente_em: 2020-11-21
 capa: ../../assets/blog/estetica-dos-dados-e-representacao-visual-da-complexidade/01.jpeg
@@ -49,3 +48,7 @@ Fractais são padrões recorrentes encontrados na natureza que expressam autosse
 Os sistemas complexos vivem no limite do caos, na intersecção entre ordem e desordem. Se olharmos para sistemas complexos no micronível dos atores, eles se mostrarão relativamente simples e regulares. Tal simplicidade local, multiplicada pelo grande número de atores e amplificada por uma complicada estrutura de relação, produz uma inesperada, ainda assim organizada, complexidade global.
 
 As visualizações de dados conectam as pontas soltas entre a objetividade pragmática do pensamento científico e a reflexão expressiva e subjetiva do fazer artístico. A estética dos dados presente nas visualizações de dados ocupadas em representar a complexidade é uma expressão contemporânea do sublime e do fascínio artístico.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/estética-dos-dados-e-representação-visual-da-complexidade-92fc66eaba4e) e pode ser encontrado no link acima.*

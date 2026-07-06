@@ -5,7 +5,6 @@ autores:
 publicado_em: 2017-12-04
 secao: panorama
 tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-no-podcast-visual-mente-ec67ae51c7ef"
 publicado_originalmente_em: 2017-12-04
 capa: ../../assets/blog/visualizacao-de-dados-no-podcast-visual-mente/01.png
@@ -63,3 +62,7 @@ Data Stories
 **Ferramentas**
 
 D3.js, processing.js, Raw, Tableau
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualização-de-dados-no-podcast-visual-mente-ec67ae51c7ef) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-06-22
 secao: bastidores
 tags: ["Dados", "Dataviz", "Educação", "Mapa", "Série"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/gráficos-e-anotações-de-análises-de-idhm-x-educação-para-o-estado-do-ceará-910912151eaa"
 publicado_originalmente_em: 2022-06-22
 capa: ../../assets/blog/graficos-e-anotacoes-de-analises-de-idhm-x-educacao-para-o-estado-do-ceara/01.png
@@ -49,3 +48,7 @@ A outra variável de destaque para a explicação da variação do IDHM entre 20
 ![Mapas da taxa da população de 11 a 13 anos nos anos finais do ensino fundamental no Ceará, 2000 e 2010](../../assets/blog/graficos-e-anotacoes-de-analises-de-idhm-x-educacao-para-o-estado-do-ceara/08.png)
 
 Os códigos desta análise estão disponíveis no github do autor. Os dados são consumidos do repositório da Base dos Dados.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/gráficos-e-anotações-de-análises-de-idhm-x-educação-para-o-estado-do-ceará-910912151eaa) e pode ser encontrado no link acima.*

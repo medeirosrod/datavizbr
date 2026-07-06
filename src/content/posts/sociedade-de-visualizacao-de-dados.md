@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-03-13
 secao: panorama
 tags: ["Dados", "Dataviz", "Design", "Evento", "Interação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/sociedade-de-visualização-de-dados-5795905ce6b7"
 publicado_originalmente_em: 2019-03-13
 capa: ../../assets/blog/sociedade-de-visualizacao-de-dados/01.png
@@ -23,3 +22,7 @@ Um recurso para profissionais de visualização de dados, independentemente de p
 Um motor para impulsionar a maturação e a profissionalização da visualização de dados. Tornar-se membro é, por enquanto, gratuito. Esperamos chegar ao ponto de oferecer suficiente valor que nos permita cobrar, em contrapartida, taxas de filiação para apoiar conferências e outras atividades de desenvolvimento profissional."
 
 "Se isso te agrada e você sente desejo de participar dessa comunidade, sinta-se à vontade para tornar-se um membro. Se tiver ideias ou tempo para exercer um papel mais ativo, entre em contato conosco por e-mail, na seção de comentários desta página, ou no Twitter. Este artigo foi traduzido por mim, @juliagiannella, e co-escrito por @amycesal, Mollie Pettit & @ElijahMeeks."
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/sociedade-de-visualização-de-dados-5795905ce6b7) e pode ser encontrado no link acima.*

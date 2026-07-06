@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-07-24
 secao: panorama
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Educação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-gabriel-zanlorenssi-16a977b02824"
 publicado_originalmente_em: 2019-07-24
 capa: ../../assets/blog/entrevista-com-gabriel-zanlorenssi/01.jpeg
@@ -49,3 +48,7 @@ Pensando em um veículo de imprensa, com um site estruturado e com publicador, c
 Para quem está começando, uma boa opção podem ser ferramentas online que produzem gráficos sofisticados sem nenhuma necessidade de conhecimento de programação. Recomendo particularmente o Flourish e o Raw Graphs. Pode-se baixar o gráfico produzido como imagem (png) ou arquivo de vetores (svg).
 
 Também há, para o próprio ggplot2 mesmo, uma extensão chamada esquisse, que permite a criação de gráficos no R arrastando caixas e clicando botões.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entrevista-com-gabriel-zanlorenssi-16a977b02824) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-01-28
 secao: ensaios
 tags: ["Dados", "Dataviz", "Design", "Eleições", "Jornalismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/é-oficial-a-visualização-de-dados-chegou-a-grande-mídia-fd4fd3871761"
 publicado_originalmente_em: 2020-01-28
 capa: ../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/01.png
@@ -57,3 +56,7 @@ A visualização de dados é tecnicamente madura. Cada vez mais, percebemos abor
 A visualização de dados está se tornando menos uma raridade da empresa de tecnologia e mais uma parte da vida cotidiana de todos. Precisamos jogar fora nossas antigas noções de visualização de dados e entender como essa nova visualização de dados é feita, como é lida e como ela se relaciona.
 
 *Elijah Meeks é o diretor executivo da Sociedade de Visualização de dados e engenheiro de visualização de dados na Apple.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/é-oficial-a-visualização-de-dados-chegou-a-grande-mídia-fd4fd3871761) e pode ser encontrado no link acima.*

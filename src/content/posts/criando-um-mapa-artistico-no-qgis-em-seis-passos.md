@@ -5,7 +5,6 @@ autores:
 publicado_em: 2024-04-29
 secao: praticas
 tags: ["Cultura", "Dados", "Dataviz", "Mapa", "Urbanismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/criando-um-mapa-artístico-no-qgis-em-seis-passos-512aec1b33c0"
 publicado_originalmente_em: 2024-04-29
 capa: ../../assets/blog/criando-um-mapa-artistico-no-qgis-em-seis-passos/01.png
@@ -105,3 +104,7 @@ Selecione o retângulo da legenda, vá nas propriedades do item, e clique em est
 ![Resultado final do mapa artístico de Brasília com degradê na legenda](../../assets/blog/criando-um-mapa-artistico-no-qgis-em-seis-passos/17.png)
 
 Se for colocar em prática, marque a autora no LinkedIn, ela adora ver as derivações que cada pessoa cria!
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/criando-um-mapa-artístico-no-qgis-em-seis-passos-512aec1b33c0) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-04-14
 secao: panorama
 tags: ["Clima", "Cultura", "Dataviz", "Design", "Educação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/o-que-aprendi-no-malofiej-27-6ca575b8ae3c"
 publicado_originalmente_em: 2019-04-14
 capa: ../../assets/blog/o-que-aprendi-no-malofiej-27/02.png
@@ -43,3 +42,7 @@ Conversando com Shirley, uma das juradas e programadora brilhante, ela me disse 
 Todas as pessoas com quem conversei durante o evento ajudaram a dissolver a insegurança. Me senti ouvida e respeitada. Dei minha palestra. E foi ótimo!
 
 Conheci pessoas maravilhosas e voltei pra casa acreditando que agora estamos conectados pra vida. Parte da importância do Malofiej é dar voz aos profissionais e visibilidade aos seus trabalhos. Mas também é aproximar pessoas, é trocar conhecimento, é criar pontes. É retomar o fôlego… e voltar ao trabalho.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/o-que-aprendi-no-malofiej-27-6ca575b8ae3c) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-08-07
 secao: panorama
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Evento"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/nadieh-bremer-e-a-nova-era-da-visualização-de-dados-2401094c0403"
 publicado_originalmente_em: 2019-08-07
 capa: ../../assets/blog/nadieh-bremer-e-a-nova-era-da-visualizacao-de-dados/03.png
@@ -26,3 +25,7 @@ Boa parte das criações da Nadieh estão dentro da tríade html, css, javascrip
 
 
 O que faz o trabalho da Nadieh impressionante é o cuidado tanto na parte visual como das tecnologias utilizadas em cada projeto. Esses frameworks conseguiram chegar no nível de navegação e fluidez em animações que conseguíamos com o flash. Outro ponto interessante é o processo de colaboração com outros pesquisadores. Ela faz um projeto muito legal com a Shirley Wu chamado datasketches.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/nadieh-bremer-e-a-nova-era-da-visualização-de-dados-2401094c0403) e pode ser encontrado no link acima.*

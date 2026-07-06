@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-03-31
 secao: bastidores
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-carol-seixas-sobre-o-projeto-bordados-2d9c4740f90a"
 publicado_originalmente_em: 2022-03-31
 capa: ../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/01.png
@@ -65,3 +64,7 @@ Portanto, minha escolha de usar práticas manuais e artesanais para reproduzir e
 **Rodrigo: Você tem algum material que gostaria de compartilhar ou alguma dica para quem está trilhando esse caminho do design e da visualização de dados?**
 
 Carol: Se você tem algum interesse em fazer algo com visualização de dados humanizada, minha dica aqui é entender o que você quer passar com o projeto. Entendendo isso, a experimentação vai ser sua maior aliada para chegar de fato a um lugar onde consiga escalar os dados e de fato ter uma visualização concreta deles.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entrevista-com-carol-seixas-sobre-o-projeto-bordados-2d9c4740f90a) e pode ser encontrado no link acima.*

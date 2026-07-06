@@ -5,7 +5,6 @@ autores:
 publicado_em: 2021-03-08
 secao: panorama
 tags: ["Dados", "Dataviz", "Design", "Jornalismo", "Saúde"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/florence-nightingale-dois-séculos-de-visualização-de-dados-19ae798ff444"
 publicado_originalmente_em: 2021-03-08
 capa: ../../assets/blog/florence-nightingale-dois-seculos-de-visualizacao-de-dados/01.png
@@ -48,3 +47,7 @@ Quando Florence se tornou uma figura frequente nos periódicos, chegou a publica
 A trajetória de Florence Nightingale suscita dúvidas para nossa era: se nos ancoramos o suficiente em dados e métricas para orientar nossas tomadas de decisão; o quão acessíveis são nossos dados para quem precisamos alcançar; se estamos usando dados para confirmar hipóteses previamente enviesadas.
 
 Os dados de Florence resultaram em progresso para muitas pessoas. O progresso é conquistado de maneira incremental por pessoas dispostas a observar as evidências.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/florence-nightingale-dois-séculos-de-visualização-de-dados-19ae798ff444) e pode ser encontrado no link acima.*

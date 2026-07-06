@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-10-07
 secao: panorama
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-barbara-castro-diretora-de-criação-do-estúdio-ambos-af639579be47"
 publicado_originalmente_em: 2019-10-07
 capa: ../../assets/blog/entrevista-com-barbara-castro-diretora-de-criacao-do-estudio-ambos/02.png
@@ -51,3 +50,7 @@ O livro Existência Numérica é bilingue e inclui uma seleção de textos de pe
 O livro Observe, Collect and Draw da Giorgia Lupi e da Stefanie Posavec é maravilhoso para compreender a visualização de dados em uma perspectiva menos tecnológica e mais pessoal.
 
 Para quem quer começar a programar, muitos apontam o Processing como uma linguagem para iniciar. Porém, para o campo da visualização acredito que o Javascript é uma linguagem boa para iniciar pois tem excelente documentação e muitas bibliotecas. Programar é também saber fragmentar o processo de criação em doses pequenas e constantes.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entrevista-com-barbara-castro-diretora-de-criação-do-estúdio-ambos-af639579be47) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-06-03
 secao: ensaios
 tags: ["Dados", "Dataviz", "Design", "Evento", "Interação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/a-interação-está-morta-vida-longa-à-interação-f11ace12fc75"
 publicado_originalmente_em: 2022-06-03
 capa: ../../assets/blog/a-interacao-esta-morta-vida-longa-a-interacao/01.png
@@ -53,3 +52,7 @@ O grupo das simulações é um que pode ajudar os leitores a entender o "peso" d
 De modo geral, esses modelos de artigos interativos com propósitos de personalização podem auxiliar os leitores a navegar questões complexas a partir de uma escala mais direcionada ou adaptada ao nível de interesse de diferentes leitores.
 
 Olga Lopes — Mestra em jornalismo pela UFSC, é pesquisadora do Núcleo de Estudos e Produção Hipermídia Aplicados ao Jornalismo (Nephi-Jor) e atua como bolsista do CNPq na área de Gestão da Informação e Popularização da Ciência do Instituto Nacional do Semiárido (INSA/MCTI).
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/a-interação-está-morta-vida-longa-à-interação-f11ace12fc75) e pode ser encontrado no link acima.*

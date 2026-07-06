@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-06-14
 secao: panorama
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-em-português-39f27ca2257c"
 publicado_originalmente_em: 2020-06-14
 capa: ../../assets/blog/visualizacao-de-dados-no-youtube-e-em-portugues/01.jpeg
@@ -31,3 +30,7 @@ Com o processo da pandemia e todo esse processo do isolamento social aconteceu t
 Aproveitem, compartilhem e valorizem conteúdo em português e de alto nível.
 
 *Rodrigo Medeiros é designer de interação e pesquisador em visualização de dados. Atualmente é Professor do Curso Superior de Tecnologia em Design Gráfico do IFPB — campus Cabedelo, Professor Colaborador do Mestrado em Engenharia de Software do CESAR School, local leader da IxDA Recife e curador do datavizbr.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualização-de-dados-em-português-39f27ca2257c) e pode ser encontrado no link acima.*

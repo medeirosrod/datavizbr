@@ -7,7 +7,6 @@ secao: ensaios
 serie: entendendo-o-agora
 ordem_na_serie: 3
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entendendo-o-agora-dataviz-em-tempos-de-coronavírus-parte-3-5ae96cc7ac11"
 publicado_originalmente_em: 2020-06-19
 capa: ../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/05.png
@@ -63,3 +62,7 @@ Os efeitos no ambiente têm sido comentados como um possível lado bom da pandem
 Porém a Bloomberg, colocando os dados em perspectiva, tem uma visão menos otimista. Apesar do lockdown ter gerado a maior queda de emissão de CO2 já registrada, em perspectiva a diminuição terá pouco efeito na desaceleração do aquecimento global.
 
 ![Gráfico da Bloomberg mostrando que a concentração de CO2 na atmosfera continuará subindo apesar da queda de emissões na pandemia](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/06.png)
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entendendo-o-agora-dataviz-em-tempos-de-coronavírus-parte-3-5ae96cc7ac11) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-12-08
 secao: bastidores
 tags: ["Dados", "Dataviz", "Design", "Interação", "Jornalismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualizando-dados-não-deixe-a-ansiedade-atrapalhar-seu-processo-criativo-aac962ad1e17"
 publicado_originalmente_em: 2020-12-08
 capa: ../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/01.png
@@ -59,3 +58,7 @@ O que fez a diferença foi transformar o dado, misturar com uma escolha gráfica
 A necessidade de controlar a ansiedade e manter um senso crítico ao longo de toda a jornada é fundamental no processo criativo de visualização de dados.
 
 *Fernando Hannaka é engenheiro de produção, autodidata, com propósito de transformar pessoas e organizações através da liderança empática e cultura analítica.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualizando-dados-não-deixe-a-ansiedade-atrapalhar-seu-processo-criativo-aac962ad1e17) e pode ser encontrado no link acima.*

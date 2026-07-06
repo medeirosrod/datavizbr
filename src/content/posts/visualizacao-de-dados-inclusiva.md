@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-08-28
 secao: praticas
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-inclusiva-3459a390b583"
 publicado_originalmente_em: 2019-08-28
 rascunho: true
@@ -55,3 +54,7 @@ Uma outra solução usada pelo trânsito é colocar as cores do sinal sempre na 
 ![Exemplo adicional de dashboard inclusivo](../../assets/blog/visualizacao-de-dados-inclusiva/07.png)
 
 A intenção é criarmos dashboards cada vez mais inclusivos e de fácil compreensão de todos. Não há cores ou gráficos proibidos, use sua criatividade para comunicar de forma clara. Caso tenha o conhecimento de alguma pessoa daltônica na equipe, convide ela para participar da criação do dashboard.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualização-de-dados-inclusiva-3459a390b583) e pode ser encontrado no link acima.*

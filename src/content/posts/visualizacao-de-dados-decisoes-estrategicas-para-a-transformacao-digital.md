@@ -5,7 +5,6 @@ autores:
 publicado_em: 2021-01-09
 secao: ensaios
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-decisões-estratégicas-para-a-transformação-digital-f7089eba1550"
 publicado_originalmente_em: 2021-01-09
 capa: ../../assets/blog/visualizacao-de-dados-decisoes-estrategicas-para-a-transformacao-digital/02.png
@@ -39,3 +38,7 @@ Somos criaturas intensamente sensitivas. Detectamos padrões em linhas de númer
 - Novos tipos de serviços e modelos de negócios
 
 Assim como o Overview Effect trouxe uma percepção profunda sobre as interconexões entre os sistemas naturais, as estratégias de visualização de dados podem provocar uma mudança cognitiva para uma visão sistêmica de produção mais consciente e integrada.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualização-de-dados-decisões-estratégicas-para-a-transformação-digital-f7089eba1550) e pode ser encontrado no link acima.*

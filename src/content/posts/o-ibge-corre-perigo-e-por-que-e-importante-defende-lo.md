@@ -5,7 +5,6 @@ autores:
 publicado_em: 2021-04-02
 secao: ensaios
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/o-ibge-corre-perigo-2dd9e21f76a0"
 publicado_originalmente_em: 2021-04-02
 rascunho: true
@@ -54,3 +53,7 @@ O segundo mapa diz respeito à demanda alcançada de escolas do ensino médio em
 **4 — Conclusão**
 
 A não ocorrência do censo significa uma perda gigantesca para nossa pesquisa demográfica. É inconcebível propor políticas públicas e melhorias à nossa população sem antes conhecer os perfis que compõem essa população. O desmonte institucional que o IBGE vem sofrendo revela muito sobre o descaso com a transparência por parte do governo e pode impedir um entendimento mais preciso sobre como a pandemia afetou de fato a vida dos brasileiros e das nossas cidades.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/o-ibge-corre-perigo-2dd9e21f76a0) e pode ser encontrado no link acima.*

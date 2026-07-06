@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-07-11
 secao: ensaios
 tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-é-o-próximo-desafio-do-design-7780e05f43a2"
 publicado_originalmente_em: 2019-07-11
 capa: ../../assets/blog/visualizacao-de-dados-e-o-proximo-desafio-do-design/01.jpeg
@@ -49,3 +48,7 @@ A maior parte do trabalho duro é simplesmente remover o design ruim de nossos g
 Quando unimos dados e design, reduzimos as falhas de comunicação e produzimos visuais que combinam o melhor dos dois mundos.
 
 *Obrigado Julia Giannella, Jessica Temporal, Pedro Barcelar e Deboráh Mesquita pelas dicas na tradução.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualização-de-dados-é-o-próximo-desafio-do-design-7780e05f43a2) e pode ser encontrado no link acima.*

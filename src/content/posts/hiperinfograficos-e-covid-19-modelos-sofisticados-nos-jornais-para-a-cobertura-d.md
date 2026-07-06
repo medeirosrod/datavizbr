@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-06-16
 secao: ensaios
 tags: ["COVID-19", "Dados", "Dataviz", "Design", "Interação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/hiperinfográficos-e-covid-19-modelos-sofisticados-nos-jornais-para-a-cobertura-da-pandemia-b6d137b8cc41"
 publicado_originalmente_em: 2020-06-16
 rascunho: true
@@ -52,3 +51,7 @@ O New York Times traz o hiperinfográfico "How the Virus Got Out", lançado em 2
 Estes modelos demonstram como os jornais experimentam infografias de estágios variados, porém ousam positivamente nos modelos mais complexos, como as hiperinfografias, a fim de oferecer meios mais dinâmicos, atrativos e sofisticados para o usuário que busca informações sobre a pandemia.
 
 *Sobre o autor: William Robson Cordeiro é Doutor em Jornalismo pelo POSJOR/UFSC com estágio-sanduíche na Universitat Autònoma de Barcelona (UAB) e pesquisador do Núcleo de Estudos e Produção Hipermídia Aplicados ao Jornalismo (Nephi-Jor).*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/hiperinfográficos-e-covid-19-modelos-sofisticados-nos-jornais-para-a-cobertura-da-pandemia-b6d137b8cc41) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-12-21
 secao: ensaios
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/ensino-de-design-da-informacao-e-dataviz-em-modo-remoto-477276d4dd3"
 publicado_originalmente_em: 2020-12-21
 capa: ../../assets/blog/minha-experiencia-com-ensino-de-design-da-informacao-e-dataviz-em-modo-remoto/01.png
@@ -125,3 +124,7 @@ Desenvolvimento de um infográfico que apresentasse dados sobre a narrativa de u
 O semestre foi um desafio pessoal tremendo. Ao fim e ao cabo, acho que a experiência foi extremamente positiva.
 
 *Mauro Pinheiro é designer, com experiência nas áreas de design da informação e design de interação. Pesquisador e professor na UFES desde 2004, é um dos coordenadores do ProDesign Ufes.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/ensino-de-design-da-informacao-e-dataviz-em-modo-remoto-477276d4dd3) e pode ser encontrado no link acima.*

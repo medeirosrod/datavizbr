@@ -5,7 +5,6 @@ autores:
 publicado_em: 2017-11-01
 secao: praticas
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Urbanismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/princípios-básicos-da-visualização-de-dados-5ebc7150fc81"
 publicado_originalmente_em: 2017-11-01
 capa: ../../assets/blog/principios-basicos-da-visualizacao-de-dados/01.png
@@ -59,3 +58,7 @@ A área de Visual Analytics tem suas raízes em InfoVis e é uma disciplina que 
 Essa combinação da área de visualização com várias outras disciplinas, incluindo ciências cognitivas e estatística, cria uma nova ciência que ajuda o usuário a ver, entender e aprender a partir de um grande conjunto de dados.
 
 Visualizar é mapear os dados em elementos visuais, mas como a gente faz isso? Como a gente cria as visualizações para que o usuário realize uma determinada tarefa? Que elementos a gente utiliza pra criar as visualizações?
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/princípios-básicos-da-visualização-de-dados-5ebc7150fc81) e pode ser encontrado no link acima.*

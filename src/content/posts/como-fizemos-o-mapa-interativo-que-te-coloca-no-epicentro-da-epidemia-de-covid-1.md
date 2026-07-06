@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-07-24
 secao: bastidores
 tags: ["COVID-19", "Clima", "Dados", "Dataviz", "Educação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/como-fizemos-o-mapa-interativo-que-te-coloca-no-epicentro-da-epidemia-de-covid-19-no-brasil-4ce949a9183b"
 publicado_originalmente_em: 2020-07-24
 rascunho: true
@@ -156,3 +155,7 @@ Em vez de gerar apenas pontos dentro do círculo, a equipe gerou previamente uma
 3. Aprender no processo: disposição para mergulhar em temas novos rapidamente. O grupo se autodenominou "Irresponsáveis Motivados". Como disse a equipe: "Feito é melhor que perfeito."
 
 Os dados de mortes vieram do Brasil.io, mantido por Álvaro Justen e voluntários. O código-fonte do projeto é aberto.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/como-fizemos-o-mapa-interativo-que-te-coloca-no-epicentro-da-epidemia-de-covid-19-no-brasil-4ce949a9183b) e pode ser encontrado no link acima.*

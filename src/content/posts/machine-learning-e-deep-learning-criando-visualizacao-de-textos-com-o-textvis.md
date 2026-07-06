@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-02-02
 secao: praticas
 tags: ["Dados", "Dataviz", "Design", "Evento", "Mapa"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/machine-learning-e-deep-learning-criando-visualização-de-textos-com-o-textvis-8e038da80902"
 publicado_originalmente_em: 2022-02-02
 capa: ../../assets/blog/machine-learning-e-deep-learning-criando-visualizacao-de-textos-com-o-textvis/01.png
@@ -37,3 +36,7 @@ MultiStream é uma abordagem de Streamgraph multiresolução para explorar séri
 ---
 
 Sobre a autora: Juliana Freitas, potiguar radicada em São Paulo. De humanas, mas também de dados. Graduada em Marketing pela Universidade Cruzeiro do Sul e Data Science Analytics em empresas, com foco em insights vindos dos dados para marcas e enterprises.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/machine-learning-e-deep-learning-criando-visualização-de-textos-com-o-textvis-8e038da80902) e pode ser encontrado no link acima.*

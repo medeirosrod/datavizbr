@@ -5,7 +5,6 @@ autores:
 publicado_em: 2017-07-01
 secao: panorama
 tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/giorgia-lupi-e-os-dados-da8b4b961662"
 publicado_originalmente_em: 2017-07-01
 capa: ../../assets/blog/giorgia-lupi-e-os-dados/01.jpeg
@@ -27,3 +26,7 @@ Outra maneira de conhecer melhor o trabalho da Giorgia é ler, com calma, o text
 "Desenhe com dados de modo que, de certa forma, remova a tecnologia da equação antes de trazê-la para finalizar o design com ferramentas digitais. Introduza novas formas de pensar (…). Eu desenho para explorar livremente as possibilidades. Eu desenho para entender visualmente o que estou pensando, eu desenho para avaliar minhas ideias e intuições ao vê-las ganhar vida no papel, eu desenho para ajudar minha mente a pensar sem limitações, sem limites." (Giorgia Lupi)
 
 Quer conhecer mais o trabalho da Giorgia? Confere os projetos da empresa dela, dá uma lida no livro Dear Data e acompanha o trabalho dela no Medium ou no Twitter.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/giorgia-lupi-e-os-dados-da8b4b961662) e pode ser encontrado no link acima.*

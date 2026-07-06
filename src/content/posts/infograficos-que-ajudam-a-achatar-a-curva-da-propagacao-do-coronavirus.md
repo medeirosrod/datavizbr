@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-04-01
 secao: ensaios
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/infográficos-que-ajudam-a-achatar-a-curva-do-coronavírus-f3e911d606e9"
 publicado_originalmente_em: 2020-04-01
 capa: ../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/01.jpeg
@@ -71,3 +70,7 @@ Nesta breve análise, não procurei descobrir qual dos infográficos informa mel
 É importante que a infografia seja usada como ferramenta de informação e persuasão neste momento crítico. Designers de informação têm um papel importante. Precisamos motivar a população para adotar o isolamento e, dessa maneira, diminuir a taxa de contágio, descongestionar os hospitais e salvar o máximo de vidas.
 
 *Ricardo Cunha Lima é infografista que, depois de trabalhar bastante no mercado editorial, resolveu se aventurar na academia e fez doutorado em design de informação.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/infográficos-que-ajudam-a-achatar-a-curva-do-coronavírus-f3e911d606e9) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-08-12
 secao: bastidores
 tags: ["Dados", "Dataviz", "Design", "Entrevista", "Interação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-victória-sacagami-e-larissa-elisa-sobre-uma-visualização-dos-parques-públicos-1dc3ef8a9f1c"
 publicado_originalmente_em: 2019-08-12
 capa: ../../assets/blog/entrevista-com-victoria-sacagami-e-larissa-elisa-sobre-uma-visualizacao-dos-parq/01.jpeg
@@ -55,3 +54,7 @@ Além disso, a transparência de dados públicos é essencial para auxílio na c
 **Quais dicas para quem está começando na área?**
 
 Seria bacana conhecer um pouco sobre as opções e funcionalidades de cada tipo de gráfico. O Dataviz Catalogue e o Dataviz Project são duas plataformas boas para isso. É interessante conferir também o trabalho de pessoas como Fernanda Viégas, Alberto Cairo, Nathan Yau, Edward Tufte, Ben Fry e Hans Rosling. Stefanie Posavec e Giorgia Lupi possuem projetos incríveis e publicaram o Dear Data. Para praticar, o Raw Graphs é uma ferramenta online simples e acessível.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entrevista-com-victória-sacagami-e-larissa-elisa-sobre-uma-visualização-dos-parques-públicos-1dc3ef8a9f1c) e pode ser encontrado no link acima.*

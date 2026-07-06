@@ -5,7 +5,6 @@ autores:
 publicado_em: 2023-01-20
 secao: bastidores
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualizando-a-composição-ministerial-do-governo-lula-d0c92ed42378"
 publicado_originalmente_em: 2023-01-20
 rascunho: true
@@ -56,3 +55,7 @@ A visualização possui interações para exibir informações mais completas qu
 Toda visualização foi criada utilizando d3.js e pode ser acessada no Observable HQ do autor.
 
 ![Visualização completa em d3.js](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/07.png)
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualizando-a-composição-ministerial-do-governo-lula-d0c92ed42378) e pode ser encontrado no link acima.*

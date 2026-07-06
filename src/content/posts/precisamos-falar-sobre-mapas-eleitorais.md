@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-11-08
 secao: ensaios
 tags: ["COVID-19", "Dados", "Dataviz", "Design", "Eleições"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/mapas-eleitorais-e71e632bc8ac"
 publicado_originalmente_em: 2020-11-08
 capa: ../../assets/blog/precisamos-falar-sobre-mapas-eleitorais/01.png
@@ -47,3 +46,7 @@ Na versão para desktop, o Financial Times supera a versão para celular, unindo
 Designers de informação precisam refletir sobre o tipo de visualização de dados que escolhem utilizar. Cada escolha tem consequências que vão além de problemas de leitura de dados. Mapas podem servir para fins políticos, podem mentir, mesmo que involuntariamente, e podem ser usados para manipular leitores despreparados.
 
 *Ricardo Cunha Lima é infografista doutor em design de informação, professor adjunto na UFPE e co-fundador do podcast Visual+mente.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/mapas-eleitorais-e71e632bc8ac) e pode ser encontrado no link acima.*

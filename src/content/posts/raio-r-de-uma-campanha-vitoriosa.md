@@ -6,7 +6,6 @@ publicado_em: 2023-01-10
 secao: bastidores
 descricao: O que os dados sobre gastos da campanha de Lula nos diz sobre a estratégia da candidatura?
 tags: ["Dados", "Dataviz", "Design", "Eleições", "Evento"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/raio-r-de-uma-campanha-vitoriosa-75d461f452e2"
 publicado_originalmente_em: 2023-01-10
 capa: ../../assets/blog/raio-r-de-uma-campanha-vitoriosa/02.png
@@ -58,3 +57,7 @@ As categorias do framework:
 ![Gráfico de barras colorido dos fornecedores categorizados por pilares estratégicos](../../assets/blog/raio-r-de-uma-campanha-vitoriosa/07.png)
 
 Na visão do dinheiro gasto, Estratégia e Conteúdo foi o pilar mais crucial da campanha, seguido por Internet e Rede Social. Outros pilares que requerem muito menos dinheiro podem ter sido bastante efetivos para determinar o resultado da campanha.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/raio-r-de-uma-campanha-vitoriosa-75d461f452e2) e pode ser encontrado no link acima.*

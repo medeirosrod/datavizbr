@@ -5,7 +5,6 @@ autores:
 publicado_em: 2017-12-20
 secao: panorama
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Educação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/lista-colaborativa-de-quem-seguir-nas-redes-sociais-em-2018-sobre-big-data-data-science-f776dbf333b3"
 publicado_originalmente_em: 2017-12-20
 capa: ../../assets/blog/lista-colaborativa-de-quem-seguir-nas-redes-sociais-em-2018-sobre-big-data-data-/01.png
@@ -73,3 +72,7 @@ O foco é listar pessoas que compartilhem seus conhecimentos nessas áreas e em 
 - Rodolfo Viana
 - Raquel Recuero
 - Fabio Vasconcellos
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/lista-colaborativa-de-quem-seguir-nas-redes-sociais-em-2018-sobre-big-data-data-science-f776dbf333b3) e pode ser encontrado no link acima.*

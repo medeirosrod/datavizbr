@@ -7,7 +7,6 @@ secao: ensaios
 serie: entendendo-o-agora
 ordem_na_serie: 2
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entendendo-o-agora-dataviz-em-tempos-de-coronavírus-930890d8c23c"
 publicado_originalmente_em: 2020-05-13
 capa: ../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/01.gif
@@ -47,3 +46,7 @@ O South China Morning Post trouxe uma explicação sobre as diferentes famílias
 ![Animação da Reuters mostrando o avanço das contaminações em Singapura, com grandes taxas de transmissão nos dormitórios de trabalhadores estrangeiros](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/06.gif)
 
 *Avanço das contaminações em Singapura (Reuters)*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entendendo-o-agora-dataviz-em-tempos-de-coronavírus-930890d8c23c) e pode ser encontrado no link acima.*

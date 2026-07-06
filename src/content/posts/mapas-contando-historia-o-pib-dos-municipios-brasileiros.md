@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-08-03
 secao: bastidores
 tags: ["Dados", "Dataviz", "Mapa", "Urbanismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/mapas-contando-história-o-pib-dos-municípios-brasileiros-aebb82f06086"
 publicado_originalmente_em: 2020-08-03
 capa: ../../assets/blog/mapas-contando-historia-o-pib-dos-municipios-brasileiros/02.png
@@ -47,3 +46,7 @@ Minas Gerais é conhecido por ser o estado que sintetiza o Brasil. Os clusters e
 São Paulo mostra que dinheiro chama dinheiro, dada a concentração territorial dos municípios dourados. Os municípios em amarelo representam elevados valores de PIB, PIB per capita e dos três componentes do PIB mais importantes. Apesar de pequeno em número e em termos territoriais, o agrupamento amarelo representa municípios de elevada população.
 
 *Fernando Barbalho — Doutor em Administração pela UnB (2014). Pesquisa e implementa produtos para transparência no setor público brasileiro. Usa R nos finais de semana para investigar perguntas que fogem às finanças públicas.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/mapas-contando-história-o-pib-dos-municípios-brasileiros-aebb82f06086) e pode ser encontrado no link acima.*

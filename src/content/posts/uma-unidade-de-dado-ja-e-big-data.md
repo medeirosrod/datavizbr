@@ -5,7 +5,6 @@ autores:
 publicado_em: 2021-12-30
 secao: ensaios
 tags: ["Clima", "Dados", "Dataviz", "Design", "Evento"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/uma-unidade-de-dado-já-é-big-data-29a7cf04ef32"
 publicado_originalmente_em: 2021-12-30
 capa: ../../assets/blog/uma-unidade-de-dado-ja-e-big-data/02.jpeg
@@ -79,3 +78,7 @@ Precisamos urgentemente comunicar essas preocupações em nossas visualizações
 ![Slide final da apresentação](../../assets/blog/uma-unidade-de-dado-ja-e-big-data/17.jpeg)
 
 Rodolfo Almeida — Jornalista visual no Núcleo Jornalismo e mestrando em design na EBA-UFRJ, pesquisa representações da crise climática na visualização de dados junto ao LabVis.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/uma-unidade-de-dado-já-é-big-data-29a7cf04ef32) e pode ser encontrado no link acima.*

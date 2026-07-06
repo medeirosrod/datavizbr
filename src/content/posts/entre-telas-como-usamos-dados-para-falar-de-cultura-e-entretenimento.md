@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-03-02
 secao: bastidores
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Jornalismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento-822899185038"
 publicado_originalmente_em: 2022-03-02
 capa: ../../assets/blog/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento/01.png
@@ -39,3 +38,7 @@ Usamos, em maioria, dados públicos, mas outros buscamos nas plataformas e empre
 Um trabalho simples, majoritariamente de curadoria e usando ferramentas que já dominava. Mas que trouxe temas relevantes e uma abordagem diferente usando visualização de dados. E, mais uma vez, mostrei para mim mesma — e, quem sabe, para algumas outras pessoas — que qualquer tema pode ter uma abordagem interessante com dados.
 
 Gabriella Sales é jornalista em formação pela ECA-USP e trabalha na equipe de Gráficos do Nexo Jornal.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento-822899185038) e pode ser encontrado no link acima.*

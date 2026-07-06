@@ -5,7 +5,6 @@ autores:
 publicado_em: 2018-10-23
 secao: panorama
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Entrevista"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-cecília-do-lago-cityvis-award-2018-ea1f1ce1c62e"
 publicado_originalmente_em: 2018-10-23
 capa: ../../assets/blog/entrevista-cecilia-do-lago-cityvis-award-2018/01.png
@@ -39,3 +38,7 @@ O segundo projeto que eu destacaria é do New York Times. O núcleo mais complet
 Quem se interessa em fazer jornalismo de dados, o melhor caminho para se inspirar é ler muitas reportagens e seguir repórteres de dados, e começar a fazer por si próprio, seus próprios levantamentos.
 
 *Cecília do Lago é repórter no @estadaodados.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entrevista-cecília-do-lago-cityvis-award-2018-ea1f1ce1c62e) e pode ser encontrado no link acima.*

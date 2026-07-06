@@ -5,7 +5,6 @@ autores:
 publicado_em: 2017-12-02
 secao: panorama
 tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-no-cidi-2015-b75490a32462"
 publicado_originalmente_em: 2017-12-02
 capa: ../../assets/blog/visualizacao-de-dados-no-cidi/01.jpeg
@@ -27,3 +26,7 @@ Quando chegamos na área de papers do evento mais uma surpresa: este ano tivemos
 Isso não só demonstra a maturidade que o tema começa a ter no Brasil, mas demonstra vários pólos sendo formados na ESDI, UFES, EBA-UFRJ, UFCG, UFPE e no IFPB. Além dessa imensidão de papers publicados, tivemos a possibilidade de conviver por alguns dias com outro grande nome da área no mundo a pesquisadora e professora Isabel Meirelles.
 
 Isabel e Fernanda Viegas para mim eram grandes inspirações no campo acadêmico e acabaram, sem saber, influenciando todo meu repertório e projetos desenvolvidos até hoje. Conviver, por pouco tempo, alguns momentos e compartilhar experiências com elas, demonstrando como temos feito para divulgar a temática da data visualization no Brasil e receber apoio, é algo enriquecedor e que marca a trajetória feita até aqui.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/visualização-de-dados-no-cidi-2015-b75490a32462) e pode ser encontrado no link acima.*

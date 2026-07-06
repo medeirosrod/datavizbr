@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-10-02
 secao: bastidores
 tags: ["Dados", "Dataviz", "Design", "Jornalismo", "Mapa"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/traço-território-como-se-desenha-o-contorno-de-um-país-da3baba81765"
 publicado_originalmente_em: 2020-10-02
 capa: ../../assets/blog/traco-territorio-como-se-desenha-o-contorno-de-um-pais/01.png
@@ -37,3 +36,7 @@ Dispus todos em um documento de Adobe Illustrator e desenhei livremente o traça
 Como uma experimentação descompromissada, esse projeto foi um respiro muito bem-vindo que permitiu explorar a ideia de limites: os limites do acervo de mapas sobre o território, limites das convenções cartográficas e os limites do significado desse traçado.
 
 ![Cartaz reunindo os traçados dos contornos do Brasil desenhados a partir dos mapas históricos](../../assets/blog/traco-territorio-como-se-desenha-o-contorno-de-um-pais/04.jpeg)
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/traço-território-como-se-desenha-o-contorno-de-um-país-da3baba81765) e pode ser encontrado no link acima.*

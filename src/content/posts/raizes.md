@@ -5,7 +5,6 @@ autores:
 publicado_em: 2021-10-14
 secao: bastidores
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/raízes-e91f9cf0cc"
 publicado_originalmente_em: 2021-10-14
 capa: ../../assets/blog/raizes/01.png
@@ -86,3 +85,7 @@ Além do objetivo de interação entre o usuário e os dados, a plataforma tem a
 A visualização de dados foi desenvolvida a princípio como um experimento para disciplina PV4. Dessa forma, é um projeto introdutório com possibilidades futuras de agregar outras interações e novas funções baseando-se em pesquisas mais aprofundadas e testes de usabilidade direcionados. No entanto, o objetivo principal de entregar informações utilizando linguagem direcionada, de modo estruturado e com intuito de gerar interações entre espectador e dados, foi atingido.
 
 Autora: Tatyana Mendes | Orientador: Professor Dr. Rodrigo Medeiros
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/raízes-e91f9cf0cc) e pode ser encontrado no link acima.*

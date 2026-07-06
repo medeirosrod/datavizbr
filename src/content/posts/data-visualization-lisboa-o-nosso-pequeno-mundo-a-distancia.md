@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-03-08
 secao: panorama
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/data-visualization-lisboa-o-nosso-pequeno-mundo-à-distância-8019936f96eb"
 publicado_originalmente_em: 2022-03-08
 capa: ../../assets/blog/data-visualization-lisboa-o-nosso-pequeno-mundo-a-distancia/01.jpeg
@@ -27,3 +26,7 @@ Uma das preocupações centrais sempre foi mostrar projetos e portfólios difere
 Em 2021, criaram novas maneiras de expressar este gigante amor que têm a visualizações e de receber ainda mais pessoas que partilham deste entusiasmo. Então, criaram o Pastel de Data, a sua newsletter que dá prioridade ao que é português ou em português. Todos os meses, convidam um profissional de Visualização de Dados da lusofonia a responder a uma entrevista curta e leve. Ali mesmo no final do ano, começaram a publicar o VisLis Review, para partilhar, refletir, e trazer para a conversa do dia-a-dia as ideias que andam nas bocas do mundo da investigação e da Academia.
 
 Para o futuro, têm muitos planos: de voltar a ver pessoas cara-a-cara, de continuar a conhecer mentes incríveis de outros fusos horários, de falar sobre Visualização em português, de continuar a divertirem-se imenso e a conhecer pessoas extraordinárias.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/data-visualization-lisboa-o-nosso-pequeno-mundo-à-distância-8019936f96eb) e pode ser encontrado no link acima.*

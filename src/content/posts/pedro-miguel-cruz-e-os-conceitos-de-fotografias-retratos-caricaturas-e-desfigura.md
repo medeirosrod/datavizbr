@@ -5,7 +5,6 @@ autores:
 publicado_em: 2019-08-13
 secao: ensaios
 tags: ["Dados", "Dataviz", "Design", "Educação", "Evento"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfiguramentos-na-f8d5201ebd61"
 publicado_originalmente_em: 2019-08-13
 capa: ../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/02.png
@@ -55,3 +54,7 @@ Refinando ainda mais a metáfora: "agora temos mesmo quase glóbulos sanguíneos
 ![Desfiguramento final com glóbulos animados e pulsação das veias](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/11.png)
 
 Como o Pedro comenta: "esse tipo de abordagem foi bastante pictórica, às vezes quase artística em alguns aspectos, bastante exploratória" mas que usaram os conceitos formais de caricatura, retrato, metáfora e desfiguramento tanto no trabalho prático como no trabalho teórico.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfiguramentos-na-f8d5201ebd61) e pode ser encontrado no link acima.*

@@ -5,7 +5,6 @@ autores:
 publicado_em: 2017-12-12
 secao: bastidores
 tags: ["Dados", "Dataviz", "Educação", "Jornalismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-americana-utilizando-nlp-14213b2d7fcd"
 publicado_originalmente_em: 2017-12-12
 capa: ../../assets/blog/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-america/01.png
@@ -59,3 +58,7 @@ A partir da análise foi possível observar que os temas dos trabalhos não dife
 Um takeaway importante foi de que no Brasil a gente precisa produzir mais conhecimento em vez de só fazer review de literatura.
 
 "It's not enough to be good. In order to be found, you have to be findable." — Austin Kleon
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-americana-utilizando-nlp-14213b2d7fcd) e pode ser encontrado no link acima.*

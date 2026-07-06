@@ -5,7 +5,6 @@ autores:
 publicado_em: 2023-04-26
 secao: panorama
 tags: ["Dados", "Dataviz", "Design", "Evento", "Jornalismo"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/cidi-2023-com-trilha-sobre-visualização-de-dados-a9b7b28f083d"
 publicado_originalmente_em: 2023-04-26
 capa: ../../assets/blog/cidi-2023-com-trilha-sobre-visualizacao-de-dados/01.png
@@ -28,3 +27,7 @@ Alguns dos tópicos que mencionam na chamada de artigos:
 Um outro elemento que pode chamar atenção dos avaliadores é outros tipos de abordagens da materialidade da informação, além da gráfica como a fisicalização ou a sonificação.
 
 O CIDI também comporta o CONGIC (congresso de iniciação científica) que tem os mesmos eixos temáticos. O prazo para submissão nos dois eventos é dia 22 de maio de 2023 pelo próprio site do evento.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/cidi-2023-com-trilha-sobre-visualização-de-dados-a9b7b28f083d) e pode ser encontrado no link acima.*

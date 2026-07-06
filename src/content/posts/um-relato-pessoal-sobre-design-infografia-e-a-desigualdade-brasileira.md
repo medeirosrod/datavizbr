@@ -5,7 +5,6 @@ autores:
 publicado_em: 2022-06-14
 secao: ensaios
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Educação"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira-80844ddff84d"
 publicado_originalmente_em: 2022-06-14
 capa: ../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/01.png
@@ -87,3 +86,7 @@ Meu ciclo de trabalho no Nexo se encerrou depois de dois anos e meio. Novamente 
 ![Autorretrato ilustrado do autor](../../assets/blog/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira/14.png)
 
 *Esse sou eu e ao lado a representação que fiz para eu mesmo.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira-80844ddff84d) e pode ser encontrado no link acima.*

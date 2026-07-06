@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-10-20
 secao: praticas
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/dez-dicas-para-deixar-sua-visualização-de-dados-mais-acessível-bf884895812d"
 publicado_originalmente_em: 2020-10-20
 rascunho: true
@@ -143,3 +142,7 @@ Exemplo: "Gráfico de barras que mostra o percentual dos tributos na arrecadaç�
 ![Gráfico de barras com o percentual dos tributos na arrecadação no Brasil](../../assets/blog/dez-dicas-para-deixar-sua-visualizacao-de-dados-mais-acessivel/20.png)
 
 *Descrição: Gráfico de barras que mostra o percentual dos tributos na arrecadação no Brasil. Cinco deles concentram 71% da arrecadação: ICMS (21%), IR (18%), Cofins (16%), Contra. à previdência (11%), Contra. ao FGTS (5%). Fonte: Receita Federal, "Carga Tributária no Brasil 2018". Autoria: Insper.*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/dez-dicas-para-deixar-sua-visualização-de-dados-mais-acessível-bf884895812d) e pode ser encontrado no link acima.*

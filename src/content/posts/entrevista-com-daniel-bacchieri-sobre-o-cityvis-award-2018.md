@@ -5,7 +5,6 @@ autores:
 publicado_em: 2018-10-24
 secao: panorama
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Entrevista"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-2018-42db79aed447"
 publicado_originalmente_em: 2018-10-24
 capa: ../../assets/blog/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-2018/01.jpeg
@@ -49,3 +48,7 @@ Daniel: Eu sou um grande fã do material que está sendo produzido pelas equipes
 Daniel: O Instagrafite é uma das maiores inspirações para o StreetMusicMap. A maior galeria colaborativa de arte de rua do mundo foi criada por dois brasileiros (Marcelo Pimentel e Marina Bortoluzzi) em 2011. Na minha opinião, a característica de receber e compartilhar obras dos mais diversos cantos do planeta é o que move e aproxima os dois projetos.
 
 *Daniel Bacchieri é jornalista, produtor multimídia e curador musical. Bacharel em Comunicação Social — Jornalismo pela Pontifícia Universidade Católica do Rio Grande do Sul (1999) e pós-graduado no Programa Avançado de Jornalismo Empreendedor do Tow-Knight Center da City University of New York — CUNY (2017).*
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-2018-42db79aed447) e pode ser encontrado no link acima.*

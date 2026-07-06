@@ -7,7 +7,6 @@ secao: ensaios
 serie: entendendo-o-agora
 ordem_na_serie: 1
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/entendendo-o-agora-dataviz-em-tempos-de-coronavírus-9484233667fe"
 publicado_originalmente_em: 2020-05-07
 capa: ../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-1/02.png
@@ -50,3 +49,7 @@ Para se manter simples e fácil de entender, a imagem perde em precisão. Não l
 A ideia ilustrada pelas duas curvas ganhou diversas adaptações, e virou até campanha de conscientização e animações.
 
 As muitas variações são até alvo de piada (precisamos achatar a curva de novas versões do gráfico achate a curva).
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/entendendo-o-agora-dataviz-em-tempos-de-coronavírus-9484233667fe) e pode ser encontrado no link acima.*

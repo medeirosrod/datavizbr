@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-05-14
 secao: bastidores
 tags: ["COVID-19", "Dataviz", "Design", "Mapa", "Saúde"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/para-onde-ir-a-escassez-de-leitos-diante-do-avanço-da-pandemia-72613aa1865f"
 publicado_originalmente_em: 2020-05-14
 capa: ../../assets/blog/para-onde-ir-a-falta-de-leitos-diante-do-avanco-da-pandemia/01.png
@@ -31,3 +30,7 @@ Em um exercício para visualizar o fluxo de eventuais deslocamentos de pacientes
 ![Mapa de fluxos de pacientes graves COVID-19 para centros com UTI](../../assets/blog/para-onde-ir-a-falta-de-leitos-diante-do-avanco-da-pandemia/04.gif)
 
 Por isso, é preciso reforçar que as medidas de isolamento social representam o caminho mais seguro para contermos o avanço da pandemia e pouparmos mais vidas. Se puder, fique em casa.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/para-onde-ir-a-escassez-de-leitos-diante-do-avanço-da-pandemia-72613aa1865f) e pode ser encontrado no link acima.*

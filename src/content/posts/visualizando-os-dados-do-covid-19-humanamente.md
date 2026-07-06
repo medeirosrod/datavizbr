@@ -5,7 +5,6 @@ autores:
 publicado_em: 2020-05-08
 secao: ensaios
 tags: ["COVID-19", "Dados", "Dataviz", "Design", "Entrevista"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/fabrics-e-o-covid-19-como-visualizar-os-dados-de-uma-pandemia-de-forma-humana-383cd4b20e9b"
 publicado_originalmente_em: 2020-05-08
 capa: ../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/02.png
@@ -47,3 +46,7 @@ Durante a epidemia, Lupi decidiu experimentar com novas formas de representar os
 ![Detalhe da visualização humanizada de Giorgia Lupi](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/06.jpeg)
 
 A humanização dos dados é algo necessário. Lupi e Chalabi são exemplos de como podemos tornar a visualização de dados algo mais criativo e que leva em consideração o contexto em que estamos inseridos e as vidas tocadas. Essa contextualização nos ajuda a não banalizar os gráficos e números e lembrar que existem pessoas por trás de tudo isso.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/fabrics-e-o-covid-19-como-visualizar-os-dados-de-uma-pandemia-de-forma-humana-383cd4b20e9b) e pode ser encontrado no link acima.*

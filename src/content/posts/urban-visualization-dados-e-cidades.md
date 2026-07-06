@@ -5,7 +5,6 @@ autores:
 publicado_em: 2017-11-26
 secao: panorama
 tags: ["Clima", "Cultura", "Dados", "Dataviz", "Design"]
-arquivo: true
 medium_url_original: "https://medium.com/datavizbr/urban-visualization-dados-e-cidades-7b490d339b7b"
 publicado_originalmente_em: 2017-11-26
 capa: ../../assets/blog/urban-visualization-dados-e-cidades/01.jpeg
@@ -35,3 +34,7 @@ Apesar da visualização não ter sido criada com esse intuito, de ser uma ferra
 Aaron Koblin analisou a frota área dos Estados Unidos e criou essa visualização de dados de maneira a simular 24 horas da rota de entrada e saída do país. Esse projeto ganhou muita repercussão sendo o primeiro projeto de visualização de dados a ser comprado pelo MOMA, reafirmando a qualidade estética que estes projetos poderiam proporcionar aos seus usuários.
 
 Considero essa área que aproxima as ferramentas de visualização de dados e as cidades como extremamente importante para entendermos e analisarmos nossa sociedade atual e o que podemos executar agora e no futuro para melhorarmos nossas cidades.
+
+---
+
+*Esse post foi originalmente postado no [Medium do datavizbr](https://medium.com/datavizbr/urban-visualization-dados-e-cidades-7b490d339b7b) e pode ser encontrado no link acima.*
