@@ -1,7 +1,7 @@
 ---
 titulo: "Entre.telas: como usamos dados para falar de cultura e entretenimento"
 autores:
-  - gabriella-s-de-macedo
+  - gabriella-sales
 publicado_em: 2022-03-02
 secao: bastidores
 tags: ["Cultura", "Dados", "Dataviz", "Design", "Jornalismo"]
