@@ -7,7 +7,6 @@ secao: bastidores
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
 medium_url_original: "https://medium.com/datavizbr/visualizando-a-composição-ministerial-do-governo-lula-d0c92ed42378"
 publicado_originalmente_em: 2023-01-20
-rascunho: true
 capa: ../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/01.png
 capa_alt: Capa do post Visualizando a composição ministerial do Governo Lula
 ---
