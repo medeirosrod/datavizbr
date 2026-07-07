@@ -110,6 +110,7 @@
   --radius-comfortable: 5px;
   --radius-relaxed:     6px;
   --radius-large:       8px;
+  --radius-pill:        999px;
 
   /* ESPAÇAMENTO (base 8px) */
   --space-px:  1px;   --space-1:   2px;   --space-2:   4px;   --space-3:   6px;
