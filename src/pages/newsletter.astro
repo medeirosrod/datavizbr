@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
 ---
 
 <BaseLayout
@@ -22,24 +23,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </header>
 
         <div class="newsletter-form-bloco">
-          <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
-            <label for="email-input" class="form-label">Seu endereço de email</label>
-            <div class="form-row">
-              <input
-                id="email-input"
-                class="input"
-                type="email"
-                placeholder="seu@email.com"
-                required
-                aria-required="true"
-              />
-              <button class="btn btn-primary" type="submit">Inscrever</button>
-            </div>
-            <p class="form-disclaimer t-caption">
-              Você pode cancelar a qualquer momento. Os dados não são compartilhados
-              com terceiros.
-            </p>
-          </form>
+          <!-- Formulário embed do beehiiv: inscrição inline, sem sair do site -->
+          <script
+            is:inline
+            async
+            src="https://subscribe-forms.beehiiv.com/v3/loader.js"
+            data-beehiiv-form="5066b3d3-7498-40b1-8623-b193374d3e9c"
+          ></script>
+          <noscript>
+            <a href={`${SITE.newsletter_url}/subscribe`}>
+              Inscreva-se pela página da newsletter →
+            </a>
+          </noscript>
+          <p class="form-disclaimer t-caption">
+            Você pode cancelar a qualquer momento. Os dados não são compartilhados
+            com terceiros.
+          </p>
         </div>
 
         <div class="o-que-esperar">
@@ -116,23 +115,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: var(--space-16);
   }
 
-  .form-label {
-    display: block;
-    font-size: var(--fs-body-sm);
-    font-weight: 600;
-    color: var(--fg-heading);
-    margin-bottom: var(--space-6);
-  }
-
-  .form-row {
-    display: flex;
-    gap: var(--space-4);
-  }
-
-  .form-row .input {
-    flex: 1;
-  }
-
   .form-disclaimer {
     color: var(--fg-meta);
     margin-top: var(--space-6);
@@ -183,9 +165,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
-  @media (max-width: 480px) {
-    .form-row {
-      flex-direction: column;
-    }
-  }
 </style>

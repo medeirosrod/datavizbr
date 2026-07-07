@@ -4,11 +4,12 @@
 export const SITE = {
   nome: 'datavizbr',
   tagline: 'Visualização de dados com sotaque brasileiro',
-  descricao: 'Bastidores, panorama, práticas e ensaios sobre visualização de dados em português, desde 2017.',
+  descricao: 'Bastidores, panorama, práticas e ensaios sobre visualização de dados em português, desde 2016.',
   url: 'https://datavizbr.com.br',
   idioma: 'pt-BR',
   autor_padrao: 'rodrigo-medeiros',
   email_contato: 'contato@datavizbr.com.br',
+  newsletter_url: 'https://eixodatavizbr.beehiiv.com',
 };
 
 export const REDES = {

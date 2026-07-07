@@ -89,20 +89,23 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
         </button>
       </div>
 
-      <div class="nav-mobile" id="navMobile">
-        <div class="nav-mobile-inner">
-          {NAV_PRINCIPAL.map((item) => (
-            <a
-              href={item.url}
-              class:list={['nav-mobile-link', { active: Astro.url.pathname.startsWith(item.url) }]}
-            >
-              {item.texto}
-            </a>
-          ))}
-          <a href="/newsletter" class="btn btn-primary nav-mobile-cta">Newsletter</a>
-        </div>
-      </div>
     </nav>
+
+    <!-- Fora do .nav: backdrop-filter no nav criaria um containing block
+         e quebraria o position: fixed deste painel -->
+    <div class="nav-mobile" id="navMobile">
+      <div class="nav-mobile-inner">
+        {NAV_PRINCIPAL.map((item) => (
+          <a
+            href={item.url}
+            class:list={['nav-mobile-link', { active: Astro.url.pathname.startsWith(item.url) }]}
+          >
+            {item.texto}
+          </a>
+        ))}
+        <a href="/newsletter" class="btn btn-primary nav-mobile-cta">Newsletter</a>
+      </div>
+    </div>
 
     <!-- CONTEÚDO DA PÁGINA -->
     <main>
@@ -290,7 +293,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
     position: fixed;
     inset: 0;
     top: 59px;
-    background: var(--bg-canvas);
+    background: var(--bg-page);
     z-index: 9;
     padding: var(--space-16) var(--padding-x);
     opacity: 0;

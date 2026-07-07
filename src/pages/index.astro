@@ -3,7 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroChart from '../components/HeroChart.astro';
 import AutorNome from '../components/AutorNome.astro';
-import { getSecaoLabel } from '../consts';
+import { getSecaoLabel, SITE } from '../consts';
 import { getCollection } from 'astro:content';
 
 // Buscar todos os posts (exceto rascunhos)
@@ -71,7 +71,7 @@ const tempoLeitura = (slug: string): number => {
       <div class="hero-grid">
         <!-- COLUNA ESQUERDA — TEXTO -->
         <div class="hero-text">
-          <p class="t-eyebrow hero-eyebrow reveal">Visualização de dados · Em português · Desde 2017</p>
+          <p class="t-eyebrow hero-eyebrow reveal">Visualização de dados · Em português · Desde 2016</p>
           <h1 class="hero-title" data-anim="split-words">
             Bastidores, panorama, práticas e ensaios sobre dataviz no Brasil.
           </h1>
@@ -175,7 +175,7 @@ const tempoLeitura = (slug: string): number => {
     <div class="container">
       <div class="acervo-header">
         <div>
-          <p class="t-eyebrow acervo-eyebrow">Acervo desde 2017</p>
+          <p class="t-eyebrow acervo-eyebrow">Acervo desde 2016</p>
           <h2 class="acervo-titulo">Navegue pelo acervo</h2>
         </div>
         <p class="acervo-subtitulo">Quatro seções, uma comunidade.</p>
@@ -333,12 +333,14 @@ const tempoLeitura = (slug: string): number => {
 
       <div class="sobre-bloco">
         <p class="t-eyebrow">O projeto</p>
-        <h2 class="sobre-titulo">Dataviz em português, desde 2017.</h2>
+        <h2 class="sobre-titulo">Dataviz em português, desde 2016.</h2>
         <p class="sobre-texto">
-          O datavizbr nasceu como espaço pra compartilhar experiências sobre
-          visualização de dados em português. Ao longo dos anos reuniu autores
-          convidados, séries temáticas e, em 2023, organizou o livro
-          <em>Dataviz em perspectiva</em> com Júlia Giannella.
+          Ao longo de quase dez anos de curadoria, o datavizbr reuniu bastidores,
+          panoramas, práticas e ensaios de dezenas de vozes — jornalistas,
+          designers, cientistas de dados e pesquisadores — que fazem dataviz no
+          Brasil. O que começou como um esforço de um curador virou um acervo
+          vivo: um lugar pra aprender, se reconhecer e acompanhar a cena
+          brasileira de visualização de dados.
         </p>
         <a href="/sobre" class="btn btn-quiet">Conheça o projeto →</a>
       </div>
@@ -350,12 +352,14 @@ const tempoLeitura = (slug: string): number => {
           No primeiro domingo do mês, uma curadoria do que rolou na cena
           brasileira de dataviz — sem spam, sem patrocínio.
         </p>
-        <form class="newsletter-form" onsubmit="return false;">
+        <form class="newsletter-form" action={`${SITE.newsletter_url}/subscribe`} method="get">
           <input
             class="input"
             type="email"
+            name="email"
             placeholder="seu@email.com"
             aria-label="Seu endereço de email"
+            required
           />
           <button class="btn btn-primary" type="submit">Inscrever</button>
         </form>
@@ -844,23 +848,19 @@ const tempoLeitura = (slug: string): number => {
   }
 
   /* ── SOBRE + NEWSLETTER ─────────────────────── */
-.sobre-newsletter { padding-block: var(--space-40) var(--space-64); }
+  .sobre-newsletter { padding-block: var(--space-40) var(--space-48); }
   .sobre-newsletter-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-24);
     align-items: start;
-	overflow: visible;
   }
   .sobre-bloco,
-.newsletter-bloco {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-  overflow: visible;
-  margin-bottom: var(--space-12);
-  padding-bottom: var(--space-8);
-}
+  .newsletter-bloco {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
   .sobre-titulo,
   .newsletter-titulo {
     font-size: var(--fs-h3);
@@ -884,12 +884,10 @@ const tempoLeitura = (slug: string): number => {
   .newsletter-disclaimer { color: var(--fg-meta); margin-top: var(--space-3); }
 
   /* sobrescreve btn-quiet só na home */
-.sobre-bloco .btn-quiet {
-  align-self: flex-start;
-  border-color: var(--border-strong);
-  margin-bottom: var(--space-4);
-  padding-bottom: calc(var(--space-5) + 1px);
-}
+  .sobre-bloco .btn-quiet {
+    align-self: flex-start;
+    border-color: var(--border-strong);
+  }
   /* ── RESPONSIVO ─────────────────────────────── */
   @media (max-width: 1100px) {
     .acervo-grid             { grid-template-columns: repeat(2, 1fr); }
