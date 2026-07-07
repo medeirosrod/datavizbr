@@ -9,6 +9,7 @@ export const SITE = {
   idioma: 'pt-BR',
   autor_padrao: 'rodrigo-medeiros',
   email_contato: 'contato@datavizbr.com.br',
+  newsletter_url: 'https://eixodatavizbr.beehiiv.com',
 };
 
 export const REDES = {

@@ -3,7 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroChart from '../components/HeroChart.astro';
 import AutorNome from '../components/AutorNome.astro';
-import { getSecaoLabel } from '../consts';
+import { getSecaoLabel, SITE } from '../consts';
 import { getCollection } from 'astro:content';
 
 // Buscar todos os posts (exceto rascunhos)
@@ -350,12 +350,14 @@ const tempoLeitura = (slug: string): number => {
           No primeiro domingo do mês, uma curadoria do que rolou na cena
           brasileira de dataviz — sem spam, sem patrocínio.
         </p>
-        <form class="newsletter-form" onsubmit="return false;">
+        <form class="newsletter-form" action={`${SITE.newsletter_url}/subscribe`} method="get">
           <input
             class="input"
             type="email"
+            name="email"
             placeholder="seu@email.com"
             aria-label="Seu endereço de email"
+            required
           />
           <button class="btn btn-primary" type="submit">Inscrever</button>
         </form>
