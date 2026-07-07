@@ -7,7 +7,6 @@ secao: ensaios
 tags: ["COVID-19", "Dados", "Dataviz", "Design", "Jornalismo"]
 medium_url_original: "https://medium.com/datavizbr/antropográficos-visualizando-dados-sobre-pessoas-com-o-objetivo-de-gerar-compaixão-e311fa815768"
 publicado_originalmente_em: 2020-10-07
-rascunho: true
 capa: ../../assets/blog/antropograficos-visualizando-dados-sobre-pessoas-com-o-objetivo-de-gerar-compaix/02.png
 capa_alt: "Capa do post Antropográficos: visualizando dados sobre pessoas com o objetivo de gerar compaixão"
 ---
