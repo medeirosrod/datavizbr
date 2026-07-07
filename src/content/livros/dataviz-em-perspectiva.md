@@ -13,13 +13,13 @@ sinopse: >
   práticos de projetos brasileiros premiados internacionalmente.
 capa: ../../assets/capa.png
 capa_alt: "Capa do livro Dataviz em perspectiva"
-tipo_acesso: gratuito
+tipo_acesso: pago
 formato:
   - pdf
 links:
   - tipo: download_pdf
-    label: Baixar PDF gratuitamente
-    url: https://datavizbr.com.br/livros/dataviz-em-perspectiva.pdf
+    label: Comprar pela Riobooks
+    url: https://www.riobooks.com.br/design/dataviz-em-perspectiva
 publicado_em: 2023-11-01
 ---
 
