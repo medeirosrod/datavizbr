@@ -8,7 +8,7 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
 
 <BaseLayout
   title="Sobre"
-  description="O datavizbr reúne quem faz, pesquisa e escreve sobre visualização de dados em português, desde 2017."
+  description="O datavizbr reúne quem faz, pesquisa e escreve sobre visualização de dados em português, desde 2016."
 >
   <section class="page-section">
     <div class="container">
@@ -16,31 +16,47 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
       <header class="page-header">
         <p class="t-eyebrow">O projeto</p>
         <h1>Sobre o datavizbr</h1>
-        <p class="page-lead">
-          Um espaço para compartilhar experiências sobre visualização de dados
-          em português — making-ofs, mapeamentos da cena brasileira e reflexões
-          sobre o campo, desde 2017.
-        </p>
       </header>
 
       <div class="content-prose">
 
-        <h2>O que é</h2>
         <p>
-          O datavizbr nasceu em 2017 como um blog pessoal de <strong>Rodrigo Medeiros</strong>
-          para documentar o trabalho com visualização de dados no contexto brasileiro.
-          Ao longo do tempo, cresceu para reunir colaboradores recorrentes e convidados
-          que, de diferentes perspectivas, escrevem sobre dataviz em português.
+          O datavizbr nasceu em 2016 de uma inquietação simples: quase tudo que
+          se publicava sobre visualização de dados estava em inglês. Quem quisesse
+          aprender, discutir ou simplesmente se reconhecer nessa área precisava
+          atravessar uma barreira de idioma — e, mais do que isso, uma barreira de
+          contexto. Os exemplos eram de lá; os dados, as referências e os problemas
+          também. Faltava um lugar onde a visualização de dados fosse pensada a
+          partir do Brasil, em português, com os nossos mapas, as nossas eleições,
+          as nossas desigualdades e as nossas soluções.
         </p>
         <p>
-          O acervo está organizado em quatro seções:
+          Foi esse lugar que o datavizbr se propôs a construir. Desde então, uma
+          curadoria contínua — feita no tempo que existia, entre aulas, pesquisa e
+          trabalho — reuniu artigos de dezenas de autoras e autores espalhados pelo
+          país e pelo mundo: gente do jornalismo de dados, do design da informação,
+          da ciência de dados, da academia e da arte. Entrevistas com quem estava
+          fazendo o trabalho acontecer, tutoriais de quem queria ensinar, ensaios
+          de quem precisava refletir, bastidores de projetos que marcaram época.
+          Cada texto passou pelo mesmo filtro: isso ajuda a construir uma cultura
+          de visualização de dados no Brasil?
         </p>
-        <ul>
-          <li><strong>Bastidores</strong> — making-ofs de visualizações: processo, decisões, ferramentas.</li>
-          <li><strong>Panorama</strong> — quem faz, o que está acontecendo, perfis e premiações da cena brasileira.</li>
-          <li><strong>Práticas</strong> — princípios, técnicas e tutoriais aplicáveis.</li>
-          <li><strong>Ensaios</strong> — reflexão sobre o campo: ética, futuro e posicionamento.</li>
-        </ul>
+        <p>
+          Quase dez anos depois, o resultado é este acervo — dezenas de artigos que
+          registram não só técnicas e ferramentas, mas a própria formação de uma
+          comunidade. Pelo datavizbr passaram discussões sobre mapas eleitorais e
+          acessibilidade, sobre dados bordados à mão e gráficos feitos em código,
+          sobre a história da infografia brasileira e o futuro da interação. É,
+          provavelmente, o registro mais longevo e contínuo da cena de visualização
+          de dados em português.
+        </p>
+        <p>
+          O datavizbr segue sendo o que sempre foi: um projeto independente de
+          curadoria, movido pela convicção de que dados bem visualizados mudam
+          conversas — e de que o Brasil tem histórias demais para deixá-las mal
+          contadas. Se você trabalha, estuda ou se encanta com visualização de
+          dados, este é o seu lugar. Bem-vinda, bem-vindo.
+        </p>
 
         <h2>O livro</h2>
         <p>
@@ -98,13 +114,6 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
     margin-block: var(--space-6) var(--space-10);
   }
 
-  .page-lead {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
-    margin: 0;
-  }
-
   .content-prose {
     max-width: 680px;
     display: flex;
@@ -123,19 +132,11 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
     margin-bottom: var(--space-4);
   }
 
-  .content-prose p,
-  .content-prose ul {
+  .content-prose p {
     font-size: var(--fs-body);
     line-height: var(--lh-body);
     color: var(--fg-body);
     margin: 0;
-  }
-
-  .content-prose ul {
-    padding-left: var(--space-10);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
   }
 
   .sobre-links {
