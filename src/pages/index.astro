@@ -21,9 +21,9 @@ const postsRestantes = allPosts
 // Combinar: primeiro os com order_homepage, depois os demais
 const posts = [...postsComOrdem, ...postsRestantes];
 
-// Post em destaque (primeiro da lista) e recentes (próximos 4)
+// Post em destaque (primeiro da lista) e recentes (próximos 8)
 const featured = posts[0];
-const recentPosts = posts.slice(1, 5);
+const recentPosts = posts.slice(1, 9);
 
 // Posts por seção
 const postsPorSecao = {
