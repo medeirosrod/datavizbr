@@ -21,9 +21,29 @@ const postsRestantes = allPosts
 // Combinar: primeiro os com order_homepage, depois os demais
 const posts = [...postsComOrdem, ...postsRestantes];
 
-// Post em destaque (primeiro da lista) e recentes (próximos 8)
+// Post em destaque (primeiro da lista)
 const featured = posts[0];
-const recentPosts = posts.slice(1, 9);
+
+// Artigos selecionados para a seção de curadoria (em ordem específica)
+const curatedPostIds = [
+  'criando-um-mapa-artistico-no-qgis-em-seis-passos',
+  'raio-r-de-uma-campanha-vitoriosa',
+  'um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira',
+  'geoprocessamento-na-resposta-a-eventos-climaticos-extremos',
+  'uma-unidade-de-dado-ja-e-big-data',
+  'antropograficos-visualizando-dados-sobre-pessoas-com-o-objetivo-de-gerar-compaix',
+  'florence-nightingale-dois-seculos-de-visualizacao-de-dados',
+  'raizes'
+];
+const curatedPosts = curatedPostIds
+  .map(id => posts.find(p => p.id === id))
+  .filter(Boolean);
+
+// Recentes: 4 posts mais novos ordenados por data de publicação (excluindo rascunhos)
+const recentPosts = allPosts
+  .filter(post => !post.data.rascunho)
+  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime())
+  .slice(0, 4);
 
 // Posts por seção
 const postsPorSecao = {
@@ -134,9 +154,43 @@ const tempoLeitura = (slug: string): number => {
   )}
 
   <!-- ═══════════════════════════════════════════
-       BLOCO 3 — ÚLTIMOS POSTS
+       BLOCO 3 — CURADORIA
   ════════════════════════════════════════════ -->
-  <section class="section ultimos-section">
+  <section class="section curadoria-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Curadoria</h2>
+      </div>
+      <div class="posts-grid stagger-children">
+        {curatedPosts.map((post, idx) => (
+          <article class="post-card" style={`--stagger-index: ${idx}`}>
+            {post.data.capa ? (
+              <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
+            ) : (
+              <div class="post-thumb post-thumb-placeholder" aria-hidden="true"></div>
+            )}
+            <div class="post-card-body">
+              <div class="post-meta"><span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span></div>
+              <h3 class="post-titulo">
+                <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
+              </h3>
+              <p class="post-excerpt">
+                {post.data.descricao || post.data.subtitulo}
+              </p>
+              <div class="post-foot">
+                <span><AutorNome autorId={post.data.autores[0]?.id} /></span><span class="dot"></span><span>{formatarData(post.data.publicado_em)}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 4 — RECENTES
+  ════════════════════════════════════════════ -->
+  <section class="section recentes-section">
     <div class="container">
       <div class="section-head">
         <h2>Recentes</h2>
@@ -169,7 +223,7 @@ const tempoLeitura = (slug: string): number => {
   </section>
 
   <!-- ═══════════════════════════════════════════
-       BLOCO 4 — NAVEGUE POR SEÇÃO
+       BLOCO 5 — NAVEGUE POR SEÇÃO
   ════════════════════════════════════════════ -->
   <section class="acervo-section">
     <div class="container">
@@ -288,7 +342,7 @@ const tempoLeitura = (slug: string): number => {
   </section>
 
   <!-- ═══════════════════════════════════════════
-       BLOCO 5 — SÉRIES
+       BLOCO 6 — SÉRIES
   ════════════════════════════════════════════ -->
   <section class="section series-section">
     <div class="container">
@@ -326,7 +380,7 @@ const tempoLeitura = (slug: string): number => {
   </section>
 
   <!-- ═══════════════════════════════════════════
-       BLOCO 6 — SOBRE + NEWSLETTER
+       BLOCO 7 — SOBRE + NEWSLETTER
   ════════════════════════════════════════════ -->
   <section class="sobre-newsletter">
     <div class="container sobre-newsletter-inner">
