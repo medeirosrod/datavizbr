@@ -39,17 +39,41 @@ IDF(t) = log_e(Número total de documentos / Número de documentos com o termo t
 
 Para cada abstract dos trabalhos das Universidades foram identificadas as 4 palavras com os scores mais altos do tf-idf, utilizando o CountVectorizer e o TfidfTransformer do scikit-learn.
 
+![Keywords da UFPE](../../assets/blog/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-america/01.png)
+
+*Keywords da UFPE*
+
+![Keywords da Carnegie Mellon](../../assets/blog/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-america/02.png)
+
 *Keywords da Carnegie Mellon*
 
 **Agrupando os trabalhos em clusters**
 
 A segunda estratégia utilizada para explorar os temas dos trabalhos foi a modelagem de tópicos com o Latent Semantic Indexing (LSI). O algoritmo utiliza os dados do tf-idf e faz uma decomposição de matrizes para agrupar os textos em tópicos.
 
+Usando o matplotlib para visualizar isso graficamente, temos:
+
+![O resultado para os termos e documentos](../../assets/blog/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-america/03.png)
+
+*O resultado para os termos e documentos*
+
 O tópico que mais diferenciou os trabalhos das Universidades mostrou que os trabalhos da Carnegie Mellon estão mais associados a 'object', 'robot' e 'algorithm' e os trabalhos da UFPE estão mais associados a 'software', 'project' e 'business'.
+
+![Visualização da UFPE e da Carnegie Mellon para o tópico y](../../assets/blog/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-america/04.png)
+
+*Visualização da UFPE e da Carnegie Mellon para o tópico y*
 
 **Etapa 2 — Investigando a natureza dos trabalhos**
 
 Foram analisados os títulos dos trabalhos para investigar a natureza dos mesmos. Os resultados mostraram diferenças nas especialidades de cada instituição: a Universidade Federal de Pernambuco produz mais trabalhos relacionados a projetos e negócios e a Carnegie Mellon produz mais trabalhos relacionados a robôs e algoritmos.
+
+![Palavras que mais aparecem nos títulos dos trabalhos da UFPE](../../assets/blog/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-america/05.png)
+
+*Palavras que mais aparecem nos títulos dos trabalhos da UFPE*
+
+![Palavras que mais aparecem nos títulos dos trabalhos da Carnegie Mellon](../../assets/blog/comparando-monografias-de-uma-universidade-brasileira-e-uma-universidade-america/06.png)
+
+*Palavras que mais aparecem nos títulos dos trabalhos da Carnegie Mellon*
 
 **Resultados**
 

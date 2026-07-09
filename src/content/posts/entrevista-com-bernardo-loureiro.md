@@ -13,6 +13,9 @@ capa_alt: Capa do post Entrevista com Bernardo Loureiro
 
 Essa semana tivemos a oportunidade de entrevistar o Bernardo Loureiro, do Medida SP, um laboratório de visualização urbana.
 
+![Projeto Gênero e nomes de ruas](../../assets/blog/entrevista-com-bernardo-loureiro/01.png)
+*Projeto Gênero e nomes de ruas*
+
 O Bernardo é mestre em Desenho Urbano pela Parsons School of Design, com foco em uso de dados e tecnologias para urbanismo. Desenvolve análises, visualizações e aplicativos voltados para problemas urbanos.
 
 **Você poderia me contar um pouco da sua trajetória com visualização de dados? Como iniciou o MedidaSP?**

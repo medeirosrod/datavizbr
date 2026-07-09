@@ -7,7 +7,7 @@ secao: panorama
 tags: ["Dados", "Dataviz", "Design", "Jornalismo", "Saúde"]
 medium_url_original: "https://medium.com/datavizbr/florence-nightingale-dois-séculos-de-visualização-de-dados-19ae798ff444"
 publicado_originalmente_em: 2021-03-08
-capa: ../../assets/blog/florence-nightingale-dois-seculos-de-visualizacao-de-dados/01.png
+capa: ../../assets/blog/florence-nightingale-dois-seculos-de-visualizacao-de-dados/03.jpeg
 capa_alt: Capa do post Florence Nightingale, dois séculos de visualização de dados
 ---
 
@@ -17,9 +17,11 @@ Em 1854, durante a Guerra da Crimeia, Florence chegou ao Império Otomano com se
 
 Quando retornou à Inglaterra com suas anotações, Florence conheceu o epidemiologista William Farr, então conhecido por seu trabalho baseado em evidência estatística sobre o último surto de cólera. Eles colaboraram na geração de ideias de representações gráficas para as extensas planilhas de Florence. À época, algumas inovações já eram conhecidas, como a série temporal (1786) e o gráfico de pizza (1801), ambos do engenheiro e economista William Playfair.
 
+![Gráfico do relatório “Mortality of the British Army: At home, at home and abroad, and during the Russian War”. 1858](../../assets/blog/florence-nightingale-dois-seculos-de-visualizacao-de-dados/01.png)
+
 Florence construiu diversas visualizações que não serviriam apenas de ilustrações, mas como argumentos de seus relatórios: gráficos de barras, colunas empilhadas, compartimentação hexagonal e gráficos de área 100%. Mas sua assinatura viria a ser o diagrama de área polar, ou, a "rosa de Nightingale" — as seções do diagrama variam em extensão e a forma resultante lembra pétalas de uma flor.
 
-*Diagrama de área polar exibindo a mortalidade do Exército Britânico no Oriente entre abril de 1854 a março de 1855 e abril de 1855 a março de 1856 em comparação com aquela de Manchester. 1858*
+![Diagrama de área polar exibindo a mortalidade do Exército Britânico no Oriente entre abril de 1854 a março de 1855 e abril de 1855 a março de 1856 em comparação com aquela de Manchester. 1858](../../assets/blog/florence-nightingale-dois-seculos-de-visualizacao-de-dados/02.jpeg)
 
 Florence desenhou essa solução para exibir e comparar taxas de mortalidade sazonais em três conjuntos:
 

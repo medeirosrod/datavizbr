@@ -11,6 +11,9 @@ capa: ../../assets/blog/entrevista-cecilia-do-lago-cityvis-award-2018/01.png
 capa_alt: Capa do post Entrevista Cecília do Lago — Cityvis Award 2018
 ---
 
+![Mapa de roubos de celular em São Paulo](../../assets/blog/entrevista-cecilia-do-lago-cityvis-award-2018/02.png)
+*Fonte: https://sao-paulo.estadao.com.br/noticias/geral,roubos-de-celular-atingem-metade-das-ruas-de-sao-paulo,70002022457*
+
 Recentemente saíram os projetos vencedores do Cityvis Award 2018 e tivemos dois projetos brasileiros no shortlist da categoria Journalistic, o Cellphone robberies (representado pela Cecília do Lago) e o StreetMusicMap (representado pelo Daniel Bacchieri). Então resolvi fazer uma entrevista com cada um deles para conhecermos mais do projeto e tentar entender a evolução da área no Brasil. Começamos com a Cecília do Lago.
 
 **Datavizbr: Primeiramente agradeço a participação no Datavizbr e gostaria que você contasse um pouco a história do projeto.**

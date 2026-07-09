@@ -15,6 +15,9 @@ capa_alt: Capa do post Visualização de dados é o próximo desafio do design?
 
 Os dados estão em todo lugar e o design é a chave para alavancá-los.
 
+![Ilustração sobre dados e design](../../assets/blog/visualizacao-de-dados-e-o-proximo-desafio-do-design/01.jpeg)
+*Illustration: Jackson Gibbs*
+
 Eu sou uma nerd dos dados. Eu cresci profissionalmente fazendo palestras, criando pesquisas, coletando dados e tentando fazer com que as pessoas fizessem uso da análise e dos resultados dos mesmos. Então, um dia, percebi que ninguém prestaria atenção aos meus incríveis, maravilhosos e gloriosos dados se meus relatórios e apresentações fossem mal projetados. Então, casei-me com um designer gráfico e, juntos, pegamos as piores sinalizações dos restaurantes e tivemos discussões acaloradas sobre nuances dos tons de roxo. Eu também me tornei uma designer nerd.
 
 **Os nerds dos dados precisam dos designers**

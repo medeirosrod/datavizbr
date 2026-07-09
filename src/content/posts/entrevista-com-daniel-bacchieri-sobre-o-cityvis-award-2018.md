@@ -11,6 +11,9 @@ capa: ../../assets/blog/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-20
 capa_alt: Capa do post Entrevista com Daniel Bacchieri sobre o CityVis Award 2018
 ---
 
+![Google Maps — Festivais de Música de Rua](../../assets/blog/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-2018/01.jpeg)
+*Google Maps — Festivais de Música de Rua.*
+
 Recentemente saíram os projetos vencedores do Cityvis Award 2018 e tivemos dois projetos brasileiros no shortlist da categoria Journalistic, o Cellphone robberies (representado pela Cecília do Lago) e o StreetMusicMap (representado pelo Daniel Bacchieri). Então resolvi fazer uma entrevista com cada um deles para conhecermos mais do projeto e tentar entender a evolução da área no Brasil. Hoje vamos conversar com o Daniel.
 
 **Datavizbr: Primeiramente agradeço a participação no Datavizbr e gostaria que você contasse um pouco a história do projeto.**
@@ -19,6 +22,7 @@ Daniel: Criado em janeiro de 2014 por mim, Daniel Bacchieri, o StreetMusicMap é
 
 São Paulo disputa com Nova Iorque o maior número de vídeos no StreetMusicMap, seguido por Londres (Reino Unido), Rio (Brasil), Austin (Estados Unidos) e Istambul (Turquia). No ranking dos países, a ordem é: Estados Unidos, Brasil, Reino Unido, Itália, Alemanha e França.
 
+![Universidad Casa Grande — Equador/Divulgação](../../assets/blog/entrevista-com-daniel-bacchieri-sobre-o-cityvis-award-2018/02.jpeg)
 *Universidad Casa Grande — Equador/Divulgação (Joshua Antoine — violinista e jornalista Daniel Bacchieri — Guayaquil, Equador)*
 
 O StreetMusicMap foi o "case" que eu apresentei para ser aceito no Programa Avançado de Jornalismo Empreendedor do Tow-Knight Center da City University of New York — CUNY em 2017.

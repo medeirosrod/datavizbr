@@ -7,18 +7,23 @@ secao: praticas
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
 medium_url_original: "https://medium.com/datavizbr/dez-dicas-para-deixar-sua-visualização-de-dados-mais-acessível-bf884895812d"
 publicado_originalmente_em: 2020-10-20
-rascunho: true
 capa: ../../assets/blog/dez-dicas-para-deixar-sua-visualizacao-de-dados-mais-acessivel/01.png
 capa_alt: Capa do post Dez dicas para deixar sua visualização de dados mais acessível
 ---
 
 *Nem todo mundo enxerga as cores da mesma maneira e é preciso levar isso em conta na hora de criar gráficos, tabelas e mapas.*
 
+![Infográfico que resume as dez dicas apresentadas no artigo](../../assets/blog/dez-dicas-para-deixar-sua-visualizacao-de-dados-mais-acessivel/01.png)
+
+*Descrição: infográfico que resume as dez dicas apresentadas no artigo.*
+
 Nem todo mundo enxerga as cores da mesma maneira e é preciso levar isso em conta na hora de criar visualizações de dados, como gráficos, tabelas e mapas. Um motivo são os diferentes tipos de daltonismo — dificuldade em distinguir cores que pode se apresentar em um a cada 12 homens (8%) e uma a cada 200 mulheres (0,5%).
 
 **1. Faça legendas diretas**
 
 Em gráficos, costumamos distinguir séries por meio de cores e legenda à parte. Com legendas diretas, conseguimos perceber as informações independentemente das cores.
+
+![Gráfico de pizza com cores parecidas e legenda à parte, difícil de ler em preto e branco](../../assets/blog/dez-dicas-para-deixar-sua-visualizacao-de-dados-mais-acessivel/02.png)
 
 *Descrição: À esquerda, um gráfico de pizza com três séries representadas com cores parecidas e legendas à parte. À direta, no mesmo gráfico em preto e branco, fica difícil associar a legenda às cores do gráfico. Autoria própria.*
 

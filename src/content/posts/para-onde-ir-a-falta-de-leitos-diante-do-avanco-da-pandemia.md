@@ -19,9 +19,15 @@ A REGIC é uma pesquisa sobre a hierarquização e regionalização dos centros 
 
 Os resultados demonstram realidades bem diferentes em cada região. Enquanto nas regiões Sul e Sudeste os deslocamentos para os serviços de alta complexidade são, em média, de 100 km, na Norte e Centro-Oeste essa média sobe para 276 e 256 km, respectivamente.
 
-![Principais deslocamentos por serviços de saúde de alta complexidade segundo REGIC 2018](../../assets/blog/para-onde-ir-a-falta-de-leitos-diante-do-avanco-da-pandemia/03.png)
+![Principais deslocamentos por serviços de saúde de alta complexidade segundo REGIC 2018](../../assets/blog/para-onde-ir-a-falta-de-leitos-diante-do-avanco-da-pandemia/02.gif)
+
+*Principais deslocamentos por serviços de saúde de alta complexidade segundo a REGIC 2018 (Fonte: IBGE, 2020. Elaboração: Gabriel Vaz de Melo).*
+
+![Mapas comparando municípios com leitos de UTI no SUS e municípios com casos confirmados de COVID-19](../../assets/blog/para-onde-ir-a-falta-de-leitos-diante-do-avanco-da-pandemia/05.png)
 
 Segundo o CNES, 91% dos municípios brasileiros não possuem leitos de UTI no SUS. Dos que possuem, a distribuição entre os Estados é desigual. No estado de São Paulo, 18% dos municípios possuem leitos de UTI públicos. Já em Amapá, Acre, Roraima e Amazonas, apenas as respectivas capitais possuem leitos.
+
+![Gráfico com a distribuição de casos confirmados de COVID-19 por estado em municípios com e sem leitos de UTI no SUS](../../assets/blog/para-onde-ir-a-falta-de-leitos-diante-do-avanco-da-pandemia/03.png)
 
 Até o dia 10 de maio de 2020, 43% dos casos no Amazonas estavam concentrados em municípios sem leitos de UTI no SUS. No Piauí, essa proporção era de 32%. Já no estado de São Paulo, de 7%.
 

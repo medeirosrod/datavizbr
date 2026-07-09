@@ -13,9 +13,15 @@ capa_alt: Capa do post Entrevista com Victória Sacagami e Larissa Elisa sobre u
 
 Essa semana tivemos a oportunidade de entrevistar Victória e Larissa Elisa que realizaram uma visualização sobre os parques públicos cariocas.
 
+![Visualização de dados dos parques públicos cariocas](../../assets/blog/entrevista-com-victoria-sacagami-e-larissa-elisa-sobre-uma-visualizacao-dos-parq/01.jpeg)
+
+*Fonte: Behance do projeto*
+
 **Vocês poderiam contar um pouco da trajetória com visualização de dados e como iniciou o projeto?**
 
 A visualização de dados caiu de paraquedas em nossas vidas. Na época, estávamos cursando o curso de Comunicação Visual Design na UFRJ, quando surgiu a oportunidade de uma bolsa de Iniciação Científica, em uma parceria da EBA com o PROURB da FAU. Tendo como orientação a professora Lucia Costa, da FAU, e co-orientação, professora Julie Pires, da EBA, começou assim nosso primeiro contato com a visualização de dados.
+
+![Trabalho cartográfico desenvolvido pela Profa. Dra. Lucia Costa nos anos 1980](../../assets/blog/entrevista-com-victoria-sacagami-e-larissa-elisa-sobre-uma-visualizacao-dos-parq/02.jpeg)
 
 *Trabalho cartográfico desenvolvido pela Profa. Dra. Lucia Costa nos anos 1980.*
 

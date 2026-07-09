@@ -25,6 +25,9 @@ A partir disso, comecei a procurar cursos e eventos de design que pudessem me aj
 
 Foi assim que encontrei a pós-graduação em Design Gráfico pela Unicamp em 2018. Em março de 2019 consegui entrar no iFood e estou aqui até hoje como designer de produto.
 
+![Carol exibindo o quadro de tempo de uso das redes sociais após a banca](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/01.png)
+*Carol exibindo o quadro de tempo de uso das redes sociais após a banca.*
+
 **Rodrigo: Você poderia explicar um pouco o que é o projeto borDADOS?**
 
 Carol: Nessa pós-graduação, quando chegou o momento de escolher o tema do trabalho final, decidi primeiramente que iria fazer algo que não exigisse tanto do computador para que eu pudesse explorar algo mais manual. Como sou muito ligada a bordados e tapeçarias, poder fazer algo com isso seria muito desafiador mas também de uma enorme recompensa pessoal.
@@ -39,15 +42,15 @@ Considerando que hoje vivemos a realidade do Big Data, entendo que minhas intera
 
 Carol: Bordar, em específico, faz parte da minha vida desde pequena pois venho de uma família de bordadeiras. Aprendi pequena a fazer ponto-cruz com minha mãe, uma tremenda artista nessa área, e muitos anos depois me encontrei nesse universo através do bordado livre.
 
-![Carol bordando no Parque Taquaral](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/03.jpeg)
+![Carol bordando no Parque Taquaral](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/02.jpeg)
 
 Para a pesquisa com meus colegas, fiz através do Google Forms. Em seguida, me preocupei em avaliar quais dados iria utilizar e como. Para a base dos projetos, fiz os esboços e as artes no programa Adobe Illustrator. Quando fiquei satisfeita, imprimi no tamanho que gostaria de fazer e passei para o tecido com um lápis comum.
 
-![Processo de pintura do algodão cru com mapa do Brasil](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/04.png)
+![Processo de pintura do algodão cru com mapa do Brasil](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/03.jpeg)
 
 Para a aquarela, utilizei tintas de aquarela para tecido diluídas com água. E para os bordados, utilizei linhas próprias de bordados com 2 tipos de pontos diferentes: para os caminhos e redes sociais usei o ponto atrás e para o de migração, utilizei o ponto nó francês.
 
-![Os 3 quadros levados à banca](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/05.png)
+![Os 3 quadros levados à banca](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/04.png)
 
 **Rodrigo: Percebo no seu trabalho uma influência do data humanism da Giorgia Lupi e do projeto Dear Data.**
 
@@ -55,11 +58,14 @@ Carol: Sim, com certeza. O trabalho delas foi a grande base para o que propus.
 
 Acredito que vivemos em uma bolha social, onde dados são trabalhados de maneira bastante elitizada, distanciando o ser humano comum — que não ironicamente — é quem fornece os dados usados.
 
-![Quadros de tempo de uso das redes sociais e migração dos colegas](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/06.png)
+![Quadros de tempo de uso das redes sociais e migração dos colegas](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/05.png)
 
 Ao preparar a monografia, li alguns textos de Byung-Chul Han em que ele cita o filósofo alemão Friedrich Nietzsche para criticar a hiperatenção e a hiperatividade. Em "Humano, demasiado humano", Nietzsche argumenta que a vida humana acaba quando elementos contemplativos são expulsos dela. Como alternativa à vida hiperativa, Han oferece a ideia de uma "vida contemplativa", na qual os indivíduos sabem dizer "não" ao excesso de estímulos.
 
 Portanto, minha escolha de usar práticas manuais e artesanais para reproduzir esses dados captados acontece de maneira que acompanhe a proposta de uma vida contemplativa, pois bordados e aquarelas são trabalhos que exigem uma atenção especial e bastante introspectiva.
+
+![Carol ouvindo a banca após sua apresentação](../../assets/blog/entrevista-com-carol-seixas-sobre-o-projeto-bordados/06.png)
+*Carol ouvindo a banca após sua apresentação.*
 
 **Rodrigo: Você tem algum material que gostaria de compartilhar ou alguma dica para quem está trilhando esse caminho do design e da visualização de dados?**
 

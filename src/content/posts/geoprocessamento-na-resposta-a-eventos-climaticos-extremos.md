@@ -18,7 +18,11 @@ A Região Hidrográfica do Guaíba, segunda maior do estado (atrás apenas da Re
 
 O Rio Vacacaí, dentro da Bacia do Vacacaí-Vacacaí Mirim e no limite ocidental da Região Hidrográfica do Guaíba, banha parte da zona urbana do município de São Gabriel e sua mancha de inundação será analisada por meio de operações espaciais comuns em sistema de informações geográficas.
 
+![Localização do Município de São Gabriel dentro das Regiões Hidrográficas do Rio Grande do Sul](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/01.png)
+
 Apesar de não ter atravessado a cidade com tanta violência como em outras cidades, o Rio Vacacaí, entre fim de abril e início de maio, alcançou cota (91 m acima do nível do mar) que supera a cota considerada normal (86 m), atingindo vários domicílios e obrigando que pessoas saíssem de suas residências. Os bairros atingidos foram: Baltar, Menino Jesus, 3 de Outubro, Vila Maria, Jardim Europa e Bom Fim, este último ficando isolado de todo o restante da cidade.
+
+![Mapa dos bairros de São Gabriel atingidos pela enchente do Rio Vacacaí](../../assets/blog/geoprocessamento-na-resposta-a-eventos-climaticos-extremos/02.png)
 
 Notícias veiculadas pela prefeitura e por portais de notícias citavam a quantidade estimada de pessoas atingidas pela enchente: 1,7 mil. Mais de 400 famílias. Com técnicas de geoprocessamento é possível ter uma estimativa mais precisa de domicílios/pessoas atingidas e a distribuição pela cidade.
 

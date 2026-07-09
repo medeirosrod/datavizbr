@@ -15,11 +15,19 @@ capa_alt: Capa do post Visualizando os dados do COVID-19 humanamente
 
 O que sentimos quando pensamos no COVID-19? Muitas das imagens que vemos do vírus não são imagens precisas, mas representações ilustrativas ou visualizações de informações. Se o vírus é representado com pontinhos, com uma coroa, vermelho ou azul — o impacto sobre nós acaba sendo diferente. Da mesma forma, se um país relata dados de doentes e mortos em gráficos muito distantes da realidade do dia-a-dia, como isso afeta nossas ações?
 
+![Ilustração inspirada em imagens de microscópio e ilustrações do National Health Institute, CDC e FDA sobre o COVID-19](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/01.jpeg)
+
+*Uma ilustração feita pela autora inspirada em imagens de microscópio e ilustrações do National Health Institute, Centers for Disease Control and Prevention (CDC), e o Food and Drug Administration (FDA).*
+
 Um webinar sobre a visualização de dados relacionados ao COVID-19 feito pela Carolina Leslie explorou as principais visualizações de dados com três elementos marcantes:
 
 1. A visualização de dados é utilizada na saúde pública há mais de 150 anos. As visualizações da época de John Snow e Florence Nightingale são exemplos de que isso não é algo novo.
 
 2. O design tem um papel crucial no jornalismo e pode diretamente afetar se uma população compreende medidas públicas ou não. A primeira vez que a curva do achatamento apareceu foi em 2007 em um paper do CDC. Foi quando Drew Harris adicionou uma linha no meio desse gráfico que ficou realmente claro porque fazer o isolamento — manter o sistema de saúde funcionando.
+
+![Gráfico da curva de achatamento com e sem medidas de proteção](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/02.png)
+
+*Imagem divulgada por Drew Harris no Twitter demonstrando a importância do isolamento.*
 
 3. A utilização de cores em infográficos pode causar diferentes emoções e alterar nossas percepções. No caso do COVID-19, existe uma tendência de uso de cores quentes, passando um senso de urgência e perigo associado aos números.
 
@@ -31,7 +39,13 @@ Mona Chalabi fez mais de vinte ilustrações com dados sobre o COVID-19 desde o 
 
 Um infográfico notável é sobre quanto tempo o vírus consegue sobreviver em diferentes superfícies. Além dos recursos visuais, ela utiliza o tempo como ferramenta ao dizer que quando terminamos de ler o infográfico (30 segundos), um desinfetante a base de álcool desativa o vírus em qualquer superfície. Ao conectar com o tempo de leitura do leitor do infográfico, a informação fica muito mais tangível e memorável.
 
-![Ilustração de Mona Chalabi para dados do COVID-19](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/04.jpeg)
+![Infográfico de Mona Chalabi sobre quanto tempo o coronavírus sobrevive em diferentes superfícies](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/03.jpeg)
+
+*Imagem retirada diretamente do Instagram de Mona Chalabi.*
+
+![Infográfico de Mona Chalabi sobre como Nova York está mudando de acordo com ligações para o 311](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/04.jpeg)
+
+*Imagem retirada diretamente do Instagram de Mona Chalabi.*
 
 **Giorgia Lupi**
 
@@ -39,11 +53,13 @@ Giorgia Lupi é uma designer de informação que fundou uma empresa chamada Accu
 
 "Dados representam a vida real. Eles são um retrato da mesma forma que uma foto captura um momento no tempo. Números ficam sempre no lugar de outras coisas, um jeito de capturar um ponto de vista — mas às vezes isso se perde de vista."
 
+![Ilustração do conceito de Data Humanism de Giorgia Lupi](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/05.png)
+
+*Esse infográfico foi publicado originalmente na revista Print Mag.*
+
 Durante a epidemia, Lupi decidiu experimentar com novas formas de representar os dados dos briefings diários do governador de Nova York, Andrew Cuomo. Ao invés de representar o número de mortes com um gráfico de barras, círculos "imperfeitos" representam as vidas perdidas. Ver essa história dessa forma nos faz refletir mais do que mais um gráfico de barras no mar de informações.
 
-![Visualização de Giorgia Lupi dos dados do COVID-19 com círculos imperfeitos](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/05.png)
-
-![Detalhe da visualização humanizada de Giorgia Lupi](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/06.jpeg)
+![Visualização de Giorgia Lupi dos dados do COVID-19 com círculos imperfeitos representando vidas perdidas](../../assets/blog/visualizando-os-dados-do-covid-19-humanamente/06.jpeg)
 
 A humanização dos dados é algo necessário. Lupi e Chalabi são exemplos de como podemos tornar a visualização de dados algo mais criativo e que leva em consideração o contexto em que estamos inseridos e as vidas tocadas. Essa contextualização nos ajuda a não banalizar os gráficos e números e lembrar que existem pessoas por trás de tudo isso.
 
