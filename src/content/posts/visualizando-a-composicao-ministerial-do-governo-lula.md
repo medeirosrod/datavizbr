@@ -1,7 +1,7 @@
 ---
 titulo: "Visualizando a composição ministerial do Governo Lula"
 autores:
-  - rodrigo-medeiros
+  - adolfo-guimaraes
 publicado_em: 2023-01-20
 secao: bastidores
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
