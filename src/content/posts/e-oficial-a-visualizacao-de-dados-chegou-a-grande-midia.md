@@ -15,11 +15,13 @@ capa_alt: "Capa do post É oficial: a visualização de dados chegou a grande m�
 
 Quando o presidente dos Estados Unidos está mostrando um gráfico Sharpie, você sabe que a visualização de dados não está mais nas margens das notícias.
 
+![Ilustração de um homem apontando para um gráfico de colunas coloridas](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/01.png)
+
 Sempre há algo acontecendo no campo da visualização de dados, mas até recentemente era apenas algo que as pessoas da área notavam. Não foi assim em 2019, onde a visualização de dados apareceu com destaque nas principais notícias.
 
 **O Primeiro Presidente da Visualização de Dados**
 
-![Comparação de visualização de dados entre presidentes americanos](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/03.png)
+![Comparação de visualização de dados entre presidentes americanos](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/02.png)
 
 Quando Donald Trump foi eleito, ele emoldurou e pendurou na Casa Branca um mapa dos Estados Unidos que implicava que ele foi eleito por uma enorme maioria dos votos. O que era importante para Trump era o valor retórico da visualização de dados geoespaciais — não o conjunto de dados subjacente.
 
@@ -29,15 +31,17 @@ Trump é um sinal de que "a visualização é o dado" para muitas pessoas. À me
 
 **Visualização de Dados Reflexiva**
 
-![Ilustração sobre visualização de dados reflexiva](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/04.png)
+![Ilustração sobre visualização de dados reflexiva](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/03.png)
 
 O livro "Am I Overthinking This?" de Michelle Rial sinaliza uma mudança fundamental em direção ao ato de criar visualização de dados como uma maneira independente de imputar significado. Ela criou uma série de gráficos à mão em seu estilo inigualável, que destaca as contradições, medos e complexidades da vida moderna de uma maneira que o texto simplesmente não consegue.
 
-![Exemplos de gráficos do livro "Am I Overthinking This?" de Michelle Rial](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/05.png)
+![Exemplos de gráficos do livro "Am I Overthinking This?" de Michelle Rial](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/04.png)
 
 **A Imparável Giorgia Lupi**
 
-![Ilustração sobre Giorgia Lupi e seu trabalho em visualização de dados](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/06.png)
+![Ilustração sobre Giorgia Lupi e seu trabalho em visualização de dados](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/05.png)
+
+![Vestido com estampa geométrica inspirada em visualização de dados, criado por Giorgia Lupi para a marca sueca Stories.com](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/06.jpeg)
 
 Giorgia Lupi ao longo de sua carreira evitou toda linha de raciocínio técnico para criar um caminho que aborda a visualização de dados tradicional, data art, design e data humanism. Em 2019, Lupi teve suas duas conquistas mais significativas: ela iniciou uma linha de moda e ingressou na Pentagram, a maior consultoria de design independente do mundo.
 
@@ -50,6 +54,8 @@ Em 2019, a Salesforce comprou a plataforma de análise Tableau por US$ 15 bilhõ
 O crescimento da Data Visualization Society em 2019 indica claramente um desejo reprimido de reunir a profissão. O que era apenas uma idéia de três pessoas em fevereiro cresceu para uma organização de 10.000 membros.
 
 **Pensando no Futuro**
+
+![Ilustração sobre o futuro da visualização de dados](../../assets/blog/e-oficial-a-visualizacao-de-dados-chegou-a-grande-midia/07.png)
 
 A visualização de dados é tecnicamente madura. Cada vez mais, percebemos abordagens baseadas em aprendizado de máquina para melhorar as sugestões de qual gráfico usar. Como profissionais, isso nos permite mudar nosso foco dos problemas técnicos para temas como subdesenvolvimento do design e modelagem de informações.
 

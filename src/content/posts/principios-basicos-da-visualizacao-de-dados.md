@@ -19,6 +19,10 @@ Pra começar, por que a gente quer codificar os dados em elementos visuais? Em o
 
 Em uma prova você preferiria tirar 72 em uma escala de 0 a 100 ou 96 em uma escala de 0 a 137?
 
+![Comparação visual mostrando que 72/100 é ligeiramente melhor do que 96/137](../../assets/blog/principios-basicos-da-visualizacao-de-dados/02.png)
+
+*72/100 é ligeiramente melhor do que 96/137 — Fonte: The Trutful Art*
+
 A visão é tão importante que muitas vezes a gente só toma algo como verdade depois de visualizar uma evidência que comprove a veracidade da coisa (Cairo, 2013). Isso torna a visualização de dados uma ferramenta bastante poderosa. E como toda ferramenta, ela pode ser usada para o bem ou para mal.
 
 **Etapas para criar uma visualização**

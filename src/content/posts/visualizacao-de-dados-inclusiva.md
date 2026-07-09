@@ -37,21 +37,31 @@ Uma outra solução usada pelo trânsito é colocar as cores do sinal sempre na 
 
 - No gráfico de termômetro, o resultado numérico é o mais importante e precisa ser destacado.
 
-![Exemplo de termômetro com destaque numérico](../../assets/blog/visualizacao-de-dados-inclusiva/03.png)
+![Exemplo de termômetro com destaque numérico](../../assets/blog/visualizacao-de-dados-inclusiva/02.png)
 
 - Use a posição da seta para ressaltar os valores em tabelas.
 
-![Exemplo de tabela com posicionamento de seta](../../assets/blog/visualizacao-de-dados-inclusiva/04.png)
+![Exemplo de tabela com posicionamento de seta](../../assets/blog/visualizacao-de-dados-inclusiva/03.png)
 
 - Use a posição de cada elemento para direcionar mais a análise do que a cor.
 
-![Exemplo com posicionamento de elementos](../../assets/blog/visualizacao-de-dados-inclusiva/05.png)
+![Exemplo de quadrante com pétalas posicionadas por variável](../../assets/blog/visualizacao-de-dados-inclusiva/04.png)
+
+*Fonte: Justin Lorenzo Pimentel*
+
+![Exemplo de quadrante com formas hexagonais posicionadas por variável](../../assets/blog/visualizacao-de-dados-inclusiva/05.png)
+
+*Fonte: Gwendoline Tan*
 
 - Uma outra opção é trocar as cores por imagens ou até mesmo por emojis.
 
-![Exemplo de visualização com emojis](../../assets/blog/visualizacao-de-dados-inclusiva/06.png)
+![Exemplo de visualização com imagens no lugar de cores](../../assets/blog/visualizacao-de-dados-inclusiva/06.png)
 
-![Exemplo adicional de dashboard inclusivo](../../assets/blog/visualizacao-de-dados-inclusiva/07.png)
+*Fonte: Royce Ho*
+
+![Exemplo de visualização com emojis](../../assets/blog/visualizacao-de-dados-inclusiva/07.png)
+
+*Fonte: Chee Ann*
 
 A intenção é criarmos dashboards cada vez mais inclusivos e de fácil compreensão de todos. Não há cores ou gráficos proibidos, use sua criatividade para comunicar de forma clara. Caso tenha o conhecimento de alguma pessoa daltônica na equipe, convide ela para participar da criação do dashboard.
 

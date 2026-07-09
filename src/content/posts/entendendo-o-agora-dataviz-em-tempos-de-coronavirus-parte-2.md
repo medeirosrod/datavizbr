@@ -23,6 +23,10 @@ Enquanto não há cura ou vacina para Covid-19, o isolamento social é a princip
 
 O artigo do Washington Post comparando 4 modelos diferentes de isolamento foi o artigo mais acessado na história do Washington Post. De uma forma bastante simples ele ilustra como o contato entre pessoas espalha o vírus e quais são os impactos da adoção de diferentes medidas de restrição de circulação.
 
+![Simulador do Washington Post comparando 4 modelos diferentes de isolamento social e seus efeitos no contágio](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/02.gif)
+
+![Simulação do Washington Post mostrando como diferentes doenças se espalham conforme taxas de contágio e letalidade](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/03.gif)
+
 O site r2d3 reuniu 4 simulações com premissas mais complexas, ilustrando o efeito de medidas de distanciamento social.
 
 O FiveThirtyEight fez uma comparação de diferentes modelos ao longo do tempo.
@@ -33,17 +37,17 @@ Outro gênero de visualização bastante presente na cobertura da pandemia são 
 
 A Reuters mostrou em detalhes os primeiros 31 casos confirmados na Coreia do Sul, mapeando os contatos sociais e formas de transmissão de cada um deles. Até chegarem à paciente 31, responsável por um grande surto de contágio no país. Ela teve contato direto com mais de 1.000 pessoas — incluindo duas idas a uma igreja, almoço em um restaurante tipo buffet. Mais de 5.000 casos na Coréia do Sul foram relacionados à igreja de Shincheonji, frequentada por ela.
 
-![Animação da Reuters mapeando os contatos sociais e as formas de transmissão dos primeiros 31 casos confirmados na Coreia do Sul](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/03.gif)
+![Animação da Reuters mapeando os contatos sociais e as formas de transmissão dos primeiros 31 casos confirmados na Coreia do Sul](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/04.gif)
 
 O NYTimes trouxe explicações sobre como o vírus se espalhou rapidamente pelo mundo. Quando Wuhan foi fechada, o vírus já tinha se espalhado para outros locais no mundo de forma silenciosa.
 
-![Animação do New York Times mostrando a disseminação global do vírus a partir de Wuhan antes do fechamento da cidade](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/04.gif)
+![Animação do New York Times mostrando a disseminação global do vírus a partir de Wuhan antes do fechamento da cidade](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/05.gif)
 
 O South China Morning Post trouxe uma explicação sobre as diferentes famílias de coronavírus e seu mecanismo de ação no corpo, usando muito bem elementos de animação disparados pela rolagem da tela.
 
-![Animação do South China Morning Post explicando as diferentes famílias de coronavírus e seu mecanismo de ação no corpo](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/05.gif)
+![Animação do South China Morning Post explicando as diferentes famílias de coronavírus e seu mecanismo de ação no corpo](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/06.gif)
 
-![Animação da Reuters mostrando o avanço das contaminações em Singapura, com grandes taxas de transmissão nos dormitórios de trabalhadores estrangeiros](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/06.gif)
+![Animação da Reuters mostrando o avanço das contaminações em Singapura, com grandes taxas de transmissão nos dormitórios de trabalhadores estrangeiros](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-2/07.gif)
 
 *Avanço das contaminações em Singapura (Reuters)*
 

@@ -19,6 +19,8 @@ O significado de "infografia" ainda é pouco conhecido. Um infográfico pode ser
 
 Nas últimas semanas, o termo "achatar a curva" foi usado por jornalistas diariamente se referindo a um gráfico de área que mostra diferentes expectativas sobre a quantidade de vítimas do vírus ao longo do tempo.
 
+![Gráfico de área mostrando o número de infecções com e sem medidas de proteção, em relação à capacidade do sistema de saúde](../../assets/blog/infograficos-que-ajudam-a-achatar-a-curva-da-propagacao-do-coronavirus/02.jpeg)
+
 *O gráfico de área sobre "achatar a curva" — versão do Jornal Nexo*
 
 Uma das maiores dificuldades para enfrentar as provações de uma pandemia é a incerteza. Os gráficos, por sua natureza quantitativa, têm uma função importante em motivar a população através da informação. A mensagem deste gráfico de área é simples: nós precisamos ficar abaixo da linha que marca a capacidade máxima do sistema de saúde.

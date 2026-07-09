@@ -23,6 +23,8 @@ Story Explorer é uma abordagem de visualização para explorar séries temporai
 
 O Story Explorer fornece uma interface de curadoria de scripts que permite aos usuários especificar a ordem cronológica dos eventos nos filmes. Foi utilizado para analisar 10 filmes não lineares populares e descrever o espectro de padrões narrativos encontrados.
 
+![Pôsteres dos 10 filmes não lineares populares analisados pelo Story Explorer, incluindo Memento, Pulp Fiction e Clube da Luta](../../assets/blog/machine-learning-e-deep-learning-criando-visualizacao-de-textos-com-o-textvis/02.jpeg)
+
 ![Interface do Story Explorer exibindo a curva de história do filme Pulp Fiction, com personagens, locações e trechos do roteiro](../../assets/blog/machine-learning-e-deep-learning-criando-visualizacao-de-textos-com-o-textvis/03.png)
 
 **2. Popularidade de um tweet no tempo e no espaço**

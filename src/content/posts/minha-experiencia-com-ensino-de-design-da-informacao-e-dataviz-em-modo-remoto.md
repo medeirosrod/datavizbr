@@ -25,6 +25,8 @@ A disciplina foi organizada em três módulos de complexidade crescente:
 - **Módulo 2 — Visualização de dados — coleta, tratamento, design (4 semanas):** tipos de gráficos, tabelas, mapas, diagramas.
 - **Módulo 3 — Infografia (5 semanas):** tipos de infográficos, retórica, criação de infográfico completo.
 
+![Segunda versão do infográfico da dupla Keila Braga e Maryah Fernanda Rocha, mostrando a evolução iterativa do projeto](../../assets/blog/minha-experiencia-com-ensino-de-design-da-informacao-e-dataviz-em-modo-remoto/02.png)
+
 ![Versão final do infográfico da dupla Keila Braga e Maryah Fernanda Rocha](../../assets/blog/minha-experiencia-com-ensino-de-design-da-informacao-e-dataviz-em-modo-remoto/03.png)
 
 *Evolução do infográfico da dupla Keila Braga e Maryah Fernanda Rocha, alunas do 1º período do curso de Design. A cada iteração, pequenos ajustes foram dando forma ao resultado final.*

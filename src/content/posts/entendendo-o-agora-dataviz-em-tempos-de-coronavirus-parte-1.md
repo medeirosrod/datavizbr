@@ -30,6 +30,14 @@ Dividi a coleção em 7 temas principais (até agora):
 
 Em 1918, na epidemia de influenza, as cidades da Filadélfia e St Louis tiveram abordagens muito diferentes. Enquanto a primeira organizou uma parada em homenagem aos soldados se preparando para a primeira guerra, a segunda promoveu ações de isolamento social. Nos dias seguintes a Filadélfia viu milhares de mortes pela gripe espanhola.
 
+![Multidão nas ruas da Filadélfia durante a pandemia de gripe espanhola de 1918](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-1/01.jpeg)
+
+*Smithsonian Magazine*
+
+![Gráfico de linha comparando as taxas de mortalidade da gripe espanhola em Filadélfia e St. Louis em 1918, um precursor da imagem que se tornaria referência no combate a pandemias](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-1/02.png)
+
+*Quartz*
+
 O CDC, Center for Disease Control americano, em um paper de 2007 sobre prevenção de pandemias, trouxe um gráfico explicando o impacto de ações de isolamento social na mitigação da crise.
 
 ![Gráfico do CDC com os objetivos da mitigação comunitária: atrasar o pico do surto, reduzir a sobrecarga dos hospitais e diminuir o total de casos](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-1/03.jpeg)

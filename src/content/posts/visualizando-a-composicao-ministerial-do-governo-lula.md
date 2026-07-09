@@ -13,6 +13,10 @@ capa_alt: Capa do post Visualizando a composição ministerial do Governo Lula
 
 Nesse texto vou explorar a construção de uma visualização para mostrar a composição ministerial do terceiro governo Lula. O objetivo da visualização é mostrar a composição a partir de três variáveis: partidos, gênero e raça.
 
+**Visualização Criada**
+
+![Visualização em donut chart da composição ministerial do novo governo Lula, com distribuição por partido, gênero e raça](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/01.png)
+
 **Dados utilizados**
 
 Os dados utilizados foram mapeados a partir de entrevistas e bases de dados. A lista de ministros empossados foi retirada do site do G1. Para as informações de raça, foram utilizadas duas fontes. As autodeclarações das pessoas pretas e pardas foram mapeadas pelo site Alma Preta. Para os demais que não foram mapeados, foi feita uma busca nos dados do TSE via o site da Base dos Dados. Os ministros que não foram classificados nesses passos, receberam o label "Sem informação".
@@ -33,27 +37,31 @@ Como o tipo de gráfico utilizado não é muito apropriado para comparar valores
 
 Cada ministro é representado por um ícone (círculo). Há uma diferença que permite identificar homens e mulheres: no ícone para mulheres foi dado um destaque com um círculo pontilhado ao redor do círculo principal. Foram evitados ícones representativos de homens e mulheres para não propagar estereótipos.
 
-![Comparação de ícones para homens e mulheres](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/03.png)
+![Ícones para representação de homens e mulheres](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/02.png)
 
 **Cores utilizadas**
 
 Para a representação das cores dos partidos foi utilizada como base uma paleta de cores padrão do d3.js, ajustada em uma ferramenta de acessibilidade para verificar a acessibilidade das cores para pessoas com deficiência visual. Para as informações de gênero e raça, foram utilizadas cores distintas que atendem critérios de acessibilidade.
 
+![Paleta de cores utilizada para representar os partidos](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/03.png)
+
+![Paleta de cores utilizada para representar gênero e raça](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/04.png)
+
 **Rótulos e Interação**
 
 Os rótulos foram utilizados para identificar cada partido no arco e mostrar resumos percentuais de mulheres e pessoas negras e indígenas. Quando o mouse é passado nos partidos, esse percentual é atualizado por partido.
 
-![Visualização com rótulos e percentuais](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/04.png)
+![Visualização com rótulos e percentuais](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/05.png)
 
 A visualização possui interações para exibir informações mais completas quando o usuário quiser: visualizar o nome de todos os ministros, visualizar os ministros por partido, e visualizar as informações de um ministro específico.
 
-![Detalhe dos ministros por partido](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/05.png)
+![Visualização com o nome de todos os ministros](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/06.png)
 
-![Informações específicas de ministro](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/06.png)
+![Detalhe dos ministros por partido](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/07.png)
+
+![Informações específicas de um ministro](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/08.png)
 
 Toda visualização foi criada utilizando d3.js e pode ser acessada no Observable HQ do autor.
-
-![Visualização completa em d3.js](../../assets/blog/visualizando-a-composicao-ministerial-do-governo-lula/07.png)
 
 ---
 

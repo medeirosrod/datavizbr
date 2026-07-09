@@ -13,6 +13,8 @@ capa_alt: Capa do post Brasileiro participa da Outlier Conference 2023
 
 Rodolfo Almeida vai participar da conferência da Data Visualization Society contando sobre sua pesquisa de mestrado, que analisa como a crise climática é representada por meio das visualizações de dados.
 
+![Logotipo da Outlier Conference e da Data Visualization Society](../../assets/blog/brasileiro-participa-da-outlier-conference-2023/01.png)
+
 A Outlier é a conferência da Data Visualization Society e sempre conta com muitos nomes importantes do cenário internacional da visualização de dados. Esse ano vai contar, por exemplo, com a participação da Nadieh Bremer, da Shirley Wu e do Pedro Miguel Cruz. Isso reforça como a participação do Rodolfo por lá é tão relevante para o cenário local da visualização de dados no Brasil.
 
 Quem se interessa pela pesquisa de Rodolfo, pode verificar no artigo que ele escreveu no blog do grupo de pesquisa LabVis. Resumidamente, o trabalho dele "se propõe a analisar visualizações de dados que tratam da mudança climática e compreender que estratégias de representação são utilizadas na comunicação desse fenômeno".

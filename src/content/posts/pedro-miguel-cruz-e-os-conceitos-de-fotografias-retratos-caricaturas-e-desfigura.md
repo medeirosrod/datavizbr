@@ -11,6 +11,8 @@ capa: ../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos
 capa_alt: Capa do post Pedro Miguel Cruz e os conceitos de fotografias, retratos, caricaturas e desfiguramentos na visualização de dados
 ---
 
+![Ilustração animada de abertura do post](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/01.gif)
+
 Pedro Miguel Cruz é um multipremiado designer de visualização português, hoje professor do mestrado em visualização de informação na Northeastern University em Boston. Pedro tem doutorado em Ciência da Informação e Tecnologia pela Universidade de Coimbra e foi pesquisador no MIT Senseable City Lab em Boston e em Singapura.
 
 Em 2013 tive a oportunidade de convidá-lo para realizar uma palestra e um workshop sobre visualização de dados no Interaction South America 2013. Nessa palestra o Pedro nos trouxe os conceitos de fotografias, retratos, caricaturas e desfiguramentos na visualização de dados.
@@ -25,33 +27,39 @@ Os aspectos que mais me interessam são efetivamente trazer metáforas visuais e
 
 A abordagem de fotografia "é a abordagem mais direta para a visualização. É a translação mais direta do espaço dos dados, para o espaço visual". Exemplo: o mapeamento da palavra "Reis" em Os Lusíadas, um gráfico que retrata a ocorrência da palavra por canto.
 
+![Mapeamento da palavra Reis em Os Lusíadas](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/03.png)
+
+![Visualização de dois grupos de personagens no livro Guerra e Paz de Tolstoi](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/04.png)
+
+*Visualização de dois grupos de personagens no livro Guerra e Paz de Tolstoi. Fonte: Pedro Miguel Cruz.*
+
 **Retrato e Caricatura**
 
 Num projeto com 2 milhões de pontos GPS de 1534 veículos em Lisboa (outubro de 2009), o Pedro começou com uma abordagem fotográfica e evoluiu para um retrato com metáfora forte e depois para uma caricatura. A metáfora escolhida foi "o trânsito como um organismo vivo, a cidade como um organismo vivo e começamos a explorar a ideia de coágulos no trânsito".
 
-![Visualização inicial dos dados GPS de Lisboa](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/04.png)
+![Visualização inicial dos dados GPS de Lisboa](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/05.png)
 
-![Rastros de veículos com traço de 30 minutos](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/05.png)
+![Rastros de veículos com traço de 30 minutos](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/06.png)
 
-![Visualização mostrando áreas de engarrafamento](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/06.png)
+![Visualização mostrando áreas de engarrafamento](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/07.png)
 
-![Técnica de sobreposição para tridimensionalidade do trânsito](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/07.png)
+![Técnica de sobreposição para tridimensionalidade do trânsito](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/08.png)
 
 Ele criou uma visualização minimal onde "quando os veículos estão mais lentos, eu desenho pontos vermelhos, e fica com essa aparência de um sistema com problemas de circulação".
 
-![Visualização minimal mostrando coágulos de trânsito com pontos vermelhos](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/08.png)
+![Visualização minimal mostrando coágulos de trânsito com pontos vermelhos](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/09.png)
 
 Para criar uma caricatura, utilizou a cidade "como sistema circulatório, as artérias são veias, as espessuras das veias tem a ver com o volume de tránsito, e a cor das veias também está relacionada a velocidade média, se o sangue fica mais escuro, o tráfego é mais lento".
 
-![Cidade representada como sistema de molas para transição à caricatura](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/09.png)
+![Cidade representada como sistema de molas para transição à caricatura](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/10.png)
 
-![Sistema circulatório da cidade com artérias e veias de trânsito](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/10.png)
+![Sistema circulatório da cidade com artérias e veias de trânsito](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/11.png)
 
 **Desfiguramento**
 
 Refinando ainda mais a metáfora: "agora temos mesmo quase glóbulos sanguíneos a circular nas veias e a fazer as veias a pulsar e exageramos mais essas distorções".
 
-![Desfiguramento final com glóbulos animados e pulsação das veias](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/11.png)
+![Desfiguramento final com glóbulos animados e pulsação das veias](../../assets/blog/pedro-miguel-cruz-e-os-conceitos-de-fotografias-retratos-caricaturas-e-desfigura/12.png)
 
 Como o Pedro comenta: "esse tipo de abordagem foi bastante pictórica, às vezes quase artística em alguns aspectos, bastante exploratória" mas que usaram os conceitos formais de caricatura, retrato, metáfora e desfiguramento tanto no trabalho prático como no trabalho teórico.
 

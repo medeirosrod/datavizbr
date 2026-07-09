@@ -11,6 +11,8 @@ capa: ../../assets/blog/giorgia-lupi-e-os-dados/01.jpeg
 capa_alt: Capa do post Giorgia Lupi e os dados.
 ---
 
+![Giorgia Lupi](../../assets/blog/giorgia-lupi-e-os-dados/01.jpeg)
+
 Quando encontrei o projeto Dear Data, criado pela Giorgia Lupi e Stefanie Posavec, na web pela primeira vez em 2015 a reação foi achar aquilo incrivelmente lindo. Mas o que representa? Como assim usar visualização de dados sem utilizar "nenhuma tecnologia"?
 
 A ideia do projeto é representar vários dados do dia-a-dia delas em visualizações em cartões postais nos quais elas enviavam uma para outra (NY-Londres, Londres-NY) semana a semana por um ano. Elas se conheceram em eventos de visualização de dados e por conta do projeto puderam entender o dia-a-dia da outra de maneira mais emotiva e relevante.

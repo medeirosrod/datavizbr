@@ -15,15 +15,27 @@ capa_alt: "Capa do post Visualização de dados: decisões estratégicas para a 
 
 Overview é um documentário sobre a primeira experiência humana de visualizar a Terra suspensa no espaço. Os astronautas sentiram um choque visual ao observar a biosfera em atividade e chamaram este momento de Overview Effect. O objetivo da missão Apollo 8, em 1968, era realizar a primeira expedição científica tripulada na órbita lunar. O que mais impactou a tripulação foi a experiência de olhar de volta para a Terra e observar as diferentes dinâmicas globais sob um ponto de vista nunca experimentado antes.
 
+![Teste do painel de controle touchscreen da Crew Dragon (SpaceX)](../../assets/blog/visualizacao-de-dados-decisoes-estrategicas-para-a-transformacao-digital/01.jpeg)
+
+*Testing of touchscreen control dashboard of the Crew Dragon (SpaceX)*
+
 A pandemia provocada pelo COVID-19 estabeleceu um marco sobre a importância de comunicar dados para auxiliar a tomada de decisão em escala. De uma hora para outra, parte da população passou a analisar dados a partir de conceitos como achatar a curva, crescimento exponencial e média móvel.
 
 A visualização de dados informacional e científica ganhou notoriedade global ao projetar e elaborar futuros possíveis para a sociedade.
 
 **O contexto da Indústria 4.0**
 
+![Índice de maturidade da Acatech para a Indústria 4.0](../../assets/blog/visualizacao-de-dados-decisoes-estrategicas-para-a-transformacao-digital/02.png)
+
+*Maturity Index Acatech Industry 4.0 [5]*
+
 Quando colocamos uma lente sobre a maturidade tecnológica das Indústrias Brasileiras, em 2020 a digitalização (sensorização e conectividade) está presente em pouco mais de 50% das empresas. A indústria nacional ainda está no nível primário do estágio de maturidade tecnológica.
 
 Vivemos em uma era de tsunami de dados. Os dados brutos só se tornam úteis quando são aplicados métodos para derivar insights sobre eles. Cyber-Physical Systems (CPS) e suas equivalências são tecnologias habilitadoras que, aliadas a conceitos e técnicas de visualização de dados, tornam-se cruciais para avançar nos estágios de maturidade tecnológica.
+
+![Cuboide de maturidade para visualizar o status atual do projeto](../../assets/blog/visualizacao-de-dados-decisoes-estrategicas-para-a-transformacao-digital/03.png)
+
+*Maturity cuboid to visualize the current project status [11]*
 
 **O papel da visualização de dados**
 

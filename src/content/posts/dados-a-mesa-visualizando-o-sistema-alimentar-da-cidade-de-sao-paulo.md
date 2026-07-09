@@ -16,9 +16,15 @@ Acredito que para começar um projeto de design da informação seja necessário
 
 Dados à Mesa é um trabalho final de graduação apresentado em 2020 na Faculdade de Arquitetura e Urbanismo da USP, orientado pelo Prof. Dr. Leandro Velloso. A partir de metodologias do Design da Informação (DI), da Design Research e do Design Centrado no Humano (DCH), foi elaborada uma coleção de estamparia para guardanapos e panos de prato, baseada em dados relacionados ao sistema alimentar na cidade de São Paulo. O objetivo principal era criar uma experiência de contato do cidadão paulistano com a informação disponível em dados abertos.
 
+![Panos de prato e guardanapos estampados com mapas de distritos de São Paulo sobre mesa de madeira](../../assets/blog/dados-a-mesa-visualizando-o-sistema-alimentar-da-cidade-de-sao-paulo/01.jpeg)
+
 *Imagem produzida pela autora*
 
 O projeto foi, desde o princípio, orientado pelo DI. O desenho da pesquisa incluiu uma fase preliminar de revisão exploratória de fontes e de imersão no universo do usuário. Desta introdução, seguiu-se para uma modelagem de dados e visualizações. Estas fontes — a análise exploratória de dados e a pesquisa de usuário — alimentaram a etapa de ideação, cuja sequência foi dada pela prototipagem das alternativas geradas.
+
+![Diagrama da metodologia mostrando o fluxo entre revisão exploratória, imersão, modelagem, ideação, prototipagem e projeto](../../assets/blog/dados-a-mesa-visualizando-o-sistema-alimentar-da-cidade-de-sao-paulo/02.png)
+
+*Diagrama da metodologia*
 
 O contexto que mobilizou as primeiras pesquisas bibliográficas é dado pelo cenário de oferta e consumo em São Paulo. Estar em contato com projetos de desenvolvimento sustentável para a cidade, ao mesmo tempo vivenciando um centro urbano onde a predominância de ultraprocessados é ostensiva diante da classe trabalhadora, suscitou o interesse pela visualização de informação sobre o ambiente alimentar que se estabelece no território e as condições sociais que se relacionam a isso.
 

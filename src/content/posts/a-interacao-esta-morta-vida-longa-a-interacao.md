@@ -21,6 +21,8 @@ Gregor Aisch participou da conferência NICAR do mesmo ano, com uma fala que reb
 
 "O ponto é, os leitores podem fazer muito mais do que apenas acionar o controle de rolarem ou clicar nos botões! Eles podem conversar, escrever, desenhar, resolver quebra-cabeças, jogar, etc."
 
+![Slide mostrando um jogo do site Upshot em que o jogador precisa adivinhar o próximo número de uma sequência. Do lado esquerdo da página estão as instruções e no direito a ilustração da cabeça uma figura humana careca com outra pessoa menor dentro dela](../../assets/blog/a-interacao-esta-morta-vida-longa-a-interacao/02.png)
+
 *Slide da apresentação The Future of Interactive News (O Futuro das notícias interativas) de Gregor Aisch no NICAR 2016*
 
 Atualmente, por diversos motivos, o mais comum é ver o que antigamente seria uma única visualização interativa sendo "desmembrada" em gráficos diferentes que aparecem no decorrer de uma narrativa de dados, com aplicações bem pontuais da interação em casos específicos.

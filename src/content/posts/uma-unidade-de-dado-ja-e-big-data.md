@@ -17,9 +17,15 @@ A oficina trouxe apresentações de artigos costuradas com provocações: falas 
 
 O tema desse ano era "Política e Escala", com reflexões sobre o papel da visualização em um mundo que desafia nossas noções de escala.
 
+![Slide de título da apresentação "Uma unidade de dado já é big data"](../../assets/blog/uma-unidade-de-dado-ja-e-big-data/01.gif)
+
 A provocação que apresentarei hoje é intitulada "Uma unidade de dado já é 'Big Data'", supervisionada pela professora Doris Kosminsky.
 
+![Slide "Representando dados"](../../assets/blog/uma-unidade-de-dado-ja-e-big-data/02.jpeg)
+
 Nosso relacionamento com os dados que coletamos sobre nosso planeta e como escolhemos representá-los tem impacto profundo em nossa compreensão do mundo e de seus habitantes.
+
+![Slide de título "O Antropoceno"](../../assets/blog/uma-unidade-de-dado-ja-e-big-data/03.jpeg)
 
 A iminente — e cada vez mais presente — ameaça da crise climática traz a marca do Antropoceno — uma nova era geológica na história do planeta marcada pela escala e o alcance do impacto humano sobre os sistemas da Terra.
 

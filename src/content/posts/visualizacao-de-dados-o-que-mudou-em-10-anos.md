@@ -19,6 +19,9 @@ Aqui farei um pequeno resumo do que vi de mudança tecnológica de 2010 para cá
 
 No começo dos anos 2000, era uma época difícil para criar infográficos interativos ou visualizações mais complexas. Podemos encontrar registros de plataformas criadas do zero como é o caso do History Flow, da Fernanda Viegas e Martin Wattenberg.
 
+![History Flow, projeto de Fernanda Viegas e Martin Wattenberg](../../assets/blog/visualizacao-de-dados-o-que-mudou-em-10-anos/01.gif)
+*History Flow, da Fernanda Viegas e do Martin Wattenberg.*
+
 Podemos encontrar também registros de trabalhos utilizando o Flash para criar infográficos interativos. Parecia que aquele campo de atuação profissional estava consolidado, apesar de ter um questionamento relevante da falta da acessibilidade desses websites, até que em 2007 a Apple lançou o iPhone e o mesmo não dava suporte para abrir animações em Flash.
 
 Naquele período entre 2005 e 2007 foram se consolidando o Padrão Web, denominação da World Wide Web Consortium (W3C) para se referir ao HTML, CSS e Javascript. Esse padrão se preocupava bastante com a Acessibilidade Digital. Com a descontinuação do Flash no mercado, essas tecnologias ganharam força. Em paralelo a esse ambiente do desenvolvimento web, ferramentas para programação criativa começaram a ganhar bastante força no mundo da visualização de dados e das artes interativas como OpenFramework, Arduino, PureData e o próprio Processing.
@@ -29,7 +32,12 @@ A partir de 2010 percebi a diferença no formato de exibição das obras influen
 
 Um dos projetos mais impactantes nesse começo dessa "transição" para mim foi o WindMap da Fernanda Viegas e do Martin Wattenberg, totalmente visualizável utilizando o navegador, com uma animação super complexa.
 
+![WindMap, projeto de Fernanda Viegas e Martin Wattenberg](../../assets/blog/visualizacao-de-dados-o-que-mudou-em-10-anos/02.png)
+
 Outro projeto que chamou muita atenção nessa época foi o Breathing Earth realizado pela Nadieh Bremer. Um projeto totalmente visualizável no navegador utilizando o framework javascript D3.
+
+![Projeto Breathing Earth da Nadieh Bremer](../../assets/blog/visualizacao-de-dados-o-que-mudou-em-10-anos/03.png)
+*Projeto Breathing Earth da Nadieh Bremer.*
 
 A ideia desse post é deixar esse registro para que compreendamos a realidade atual e que possamos refletir como a área da visualização de dados, inclusive do ponto de vista da tecnologia, tem modificado, se estruturado e simplesmente… mudado.
 

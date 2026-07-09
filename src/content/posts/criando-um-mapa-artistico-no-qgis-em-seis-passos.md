@@ -24,6 +24,8 @@ Para esse tipo de mapa mostrando a malha urbana, precisamos de dois plugins: o Q
 
 Clique em 'Plugins', depois em 'Manage and install plugins'. Procure por 'OSM' e instale o 'QuickMapServices' e o 'OSM Downloader'.
 
+![Menu Plugins do QGIS com a opção Manage and Install Plugins selecionada](../../assets/blog/criando-um-mapa-artistico-no-qgis-em-seis-passos/02.png)
+
 ![Janela de gerenciamento de plugins do QGIS com a busca por OSM](../../assets/blog/criando-um-mapa-artistico-no-qgis-em-seis-passos/03.png)
 
 *É só clicar em instalar plugin, caso você ainda não tenha instalado.*

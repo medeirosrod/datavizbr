@@ -25,9 +25,13 @@ Propusemos uma newsletter semanal, que traria as principais notícias culturais 
 
 Depois de prepararmos a estrutura, foi o momento de criar uma identidade visual para o projeto. Propus uma paleta discreta, com tons próximos ao pastel e outros contrastantes, as fontes para título e texto e uma logo simples para usarmos de imagem.
 
+![Identidade visual da newsletter entre.telas, com logo, paleta de cores pastel e exemplo de título e destaque](../../assets/blog/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento/01.png)
+
 Produzimos 8 edições, disparadas nas manhãs de segunda-feira, entre outubro e dezembro de 2021. Ao longo da semana, escolhíamos as notícias e produzíamos o breve texto que seria enviado, para depois pensar na visualização que escolheríamos e ir atrás dos dados.
 
 Durante essas edições, passeamos por temas mais leves, como o Grammy, artistas que hitaram no Spotify e lançamentos de filmes e exposições. Mas também entramos em assuntos com maior relevância social, como a localização dos museus na cidade de São Paulo e o orçamento de projetos financiados pela Ancine ao longo dos anos.
+
+![Gráfico de bolhas com o número de museus na cidade de São Paulo por região](../../assets/blog/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento/02.png)
 
 ![Gráfico de barras com as áreas da ciência em que as mulheres são maioria, como odontologia, bioquímica, medicina e enfermagem](../../assets/blog/entre-telas-como-usamos-dados-para-falar-de-cultura-e-entretenimento/03.png)
 

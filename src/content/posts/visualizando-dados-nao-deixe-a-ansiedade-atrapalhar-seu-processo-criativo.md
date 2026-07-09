@@ -23,33 +23,35 @@ O IBGE disponibiliza dados sobre o mercado e a força de trabalho, incluindo a t
 
 O público-alvo deste projeto eram economistas, analistas e tomadores de decisão para entender a situação da força de trabalho durante os anos. Uma dificuldade identificada: conseguir visualizar o comportamento da taxa de desemprego tanto do ponto de vista geográfico quanto temporal.
 
-![Gráfico de linhas da taxa de desemprego por estado](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/03.png)
+![Gráfico de linhas da taxa de desemprego por estado](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/02.png)
 
 **Fonte de inspiração**
 
 O gráfico inspirador escolhido foi o mapa de calor publicado pelo The Wall Street Journal sobre o impacto de vacinas no combate a doenças nos estados dos Estados Unidos.
 
-![Mapa de calor do impacto da vacina contra sarampo - Wall Street Journal](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/04.png)
+![Mapa de calor do impacto da vacina contra sarampo - Wall Street Journal](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/03.png)
 
 **Exploração e experimentação**
 
 Foram analisados os dados por diferentes aspectos: sazonalidade (os dados têm tendência de cair à medida que se aproxima o último trimestre do ano) e comportamento por região. De posse dos dados, foi realizada uma experimentação com o mapa de calor.
 
-![Mapa de calor da taxa de desemprego por estado](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/05.png)
+![Mapa de calor da taxa de desemprego por estado](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/04.png)
 
 **Reavaliação**
 
 O primeiro mapa de calor mostrava apenas que a taxa de desemprego estava crescendo — o mesmo que um gráfico de linhas já mostrava. Reavaliando para o objetivo exploratório do público-alvo, foi calculada a diferença da taxa de desemprego entre trimestres.
 
-![Mapa de calor da diferença trimestral da taxa de desemprego](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/06.png)
+![Mapa de calor da diferença trimestral da taxa de desemprego](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/05.png)
 
 Essa tentativa também não resultou em padrões claros. A solução foi calcular a média móvel (baseada em 4 trimestres) que suaviza flutuações de curto prazo, leva em consideração sazonalidade e destaca tendências de longo prazo.
 
-![Gráfico de linha da média móvel da taxa de desemprego](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/07.png)
+![Gráfico de linha da média móvel da taxa de desemprego](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/06.png)
 
 **Resultado final**
 
 Após validação com economistas, chegou-se à visualização final: um mapa de calor usando a média móvel da diferença entre trimestres, com contextualização de crises econômicas, políticas e sanitária no Brasil, e opção de filtragem por região. O gráfico inclui visão geográfica e temporal.
+
+![Visualização final do mapa de calor com contextualização de crises](../../assets/blog/visualizando-dados-nao-deixe-a-ansiedade-atrapalhar-seu-processo-criativo/07.png)
 
 **Conclusão**
 

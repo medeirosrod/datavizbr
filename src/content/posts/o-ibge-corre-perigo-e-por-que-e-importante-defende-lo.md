@@ -26,9 +26,17 @@ Além de enfrentar todo o reajuste econômico, a realização do censo demográf
 
 Talvez até aqui você já tenha compreendido que o IBGE esteja passando por crises internas e externas que comprometem a obtenção de dados sócio demográficos do país, mas a intenção principal desse texto, parte de uma dúvida pessoal, que é: será que boa parte da população brasileira (ou pelo menos você que está lendo esse texto), consegue entender o que a não-realização do censo demográfico implica?
 
+![Recenseador do IBGE utilizando smartphone durante coleta de dados](../../assets/blog/o-ibge-corre-perigo-e-por-que-e-importante-defende-lo/01.jpeg)
+
+*Fonte: IBGE, divulgação*
+
 **2 — A Importância da realização do censo demográfico**
 
 Já no período imperial, o Brasil possuía um órgão com atividades exclusivamente estatísticas, a Diretoria Geral de Estatísticas (criada em 1871). Durante o início da República o governo decidiu ampliar as atividades estatísticas, que passaram a ser divididas entre o Departamento Nacional de Estatística e alguns Ministérios competentes. O fim do Departamento em 1934, favoreceu a criação do Instituto Nacional de Estatísticas (INE) — que posteriormente, em 1937 recebeu o anexo do Conselho Brasileiro de Geografia, passando então a se chamar de Instituto Brasileiro de Geografia e Estatística.
+
+![Colagem histórica de materiais dos censos demográficos brasileiros ao longo das décadas](../../assets/blog/o-ibge-corre-perigo-e-por-que-e-importante-defende-lo/02.jpeg)
+
+*Fonte: Agência IBGE, divulgação*
 
 Isso significa que desde 1872 o Brasil realiza um censo demográfico. Somente a partir de 1920 que a realização desse censo passou a ocorrer a cada 10 anos. Até 2020, desde que foram iniciadas as atividades estatísticas nacionais, o censo havia sido adiado apenas duas vezes, uma em 1930 devido a todo o levante que levou Getúlio Vargas ao poder e outra em 1990, quando o censo foi prorrogado para o ano seguinte.
 

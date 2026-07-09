@@ -17,7 +17,11 @@ Em março deste ano eu fiz um texto que explorava as principais variações de I
 
 O trabalho original comparou as variações de IDH entre 1991 e 2000 e em seguida entre 2000 e 2010. Dessas comparações gerou-se três agrupamentos utilizando método de clusterização: os municípios com baixa variação de IDHM, os municípios com média variação de IDHM e aqueles com alta variação de IDHM.
 
+![Gráfico de dispersão da variação percentual do IDHM por agrupamento, com destaque em amarelo para os municípios do Ceará](../../assets/blog/graficos-e-anotacoes-de-analises-de-idhm-x-educacao-para-o-estado-do-ceara/01.png)
+
 O mapa mostra como os municípios cearenses variaram os IDHMs entre 1991 e 2000. Quanto mais azul maior o índice e quanto mais vermelho menor. O ponto de mudança de tom de cor é o que corresponde a IDHM 0,5. Para a ONU, locais com IDHM menor que 0,5 são considerados de baixo desenvolvimento.
+
+![Mapas da variação do IDHM dos municípios cearenses entre 1991 e 2000, por grupo de variação](../../assets/blog/graficos-e-anotacoes-de-analises-de-idhm-x-educacao-para-o-estado-do-ceara/02.png)
 
 A grande maioria dos municípios apresentavam IDHM muito baixo em 1991, sendo que as cores vermelhas mais fortes predominavam no grupo de Alta Variação de IDHM. Em 2000 já se percebe uma redução na tonalidade vermelha.
 

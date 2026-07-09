@@ -13,6 +13,8 @@ capa_alt: Capa do post CIDI 2023 com trilha sobre visualização de dados
 
 Congresso Internacional de Design da Informação agora conta com uma trilha específica para a visualização de dados.
 
+![Logotipo do CIDI Caruaru | PE](../../assets/blog/cidi-2023-com-trilha-sobre-visualizacao-de-dados/01.png)
+
 Na sua décima primeira edição, o evento agora modifica a trilha de Tecnologia para chamá-la de Visualização de dados. Dessa forma, engloba a área de interesse de "pesquisas e reflexões que abordem o papel do Design da Informação na infografia, na visualização da informação e/ou na visualização de dados/dataviz".
 
 Alguns dos tópicos que mencionam na chamada de artigos:

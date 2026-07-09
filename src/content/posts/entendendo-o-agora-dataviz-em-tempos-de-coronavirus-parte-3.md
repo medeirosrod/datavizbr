@@ -21,6 +21,8 @@ Neste terceiro post da série mostro alguns exemplos interessantes de outros ân
 
 "Searching Covid-19" é uma exploração visual das mudanças de comportamento de buscas iniciadas com "O que é" e "Como fazer". Resultado de uma parceria entre o Google Trends, a empresa de dataviz Schema e a empresa de notícias Axios, em parceria com Alberto Cairo. Ela mostra como o desconhecimento inicial sobre o Covid-19, deu lugar a questões sobre como lidar com o isolamento e se proteger do vírus e por fim migrou para questionamentos sobre os impactos econômicos da crise.
 
+![Animação do site Searching Covid-19 mostrando a mudança nas buscas do Google ao longo da pandemia](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/01.gif)
+
 O Nexo perguntou como a quarentena mudou as buscas por receitas no Brasil. Brownie e pão foram os campeões de audiência.
 
 ![Gráfico animado do Nexo mostrando o aumento das buscas por receitas no Brasil durante a quarentena](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/02.gif)
@@ -60,6 +62,8 @@ Mona Chalabi criou uma ilustração sensível sobre a população de NY, ressalt
 Os efeitos no ambiente têm sido comentados como um possível lado bom da pandemia. As cidades ficaram mais limpas, com diminuição da quantidade de gases poluentes na atmosfera. Imagens de satélite mostram que a mancha de poluição em SP se reduziu na quarentena.
 
 Porém a Bloomberg, colocando os dados em perspectiva, tem uma visão menos otimista. Apesar do lockdown ter gerado a maior queda de emissão de CO2 já registrada, em perspectiva a diminuição terá pouco efeito na desaceleração do aquecimento global.
+
+![Gráfico da Bloomberg mostrando a maior queda de emissões de CO2 já registrada em decorrência do lockdown](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/05.png)
 
 ![Gráfico da Bloomberg mostrando que a concentração de CO2 na atmosfera continuará subindo apesar da queda de emissões na pandemia](../../assets/blog/entendendo-o-agora-dataviz-em-tempos-de-coronavirus-parte-3/06.png)
 

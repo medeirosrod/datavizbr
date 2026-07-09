@@ -30,6 +30,8 @@ A hiperinfografia são modelos ou conjunto de modelos de infográficos autônomo
 
 O jornal espanhol La Vanguardia lançou em 1 de abril de 2020 o hiperinfográfico "¿Qué debo hacer cuando regreso del supermercado?". O trabalho propõe oferecer recomendações de como se proteger do coronavírus ao chegar em casa. O hiperinfográfico oferece estética em terceira dimensão que age motivada pela ação do usuário, partindo da interação mediante scrolling e leitura verticalizada.
 
+![Cena do hiperinfográfico do jornal La Vanguardia com recomendações de higienização ao chegar em casa](../../assets/blog/hiperinfograficos-e-covid-19-modelos-sofisticados-nos-jornais-para-a-cobertura-d/02.png)
+
 *Hiperinfográfico do jornal La Vanguardia, da Espanha*
 
 **The New York Times (Estados Unidos)**
