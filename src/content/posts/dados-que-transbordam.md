@@ -65,6 +65,8 @@ Na sequência, foi desenvolvido o Wireframe no Figma, protótipo visual de baixa
 
 ![Figura 13: Cronologia das maiores enchentes do Rio Grande do Sul. Fonte: A autora.](../../assets/blog/dados-que-transbordam/13.png)
 
+![Figura 14: Gráfico que mostra como a população foi afetada. Fonte: A autora.](../../assets/blog/dados-que-transbordam/14.jpg)
+
 ![Figura 15: Gráfico das cidades mais atingidas. Fonte: A autora.](../../assets/blog/dados-que-transbordam/15.jpg)
 
 ![Figura 16: Gráfico das cidades com mais óbitos. Fonte: A autora.](../../assets/blog/dados-que-transbordam/16.png)
