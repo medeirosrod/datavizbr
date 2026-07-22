@@ -7,7 +7,6 @@ secao: bastidores
 tags: ["COVID-19", "Clima", "Dados", "Dataviz", "Educação"]
 medium_url_original: "https://medium.com/datavizbr/como-fizemos-o-mapa-interativo-que-te-coloca-no-epicentro-da-epidemia-de-covid-19-no-brasil-4ce949a9183b"
 publicado_originalmente_em: 2020-07-24
-rascunho: true
 capa: ../../assets/blog/como-fizemos-o-mapa-interativo-que-te-coloca-no-epicentro-da-epidemia-de-covid-1/01.png
 capa_alt: Capa do post Como fizemos o mapa interativo que te coloca no epicentro da epidemia de Covid-19 no Brasil
 ---
