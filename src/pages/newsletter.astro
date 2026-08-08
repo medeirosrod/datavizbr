@@ -115,6 +115,29 @@ import { SITE } from '../consts';
     padding: var(--space-16);
   }
 
+  /*
+   * O loader.js do beehiiv insere o iframe do formulário dentro de um
+   * <div style="overflow:hidden;height:0px"> e só revela o conteúdo depois
+   * que recebe uma mensagem postMessage do iframe com a altura real. Esse
+   * handshake às vezes trava (sobretudo no mobile) e o wrapper fica preso
+   * em height:0, deixando o formulário invisível indefinidamente. Forçamos
+   * o wrapper a acompanhar a altura do próprio iframe (que o beehiiv ajusta
+   * corretamente) em vez de depender do resize do wrapper.
+   */
+  .newsletter-form-bloco :global(> div > div) {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-form-bloco {
+      /* O template do beehiiv coloca campo de email e botão lado a lado
+         e não empilha em telas estreitas; menos padding aqui dá mais
+         largura ao iframe e evita que o texto do botão seja cortado. */
+      padding: var(--space-8);
+    }
+  }
+
   .form-disclaimer {
     color: var(--fg-meta);
     margin-top: var(--space-6);
