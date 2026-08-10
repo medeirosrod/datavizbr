@@ -1,5 +1,6 @@
 ---
 titulo: "Geoprocessamento na resposta a eventos climáticos extremos"
+descricao: Como técnicas de geoprocessamento no QGIS ajudaram a mapear com precisão os domicílios atingidos pela enchente do Rio Vacacaí em 2024.
 autores:
   - elmo-neto
 publicado_em: 2024-05-17

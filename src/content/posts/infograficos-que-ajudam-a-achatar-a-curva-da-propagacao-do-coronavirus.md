@@ -1,5 +1,6 @@
 ---
 titulo: "Infográficos que ajudam a \"achatar a curva\" da propagação do coronavírus"
+descricao: Como os vídeo-infográficos da Vox e do Kurzgesagt usaram formas esquemáticas e pictóricas para explicar o achatamento da curva.
 autores:
   - ricardo-cunha-lima
 publicado_em: 2020-04-01

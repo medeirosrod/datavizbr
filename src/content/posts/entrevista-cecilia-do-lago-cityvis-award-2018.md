@@ -1,5 +1,6 @@
 ---
 titulo: "Entrevista Cecília do Lago — Cityvis Award 2018"
+descricao: Cecília do Lago conta como criou a reportagem sobre roubos de celular em São Paulo, finalista do Cityvis Award 2018.
 autores:
   - rodrigo-medeiros
 publicado_em: 2018-10-23

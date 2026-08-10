@@ -1,5 +1,6 @@
 ---
 titulo: "Entendendo o agora — Dataviz em tempos de coronavírus parte 1"
+descricao: Primeira parte de uma coletânea de visualizações sobre a pandemia de Covid-19, começando pelo tema achatar a curva.
 autores:
   - carolina-leslie
 publicado_em: 2020-05-07

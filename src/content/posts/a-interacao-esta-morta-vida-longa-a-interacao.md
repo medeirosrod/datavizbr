@@ -1,5 +1,6 @@
 ---
 titulo: "A interação está morta. Vida longa à interação!"
+descricao: Um panorama sobre quando vale a pena usar interação em visualizações de dados, com exemplos do jornalismo internacional.
 autores:
   - olga-lopes
 publicado_em: 2022-06-03

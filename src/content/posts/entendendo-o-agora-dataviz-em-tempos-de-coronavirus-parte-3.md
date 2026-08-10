@@ -1,5 +1,6 @@
 ---
 titulo: "Entendendo o agora — Dataviz em tempos de Coronavírus parte 3"
+descricao: Terceira parte da série, explorando dataviz sobre buscas na internet, mobilidade, economia e impacto ambiental na pandemia.
 autores:
   - carolina-leslie
 publicado_em: 2020-06-19

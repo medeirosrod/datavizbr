@@ -1,5 +1,6 @@
 ---
 titulo: "Dez dicas para deixar sua visualização de dados mais acessível"
+descricao: Dez estratégias práticas para tornar gráficos, tabelas e mapas legíveis para pessoas com daltonismo e baixa visão.
 autores:
   - vinicius-c-barqueiro
 publicado_em: 2020-10-20

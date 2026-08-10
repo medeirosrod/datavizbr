@@ -1,5 +1,6 @@
 ---
 titulo: "O IBGE CORRE PERIGO: e por que é importante defendê-lo"
+descricao: Os cortes orçamentários no IBGE, o risco ao censo demográfico e por que esses dados importam para políticas públicas.
 autores:
   - glaudemias-g-junior
 publicado_em: 2021-04-02

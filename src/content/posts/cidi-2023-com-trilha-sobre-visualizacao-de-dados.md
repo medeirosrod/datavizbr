@@ -1,5 +1,6 @@
 ---
 titulo: "CIDI 2023 com trilha sobre visualização de dados"
+descricao: O Congresso Internacional de Design da Informação (CIDI) 2023 ganha uma trilha dedicada à visualização de dados.
 autores:
   - rodrigo-medeiros
 publicado_em: 2023-04-26

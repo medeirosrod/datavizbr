@@ -1,5 +1,6 @@
 ---
 titulo: "Antropográficos: visualizando dados sobre pessoas com o objetivo de gerar compaixão"
+descricao: O que são antropográficos, visualizações de dados sobre pessoas pensadas para gerar compaixão pelos indivíduos representados.
 autores:
   - luiz-morais
 publicado_em: 2020-10-07

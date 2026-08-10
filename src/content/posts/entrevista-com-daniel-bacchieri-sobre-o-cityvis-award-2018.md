@@ -1,5 +1,6 @@
 ---
 titulo: "Entrevista com Daniel Bacchieri sobre o CityVis Award 2018"
+descricao: Daniel Bacchieri conta a história do StreetMusicMap, mapa colaborativo de música de rua finalista do CityVis Award 2018.
 autores:
   - rodrigo-medeiros
 publicado_em: 2018-10-24

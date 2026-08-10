@@ -1,5 +1,6 @@
 ---
 titulo: "Data Visualization Lisboa: o nosso pequeno mundo à distância"
+descricao: Como a comunidade Data Visualization Lisboa se reinventou e se aproximou por meio de meetups online durante a pandemia.
 autores:
   - salome-esteves
 publicado_em: 2022-03-08

@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de dados: decisões estratégicas para a transformação digital"
+descricao: Como a visualização de dados se torna estratégica para a maturidade tecnológica das indústrias na era da Indústria 4.0.
 autores:
   - ricardo-brazileiro
 publicado_em: 2021-01-09

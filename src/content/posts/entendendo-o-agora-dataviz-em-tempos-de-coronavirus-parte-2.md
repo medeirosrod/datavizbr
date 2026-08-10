@@ -1,5 +1,6 @@
 ---
 titulo: "Entendendo o agora — Dataviz em tempos de coronavírus parte 2"
+descricao: Segunda parte da coletânea sobre dataviz na pandemia, com simulações de contágio e narrativas visuais interativas.
 autores:
   - carolina-leslie
 publicado_em: 2020-05-13

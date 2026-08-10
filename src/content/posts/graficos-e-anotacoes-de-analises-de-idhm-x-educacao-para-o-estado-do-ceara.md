@@ -1,5 +1,6 @@
 ---
 titulo: "Gráficos e anotações de análises de IDHM x educação para o estado do Ceará"
+descricao: Mapas e gráficos mostram como variáveis de educação explicaram a evolução do IDHM dos municípios cearenses entre 1991 e 2010.
 autores:
   - fernando-barbalho
 publicado_em: 2022-06-22

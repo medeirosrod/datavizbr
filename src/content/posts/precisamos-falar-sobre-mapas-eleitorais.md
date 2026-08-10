@@ -1,5 +1,6 @@
 ---
 titulo: "Precisamos falar sobre mapas eleitorais"
+descricao: Por que mapas eleitorais tradicionais enganam e como cartogramas de veículos como Financial Times e New Yorker corrigem essa distorção.
 autores:
   - ricardo-cunha-lima
 publicado_em: 2020-11-08

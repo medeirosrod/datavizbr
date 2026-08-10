@@ -1,5 +1,6 @@
 ---
 titulo: "Machine Learning e Deep Learning: criando visualização de textos com o TextVis"
+descricao: Como o TextVis usa machine learning e deep learning para transformar textos em visualizações de dados, com exemplos de aplicação.
 autores:
   - juliana-freitas
 publicado_em: 2022-02-02

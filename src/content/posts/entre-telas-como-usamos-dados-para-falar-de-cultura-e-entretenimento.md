@@ -1,5 +1,6 @@
 ---
 titulo: "Entre.telas: como usamos dados para falar de cultura e entretenimento"
+descricao: Os bastidores da newsletter entre.telas, que uniu notícias culturais e visualização de dados em oito edições.
 autores:
   - gabriella-sales
 publicado_em: 2022-03-02

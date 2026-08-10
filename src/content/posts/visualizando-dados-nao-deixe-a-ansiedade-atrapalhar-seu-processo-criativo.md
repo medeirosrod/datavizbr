@@ -1,5 +1,6 @@
 ---
 titulo: "Visualizando dados: não deixe a ansiedade atrapalhar seu processo criativo"
+descricao: Como sucessivas tentativas e reavaliações transformaram dados de desemprego do IBGE em um mapa de calor com média móvel.
 autores:
   - fernando-hannaka
 publicado_em: 2020-12-08

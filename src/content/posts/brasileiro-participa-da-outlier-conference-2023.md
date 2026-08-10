@@ -1,5 +1,6 @@
 ---
 titulo: "Brasileiro participa da Outlier Conference 2023"
+descricao: Rodolfo Almeida representa o Brasil na Outlier Conference 2023 com pesquisa sobre como a crise climática é representada em dataviz.
 autores:
   - rodrigo-medeiros
 publicado_em: 2023-04-27

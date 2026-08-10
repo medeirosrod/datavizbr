@@ -1,5 +1,6 @@
 ---
 titulo: "Uma unidade de dado já é \"Big Data\""
+descricao: Uma provocação apresentada no VIS4DH sobre como visualizar a escala emaranhada da crise climática e do Antropoceno.
 autores:
   - rodolfo-almeida
 publicado_em: 2021-12-30

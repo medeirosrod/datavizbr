@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de dados é o próximo desafio do design?"
+descricao: Tradução de um texto de Stephanie Evergreen sobre por que dados e designers precisam trabalhar juntos na visualização de dados.
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-07-11

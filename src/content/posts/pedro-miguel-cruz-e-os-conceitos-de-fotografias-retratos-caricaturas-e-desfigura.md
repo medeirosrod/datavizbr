@@ -1,5 +1,6 @@
 ---
 titulo: "Pedro Miguel Cruz e os conceitos de fotografias, retratos, caricaturas e desfiguramentos na visualização de dados"
+descricao: Pedro Miguel Cruz explica como metáforas visuais, de fotografias a desfiguramentos, podem intensificar a mensagem de uma visualização.
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-08-13

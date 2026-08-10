@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de informação por Pedro Miguel Cruz"
+descricao: Um resumo da palestra de Pedro Miguel Cruz no Interaction South America 2013 sobre retrato e caricatura na visualização de dados.
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-05

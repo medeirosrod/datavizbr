@@ -1,5 +1,6 @@
 ---
 titulo: "Para onde ir? A falta de leitos diante do avanço da pandemia"
+descricao: Mapas mostram a desigualdade na distribuição de leitos de UTI no Brasil e os longos deslocamentos que a pandemia exigiria.
 autores:
   - gabriel-vaz-de-melo
 publicado_em: 2020-05-14

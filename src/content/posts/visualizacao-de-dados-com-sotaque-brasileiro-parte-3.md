@@ -9,7 +9,7 @@ ordem_na_serie: 3
 tags:
   - dataviz
   - brasil
-descricao: "Terceira parte do mapeamento da cena brasileira de visualização de dados."
+descricao: "Terceira parte da série, dedicada aos profissionais brasileiros de design, computação e ciência de dados em dataviz."
 capa: ./_capas/vdsb-03.png
 ---
 

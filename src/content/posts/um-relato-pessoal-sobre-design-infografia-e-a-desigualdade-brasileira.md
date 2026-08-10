@@ -1,5 +1,6 @@
 ---
 titulo: "Um relato pessoal sobre design, infografia e a desigualdade brasileira"
+descricao: A trajetória de um infografista da Baixada Fluminense até redações como O Globo e Nexo, contada através da desigualdade brasileira.
 autores:
   - lucas-gomes
 publicado_em: 2022-06-14

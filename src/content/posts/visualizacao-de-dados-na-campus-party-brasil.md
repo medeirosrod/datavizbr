@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de dados na Campus Party Brasil"
+descricao: Um resumo das palestras e mesas redondas sobre visualização de dados curadas pelo autor na Campus Party Brasil de 2015 e 2016.
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-07

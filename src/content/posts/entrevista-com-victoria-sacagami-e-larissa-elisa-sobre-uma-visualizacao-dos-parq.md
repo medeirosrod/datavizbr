@@ -1,5 +1,6 @@
 ---
 titulo: "Entrevista com Victória Sacagami e Larissa Elisa sobre uma visualização dos parques públicos cariocas."
+descricao: Victória Sacagami e Larissa Elisa contam como transformaram uma pesquisa de iniciação científica em visualização dos parques do Rio.
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-08-12

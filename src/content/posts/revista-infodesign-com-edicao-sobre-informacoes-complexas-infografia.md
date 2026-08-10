@@ -1,5 +1,6 @@
 ---
 titulo: "Revista Infodesign com edição sobre informações complexas & infografia"
+descricao: Destaque para o artigo Pensar Infográfico na edição da Revista InfoDesign dedicada a informações complexas e infografia.
 autores:
   - rodrigo-medeiros
 publicado_em: 2018-01-05

@@ -1,5 +1,6 @@
 ---
 titulo: "Hiperinfográficos e covid-19: modelos sofisticados nos jornais para a cobertura da pandemia"
+descricao: Três exemplos de hiperinfográficos, os modelos hipermidiáticos mais complexos e imersivos usados na cobertura da pandemia.
 autores:
   - william-r-cordeiro
 publicado_em: 2020-06-16

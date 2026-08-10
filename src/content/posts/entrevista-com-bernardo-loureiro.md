@@ -1,5 +1,6 @@
 ---
 titulo: "Entrevista com Bernardo Loureiro"
+descricao: Bernardo Loureiro, do laboratório Medida SP, fala sobre visualização urbana, ferramentas e como começar na área.
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-08-04

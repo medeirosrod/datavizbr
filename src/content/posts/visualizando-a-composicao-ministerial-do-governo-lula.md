@@ -1,5 +1,6 @@
 ---
 titulo: "Visualizando a composição ministerial do Governo Lula"
+descricao: Os bastidores da construção de um donut chart que mostra a composição do terceiro governo Lula por partido, gênero e raça.
 autores:
   - adolfo-guimaraes
 publicado_em: 2023-01-20

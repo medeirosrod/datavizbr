@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de dados no youtube e em português"
+descricao: Uma seleção de vídeos e lives em português sobre visualização de dados e infografia produzidos durante a pandemia.
 autores:
   - rodrigo-medeiros
 publicado_em: 2020-06-14

@@ -1,5 +1,6 @@
 ---
 titulo: "Dados à Mesa: visualizando o sistema alimentar da cidade de São Paulo"
+descricao: TCC que transforma dados do sistema alimentar de São Paulo em uma coleção de estamparia para panos de prato e guardanapos.
 autores:
   - gabriela-momberg
 publicado_em: 2022-01-05

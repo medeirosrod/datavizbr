@@ -1,5 +1,6 @@
 ---
 titulo: "O que aprendi no Malofiej 27"
+descricao: Um relato sobre integrar o júri do Malofiej 27, o maior prêmio de infografia do mundo, e as reflexões que a experiência trouxe.
 autores:
   - carol-cavaleiro
 publicado_em: 2019-04-14

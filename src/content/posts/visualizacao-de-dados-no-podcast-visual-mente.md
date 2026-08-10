@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de dados no podcast visual+mente"
+descricao: Um compilado de referências, projetos, eventos e ferramentas de dataviz citados no episódio #59 do podcast visual+mente.
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-04

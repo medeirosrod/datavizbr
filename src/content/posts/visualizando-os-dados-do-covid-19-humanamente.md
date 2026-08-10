@@ -1,5 +1,6 @@
 ---
 titulo: "Visualizando os dados do COVID-19 humanamente"
+descricao: Como Giorgia Lupi e Mona Chalabi usam a imperfeição e o desenho à mão para humanizar os dados da pandemia de Covid-19.
 autores:
   - eliza-fagundes
 publicado_em: 2020-05-08

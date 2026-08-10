@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de dados no CIDI"
+descricao: Um relato do CIDI 2015, evento que revelou a maturidade crescente das pesquisas brasileiras em visualização de dados.
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-02

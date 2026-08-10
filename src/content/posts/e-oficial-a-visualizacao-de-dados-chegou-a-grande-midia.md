@@ -1,5 +1,6 @@
 ---
 titulo: "É oficial: a visualização de dados chegou a grande mídia."
+descricao: Um balanço de 2019, o ano em que a visualização de dados saiu das margens e virou destaque na grande mídia.
 autores:
   - rodrigo-medeiros
 publicado_em: 2020-01-28

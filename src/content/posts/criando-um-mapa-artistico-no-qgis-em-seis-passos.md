@@ -1,5 +1,6 @@
 ---
 titulo: "Criando um mapa artístico no QGIS em seis passos"
+descricao: Tutorial passo a passo para criar um mapa artístico da malha urbana de uma cidade usando o QGIS.
 autores:
   - isabela-noronha
 publicado_em: 2024-04-29

@@ -1,5 +1,6 @@
 ---
 titulo: "Dados que transbordam: Design de informação aplicado à representação visual das enchentes"
+descricao: TCC de design da informação que transforma dados das enchentes de 2024 no Rio Grande do Sul em narrativa visual e afetiva.
 autores:
   - marina-becker
 publicado_em: 2026-07-09

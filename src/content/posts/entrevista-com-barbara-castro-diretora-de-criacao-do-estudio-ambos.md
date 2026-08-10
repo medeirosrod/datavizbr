@@ -1,5 +1,6 @@
 ---
 titulo: "Entrevista com Barbara Castro, diretora de criação do estúdio Ambos&&."
+descricao: Barbara Castro fala sobre curadoria de exposições de visualização de dados como linguagem artística no Brasil.
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-10-07

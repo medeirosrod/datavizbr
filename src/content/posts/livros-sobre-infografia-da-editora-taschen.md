@@ -1,5 +1,6 @@
 ---
 titulo: "Livros sobre infografia da editora Taschen"
+descricao: Uma indicação de quatro livros de infografia editados em português pela Taschen, resenhados pelo canal Pensar Infográfico.
 autores:
   - rodrigo-medeiros
 publicado_em: 2018-02-24

@@ -1,5 +1,6 @@
 ---
 titulo: "Raízes"
+descricao: Visualização interativa de denúncias de crimes de ódio na internet, estruturada como uma árvore que cresce com os dados.
 autores:
   - tatyana-mendes
 publicado_em: 2021-10-14

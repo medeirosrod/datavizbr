@@ -1,5 +1,6 @@
 ---
 titulo: "Mapas contando história: o PIB dos municípios brasileiros"
+descricao: Mapas de clusterização revelam os seis perfis econômicos dos municípios brasileiros a partir dos dados de PIB do IBGE.
 autores:
   - fernando-barbalho
 publicado_em: 2020-08-03

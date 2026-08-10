@@ -9,7 +9,7 @@ ordem_na_serie: 4
 tags:
   - dataviz
   - brasil
-descricao: "Quarta parte do mapeamento da cena brasileira de visualização de dados."
+descricao: "Quarta parte da série, mapeando os profissionais brasileiros que atuam com jornalismo de dados."
 capa: ./_capas/vdsb-04.gif
 ---
 

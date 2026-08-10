@@ -1,5 +1,6 @@
 ---
 titulo: "Minha experiência com ensino de Design da Informação e Dataviz em modo remoto"
+descricao: Um professor da Ufes relata os projetos e aprendizados de ensinar design da informação e dataviz remotamente durante a pandemia.
 autores:
   - mauro-pinheiro
 publicado_em: 2020-12-21

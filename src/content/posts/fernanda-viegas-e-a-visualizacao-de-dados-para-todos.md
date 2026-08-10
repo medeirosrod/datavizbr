@@ -1,5 +1,6 @@
 ---
 titulo: "Fernanda Viégas e a visualização de dados para todos"
+descricao: Uma coletânea de registros em português sobre o trabalho de Fernanda Viégas, referência brasileira em dataviz no Google.
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-09

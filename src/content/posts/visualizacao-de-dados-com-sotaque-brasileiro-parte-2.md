@@ -9,7 +9,7 @@ ordem_na_serie: 2
 tags:
   - dataviz
   - brasil
-descricao: "Segunda parte do mapeamento da cena brasileira de visualização de dados."
+descricao: "Segunda parte da série, mapeando trabalhos brasileiros de arte e interfaces físicas na visualização de dados."
 capa: ./_capas/vdsb-02.png
 ---
 

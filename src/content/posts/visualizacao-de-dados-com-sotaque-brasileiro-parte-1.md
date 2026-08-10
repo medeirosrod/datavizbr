@@ -9,7 +9,7 @@ ordem_na_serie: 1
 tags:
   - dataviz
   - brasil
-descricao: "Primeira parte do mapeamento da cena brasileira de visualização de dados."
+descricao: "Primeira parte da série sobre a cena brasileira de dataviz, contando a história da infografia no Brasil desde os anos 1990."
 capa: ./_capas/vdsb-01.png
 ---
 

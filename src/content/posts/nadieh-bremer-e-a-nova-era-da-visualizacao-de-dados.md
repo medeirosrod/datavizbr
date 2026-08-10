@@ -1,5 +1,6 @@
 ---
 titulo: "Nadieh Bremer e a nova era da visualização de dados"
+descricao: Um panorama sobre a trajetória e os projetos premiados de Nadieh Bremer, referência em visualização de dados na web.
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-08-07

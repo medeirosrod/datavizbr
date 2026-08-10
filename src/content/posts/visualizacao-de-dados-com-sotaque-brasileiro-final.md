@@ -9,7 +9,7 @@ ordem_na_serie: 5
 tags:
   - dataviz
   - brasil
-descricao: "Conclusão do mapeamento da cena brasileira de visualização de dados."
+descricao: "Última parte da série, reunindo as comunidades e grupos de pesquisa que consolidaram a visualização de dados no Brasil."
 capa: ./_capas/vdsb-05.png
 ---
 

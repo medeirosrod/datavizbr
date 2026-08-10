@@ -1,5 +1,6 @@
 ---
 titulo: "Lista colaborativa de quem seguir nas redes sociais em 2018 sobre big data, data science, jornalismo de dados e visualização de dados."
+descricao: Uma lista colaborativa de perfis brasileiros para seguir sobre visualização de dados, infografia, data science e jornalismo de dados.
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-12-20

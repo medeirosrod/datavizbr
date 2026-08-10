@@ -1,5 +1,6 @@
 ---
 titulo: "Princípios básicos da Visualização de Dados"
+descricao: Uma introdução aos conceitos essenciais da visualização de dados, do propósito de comunicar ao debate entre beleza e revelação.
 autores:
   - deborah-mesquita
 publicado_em: 2017-11-01

@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de Dados Inclusiva"
+descricao: Dicas práticas para criar dashboards acessíveis a pessoas daltônicas, usando ícones, posição e texto além da cor.
 autores:
   - ligia-galvao
 publicado_em: 2019-08-28

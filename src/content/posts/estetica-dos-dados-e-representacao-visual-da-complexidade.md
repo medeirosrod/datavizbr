@@ -1,5 +1,6 @@
 ---
 titulo: "Estética dos dados e representação visual da complexidade"
+descricao: Um ensaio sobre o fascínio estético por visualizações complexas e a intersecção entre arte e ciência na representação de dados.
 autores:
   - marck-ai
 publicado_em: 2020-11-21

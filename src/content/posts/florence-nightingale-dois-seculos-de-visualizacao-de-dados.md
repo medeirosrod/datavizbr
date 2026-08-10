@@ -1,5 +1,6 @@
 ---
 titulo: "Florence Nightingale, dois séculos de visualização de dados"
+descricao: Como Florence Nightingale usou diagramas de área polar para provar, com dados, que doenças evitáveis matavam mais que a guerra.
 autores:
   - igor-falconieri
 publicado_em: 2021-03-08

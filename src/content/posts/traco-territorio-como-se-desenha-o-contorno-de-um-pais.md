@@ -1,5 +1,6 @@
 ---
 titulo: "Traço, território: como se desenha o contorno de um país"
+descricao: Uma animação feita a partir de 87 mapas históricos mostra como o contorno do território brasileiro mudou ao longo dos séculos.
 autores:
   - rodolfo-almeida
 publicado_em: 2020-10-02

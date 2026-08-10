@@ -1,5 +1,6 @@
 ---
 titulo: "Entrevista com Gabriel Zanlorenssi"
+descricao: Gabriel Zanlorenssi, do Nexo Jornal, compara ggplot2 e D3 e dá dicas de ferramentas para quem está começando em dataviz.
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-07-24

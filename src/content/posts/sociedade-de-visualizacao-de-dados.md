@@ -1,5 +1,6 @@
 ---
 titulo: "Sociedade de Visualização de Dados"
+descricao: O anúncio da criação da Data Visualization Society e seus três objetivos para profissionalizar a área.
 autores:
   - rodrigo-medeiros
 publicado_em: 2019-03-13

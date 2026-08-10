@@ -1,5 +1,6 @@
 ---
 titulo: "Como fizemos o mapa interativo que te coloca no epicentro da epidemia de Covid-19 no Brasil"
+descricao: Os bastidores técnicos e criativos do mapa interativo No Epicentro, que mostra o raio de mortes por Covid-19 ao redor do usuário.
 autores:
   - rodrigo-menegat-schuinski
 publicado_em: 2020-07-24

@@ -1,5 +1,6 @@
 ---
 titulo: "Entrevista com Carol Seixas sobre o projeto borDADOS"
+descricao: Carol Seixas conta como transformou dados do cotidiano em bordado no projeto borDADOS, sua pesquisa de pós-graduação.
 autores:
   - rodrigo-medeiros
 publicado_em: 2022-03-31

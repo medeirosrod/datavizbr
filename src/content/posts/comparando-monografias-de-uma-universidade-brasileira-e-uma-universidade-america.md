@@ -1,5 +1,6 @@
 ---
 titulo: "Comparando monografias de uma Universidade brasileira e uma Universidade americana utilizando NLP"
+descricao: Usando processamento de linguagem natural para comparar temas e estilos de monografias entre uma universidade brasileira e uma americana.
 autores:
   - deborah-mesquita
 publicado_em: 2017-12-12

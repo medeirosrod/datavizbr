@@ -1,5 +1,6 @@
 ---
 titulo: "Giorgia Lupi e os dados."
+descricao: Sobre o projeto Dear Data e as ideias de Giorgia Lupi acerca de dados, humanismo e o desenho como ferramenta de pensamento.
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-07-01

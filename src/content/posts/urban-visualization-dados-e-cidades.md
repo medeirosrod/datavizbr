@@ -1,5 +1,6 @@
 ---
 titulo: "Urban Visualization: dados e cidades."
+descricao: Um panorama de projetos de urban visualization, do rastreamento de lixo do MIT ao Wind Map de Fernanda Viégas.
 autores:
   - rodrigo-medeiros
 publicado_em: 2017-11-26

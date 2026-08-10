@@ -1,5 +1,6 @@
 ---
 titulo: "Visualização de dados: o que mudou em 10 anos?"
+descricao: Um retrospecto de como o fim do Flash e a ascensão do D3.js e do React transformaram a visualização de dados na web desde 2010.
 autores:
   - rodrigo-medeiros
 publicado_em: 2022-01-13
