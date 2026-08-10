@@ -17,12 +17,8 @@
     --font-mono: 'Courier New', monospace;
   }
 }
-@font-face { font-family: 'IBM Plex Sans'; font-weight: 500; font-style: normal;  src: url('/fonts/IBMPlexSans-Medium.ttf') format('truetype');           font-display: swap; }
-@font-face { font-family: 'IBM Plex Sans'; font-weight: 500; font-style: italic;  src: url('/fonts/IBMPlexSans-MediumItalic.ttf') format('truetype');    font-display: swap; }
-@font-face { font-family: 'IBM Plex Sans'; font-weight: 600; font-style: normal;  src: url('/fonts/IBMPlexSans-SemiBold.ttf') format('truetype');        font-display: swap; }
-@font-face { font-family: 'IBM Plex Sans'; font-weight: 600; font-style: italic;  src: url('/fonts/IBMPlexSans-SemiBoldItalic.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'IBM Plex Sans'; font-weight: 700; font-style: normal;  src: url('/fonts/IBMPlexSans-Bold.ttf') format('truetype');            font-display: swap; }
-@font-face { font-family: 'IBM Plex Sans'; font-weight: 700; font-style: italic;  src: url('/fonts/IBMPlexSans-BoldItalic.ttf') format('truetype');      font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 100 700; font-style: normal;  src: url('/fonts/IBMPlexSans-VariableFont_wdth,wght.ttf') format('truetype-variations');        font-display: swap; }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 100 700; font-style: italic;  src: url('/fonts/IBMPlexSans-Italic-VariableFont_wdth,wght.ttf') format('truetype-variations'); font-display: swap; }
 
 /* --------------------------------------------------------------------------
    TOKENS
