@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AutorNome from '../../components/AutorNome.astro';
+import PostCoverDefault from '../../components/PostCoverDefault.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -60,8 +61,10 @@ const formatarData = (date: Date): string => {
               <article class="post-card">
                 <div class="post-numero">Parte {(post.data.ordem_na_serie || idx + 1)}</div>
 
-                {post.data.capa && (
+                {post.data.capa ? (
                   <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
+                ) : (
+                  <PostCoverDefault class="post-thumb" />
                 )}
 
                 <div class="post-card-body">

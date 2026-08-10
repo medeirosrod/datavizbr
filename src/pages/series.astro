@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AutorNome from '../components/AutorNome.astro';
+import PostCoverDefault from '../components/PostCoverDefault.astro';
 import { getCollection } from 'astro:content';
 
 const allSeries = await getCollection('series');
@@ -69,7 +70,7 @@ const formatarData = (date: Date): string => {
                     {post.data.capa ? (
                       <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
                     ) : (
-                      <div class={`post-thumb post-thumb-placeholder ${corClass}`} aria-hidden="true"></div>
+                      <PostCoverDefault class="post-thumb" />
                     )}
                     <div class="post-card-body">
                       <h3 class="post-titulo">

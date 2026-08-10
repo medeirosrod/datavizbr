@@ -3,6 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroChart from '../components/HeroChart.astro';
 import AutorNome from '../components/AutorNome.astro';
+import PostCoverDefault from '../components/PostCoverDefault.astro';
 import { getSecaoLabel, SITE } from '../consts';
 import { getCollection } from 'astro:content';
 
@@ -21,8 +22,13 @@ const postsRestantes = allPosts
 // Combinar: primeiro os com order_homepage, depois os demais
 const posts = [...postsComOrdem, ...postsRestantes];
 
-// Post em destaque (primeiro da lista)
-const featured = posts[0];
+// Em destaque: todos os posts marcados com order_homepage: 1, do mais novo ao mais antigo.
+// Se nenhum estiver marcado, cai no primeiro da lista para a seção não sumir.
+const destaques = allPosts
+  .filter(post => !post.data.rascunho && post.data.order_homepage === 1)
+  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+
+const emDestaque = destaques.length > 0 ? destaques : posts.slice(0, 1);
 
 // Artigos selecionados para a seção de curadoria (em ordem específica)
 const curatedPostIds = [
@@ -110,45 +116,66 @@ const tempoLeitura = (slug: string): number => {
   <!-- ═══════════════════════════════════════════
        BLOCO 2 — EM DESTAQUE
   ════════════════════════════════════════════ -->
-  {featured && (
+  {emDestaque.length > 0 && (
     <section class="section destaque-section">
       <div class="container">
         <div class="section-head">
           <h2>Em destaque</h2>
         </div>
-        <article class="destaque">
-          <div class="destaque-capa">
-            {featured.data.capa ? (
-              <img src={featured.data.capa.src} alt={featured.data.capa_alt || featured.data.titulo} />
-            ) : (
-              <div class="destaque-capa-placeholder" aria-hidden="true"></div>
-            )}
-          </div>
-          <div class="destaque-conteudo">
-            <div class="destaque-meta">
-              <span class={`badge badge-${featured.data.secao}`}>{getSecaoLabel(featured.data.secao)}</span>
-              <span class="t-caption">{tempoLeitura(featured.slug)} min de leitura</span>
-            </div>
-            <h2 class="destaque-titulo">
-              <a href={`/posts/${featured.id}`}>
-                {featured.data.titulo}
-              </a>
-            </h2>
-            <p class="destaque-excerpt">
-              {featured.data.descricao || featured.data.subtitulo}
-            </p>
-            <div class="destaque-autor">
-              <div class="autor-avatar" aria-hidden="true">{featured.data.autores[0]?.id?.substring(0, 2).toUpperCase() || 'DR'}</div>
-              <div>
-                <div class="autor-nome"><AutorNome autorId={featured.data.autores[0]?.id} /></div>
-                <div class="t-caption">{formatarData(featured.data.publicado_em)}</div>
+
+        <div class="destaque-carrossel" data-destaque-carrossel>
+          {emDestaque.map((post, idx) => (
+            <article class:list={['destaque', 'destaque-slide', idx === 0 && 'ativo']} data-destaque-slide inert={idx !== 0}>
+              <div class="destaque-capa">
+                {post.data.capa ? (
+                  <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} />
+                ) : (
+                  <div class="destaque-capa-placeholder">
+                    <PostCoverDefault proporcao="4 / 3" />
+                  </div>
+                )}
               </div>
-            </div>
-            <a href={`/posts/${featured.id}`} class="destaque-cta">
-              Ler texto →
-            </a>
+              <div class="destaque-conteudo">
+                <div class="destaque-meta">
+                  <span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span>
+                  <span class="t-caption">{tempoLeitura(post.slug)} min de leitura</span>
+                </div>
+                <h2 class="destaque-titulo">
+                  <a href={`/posts/${post.id}`}>
+                    {post.data.titulo}
+                  </a>
+                </h2>
+                <p class="destaque-excerpt">
+                  {post.data.descricao || post.data.subtitulo}
+                </p>
+                <div class="destaque-autor">
+                  <div class="autor-avatar" aria-hidden="true">{post.data.autores[0]?.id?.substring(0, 2).toUpperCase() || 'DR'}</div>
+                  <div>
+                    <div class="autor-nome"><AutorNome autorId={post.data.autores[0]?.id} /></div>
+                    <div class="t-caption">{formatarData(post.data.publicado_em)}</div>
+                  </div>
+                </div>
+                <a href={`/posts/${post.id}`} class="destaque-cta">
+                  Ler texto →
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {emDestaque.length > 1 && (
+          <div class="destaque-dots">
+            {emDestaque.map((post, idx) => (
+              <button
+                type="button"
+                class:list={['destaque-dot', idx === 0 && 'ativo']}
+                data-destaque-dot
+                aria-current={idx === 0 ? 'true' : 'false'}
+                aria-label={`Ver destaque ${idx + 1} de ${emDestaque.length}: ${post.data.titulo}`}
+              ></button>
+            ))}
           </div>
-        </article>
+        )}
       </div>
     </section>
   )}
@@ -167,7 +194,7 @@ const tempoLeitura = (slug: string): number => {
             {post.data.capa ? (
               <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
             ) : (
-              <div class="post-thumb post-thumb-placeholder" aria-hidden="true"></div>
+              <PostCoverDefault class="post-thumb" />
             )}
             <div class="post-card-body">
               <div class="post-meta"><span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span></div>
@@ -202,7 +229,7 @@ const tempoLeitura = (slug: string): number => {
             {post.data.capa ? (
               <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
             ) : (
-              <div class="post-thumb post-thumb-placeholder" aria-hidden="true"></div>
+              <PostCoverDefault class="post-thumb" />
             )}
             <div class="post-card-body">
               <div class="post-meta"><span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span></div>
@@ -510,10 +537,59 @@ const tempoLeitura = (slug: string): number => {
     gap: var(--space-20);
     align-items: center;
   }
+
+  /* Carrossel: slides empilhados na mesma célula de grid, então a altura
+     acompanha o slide mais alto e não há salto na troca. */
+  .destaque-carrossel {
+    display: grid;
+  }
+  /* O slide inativo continua ocupando a célula (para a altura não saltar),
+     mas fica fora do fluxo de cliques e do foco — este último via `inert`. */
+  .destaque-slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 600ms ease;
+  }
+  .destaque-slide.ativo {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .destaque-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-6);
+    margin-top: var(--space-16);
+  }
+  .destaque-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--border-strong);
+    cursor: pointer;
+    transition: background 200ms ease, transform 200ms ease;
+  }
+  .destaque-dot:hover {
+    background: var(--dvb-ink-4);
+  }
+  .destaque-dot.ativo {
+    background: var(--color-primary);
+    transform: scale(1.25);
+  }
+  .destaque-dot:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .destaque-slide { transition: none; }
+  }
   .destaque-capa-placeholder {
-    aspect-ratio: 4/3;
     border-radius: var(--radius-large);
-    background: linear-gradient(135deg, var(--dvb-orange-100) 0%, var(--dvb-purple-100) 100%);
+    overflow: hidden;
     box-shadow: var(--elev-3);
   }
   .destaque-meta {
@@ -1046,4 +1122,69 @@ const tempoLeitura = (slug: string): number => {
   } else {
     initAnimations();
   }
+</script>
+
+<script is:inline>
+  // Carrossel do "Em destaque" — cross-fade entre os posts com order_homepage: 1
+  (function () {
+    function initDestaque() {
+      const carrossel = document.querySelector('[data-destaque-carrossel]');
+      if (!carrossel) return;
+
+      const slides = Array.from(carrossel.querySelectorAll('[data-destaque-slide]'));
+      const dots = Array.from(document.querySelectorAll('[data-destaque-dot]'));
+      if (slides.length < 2) return;
+
+      const INTERVALO = 6000;
+      const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let atual = 0;
+      let timer = null;
+
+      function mostrar(indice) {
+        atual = indice;
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('ativo', i === indice);
+          slide.inert = i !== indice;
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('ativo', i === indice);
+          dot.setAttribute('aria-current', i === indice ? 'true' : 'false');
+        });
+      }
+
+      function parar() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+
+      function iniciar() {
+        if (semMovimento || timer) return;
+        timer = setInterval(() => mostrar((atual + 1) % slides.length), INTERVALO);
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          parar();
+          mostrar(i);
+          iniciar();
+        });
+      });
+
+      // Não avança enquanto a pessoa está lendo ou navegando pelo teclado
+      carrossel.addEventListener('mouseenter', parar);
+      carrossel.addEventListener('mouseleave', iniciar);
+      carrossel.addEventListener('focusin', parar);
+      carrossel.addEventListener('focusout', iniciar);
+      document.addEventListener('visibilitychange', () => {
+        document.hidden ? parar() : iniciar();
+      });
+
+      iniciar();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDestaque);
+    } else {
+      initDestaque();
+    }
+  })();
 </script>

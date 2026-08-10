@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AutorNome from '../components/AutorNome.astro';
+import PostCoverDefault from '../components/PostCoverDefault.astro';
 import { getSecaoLabel } from '../consts';
 import { getCollection } from 'astro:content';
 
@@ -31,7 +32,7 @@ const formatarData = (date: Date): string => {
             {post.data.capa ? (
               <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
             ) : (
-              <div class="post-thumb post-thumb-placeholder" aria-hidden="true"></div>
+              <PostCoverDefault class="post-thumb" />
             )}
             <div class="post-card-body">
               <div class="post-meta">
