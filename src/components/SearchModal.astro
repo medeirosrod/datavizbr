@@ -1,0 +1,329 @@
+---
+// src/components/SearchModal.astro
+---
+
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Buscar no site" hidden>
+  <div class="search-panel">
+    <div class="search-field">
+      <svg class="search-field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input
+        type="text"
+        id="searchInput"
+        class="search-field-input"
+        placeholder="Buscar por título, tag ou autor..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button type="button" class="search-close" id="searchClose" aria-label="Fechar busca">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">Digite para buscar entre os posts do datavizbr.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  import MiniSearch from 'minisearch';
+
+  interface SearchDoc {
+    id: string;
+    titulo: string;
+    subtitulo: string;
+    descricao: string;
+    tags: string;
+    autores: string;
+    secao: string;
+    secaoLabel: string;
+    publicado_em: string;
+    capa: string | null;
+    url: string;
+    corpo: string;
+  }
+
+  const overlay = document.getElementById('searchOverlay') as HTMLDivElement | null;
+  const trigger = document.getElementById('searchTrigger') as HTMLButtonElement | null;
+  const closeBtn = document.getElementById('searchClose') as HTMLButtonElement | null;
+  const input = document.getElementById('searchInput') as HTMLInputElement | null;
+  const resultsEl = document.getElementById('searchResults') as HTMLDivElement | null;
+
+  if (overlay && trigger && closeBtn && input && resultsEl) {
+    let miniSearch: MiniSearch<SearchDoc> | null = null;
+    let docsById: Map<string, SearchDoc> = new Map();
+    let loadPromise: Promise<void> | null = null;
+    let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const normalize = (s: string) =>
+      s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+    function formatDate(iso: string): string {
+      return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    async function ensureIndexLoaded(): Promise<void> {
+      if (loadPromise) return loadPromise;
+
+      loadPromise = (async () => {
+        resultsEl!.innerHTML = '<p class="search-hint">Carregando índice...</p>';
+        const res = await fetch('/search-index.json');
+        const docs: SearchDoc[] = await res.json();
+        docsById = new Map(docs.map((d) => [d.id, d]));
+
+        miniSearch = new MiniSearch<SearchDoc>({
+          idField: 'id',
+          fields: ['titulo', 'subtitulo', 'descricao', 'tags', 'autores', 'corpo'],
+          storeFields: ['id'],
+          extractField: (doc, fieldName) => normalize((doc as any)[fieldName] ?? ''),
+          searchOptions: {
+            boost: { titulo: 3, tags: 2, autores: 2, descricao: 1.5 },
+            prefix: true,
+            fuzzy: 0.2,
+          },
+        });
+        miniSearch.addAll(docs);
+
+        resultsEl!.innerHTML = '<p class="search-hint">Digite para buscar entre os posts do datavizbr.</p>';
+      })();
+
+      return loadPromise;
+    }
+
+    function renderResults(query: string) {
+      if (!miniSearch) return;
+
+      if (!query.trim()) {
+        resultsEl!.innerHTML = '<p class="search-hint">Digite para buscar entre os posts do datavizbr.</p>';
+        return;
+      }
+
+      const hits = miniSearch.search(normalize(query)).slice(0, 20);
+
+      if (hits.length === 0) {
+        resultsEl!.innerHTML = `<p class="search-hint">Nenhum resultado para "${escapeHtml(query)}".</p>`;
+        return;
+      }
+
+      resultsEl!.innerHTML = hits
+        .map((hit) => {
+          const doc = docsById.get(String(hit.id));
+          if (!doc) return '';
+          return `
+            <a href="${doc.url}" class="search-result">
+              <span class="search-result-meta">
+                <span class="search-result-secao">${escapeHtml(doc.secaoLabel)}</span>
+                <span class="search-result-date">${formatDate(doc.publicado_em)}</span>
+              </span>
+              <span class="search-result-title">${escapeHtml(doc.titulo)}</span>
+              ${doc.descricao ? `<span class="search-result-desc">${escapeHtml(doc.descricao)}</span>` : ''}
+              ${doc.autores ? `<span class="search-result-autor">${escapeHtml(doc.autores)}</span>` : ''}
+            </a>
+          `;
+        })
+        .join('');
+    }
+
+    function escapeHtml(str: string): string {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    async function openSearch() {
+      overlay!.hidden = false;
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => overlay!.classList.add('open'));
+      input!.focus();
+      await ensureIndexLoaded();
+    }
+
+    function closeSearch() {
+      overlay!.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        overlay!.hidden = true;
+      }, 200);
+    }
+
+    trigger.addEventListener('click', openSearch);
+    closeBtn.addEventListener('click', closeSearch);
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeSearch();
+    });
+
+    input.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      const value = input!.value;
+      debounceTimer = setTimeout(() => renderResults(value), 150);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const isOpen = !overlay!.hidden;
+
+      if (!isOpen && (e.key === '/' || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'))) {
+        const target = e.target as HTMLElement;
+        const isTyping = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+        if (isTyping) return;
+        e.preventDefault();
+        openSearch();
+        return;
+      }
+
+      if (isOpen && e.key === 'Escape') {
+        closeSearch();
+      }
+    });
+  }
+</script>
+
+<style>
+  /* .search-trigger vive fora deste componente (dentro do .nav em BaseLayout.astro),
+     então precisa de :global() para que este CSS com escopo o alcance. */
+  :global(.search-trigger) {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-3);
+    color: var(--fg-label);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-standard);
+    transition: color 180ms ease, background 180ms ease;
+  }
+  :global(.search-trigger:hover) { color: var(--color-primary); background: var(--color-primary-tint); }
+  :global(.search-trigger:focus-visible) { outline: none; box-shadow: var(--focus-ring); }
+
+  .search-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10vh var(--padding-x) var(--space-24);
+    background: rgba(20, 12, 30, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  .search-overlay.open { opacity: 1; }
+  .search-overlay[hidden] { display: none; }
+
+  .search-panel {
+    width: 100%;
+    max-width: 640px;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border-radius: var(--radius-large);
+    box-shadow: var(--elev-3, var(--shadow-far));
+    overflow: hidden;
+    transform: translateY(-8px);
+    transition: transform 200ms ease;
+  }
+  .search-overlay.open .search-panel { transform: translateY(0); }
+
+  .search-field {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-12) var(--space-16);
+    border-bottom: 1px solid var(--border-default);
+  }
+  .search-field-icon { color: var(--fg-meta); flex-shrink: 0; }
+  .search-field-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: var(--fs-body);
+    color: var(--fg-heading);
+    font-family: var(--font-sans);
+  }
+  .search-field-input::placeholder { color: var(--fg-meta); }
+  .search-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--fg-meta);
+    padding: var(--space-3);
+    display: flex;
+    border-radius: var(--radius-standard);
+  }
+  .search-close:hover { color: var(--fg-heading); background: var(--bg-soft); }
+
+  .search-results {
+    overflow-y: auto;
+    padding: var(--space-6) 0;
+  }
+
+  /* .search-hint também é (re)injetado via innerHTML assim que o modal abre
+     (estado de carregamento do índice), então precisa de :global() como os
+     resultados abaixo. */
+  :global(.search-hint) {
+    padding: var(--space-8) var(--space-16);
+    padding-left: calc(var(--space-16) + 18px + var(--space-8));
+    color: var(--fg-meta);
+    font-size: var(--fs-body-sm);
+  }
+
+  /* Resultados são injetados via innerHTML no client, então precisam de :global()
+     para que o CSS com escopo do Astro alcance esses elementos. */
+  :global(.search-result) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-8) var(--space-16);
+    border-bottom: none;
+    color: var(--fg-body);
+    transition: background 120ms ease;
+  }
+  :global(.search-result:hover),
+  :global(.search-result:focus-visible) { background: var(--bg-soft); outline: none; }
+
+  :global(.search-result-meta) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    font-size: var(--fs-micro);
+    color: var(--fg-meta);
+  }
+  :global(.search-result-secao) {
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  :global(.search-result-title) {
+    font-size: var(--fs-body);
+    font-weight: 600;
+    color: var(--fg-heading);
+  }
+  :global(.search-result-desc) {
+    font-size: var(--fs-body-sm);
+    color: var(--fg-body);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  :global(.search-result-autor) {
+    font-size: var(--fs-micro);
+    color: var(--fg-meta);
+  }
+
+  @media (max-width: 768px) {
+    .search-overlay { padding: 0; align-items: stretch; }
+    .search-panel { max-width: none; max-height: none; height: 100%; border-radius: 0; }
+  }
+</style>
