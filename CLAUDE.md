@@ -6,11 +6,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **datavizbr** is a blog platform for data visualization content built with Astro. It features 70+ posts migrated from Medium, organized by sections (Panorama, Práticas, Bastidores, Ensaios), with support for authors, series, tags, and related content.
 
+## Codebase Overview
+
+Fully static-generated (SSG) Astro 6 site — every route is prerendered via `getStaticPaths()`, no server adapter. Content lives in four Zod-validated collections (`posts`, `autores`, `series`, `livros`) defined in `src/content.config.ts`; a partially-adopted data-access layer (`src/lib/data.ts`) wraps `getCollection()`, but most listing pages under `src/pages/` query collections directly with their own inline filter/sort logic.
+
+**Stack**: Astro 6.2, TypeScript strict, `minisearch` (client-side search), Sharp installed but image optimization disabled (`noop` service). No test runner or lint script.
+**Structure**: `src/content/` (Markdown content), `src/pages/` (routes), `src/layouts/` + `src/components/` (UI), `src/lib/data.ts` (queries), `src/styles/tokens.css` (single source of truth for CSS variables).
+
+For full architecture — route map, data flow diagrams, cross-file filtering inconsistencies, and known gotchas — see [docs/CODEBASE_MAP.md](docs/CODEBASE_MAP.md).
+
 ## Quick Commands
 
 ```bash
 npm install          # Install dependencies
-npm run dev          # Start dev server (http://localhost:4323)
+npm run dev          # Start dev server (http://localhost:4321, Astro default)
 npm run build        # Build for production
 npm run preview      # Preview production build locally
 npm run astro -- <cmd>  # Run any Astro CLI command
@@ -37,17 +46,18 @@ Posts use:
 - **Tags** (`src/pages/tags/index.astro` & `[slug].astro`): Dynamic tag pages; note: `[slug].astro` has explicit filter on line 22 for posts
 - **Authors** (`src/pages/autores.astro` & `autores/[slug].astro`): Author profiles and their posts
 - **Series** (`src/pages/series.astro` & `series/[id].astro`): Grouped post collections
-- **Post Detail** (`src/pages/posts/[id].astro`): Individual post rendering with layout
+- **Post Detail** (`src/pages/posts/[...slug].astro`): Individual post rendering with layout
 
 ### Layout System
-- `BaseLayout.astro`: Global layout (header, footer, nav)
-- `PostLayout.astro`: Post-specific layout (date, author info, related posts)
+- `BaseLayout.astro`: Global layout (head/nav/footer/search modal); footer nav links are hardcoded here, not driven by `consts.ts`
+- `PostLayout.astro`: Post-specific layout (date, author info, tags, prev/next); wraps `BaseLayout`
 
 ### Key Components
-- `AutorNome.astro`: Renders author name/link from author ID
-- `FormattedDate.astro`: Formats dates in pt-BR locale
-- `HeaderLink.astro`: Navigation link component
-- `Header.astro` / `Footer.astro`: Site chrome
+- `AutorNome.astro`: Renders author name from author ID (`getEntry`, falls back to raw id)
+- `FormattedDate.astro`: Renders a `<time>` element (locale currently hardcoded to `en-us`, not `pt-BR`)
+- `HeroChart.astro`: D3/GSAP animated homepage chart (depends on global `d3`/`gsap` loaded via CDN in `index.astro`)
+- `PostCoverDefault.astro`: Fallback SVG cover for posts without a `capa` image
+- `SearchModal.astro`: Client-side search overlay (`minisearch` against `/search-index.json`)
 
 ## Recent Changes & Context
 
@@ -87,7 +97,8 @@ Posts use:
 ## File Locations to Know
 
 - `src/consts.ts`: Site-wide constants (sections, site URL)
-- `src/content/config.ts`: Content collection schemas
+- `src/content.config.ts`: Content collection schemas (authoritative source for frontmatter fields)
+- `src/lib/data.ts`: Data-access helpers (`getPosts`, `getAutores`, etc.) — only partially adopted by pages; see [docs/CODEBASE_MAP.md](docs/CODEBASE_MAP.md) for which pages bypass it
 - `astro.config.mjs`: Build/image optimization settings
 - `tsconfig.json`: TypeScript config (strict mode)
 - `src/styles/`: Global CSS variables (--space-*, --color-*, --fs-*, etc)

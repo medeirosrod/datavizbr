@@ -5,19 +5,19 @@ import HeroChart from '../components/HeroChart.astro';
 import AutorNome from '../components/AutorNome.astro';
 import PostCoverDefault from '../components/PostCoverDefault.astro';
 import { getSecaoLabel, SITE } from '../consts';
-import { getCollection } from 'astro:content';
+import { getPosts, getSeries, porData } from '../lib/data';
 
-// Buscar todos os posts (exceto rascunhos)
-const allPosts = await getCollection('posts');
+// Buscar todos os posts publicados (rascunhos já filtrados por getPosts)
+const allPosts = await getPosts();
 
 // Separar posts com order_homepage dos demais
 const postsComOrdem = allPosts
-  .filter(post => !post.data.rascunho && post.data.order_homepage)
+  .filter(post => post.data.order_homepage)
   .sort((a, b) => (a.data.order_homepage || 999) - (b.data.order_homepage || 999));
 
 const postsRestantes = allPosts
-  .filter(post => !post.data.rascunho && !post.data.order_homepage)
-  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+  .filter(post => !post.data.order_homepage)
+  .sort(porData);
 
 // Combinar: primeiro os com order_homepage, depois os demais
 const posts = [...postsComOrdem, ...postsRestantes];
@@ -25,8 +25,8 @@ const posts = [...postsComOrdem, ...postsRestantes];
 // Em destaque: todos os posts marcados com order_homepage: 1, do mais novo ao mais antigo.
 // Se nenhum estiver marcado, cai no primeiro da lista para a seção não sumir.
 const destaques = allPosts
-  .filter(post => !post.data.rascunho && post.data.order_homepage === 1)
-  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+  .filter(post => post.data.order_homepage === 1)
+  .sort(porData);
 
 const emDestaque = destaques.length > 0 ? destaques : posts.slice(0, 1);
 
@@ -45,11 +45,8 @@ const curatedPosts = curatedPostIds
   .map(id => posts.find(p => p.id === id))
   .filter(Boolean);
 
-// Recentes: 4 posts mais novos ordenados por data de publicação (excluindo rascunhos)
-const recentPosts = allPosts
-  .filter(post => !post.data.rascunho)
-  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime())
-  .slice(0, 4);
+// Recentes: 4 posts mais novos ordenados por data de publicação
+const recentPosts = [...allPosts].sort(porData).slice(0, 4);
 
 // Posts por seção
 const postsPorSecao = {
@@ -67,7 +64,7 @@ const contagemPorSecao = {
 };
 
 // Buscar séries
-const allSeries = await getCollection('series');
+const allSeries = await getSeries();
 const series = allSeries.sort((a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime()).slice(0, 2);
 
 // Função auxiliar para formatar data

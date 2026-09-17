@@ -2,11 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AutorNome from '../components/AutorNome.astro';
 import PostCoverDefault from '../components/PostCoverDefault.astro';
-import { getCollection } from 'astro:content';
+import { getPostsPorSerie, getSeries } from '../lib/data';
 
-const allSeries = await getCollection('series');
-const series = allSeries.sort((a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime());
-const allPosts = await getCollection('posts');
+const allSeries = await getSeries();
+const seriesOrdenadas = allSeries.sort((a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime());
+
+const series = await Promise.all(
+  seriesOrdenadas.map(async (serie) => ({
+    serie,
+    postsDaSerie: await getPostsPorSerie(serie.id),
+  }))
+);
 
 const formatarData = (date: Date): string => {
   return new Intl.DateTimeFormat('pt-BR', {
@@ -26,11 +32,7 @@ const formatarData = (date: Date): string => {
       </header>
     </div>
 
-    {series.map((serie) => {
-      const postsDaSerie = allPosts
-        .filter(p => p.data.serie?.id === serie.id && !p.data.rascunho)
-        .sort((a, b) => (a.data.ordem_na_serie || 0) - (b.data.ordem_na_serie || 0));
-
+    {series.map(({ serie, postsDaSerie }) => {
       const statusText = serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento';
       const corClass = `serie-capa-${serie.data.cor || 'laranja'}`;
 

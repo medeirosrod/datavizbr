@@ -1,12 +1,12 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
+import { getPosts, porData } from '../../lib/data';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts');
-  const activePosts = posts.filter(post => !post.data.rascunho);
+  const posts = await getPosts();
 
-  return activePosts.map((post) => ({
+  return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
   }));
@@ -20,10 +20,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 // Buscar posts anteriores e próximos
-const allPosts = await getCollection('posts');
-const activePosts = allPosts
-  .filter(p => !p.data.rascunho)
-  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+const activePosts = (await getPosts()).sort(porData);
 
 const currentIndex = activePosts.findIndex(p => p.id === post.id);
 const previousPost = currentIndex > 0 ? activePosts[currentIndex - 1] : undefined;

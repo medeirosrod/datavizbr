@@ -79,6 +79,12 @@ export async function getPostsPorTag(tag: string) {
     .sort(porData);
 }
 
+// Posts públicos para o feed RSS: exclui rascunhos (via getPosts) e arquivados.
+export async function getPostsParaFeed() {
+  const todos = await getPosts();
+  return todos.filter((p) => !p.data.arquivo).sort(porData);
+}
+
 // ── AUTORES ──────────────────────────────────────────────────────────────────
 
 export async function getAutores() {
@@ -130,7 +136,7 @@ export async function getLivrosPorAutor(idAutor: string) {
 
 // ── UTILITÁRIOS ──────────────────────────────────────────────────────────────
 
-function porData(
+export function porData(
   a: CollectionEntry<'posts'>,
   b: CollectionEntry<'posts'>
 ) {

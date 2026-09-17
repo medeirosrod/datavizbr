@@ -1,9 +1,9 @@
-import { getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
 import { SITE } from '../consts';
+import { getPostsParaFeed } from '../lib/data';
 
 export async function GET(context) {
-	const posts = await getCollection('posts', ({ data }) => !data.rascunho && !data.arquivo);
+	const posts = await getPostsParaFeed();
 	return rss({
 		title: SITE.nome,
 		description: SITE.descricao,

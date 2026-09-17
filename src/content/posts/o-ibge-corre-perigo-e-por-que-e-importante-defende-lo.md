@@ -8,7 +8,6 @@ secao: ensaios
 tags: ["COVID-19", "Cultura", "Dados", "Dataviz", "Design"]
 medium_url_original: "https://medium.com/datavizbr/o-ibge-corre-perigo-2dd9e21f76a0"
 publicado_originalmente_em: 2021-04-02
-rascunho: true
 capa: ../../assets/blog/o-ibge-corre-perigo-e-por-que-e-importante-defende-lo/01.jpeg
 capa_alt: "Capa do post O IBGE CORRE PERIGO: e por que é importante defendê-lo"
 ---

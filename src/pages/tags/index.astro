@@ -1,15 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getPosts, getAllTags } from '../../lib/data';
 
-const allPosts = await getCollection('posts', ({ data }) => !data.rascunho);
-
-const tagsMap = new Map<string, number>();
-allPosts.forEach(post => {
-  post.data.tags.forEach(tag => {
-    tagsMap.set(tag, (tagsMap.get(tag) || 0) + 1);
-  });
-});
+const allPosts = await getPosts();
+const tagsMap = await getAllTags();
 
 const tags = Array.from(tagsMap.entries())
   .map(([slug, count]) => ({ slug, count }))

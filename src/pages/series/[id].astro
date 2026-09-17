@@ -2,10 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AutorNome from '../../components/AutorNome.astro';
 import PostCoverDefault from '../../components/PostCoverDefault.astro';
-import { getCollection } from 'astro:content';
+import { getPostsPorSerie, getSeries } from '../../lib/data';
 
 export async function getStaticPaths() {
-  const series = await getCollection('series');
+  const series = await getSeries();
 
   return series.map((serie) => ({
     params: { id: serie.id },
@@ -20,10 +20,7 @@ interface Props {
 const { serie } = Astro.props;
 
 // Buscar posts desta série
-const allPosts = await getCollection('posts');
-const postsDaSerie = allPosts
-  .filter(post => post.data.serie?.id === serie.id && !post.data.rascunho)
-  .sort((a, b) => (a.data.ordem_na_serie || 0) - (b.data.ordem_na_serie || 0));
+const postsDaSerie = await getPostsPorSerie(serie.id);
 
 const formatarData = (date: Date): string => {
   return new Intl.DateTimeFormat('pt-BR', {

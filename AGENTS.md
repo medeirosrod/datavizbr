@@ -1,5 +1,7 @@
 # datavizbr — repo guide
 
+For full architecture (route map, data flow, cross-file filtering inconsistencies, known gotchas), see [docs/CODEBASE_MAP.md](docs/CODEBASE_MAP.md).
+
 ## Stack
 - **Astro 6** + TypeScript (strict), MDX, static site
 - Node >=22.12.0, npm
@@ -41,7 +43,7 @@ Slugs from author name: `rodrigo-medeiros`, `tatyana-mendes`, etc. Referenced as
 - `src/layouts/PostLayout.astro` — post layout with prev/next nav
 - `src/pages/posts/[...slug].astro` — dynamic post route (pre-renders via `getStaticPaths`)
 - `src/styles/global.css` → `tokens.css` (design tokens), `base.css` (reset), `animations.css`
-- `src/scripts/animations.js` — GSAP + D3 animations on homepage
+- `src/scripts/animations.js` — GSAP + D3 animation helpers; **currently dead code** (not imported anywhere) — `index.astro` duplicates this logic inline instead, so edit both or consolidate
 
 ## CDN dependencies (homepage only, `is:inline`)
 - GSAP 3.12.5 + ScrollTrigger

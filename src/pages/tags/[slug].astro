@@ -3,15 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AutorNome from '../../components/AutorNome.astro';
 import PostCoverDefault from '../../components/PostCoverDefault.astro';
 import { getSecaoLabel } from '../../consts';
-import { getCollection } from 'astro:content';
+import { getAllTags, getPostsPorTag } from '../../lib/data';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('posts', ({ data }) => !data.rascunho);
+  const tagsMap = await getAllTags();
 
-  const tagsSet = new Set<string>();
-  allPosts.forEach(post => post.data.tags.forEach(tag => tagsSet.add(tag)));
-
-  return Array.from(tagsSet).map(tag => ({
+  return Array.from(tagsMap.keys()).map(tag => ({
     params: { slug: tag },
     props: { tag },
   }));
@@ -20,10 +17,7 @@ export async function getStaticPaths() {
 interface Props { tag: string; }
 const { tag } = Astro.props;
 
-const allPosts = await getCollection('posts', ({ data }) => !data.rascunho);
-const posts = allPosts
-  .filter(post => post.data.tags.includes(tag))
-  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+const posts = await getPostsPorTag(tag);
 
 const formatarData = (date: Date): string => {
   return new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(new Date(date));

@@ -8,7 +8,6 @@ secao: ensaios
 tags: ["COVID-19", "Dados", "Dataviz", "Design", "Interação"]
 medium_url_original: "https://medium.com/datavizbr/hiperinfográficos-e-covid-19-modelos-sofisticados-nos-jornais-para-a-cobertura-da-pandemia-b6d137b8cc41"
 publicado_originalmente_em: 2020-06-16
-rascunho: true
 capa: ../../assets/blog/hiperinfograficos-e-covid-19-modelos-sofisticados-nos-jornais-para-a-cobertura-d/01.png
 capa_alt: "Capa do post Hiperinfográficos e covid-19: modelos sofisticados nos jornais para a cobertura da pandemia"
 ---

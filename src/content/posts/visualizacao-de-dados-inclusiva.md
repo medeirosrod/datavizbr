@@ -8,7 +8,6 @@ secao: praticas
 tags: ["Acessibilidade", "Cultura", "Dados", "Dataviz", "Design"]
 medium_url_original: "https://medium.com/datavizbr/visualização-de-dados-inclusiva-3459a390b583"
 publicado_originalmente_em: 2019-08-28
-rascunho: true
 capa: ../../assets/blog/visualizacao-de-dados-inclusiva/01.png
 capa_alt: Capa do post Visualização de Dados Inclusiva
 ---

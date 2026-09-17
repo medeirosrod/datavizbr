@@ -3,12 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import AutorNome from '../components/AutorNome.astro';
 import PostCoverDefault from '../components/PostCoverDefault.astro';
 import { getSecaoLabel } from '../consts';
-import { getCollection } from 'astro:content';
+import { getPostsPorSecao } from '../lib/data';
 
-const allPosts = await getCollection('posts');
-const posts = allPosts
-  .filter(post => post.data.secao === 'ensaios' && !post.data.rascunho)
-  .sort((a, b) => new Date(b.data.publicado_em).getTime() - new Date(a.data.publicado_em).getTime());
+const posts = await getPostsPorSecao('ensaios');
 
 const formatarData = (date: Date): string => {
   return new Intl.DateTimeFormat('pt-BR', {

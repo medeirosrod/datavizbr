@@ -5,7 +5,7 @@ import { getPostsPorAutor, getLivrosPorAutor, papelNoLivro } from '../../lib/dat
 import { getSecaoLabel } from '../../consts';
 
 export async function getStaticPaths() {
-  const autores = await getCollection('autores');
+  const autores = (await getCollection('autores')).filter(autor => autor.data.ativo);
   return autores.map(autor => ({
     params: { id: autor.id },
     props: { autor },
