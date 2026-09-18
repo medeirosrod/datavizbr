@@ -1,0 +1,115 @@
+---
+import type { ImageMetadata } from 'astro';
+
+interface Premio {
+  label: string;
+  selo: ImageMetadata;
+  selo_alt: string;
+}
+
+interface Props {
+  fotos?: ImageMetadata[];
+  premios?: Premio[];
+  tituloLivro: string;
+  premiosTitulo?: string;
+}
+
+const { fotos = [], premios = [], tituloLivro, premiosTitulo } = Astro.props;
+---
+
+{(fotos.length > 0 || premios.length > 0) && (
+  <div class="livro-galeria-wrap">
+    {fotos.length > 0 && (
+      <div class="livro-galeria" role="group" aria-label={`Fotos do livro ${tituloLivro}`}>
+        {fotos.map((foto, i) => (
+          <img src={foto.src} alt={`Foto do livro ${tituloLivro}, ${i + 1}`} loading="lazy" />
+        ))}
+      </div>
+    )}
+
+    {premios.length > 0 && (
+      <div class="livro-premios-bloco">
+        {premiosTitulo && <h3 class="livro-premios-titulo">{premiosTitulo}</h3>}
+        <div class="livro-selos" role="group" aria-label="Reconhecimentos do livro">
+          {premios.map(premio => (
+            <img
+              src={premio.selo.src}
+              alt={premio.selo_alt}
+              title={premio.label}
+              class={premio.label.includes('MCB') ? 'selo-escuro' : ''}
+              loading="lazy"
+            />
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+)}
+
+<style>
+  .livro-galeria-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .livro-galeria {
+    display: flex;
+    gap: var(--space-8);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--space-2);
+  }
+
+  .livro-galeria img {
+    scroll-snap-align: start;
+    flex: 0 0 240px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: var(--radius-relaxed);
+    border: 1px solid var(--border-default);
+  }
+
+  .livro-premios-bloco {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .livro-premios-titulo {
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--fg-heading);
+    margin: 0;
+  }
+
+  .livro-selos {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
+    flex-wrap: wrap;
+  }
+
+  .livro-selos img {
+    height: 74px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .livro-selos img.selo-escuro {
+    background: var(--dvb-ink, #1a1a1a);
+    border-radius: var(--radius-standard);
+    padding: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .livro-galeria img {
+      flex-basis: 200px;
+      height: 200px;
+    }
+
+    .livro-selos img {
+      height: 55px;
+    }
+  }
+</style>

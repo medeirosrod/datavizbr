@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# local tool cache
+.impeccable/
+
 # dependencies
 node_modules/
 

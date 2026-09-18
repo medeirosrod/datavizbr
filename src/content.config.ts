@@ -10,7 +10,7 @@ const autores = defineCollection({
     z.object({
       nome: z.string(),
       foto: image().optional(),
-      quem_e: z.string().max(280),
+      quem_e: z.string().max(600),
       trabalhando_em: z.string().max(200).optional(),
       trabalho_favorito: z.object({
         titulo: z.string(),
@@ -101,6 +101,12 @@ const livros = defineCollection({
       })).optional(),
       posts_relacionados: z.array(reference('posts')).optional(),
       publicado_em: z.date(),
+      premios: z.array(z.object({
+        label: z.string(),
+        selo: image(),
+        selo_alt: z.string(),
+      })).optional(),
+      fotos: z.array(image()).optional(),
     }),
 });
 

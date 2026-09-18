@@ -1,11 +1,15 @@
 ---
 // src/pages/index.astro
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroChart from '../components/HeroChart.astro';
 import AutorNome from '../components/AutorNome.astro';
 import PostCoverDefault from '../components/PostCoverDefault.astro';
 import { getSecaoLabel, SITE } from '../consts';
-import { getPosts, getSeries, porData } from '../lib/data';
+import { getPosts, getSeries, porData, tempoLeitura } from '../lib/data';
+
+// Curador (seção "Curadoria" da home)
+const curador = await getEntry('autores', SITE.autor_padrao);
 
 // Buscar todos os posts publicados (rascunhos já filtrados por getPosts)
 const allPosts = await getPosts();
@@ -30,20 +34,25 @@ const destaques = allPosts
 
 const emDestaque = destaques.length > 0 ? destaques : posts.slice(0, 1);
 
-// Artigos selecionados para a seção de curadoria (em ordem específica)
+// Escolha pessoal do curador (4 textos — ver seção "Curadoria" na home)
 const curatedPostIds = [
   'criando-um-mapa-artistico-no-qgis-em-seis-passos',
   'raio-r-de-uma-campanha-vitoriosa',
   'um-relato-pessoal-sobre-design-infografia-e-a-desigualdade-brasileira',
-  'geoprocessamento-na-resposta-a-eventos-climaticos-extremos',
-  'uma-unidade-de-dado-ja-e-big-data',
-  'antropograficos-visualizando-dados-sobre-pessoas-com-o-objetivo-de-gerar-compaix',
-  'florence-nightingale-dois-seculos-de-visualizacao-de-dados',
-  'raizes'
+  'visualizacao-de-dados-com-sotaque-brasileiro-parte-1',
 ];
 const curatedPosts = curatedPostIds
   .map(id => posts.find(p => p.id === id))
   .filter(Boolean);
+
+if (import.meta.env.DEV) {
+  const idsAusentes = curatedPostIds.filter(id => !posts.some(p => p.id === id));
+  if (idsAusentes.length > 0) {
+    console.warn(
+      `[index.astro] curatedPostIds sem post correspondente (removido, virou rascunho, ou id com erro de digitação): ${idsAusentes.join(', ')}`
+    );
+  }
+}
 
 // Recentes: 4 posts mais novos ordenados por data de publicação
 const recentPosts = [...allPosts].sort(porData).slice(0, 4);
@@ -75,13 +84,6 @@ const formatarData = (date: Date): string => {
   }).format(new Date(date));
 };
 
-// Função para calcular tempo de leitura (estimativa simples)
-const tempoLeitura = (slug: string): number => {
-  // Aproximadamente 200 palavras por minuto
-  const wordsPerMinute = 200;
-  // Isso é uma aproximação - em produção você teria o conteúdo real
-  return Math.ceil(3); // placeholder
-};
 ---
 
 <BaseLayout>
@@ -135,7 +137,7 @@ const tempoLeitura = (slug: string): number => {
               <div class="destaque-conteudo">
                 <div class="destaque-meta">
                   <span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span>
-                  <span class="t-caption">{tempoLeitura(post.slug)} min de leitura</span>
+                  <span class="t-caption">{tempoLeitura(post.body ?? '')} min de leitura</span>
                 </div>
                 <h2 class="destaque-titulo">
                   <a href={`/posts/${post.id}`}>
@@ -178,13 +180,33 @@ const tempoLeitura = (slug: string): number => {
   )}
 
   <!-- ═══════════════════════════════════════════
-       BLOCO 3 — INDICADOS DA COMUNIDADE
+       BLOCO 3 — CURADORIA (autor + 3 escolhas pessoais)
   ════════════════════════════════════════════ -->
   <section class="section curadoria-section">
     <div class="container">
       <div class="section-head">
-        <h2>Indicados da comunidade</h2>
+        <h2>Curadoria</h2>
       </div>
+
+      {curador && (
+        <div class="curador-card">
+          {curador.data.foto && (
+            <img src={curador.data.foto.src} alt={curador.data.nome} class="curador-foto" />
+          )}
+          <div class="curador-texto">
+            <p class="curador-bio">
+              O datavizbr é o caderno de campo de quem faz, ensina e pesquisa dataviz no Brasil
+              há quase duas décadas — <strong>{curador.data.nome}</strong>, professor da UFRPE,
+              doutor em Ciência da Computação (UFPE), mestre em Tecnologia e Arte Digital
+              (Universidade do Minho) e especialista em Design da Informação pela UFPE.
+            </p>
+            <a href="/sobre" class="curador-link">Conheça o projeto →</a>
+          </div>
+        </div>
+      )}
+
+      <p class="t-caption curadoria-subtitulo">Recomendados pela curadoria para começar por aqui.</p>
+
       <div class="posts-grid stagger-children">
         {curatedPosts.map((post, idx) => (
           <article class="post-card" style={`--stagger-index: ${idx}`}>
@@ -520,6 +542,13 @@ const tempoLeitura = (slug: string): number => {
     max-width: 760px;
     margin-bottom: var(--space-8);
   }
+  .hero-title .word-wrapper {
+    display: inline-block;
+    overflow: hidden;
+  }
+  .hero-title .word {
+    display: inline-block;
+  }
   .hero-lead {
     font-size: var(--fs-body-lg);
     line-height: var(--lh-body-lg);
@@ -560,6 +589,7 @@ const tempoLeitura = (slug: string): number => {
     margin-top: var(--space-16);
   }
   .destaque-dot {
+    position: relative;
     width: 10px;
     height: 10px;
     padding: 0;
@@ -568,6 +598,12 @@ const tempoLeitura = (slug: string): number => {
     background: var(--border-strong);
     cursor: pointer;
     transition: background 200ms ease, transform 200ms ease;
+  }
+  /* Expande a área de toque para 44x44px sem aumentar o dot visual */
+  .destaque-dot::before {
+    content: '';
+    position: absolute;
+    inset: -17px;
   }
   .destaque-dot:hover {
     background: var(--dvb-ink-4);
@@ -588,6 +624,12 @@ const tempoLeitura = (slug: string): number => {
     border-radius: var(--radius-large);
     overflow: hidden;
     box-shadow: var(--elev-3);
+  }
+  .destaque-capa img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .destaque-meta {
     display: flex;
@@ -644,6 +686,45 @@ const tempoLeitura = (slug: string): number => {
     border-bottom: none;
   }
   .destaque-cta:hover { color: var(--color-primary-hover); }
+
+  /* ── CURADOR ────────────────────────────────── */
+  .curador-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
+    margin-bottom: var(--space-24);
+    padding-bottom: var(--space-16);
+    border-bottom: 1px solid var(--border-default);
+  }
+  .curador-foto {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .curador-texto {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .curador-bio {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+    max-width: 65ch;
+    margin: 0;
+  }
+  .curador-bio strong { color: var(--fg-heading); }
+  .curador-link {
+    font-size: var(--fs-body-sm);
+    font-weight: 600;
+    color: var(--color-primary-deep);
+    border-bottom: none;
+    align-self: flex-start;
+  }
+  .curador-link:hover { color: var(--dvb-orange-hover); }
+  .curadoria-subtitulo { margin-bottom: var(--space-8); }
 
   /* ── GRID DE POSTS ──────────────────────────── */
   .posts-grid {
@@ -1023,7 +1104,13 @@ const tempoLeitura = (slug: string): number => {
     .hero-grid               { grid-template-columns: 1fr; gap: var(--space-16); }
     .posts-grid              { grid-template-columns: repeat(2, 1fr); }
     .destaque                { grid-template-columns: 1fr; }
-    .destaque-capa           { display: none; }
+    .destaque-capa           {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: var(--radius-large);
+      margin-bottom: var(--space-8);
+    }
+    .destaque-capa-placeholder { height: 100%; }
     .acervo-header           { flex-direction: column; align-items: flex-start; }
     .acervo-subtitulo        { text-align: left; max-width: 100%; }
   }
@@ -1035,6 +1122,7 @@ const tempoLeitura = (slug: string): number => {
     .sobre-newsletter-inner  { grid-template-columns: 1fr; }
     .newsletter-form         { flex-direction: column; }
     .acervo-card             { min-height: unset; }
+    .curador-card            { flex-direction: column; align-items: flex-start; }
   }
 
 </style>

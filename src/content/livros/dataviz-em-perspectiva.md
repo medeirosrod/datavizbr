@@ -21,6 +21,20 @@ links:
     label: Comprar pela Riobooks
     url: https://www.riobooks.com.br/design/dataviz-em-perspectiva
 publicado_em: 2023-11-01
+premios:
+  - label: "Longlist · Information is Beautiful Awards 2023"
+    selo: ../../assets/livros/dataviz-em-perspectiva/selo-iib.png
+    selo_alt: "Selo Information is Beautiful Awards 2023 — Longlist"
+  - label: "Projeto selecionado · 14ª Bienal Brasileira de Design"
+    selo: ../../assets/livros/dataviz-em-perspectiva/selo-bienal-branco.png
+    selo_alt: "Selo 14ª Bienal Brasileira de Design — Projeto selecionado"
+  - label: "Destaque do júri · 36º Prêmio Design MCB"
+    selo: ../../assets/livros/dataviz-em-perspectiva/selo-mcb.png
+    selo_alt: "Selo 36º Prêmio Design Museu da Casa Brasileira — Destaque do júri"
+fotos:
+  - ../../assets/livros/dataviz-em-perspectiva/dataviz01.jpg
+  - ../../assets/livros/dataviz-em-perspectiva/dataviz02.jpg
+  - ../../assets/livros/dataviz-em-perspectiva/dataviz03.jpg
 ---
 
 *Dataviz em perspectiva* é uma coletânea organizada por Rodrigo Medeiros e Júlia Giannella

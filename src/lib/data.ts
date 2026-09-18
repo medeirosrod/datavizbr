@@ -151,3 +151,20 @@ export function papelNoLivro(
   if (livro.data.autores_capitulos?.some((r) => r.id === idAutor)) return 'autor_capitulo';
   return null;
 }
+
+export function stripMarkdown(md: string): string {
+  return md
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]*`/g, ' ')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[#>*_~-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Estimativa de tempo de leitura a partir do corpo real do post (markdown bruto).
+export function tempoLeitura(body: string, palavrasPorMinuto = 200): number {
+  const palavras = stripMarkdown(body).split(' ').filter(Boolean).length;
+  return Math.max(1, Math.ceil(palavras / palavrasPorMinuto));
+}

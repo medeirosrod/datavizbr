@@ -1,9 +1,63 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import LivroGaleria from '../../components/LivroGaleria.astro';
+import { getCollection, getEntry } from 'astro:content';
+import { getPosts, getAutores, getAllTags } from '../../lib/data';
+import { SITE } from '../../consts';
 
 const allAutores = await getCollection('autores');
 const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
+const curador = await getEntry('autores', SITE.autor_padrao);
+
+const livro = await getEntry('livros', 'dataviz-em-perspectiva');
+
+const posts = await getPosts();
+const autoresAtivos = await getAutores();
+const tags = await getAllTags();
+
+const totalPosts = posts.length;
+const totalAutores = autoresAtivos.length;
+const totalTags = tags.size;
+
+const postsPorData = [...posts].sort(
+  (a, b) => a.data.publicado_em.valueOf() - b.data.publicado_em.valueOf()
+);
+const primeiroPost = postsPorData[0];
+const anosAtivo = Math.floor(
+  (Date.now() - primeiroPost.data.publicado_em.valueOf()) / (365.25 * 24 * 60 * 60 * 1000)
+);
+
+const marcos = [
+  {
+    quando: '11 de março de 2016',
+    titulo: 'Fundação',
+    texto: `Primeiro post publicado: "${primeiroPost.data.titulo}".`,
+  },
+  {
+    quando: 'Julho de 2026',
+    titulo: 'Domínio próprio',
+    texto: 'O datavizbr ganha endereço próprio, independente das plataformas de blog.',
+  },
+  {
+    quando: '2 de agosto de 2026',
+    titulo: 'Eixo 01',
+    texto: 'Primeira edição da newsletter mensal do datavizbr.',
+  },
+  {
+    quando: 'Hoje',
+    titulo: `~${anosAtivo} anos de curadoria`,
+    texto: `${totalPosts} posts · ${totalAutores} autoras e autores · ${totalTags} temas.`,
+    destaque: true,
+  },
+];
+
+const secoes = [
+  { id: 'por-que-nasceu', label: 'Por que nasceu' },
+  { id: 'como-funciona', label: 'Como funciona' },
+  { id: 'o-que-virou', label: 'O que virou' },
+  { id: 'pra-quem-e', label: 'Pra quem é' },
+  { id: 'o-livro', label: 'O livro' },
+];
 ---
 
 <BaseLayout
@@ -18,64 +72,135 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
         <h1>Sobre o datavizbr</h1>
       </header>
 
-      <div class="content-prose">
+      {curadores.map(c => (
+        <div class="curador-destaque">
+          {c.data.foto && (
+            <img src={c.data.foto.src} alt={c.data.nome} class="curador-destaque-foto" />
+          )}
+          <div>
+            <h2 class="curador-destaque-nome">
+              <a href={`/autores/${c.id}`}>{c.data.nome}</a>
+            </h2>
+            <p class="curador-destaque-bio">{c.data.quem_e}</p>
+          </div>
+        </div>
+      ))}
 
-        <p>
-          O datavizbr nasceu em 2016 de uma inquietação simples: quase tudo que
-          se publicava sobre visualização de dados estava em inglês. Quem quisesse
-          aprender, discutir ou simplesmente se reconhecer nessa área precisava
-          atravessar uma barreira de idioma — e, mais do que isso, uma barreira de
-          contexto. Os exemplos eram de lá; os dados, as referências e os problemas
-          também. Faltava um lugar onde a visualização de dados fosse pensada a
-          partir do Brasil, em português, com os nossos mapas, as nossas eleições,
-          as nossas desigualdades e as nossas soluções.
-        </p>
-        <p>
-          Foi esse lugar que o datavizbr se propôs a construir. Desde então, uma
-          curadoria contínua — feita no tempo que existia, entre aulas, pesquisa e
-          trabalho — reuniu artigos de dezenas de autoras e autores espalhados pelo
-          país e pelo mundo: gente do jornalismo de dados, do design da informação,
-          da ciência de dados, da academia e da arte. Entrevistas com quem estava
-          fazendo o trabalho acontecer, tutoriais de quem queria ensinar, ensaios
-          de quem precisava refletir, bastidores de projetos que marcaram época.
-          Cada texto passou pelo mesmo filtro: isso ajuda a construir uma cultura
-          de visualização de dados no Brasil?
-        </p>
-        <p>
-          Quase dez anos depois, o resultado é este acervo — dezenas de artigos que
-          registram não só técnicas e ferramentas, mas a própria formação de uma
-          comunidade. Pelo datavizbr passaram discussões sobre mapas eleitorais e
-          acessibilidade, sobre dados bordados à mão e gráficos feitos em código,
-          sobre a história da infografia brasileira e o futuro da interação. É,
-          provavelmente, o registro mais longevo e contínuo da cena de visualização
-          de dados em português.
-        </p>
-        <p>
-          O datavizbr segue sendo o que sempre foi: um projeto independente de
-          curadoria, movido pela convicção de que dados bem visualizados mudam
-          conversas — e de que o Brasil tem histórias demais para deixá-las mal
-          contadas. Se você trabalha, estuda ou se encanta com visualização de
-          dados, este é o seu lugar. Bem-vinda, bem-vindo.
-        </p>
+      <div class="timeline-wrap">
+        <ol class="timeline">
+          {marcos.map(m => (
+            <li class={`timeline-item ${m.destaque ? 'timeline-item-destaque' : ''}`}>
+              <span class="timeline-quando">{m.quando}</span>
+              <strong class="timeline-titulo">{m.titulo}</strong>
+              <span class="timeline-texto">{m.texto}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
 
-        <h2>O livro</h2>
-        <p>
-          Em 2023, o datavizbr organizou <em>Dataviz em perspectiva</em>, em parceria com
-          Júlia Giannella — uma coletânea com capítulos de diferentes autores sobre o
-          estado da arte da visualização de dados no Brasil e na América Latina.
-          O livro está disponível gratuitamente em PDF.
-        </p>
-        <p>
-          <a href="/livros/dataviz-em-perspectiva">Conheça o livro →</a>
-        </p>
+      <div class="sobre-grid">
+        <aside class="sobre-sidebar">
+          <div class="sidebar-sticky">
+            <nav class="toc" aria-label="Sumário da página">
+              <ol class="toc-list">
+                {secoes.map((s, i) => (
+                  <li>
+                    <a href={`#${s.id}`} data-toc-link={s.id} class="toc-link">
+                      <span class="toc-num">{String(i + 1).padStart(2, '0')}</span>
+                      <span>{s.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </aside>
 
-        <h2>Curadoria</h2>
-        {curadores.map(c => (
-          <p>
-            <strong>{c.data.nome}</strong> — {c.data.quem_e}
-          </p>
-        ))}
+        <div class="sobre-main">
+          <div class="content-prose">
 
+            <section id="por-que-nasceu">
+              <h2>Por que nasceu</h2>
+              <p>
+                O datavizbr nasceu em 2016 de uma inquietação simples: quase tudo que
+                se publicava sobre visualização de dados estava em inglês. Quem quisesse
+                aprender, discutir ou simplesmente se reconhecer nessa área precisava
+                atravessar uma barreira de idioma — e, mais do que isso, uma barreira de
+                contexto. Os exemplos eram de lá; os dados, as referências e os problemas
+                também. Faltava um lugar onde a visualização de dados fosse pensada a
+                partir do Brasil, em português, com os nossos mapas, as nossas eleições,
+                as nossas desigualdades e as nossas soluções.
+              </p>
+            </section>
+
+            <section id="como-funciona">
+              <h2>Como funciona</h2>
+              <p>
+                Foi esse lugar que o datavizbr se propôs a construir. Desde então, uma
+                curadoria contínua — feita no tempo que existia, entre aulas, pesquisa e
+                trabalho — reuniu artigos de dezenas de autoras e autores espalhados pelo
+                país e pelo mundo: gente do jornalismo de dados, do design da informação,
+                da ciência de dados, da academia e da arte. Entrevistas com quem estava
+                fazendo o trabalho acontecer, tutoriais de quem queria ensinar, ensaios
+                de quem precisava refletir, bastidores de projetos que marcaram época.
+                Cada texto passou pelo mesmo filtro: isso ajuda a construir uma cultura
+                de visualização de dados no Brasil?
+              </p>
+            </section>
+
+            <blockquote class="pull-quote">
+              O Brasil tem histórias demais para deixá-las mal contadas.
+            </blockquote>
+
+            <section id="o-que-virou">
+              <h2>O que virou</h2>
+              <p>
+                Quase dez anos depois, o resultado é este acervo — dezenas de artigos que
+                registram não só técnicas e ferramentas, mas a própria formação de uma
+                comunidade. Pelo datavizbr passaram discussões sobre mapas eleitorais e
+                acessibilidade, sobre dados bordados à mão e gráficos feitos em código,
+                sobre a história da infografia brasileira e o futuro da interação. É,
+                provavelmente, o registro mais longevo e contínuo da cena de visualização
+                de dados em português.
+              </p>
+            </section>
+
+            <section id="pra-quem-e">
+              <h2>Pra quem é</h2>
+              <p>
+                O datavizbr segue sendo o que sempre foi: um projeto independente de
+                curadoria, movido pela convicção de que dados bem visualizados mudam
+                conversas — e de que o Brasil tem histórias demais para deixá-las mal
+                contadas. Se você trabalha, estuda ou se encanta com visualização de
+                dados, este é o seu lugar. Bem-vinda, bem-vindo.
+              </p>
+            </section>
+
+            <section id="o-livro">
+              <h2>O livro</h2>
+
+              {livro && (
+                <div class="livro-sobre">
+                  <p>
+                    Em 2023, Rodrigo Medeiros e Júlia Giannella organizaram o livro <em>{livro.data.titulo}</em> —
+                    uma coletânea com capítulos de diferentes autores sobre o estado da arte
+                    da visualização de dados no Brasil e na América Latina.
+                  </p>
+
+                  <LivroGaleria
+                    fotos={livro.data.fotos}
+                    premios={livro.data.premios}
+                    tituloLivro={livro.data.titulo}
+                    premiosTitulo="Reconhecimentos"
+                  />
+
+                  <a href={`/livros/${livro.id}`} class="livro-link">Conheça o livro →</a>
+                </div>
+              )}
+            </section>
+
+          </div>
+        </div>
       </div>
 
       <div class="sobre-links">
@@ -93,6 +218,33 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
   </section>
 </BaseLayout>
 
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+  const targets = Array.from(links)
+    .map(link => document.getElementById(link.dataset.tocLink || ''))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (links.length && targets.length && 'IntersectionObserver' in window) {
+    const setActive = (id: string) => {
+      links.forEach(link => {
+        link.classList.toggle('is-active', link.dataset.tocLink === id);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-15% 0px -70% 0px', threshold: 0 }
+    );
+
+    targets.forEach(t => observer.observe(t));
+  }
+</script>
+
 <style>
   .page-section {
     padding-block: var(--space-40);
@@ -100,9 +252,7 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
 
   .page-header {
     max-width: 680px;
-    margin-bottom: var(--space-32);
-    border-bottom: 1px solid var(--border-default);
-    padding-bottom: var(--space-24);
+    margin-bottom: var(--space-16);
   }
 
   .page-header h1 {
@@ -114,12 +264,183 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
     margin-block: var(--space-6) var(--space-10);
   }
 
-  .content-prose {
+  .curador-destaque {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
     max-width: 680px;
+    margin-bottom: var(--space-32);
+  }
+
+  .curador-destaque-foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .curador-destaque-nome {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    margin: 0 0 var(--space-3);
+  }
+
+  .curador-destaque-nome a {
+    color: var(--fg-heading);
+    border-bottom: none;
+  }
+
+  .curador-destaque-nome a:hover {
+    color: var(--color-primary-deep);
+  }
+
+  .curador-destaque-nome a:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-micro);
+  }
+
+  .curador-destaque-bio {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--fg-body);
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  /* TIMELINE */
+  .timeline-wrap {
+    margin-bottom: var(--space-40);
+    overflow-x: auto;
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: var(--space-16);
+  }
+
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-10);
+    border-top: 3px solid var(--border-default);
+  }
+
+  .timeline-item-destaque {
+    border-top-color: var(--color-primary);
+  }
+
+  .timeline-quando {
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--fg-meta);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .timeline-titulo {
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--fg-heading);
+  }
+
+  .timeline-item-destaque .timeline-titulo {
+    color: var(--color-primary-deep);
+  }
+
+  .timeline-texto {
+    font-size: var(--fs-body-sm);
+    color: var(--fg-body);
+    line-height: var(--lh-body-sm, 1.4);
+  }
+
+  /* GRID: SIDEBAR + TEXTO */
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 680px);
+    gap: var(--space-32);
+    margin-bottom: var(--space-32);
+  }
+
+  .sobre-sidebar {
+    min-width: 0;
+  }
+
+  .sidebar-sticky {
+    position: sticky;
+    top: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+  }
+
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .toc-link {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+    font-size: var(--fs-body-sm);
+    color: var(--fg-meta);
+    border-bottom: none;
+    padding-block: var(--space-2);
+    transition: color 140ms ease;
+  }
+
+  .toc-num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--fg-meta);
+    flex-shrink: 0;
+  }
+
+  .toc-link:hover {
+    color: var(--fg-heading);
+  }
+
+  .toc-link.is-active {
+    color: var(--color-primary-deep);
+    font-weight: 700;
+  }
+
+  .toc-link.is-active .toc-num {
+    color: var(--color-primary-deep);
+  }
+
+  .toc-link:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-micro);
+  }
+
+  /* TEXTO */
+  .content-prose {
     display: flex;
     flex-direction: column;
     gap: var(--space-6);
-    margin-bottom: var(--space-32);
+  }
+
+  .content-prose section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    scroll-margin-top: var(--space-24);
   }
 
   .content-prose h2 {
@@ -129,7 +450,7 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
     font-weight: 700;
     color: var(--fg-heading);
     margin-top: var(--space-16);
-    margin-bottom: var(--space-4);
+    margin-bottom: 0;
   }
 
   .content-prose p {
@@ -139,6 +460,33 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
     margin: 0;
   }
 
+  .pull-quote {
+    margin: var(--space-16) 0;
+    padding-left: var(--space-16);
+    border-left: 3px solid var(--color-primary);
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: 700;
+    color: var(--fg-heading);
+    font-style: normal;
+  }
+
+  /* LIVRO */
+  .livro-sobre {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .livro-link {
+    align-self: flex-start;
+    font-size: var(--fs-body-sm);
+    font-weight: 700;
+    color: var(--color-primary-deep);
+  }
+
+  /* LINKS FINAIS */
   .sobre-links {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -162,6 +510,11 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
     color: inherit;
   }
 
+  .sobre-link-card:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
   .sobre-link-titulo {
     font-size: var(--fs-body);
     font-weight: 700;
@@ -170,12 +523,55 @@ const curadores = allAutores.filter(a => a.data.papel === 'curadoria');
 
   .sobre-link-desc {
     font-size: var(--fs-body-sm);
-    color: var(--color-primary);
+    color: var(--color-primary-deep);
+  }
+
+  @media (max-width: 900px) {
+    .sobre-grid {
+      grid-template-columns: minmax(0, 680px);
+    }
+
+    .sobre-sidebar {
+      order: 2;
+    }
+
+    .sidebar-sticky {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-default);
+      padding-top: var(--space-16);
+      margin-top: var(--space-16);
+    }
+
+    .toc {
+      width: 100%;
+    }
+
+    .toc-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--space-10);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .timeline {
+      grid-template-columns: 1fr;
+      gap: var(--space-16);
+    }
   }
 
   @media (max-width: 600px) {
     .sobre-links {
       grid-template-columns: 1fr;
+    }
+
+    .curador-destaque {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>

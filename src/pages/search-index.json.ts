@@ -1,20 +1,9 @@
 // src/pages/search-index.json.ts
 import type { APIRoute } from 'astro';
-import { getPosts, getAutores } from '../lib/data';
+import { getPosts, getAutores, stripMarkdown } from '../lib/data';
 import { getSecaoLabel } from '../consts';
 
 export const prerender = true;
-
-function stripMarkdown(md: string): string {
-  return md
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/`[^`]*`/g, ' ')
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
-    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/[#>*_~-]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
 
 export const GET: APIRoute = async () => {
   const [posts, autores] = await Promise.all([getPosts(), getAutores()]);

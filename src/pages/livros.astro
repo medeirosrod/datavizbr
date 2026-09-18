@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LivroGaleria from '../components/LivroGaleria.astro';
 import { getCollection } from 'astro:content';
 
 const allLivros = await getCollection('livros');
@@ -24,13 +25,6 @@ const livros = allLivros.sort((a, b) => b.data.ano - a.data.ano);
         <div class="livros-list">
           {livros.map((livro) => (
             <article class="livro-card">
-              <a href={`/livros/${livro.id}`} class="livro-capa-link">
-                <img
-                  src={livro.data.capa.src}
-                  alt={livro.data.capa_alt}
-                  class="livro-capa"
-                />
-              </a>
               <div class="livro-info">
                 <div class="livro-meta">
                   <span class="livro-ano">{livro.data.ano}</span>
@@ -45,6 +39,24 @@ const livros = allLivros.sort((a, b) => b.data.ano - a.data.ano);
                 {livro.data.subtitulo && (
                   <p class="livro-subtitulo">{livro.data.subtitulo}</p>
                 )}
+
+                {livro.data.fotos && livro.data.fotos.length > 0 ? (
+                  <LivroGaleria
+                    fotos={livro.data.fotos}
+                    premios={livro.data.premios}
+                    tituloLivro={livro.data.titulo}
+                    premiosTitulo="Reconhecimentos"
+                  />
+                ) : (
+                  <a href={`/livros/${livro.id}`} class="livro-capa-link">
+                    <img
+                      src={livro.data.capa.src}
+                      alt={livro.data.capa_alt}
+                      class="livro-capa"
+                    />
+                  </a>
+                )}
+
                 <p class="livro-sinopse">{livro.data.sinopse}</p>
                 <div class="livro-links">
                   {livro.data.links.map(link => (
@@ -106,10 +118,9 @@ const livros = allLivros.sort((a, b) => b.data.ano - a.data.ano);
   }
 
   .livro-card {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: var(--space-20);
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
     padding-bottom: var(--space-32);
     border-bottom: 1px solid var(--border-default);
   }
@@ -121,6 +132,7 @@ const livros = allLivros.sort((a, b) => b.data.ano - a.data.ano);
   .livro-capa-link {
     display: block;
     border-bottom: none;
+    width: 220px;
   }
 
   .livro-capa {
@@ -198,11 +210,8 @@ const livros = allLivros.sort((a, b) => b.data.ano - a.data.ano);
   }
 
   @media (max-width: 640px) {
-    .livro-card {
-      grid-template-columns: 1fr;
-    }
-
-    .livro-capa {
+    .livro-capa-link {
+      width: 100%;
       max-width: 200px;
     }
   }

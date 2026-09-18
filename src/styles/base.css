@@ -70,7 +70,7 @@ a:hover:not(.btn) { border-bottom-color: currentColor; }
 .t-eyebrow  {
   font-size: 12px; line-height: 1.2; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.8px;
-  color: var(--color-primary);
+  color: var(--color-primary-deep);
 }
 .t-micro    { font-size: var(--fs-micro); line-height: var(--lh-micro); font-weight: 500; color: var(--fg-meta); }
 .t-tnum     { font-feature-settings: var(--feat-tabular); }
@@ -92,10 +92,10 @@ a:hover:not(.btn) { border-bottom-color: currentColor; }
 }
 .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 
-.btn-primary   { background: var(--color-primary); color: var(--fg-on-primary); }
-.btn-primary:hover { background: var(--color-primary-hover); }
+.btn-primary   { background: var(--color-primary-deep); color: var(--fg-on-primary); }
+.btn-primary:hover { filter: brightness(0.85); }
 
-.btn-ghost     { background: transparent; color: var(--color-primary); border-color: var(--color-primary); }
+.btn-ghost     { background: transparent; color: var(--color-primary-deep); border-color: var(--color-primary); }
 .btn-ghost:hover { background: var(--color-primary-soft); }
 
 .btn-quiet     { background: transparent; color: var(--fg-label); border-color: var(--border-default); }
@@ -154,6 +154,14 @@ a:hover:not(.btn) { border-bottom-color: currentColor; }
 }
 .input::placeholder { color: var(--fg-meta); }
 .input:focus { border-color: var(--border-focus); box-shadow: var(--focus-ring); }
+.input:invalid:not(:placeholder-shown),
+.input:user-invalid {
+  border-color: var(--dvb-error);
+}
+.input:invalid:not(:placeholder-shown):focus,
+.input:user-invalid:focus {
+  box-shadow: 0 0 0 3px var(--dvb-error-bg);
+}
 
 .label {
   display: block;

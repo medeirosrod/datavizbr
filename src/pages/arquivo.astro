@@ -104,12 +104,21 @@ const formatarData = (date: Date): string => {
       const anoSelecionado = filtroAno.value;
       const ordemSelecionada = filtroOrdem.value;
 
-      const secoes = container.querySelectorAll('.ano-section');
+      const secoes = Array.from(container.querySelectorAll('.ano-section')) as HTMLElement[];
       secoes.forEach(secao => {
         const ano = secao.getAttribute('data-year');
         const exibir = anoSelecionado === 'todos' || ano === anoSelecionado;
-        (secao as HTMLElement).style.display = exibir ? 'block' : 'none';
+        secao.style.display = exibir ? 'block' : 'none';
       });
+
+      // Reordenar os blocos de ano (2016→2026 quando "mais antigo")
+      secoes
+        .sort((a, b) => {
+          const anoA = Number(a.getAttribute('data-year'));
+          const anoB = Number(b.getAttribute('data-year'));
+          return ordemSelecionada === 'antigo' ? anoA - anoB : anoB - anoA;
+        })
+        .forEach(secao => container.appendChild(secao));
 
       // Reordenar cards dentro de cada grid visível
       const grids = container.querySelectorAll('.posts-grid');

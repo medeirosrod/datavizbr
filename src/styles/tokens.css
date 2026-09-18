@@ -77,7 +77,7 @@
   --fg-label:      var(--dvb-ink-2);
   --fg-body:       var(--dvb-ink-3);
   --fg-meta:       var(--dvb-ink-4);
-  --fg-link:       var(--dvb-orange);
+  --fg-link:       var(--dvb-orange-deep);
   --fg-on-primary: #ffffff;
 
   --bg-page:        var(--dvb-bg);

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LivroGaleria from '../../components/LivroGaleria.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -17,6 +18,9 @@ const allAutores = await getCollection('autores');
 const organizadores = livro.data.organizadores
   .map(ref => allAutores.find(a => a.id === ref.id))
   .filter(Boolean);
+
+const temGaleria = (livro.data.fotos?.length ?? 0) > 0;
+const temPremios = (livro.data.premios?.length ?? 0) > 0;
 ---
 
 <BaseLayout
@@ -26,14 +30,16 @@ const organizadores = livro.data.organizadores
   <article class="livro-page">
     <div class="container">
 
-      <div class="livro-hero">
-        <div class="livro-capa-wrap">
-          <img
-            src={livro.data.capa.src}
-            alt={livro.data.capa_alt}
-            class="livro-capa"
-          />
-        </div>
+      <div class={`livro-hero ${temGaleria ? 'livro-hero-sem-capa' : ''}`}>
+        {!temGaleria && (
+          <div class="livro-capa-wrap">
+            <img
+              src={livro.data.capa.src}
+              alt={livro.data.capa_alt}
+              class="livro-capa"
+            />
+          </div>
+        )}
 
         <div class="livro-header">
           <div class="livro-meta">
@@ -100,6 +106,17 @@ const organizadores = livro.data.organizadores
         </div>
       </div>
 
+      {(temGaleria || temPremios) && (
+        <section class="livro-galeria-section">
+          <LivroGaleria
+            fotos={livro.data.fotos}
+            premios={livro.data.premios}
+            tituloLivro={livro.data.titulo}
+            premiosTitulo="Reconhecimentos"
+          />
+        </section>
+      )}
+
       {livro.data.sumario && livro.data.sumario.length > 0 && (
         <section class="sumario-section">
           <h2>Sumário</h2>
@@ -137,6 +154,10 @@ const organizadores = livro.data.organizadores
     margin-bottom: var(--space-40);
     padding-bottom: var(--space-40);
     border-bottom: 1px solid var(--border-default);
+  }
+
+  .livro-hero-sem-capa {
+    grid-template-columns: minmax(0, 680px);
   }
 
   .livro-capa {
@@ -208,6 +229,10 @@ const organizadores = livro.data.organizadores
     display: flex;
     gap: var(--space-6);
     flex-wrap: wrap;
+  }
+
+  .livro-galeria-section {
+    margin-bottom: var(--space-40);
   }
 
   .livro-formatos {
