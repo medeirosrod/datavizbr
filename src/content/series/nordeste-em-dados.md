@@ -4,7 +4,7 @@ descricao: "Série do datavizbr sobre o Nordeste que produz, estuda e desenvolve
 status: "em_andamento"
 iniciada_em: 2026-11-09
 cor: "laranja"
-capa: ../../assets/blog/o-vento-que-sobra/capa.png
+capa: ./_capas/nordeste-em-dados.gif
 ---
 
 Quase todo mapa do Nordeste que circula mostra pobreza. Esses mapas não estão errados, mas são uma escolha: o mapa responde à pergunta que alguém decidiu fazer. Nesta série, o datavizbr faz outras perguntas à região, sempre com dados públicos, fonte citada e o método aberto.
