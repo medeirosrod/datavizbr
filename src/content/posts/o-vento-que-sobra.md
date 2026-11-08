@@ -14,7 +14,7 @@ capa_alt: "Calendário de 2026 com um quadrado por dia. Os dias em que a geraç�
 rascunho: true
 ---
 
-Num vídeo recente no Instagram, o economista pernambucano Gil do Vigor começa assim: "Bora falar do Nordeste, mas do Nordeste de verdade". Ele reclama de que, quando alguém de fora fala da região, "sempre coloca a gente num lugar de pobreza, de sofrimento, de um povo que precisa de ajuda". Não nega a desigualdade ("Tem pobreza e desigualdade? Temos"), mas pede outra coisa: que o Nordeste seja reconhecido "como um povo que trabalha, que estuda, que desenvolve".
+Num [vídeo publicado no Instagram em 23 de outubro de 2026](https://www.instagram.com/reel/De2HoRHiS0S/), o economista pernambucano Gil do Vigor começa assim: "Bora falar do Nordeste, mas do Nordeste de verdade". Ele reclama de que, quando alguém de fora fala da região, "sempre coloca a gente num lugar de pobreza, de sofrimento, de um povo que precisa de ajuda". Não nega a desigualdade ("Tem pobreza e desigualdade? Temos"), mas pede outra coisa: que o Nordeste seja reconhecido "como um povo que trabalha, que estuda, que desenvolve".
 
 Para quem trabalha com visualização de dados, a crítica tem um nome conhecido: enquadramento. Um mapa responde à pergunta que alguém decidiu fazer. Se a pergunta é sempre sobre carência, o Nordeste sempre aparece pintado da mesma cor.
 
@@ -81,6 +81,6 @@ Todos os números vêm de dados abertos do ONS:
 
 ## O que vem a seguir
 
-O vento é o primeiro capítulo. O vídeo do Gil fala também da interiorização das universidades federais, das redações nota mil do Enem e das olimpíadas científicas. A série vai seguir por esses temas, sempre com a mesma regra: dado público, fonte citada e método aberto.
+O vento é o primeiro capítulo. O vídeo do Gil fala também da interiorização das universidades federais, das redações nota mil do Enem e das olimpíadas científicas. A série vai seguir por esses temas, sempre com a mesma regra: dado público, fonte citada e método aberto. Para isso, além dos dados abertos de cada área, ela vai consultar o [Data Nordeste](https://datanordeste.sudene.gov.br/), a plataforma de dados da Sudene.
 
 Se você tem um dado sobre o Nordeste que merece um gráfico, escreva para o datavizbr.
