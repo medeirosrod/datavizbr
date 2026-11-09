@@ -4,6 +4,7 @@ descricao: "Série do datavizbr sobre o Nordeste que produz, estuda e desenvolve
 status: "em_andamento"
 iniciada_em: 2026-11-09
 cor: "laranja"
+layout: "destaque"
 capa: ./_capas/nordeste-em-dados.gif
 proximos:
   - "A interiorização das universidades federais"
