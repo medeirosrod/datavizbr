@@ -11,8 +11,10 @@ ordem_na_serie: 1
 tags: ["Dados", "Dataviz", "Série"]
 capa: ../../assets/blog/o-vento-que-sobra/capa.png
 capa_alt: "Calendário de 2026 com um quadrado por dia. Os dias em que a geração eólica do Nordeste superou o consumo da região aparecem em laranja, concentrados entre junho e outubro."
-rascunho: true
 ---
+
+import Scrolly from '../../components/scrolly/Scrolly.astro';
+import Passo from '../../components/scrolly/Passo.astro';
 
 Num [vídeo publicado no Instagram em 23 de outubro de 2026](https://www.instagram.com/reel/De2HoRHiS0S/), o economista pernambucano Gil do Vigor começa assim: "Bora falar do Nordeste, mas do Nordeste de verdade". Ele reclama de que, quando alguém de fora fala da região, "sempre coloca a gente num lugar de pobreza, de sofrimento, de um povo que precisa de ajuda". Não nega a desigualdade ("Tem pobreza e desigualdade? Temos"), mas pede outra coisa: que o Nordeste seja reconhecido "como um povo que trabalha, que estuda, que desenvolve".
 
@@ -20,49 +22,67 @@ Para quem trabalha com visualização de dados, a crítica tem um nome conhecido
 
 Esta série, **Nordeste em dados**, faz outras perguntas à região. O primeiro capítulo começa por uma que quase ninguém faz: de onde vem a energia que o Brasil usa?
 
+<Scrolly>
+
+<Passo grafico="vento-por-mes" etapa={1} estatico={false}>
+
 ## Agosto, o mês em que o vento bastou
 
 O Operador Nacional do Sistema Elétrico (ONS) publica, hora a hora, quanto cada região do país gera e consome. Somando as horas de agosto de 2026, a geração eólica do Nordeste chegou a **106% da carga da região**. Durante um mês inteiro, só o vento produziu mais energia do que todo o Nordeste consumiu.
 
-![Gráfico de barras com a geração eólica do Nordeste como percentual do consumo da região, de janeiro a novembro de 2026. Agosto é o único mês acima de 100%, com 106%. Julho tem 99,3% e setembro 97,6%.](../../assets/blog/o-vento-que-sobra/01-vento-por-mes.gif)
+</Passo>
+
+<Passo grafico="vento-por-mes" etapa={2}>
 
 O gráfico mostra o ritmo do ano. No começo de 2026, o vento cobriu entre 52% e 74% do consumo. A partir de maio, começa a temporada dos ventos, e a curva sobe: 89% em maio, 97,5% em junho, 99,3% em julho, 106% em agosto, 97,6% em setembro. No acumulado de 1º de janeiro a 5 de novembro, a geração eólica do Nordeste equivale a **82,5% de tudo o que a região consumiu**.
+
+</Passo>
+
+<Passo grafico="calendario-83-dias" etapa={3}>
 
 ## 83 dias
 
 A média mensal esconde os dias. Olhando dia a dia, em **83 dias de 2026** a geração eólica do Nordeste foi maior que o consumo da região. O primeiro foi em maio. Agosto teve 24 dias assim, julho teve 18, junho 15, setembro 14 e outubro 9.
 
-![Calendário de 2026 com um quadrado por dia. Os 83 dias em que o vento superou o consumo do Nordeste aparecem em laranja, quase todos entre junho e outubro.](../../assets/blog/o-vento-que-sobra/02-calendario-83-dias.gif)
-
 O dia mais forte foi 17 de julho, quando o vento gerou **124,5%** do consumo do dia. Às 5h de 19 de julho, numa hora de madrugada com pouco consumo e muito vento, a geração eólica chegou a 173% da carga da região.
 
 O calendário mostra duas coisas ao mesmo tempo: que o fenômeno não foi um acaso e que ele tem estação.
+
+</Passo>
+
+<Passo grafico="gera-x-consome" etapa={4}>
 
 ## O que sobra viaja
 
 Se uma região gera mais do que consome, a diferença vai para algum lugar. O ONS divide o país em quatro subsistemas ligados por linhas de transmissão: Norte, Nordeste, Sul e Sudeste/Centro-Oeste. Em 2026, a média do Nordeste foi de **19,8 GW gerados para 13,7 GW consumidos**. Quase um terço do que a região produziu foi para outras partes do país.
 
-![Gráfico de barras comparando geração e consumo médios de 2026 em cada subsistema. O Nordeste gera 19,8 GW e consome 13,7 GW. O Norte gera 10,8 e consome 8,8. O Sul gera 11,4 e consome 14,1. O Sudeste e Centro-Oeste gera 39,0 e consome 44,3.](../../assets/blog/o-vento-que-sobra/03-gera-x-consome.gif)
-
 O Nordeste é o subsistema que mais exporta energia no país, e exportou em 91,5% das horas do ano. O Sudeste/Centro-Oeste, onde está a maior parte do consumo, gerou em média 39,0 GW para 44,3 GW consumidos. O Sul também consumiu mais do que gerou.
 
 Uma ressalva importante: energia elétrica na rede se mistura. Não dá para dizer que a lâmpada de uma casa em São Paulo foi acesa pelo vento da Bahia. O que os dados permitem dizer é que, no saldo, o Nordeste manda energia para o resto do país, e o vento é a maior parte do que ele gera: 57% da geração da região em 2026.
+
+</Passo>
+
+<Passo grafico="eolica-por-estado" etapa={5}>
 
 ## Quase toda a energia eólica do Brasil
 
 De toda a geração eólica do país entre janeiro e novembro de 2026, **92,9% saiu do subsistema Nordeste**. Pela capacidade instalada, o retrato é parecido: o país tem 34,5 GW de potência eólica em operação, em 1.082 usinas, e 91,4% dessa potência está no subsistema Nordeste.
 
-![Gráfico de barras horizontais com a potência eólica em operação por estado. Bahia tem 11,7 GW, Rio Grande do Norte 10,7, Piauí 4,4, Ceará 2,5, Rio Grande do Sul 2,0, Paraíba 1,6, Pernambuco 1,0, Maranhão 0,4 e Santa Catarina 0,2.](../../assets/blog/o-vento-que-sobra/04-eolica-por-estado.gif)
-
 Bahia (11,7 GW) e Rio Grande do Norte (10,7 GW) têm, juntos, 65% de toda a potência eólica do Brasil. O Piauí vem em terceiro, com 4,4 GW. O primeiro estado de fora do Nordeste na lista é o Rio Grande do Sul, em quinto, com 2,0 GW.
+
+</Passo>
+
+<Passo grafico="potencia-acumulada" etapa={6}>
 
 ## De quase nada a 34,5 GW
 
 Esse parque é recente. Somando a potência das unidades em operação hoje pelo ano em que cada uma entrou em funcionamento, o Brasil tinha 4,2 GW eólicos em 2014. Doze anos depois, são 34,5 GW, oito vezes mais.
 
-![Gráfico de área com a potência eólica em operação no Brasil, acumulada pelo ano de entrada em operação de cada unidade. A curva fica perto de zero até 2013, chega a 4,2 GW em 2014 e sobe até 34,5 GW em 2026.](../../assets/blog/o-vento-que-sobra/05-potencia-eolica-acumulada.gif)
-
 O gráfico tem um limite que vale dizer: ele só conta as unidades que ainda estão em operação. Turbinas que já foram desligadas não aparecem, então os anos mais antigos podem estar um pouco abaixo do que realmente existia.
+
+</Passo>
+
+</Scrolly>
 
 ## E o Maranhão?
 

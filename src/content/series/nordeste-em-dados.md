@@ -5,6 +5,10 @@ status: "em_andamento"
 iniciada_em: 2026-11-09
 cor: "laranja"
 capa: ./_capas/nordeste-em-dados.gif
+proximos:
+  - "A interiorização das universidades federais"
+  - "As redações nota mil do Enem"
+  - "As olimpíadas científicas"
 ---
 
 Quase todo mapa do Nordeste que circula mostra pobreza. Esses mapas não estão errados, mas são uma escolha: o mapa responde à pergunta que alguém decidiu fazer. Nesta série, o datavizbr faz outras perguntas à região, sempre com dados públicos, fonte citada e o método aberto.

@@ -1,0 +1,39 @@
+---
+// Passo 5: potência eólica em operação por estado. Laranja = Nordeste (IBGE).
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/vento/blogdata.json';
+
+const fmt = (v: number) => v.toFixed(1).replace('.', ',');
+const nomes: Record<string, string> = {
+  BA: 'Bahia', RN: 'Rio Grande do Norte', PI: 'Piauí', CE: 'Ceará', RS: 'Rio Grande do Sul',
+  PB: 'Paraíba', PE: 'Pernambuco', MA: 'Maranhão', SC: 'Santa Catarina',
+};
+const nordeste = ['BA', 'RN', 'PI', 'CE', 'PB', 'PE', 'MA', 'SE', 'AL'];
+const esc = 284 / 12;
+const barras = Object.entries(dados.st).map(([uf, v], i) => ({
+  nome: nomes[uf] ?? uf,
+  v,
+  ne: nordeste.includes(uf),
+  y: 6 + i * 38,
+  d: i * 0.07,
+}));
+---
+
+<Moldura
+  titulo="Onde está a energia eólica do Brasil — potência em operação por estado, em GW"
+  rotulo="Gráfico de barras horizontais com a potência eólica em operação por estado. Bahia tem 11,7 GW, Rio Grande do Norte 10,7, Piauí 4,4, Ceará 2,5, Rio Grande do Sul 2,0, Paraíba 1,6, Pernambuco 1,0, Maranhão 0,4 e Santa Catarina 0,2."
+  fonte="Fonte: ONS, capacidade de geração. Elaboração: datavizbr. Laranja: estados do Nordeste (divisão do IBGE)."
+>
+  {barras.map((b) => (
+    <g>
+      <text class="rv rv-fade t-fim" style={`--d:${b.d};--s:0.1`} x="128" y={b.y + 17} font-size="14">{b.nome}</text>
+      <rect class="rv rv-barra-h" style={`--d:${b.d};--s:0.4`} x="136" y={b.y} width={b.v * esc} height="24" rx="3" fill={b.ne ? 'var(--g-laranja)' : 'var(--g-cinza)'} />
+      <text class:list={['rv rv-fade', b.ne ? 't-laranja' : '']} style={`--d:${b.d + 0.35};--s:0.1`} x={136 + b.v * esc + 6} y={b.y + 17} font-size="14">{fmt(b.v)}</text>
+    </g>
+  ))}
+  <g class="rv rv-fade" style="--d:0.85;--s:0.12">
+    <text class="t-laranja t-fim" x="476" y="236" font-size="54">65%</text>
+    <text class="t-fim" x="476" y="258">da potência do país está</text>
+    <text class="t-fim" x="476" y="276">só na Bahia e no RN</text>
+  </g>
+</Moldura>

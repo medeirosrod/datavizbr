@@ -1,0 +1,74 @@
+---
+// Moldura comum dos gráficos do scrollytelling: título e fonte em HTML (legíveis
+// no celular), SVG em viewBox fixo no meio. Os filhos são o conteúdo do <svg>.
+import './scrolly.css';
+
+interface Props {
+  titulo: string;
+  /** Descrição completa para leitores de tela (equivale ao alt de uma imagem). */
+  rotulo: string;
+  fonte: string;
+}
+const { titulo, rotulo, fonte } = Astro.props;
+---
+
+<figure class="grafico" role="img" aria-label={rotulo}>
+  <p class="g-titulo">{titulo}</p>
+  <svg viewBox="0 0 480 380" aria-hidden="true" focusable="false">
+    <slot />
+  </svg>
+  <figcaption class="g-fonte">{fonte}</figcaption>
+</figure>
+
+<style is:global>
+  .grafico {
+    --g-laranja: var(--dvb-orange, #e67e2c);
+    --g-cinza: #c9c3d3;
+    --g-claro: #e2ddd6;
+    --g-tinta: var(--dvb-ink, #1a0f24);
+    --g-mudo: var(--dvb-ink-3, #6b5d76);
+    margin: 0;
+    width: 100%;
+  }
+  .grafico svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .g-titulo {
+    margin: 0 0 6px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--g-tinta);
+  }
+  .g-fonte {
+    margin-top: 4px;
+    font-size: 0.6875rem;
+    line-height: 1.3;
+    color: var(--g-mudo);
+  }
+  /* o tamanho padrão fica no <svg>, para o atributo font-size dos <text> poder sobrescrevê-lo */
+  .grafico svg {
+    font-size: 13px;
+  }
+  .grafico text {
+    font-family: inherit;
+    fill: var(--g-mudo);
+  }
+  .grafico .t-forte {
+    font-weight: 700;
+    fill: var(--g-tinta);
+  }
+  .grafico .t-laranja {
+    font-weight: 700;
+    fill: var(--g-laranja);
+  }
+  .grafico .t-fim {
+    text-anchor: end;
+  }
+  .grafico .t-meio {
+    text-anchor: middle;
+  }
+</style>

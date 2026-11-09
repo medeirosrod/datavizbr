@@ -1,0 +1,29 @@
+/* Primitivas de animação guiada pela rolagem.
+   O JS só escreve --p (0 a 1) na figura do palco; todo o resto é CSS.
+   Sem JS, ou com movimento reduzido, --p não existe e vale 1 (estado final). */
+
+.rv {
+  /* progresso local do elemento: começa em --d e dura --s (frações de --p) */
+  --k: clamp(0, calc((var(--p, 1) - var(--d, 0)) / var(--s, 0.2)), 1);
+}
+
+.rv-barra-v {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  transform: scaleY(var(--k));
+}
+
+.rv-barra-h {
+  transform-box: fill-box;
+  transform-origin: left;
+  transform: scaleX(var(--k));
+}
+
+.rv-fade {
+  opacity: var(--k);
+}
+
+/* estados discretos (troca de passo) usam transição normal */
+.rv-estado {
+  transition: opacity 0.4s ease;
+}

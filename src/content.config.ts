@@ -40,12 +40,14 @@ const series = defineCollection({
       iniciada_em: z.date(),
       encerrada_em: z.date().optional(),
       cor: z.string().optional(),
+      // capítulos ainda não publicados, na ordem em que vão sair (aparecem como "em breve")
+      proximos: z.array(z.string()).default([]),
     }),
 });
 
 // ---------- POSTS ----------
 const posts = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
   schema: ({ image }) =>
     z.object({
       titulo: z.string(),

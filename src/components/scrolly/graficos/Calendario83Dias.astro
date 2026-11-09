@@ -1,0 +1,66 @@
+---
+// Passo 3: um quadrado por dia de 2026; laranja = vento > consumo do Nordeste.
+import Moldura from '../Moldura.astro';
+import dias from '../../../data/vento/days.json';
+
+const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov'];
+const passoX = 14.4;
+const passoY = 26;
+const origemX = 30;
+
+// [mês, dia, vento ÷ carga]
+const celulas = (dias as [number, number, number][]).map(([m, d, r]) => {
+  const indice = (m - 1) * 31 + d;
+  const quente = r > 1;
+  return {
+    x: origemX + (d - 1) * passoX,
+    y: 4 + (m - 1) * passoY,
+    quente,
+    cor: quente ? 'laranja' : r > 0.8 ? 'cinza' : 'claro',
+    // base aparece primeiro, os dias laranja depois, em ordem de calendário
+    d: quente ? 0.3 + (indice / 340) * 0.55 : (indice / 340) * 0.3,
+  };
+});
+const total = celulas.filter((c) => c.quente).length;
+---
+
+<Moldura
+  titulo="83 dias em que o vento passou do consumo"
+  rotulo="Calendário de 2026 com um quadrado por dia. Os 83 dias em que o vento superou o consumo do Nordeste aparecem em laranja, quase todos entre junho e outubro."
+  fonte="Fonte: ONS, dados abertos. Elaboração: datavizbr. Dados até 5 de novembro."
+>
+  {meses.map((m, i) => (
+    <text x="0" y={4 + i * passoY + 15} font-size="12">{m}</text>
+  ))}
+  {celulas.map((c) => (
+    <rect
+      class={`rv rv-fade c-${c.cor}`}
+      style={`--d:${c.d};--s:0.05`}
+      x={c.x}
+      y={c.y}
+      width="11.5"
+      height="20"
+      rx="2"
+    />
+  ))}
+
+  <g transform="translate(30 312)">
+    <rect width="10" height="10" rx="2" class="c-laranja" />
+    <text x="15" y="9" font-size="11">vento &gt; consumo</text>
+    <rect x="115" width="10" height="10" rx="2" class="c-cinza" />
+    <text x="130" y="9" font-size="11">entre 80% e 100%</text>
+    <rect x="245" width="10" height="10" rx="2" class="c-claro" />
+    <text x="260" y="9" font-size="11">abaixo de 80%</text>
+  </g>
+
+  <g class="rv rv-fade" style="--d:0.85;--s:0.12">
+    <text x="30" y="362" class="t-laranja" font-size="28">{total} dias</text>
+    <text x="128" y="362" font-size="13">com vento acima do consumo</text>
+  </g>
+</Moldura>
+
+<style>
+  .c-laranja { fill: var(--g-laranja); }
+  .c-cinza { fill: var(--g-cinza); }
+  .c-claro { fill: var(--g-claro); }
+</style>
