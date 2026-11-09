@@ -1023,7 +1023,10 @@ const formatarData = (date: Date): string => {
   transition: box-shadow 160ms ease;
 }
 .serie-card-capa {
-  aspect-ratio: 16/7;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/2;        /* mesma proporção das capas (1200x800); 16/7 achatava a imagem */
+  object-fit: cover;        /* se uma capa futura tiver outra proporção, corta em vez de esticar */
   border-radius: var(--radius-large) var(--radius-large) 0 0;  /* arredonda só o topo */
   overflow: hidden;         /* clip da imagem fica só na capa */
 }
