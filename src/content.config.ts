@@ -40,6 +40,8 @@ const series = defineCollection({
       iniciada_em: z.date(),
       encerrada_em: z.date().optional(),
       cor: z.string().optional(),
+      // padrao: cabeçalho + grade de cards; destaque: mapa, regra, linha do tempo (Nordeste em dados)
+      layout: z.enum(['padrao', 'destaque']).default('padrao'),
       // capítulos ainda não publicados, na ordem em que vão sair (aparecem como "em breve")
       proximos: z.array(z.string()).default([]),
     }),
