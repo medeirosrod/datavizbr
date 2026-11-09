@@ -1,0 +1,57 @@
+---
+// Passo 6: potência eólica em operação, somada pelo ano de entrada em operação.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/vento/blogdata.json';
+
+const cum = dados.cum as Record<string, number>;
+const fmt = (v: number) => v.toFixed(1).replace('.', ',');
+const X = (ano: number) => 36 + (ano - 2006) * (434 / 20);
+const Y = (v: number) => 330 - v * (300 / 36);
+
+let ultimo = 0;
+const pontos: [number, number][] = [];
+for (let ano = 2006; ano <= 2026; ano++) {
+  if (cum[ano] != null) ultimo = cum[ano];
+  pontos.push([X(ano), Y(ultimo)]);
+}
+const linha = 'M' + pontos.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L');
+const area = `${linha}L${X(2026)},${Y(0)}L${X(2006)},${Y(0)}Z`;
+---
+
+<Moldura
+  titulo="De quase nada a 34,5 GW — potência eólica em operação no Brasil, por ano de entrada"
+  rotulo="Gráfico de área com a potência eólica em operação no Brasil, acumulada pelo ano de entrada em operação de cada unidade. A curva fica perto de zero até 2013, chega a 4,2 GW em 2014 e sobe até 34,5 GW em 2026."
+  fonte="Fonte: ONS, capacidade de geração. Elaboração: datavizbr. Conta só unidades ainda em operação."
+>
+  {[0, 10, 20, 30].map((v) => (
+    <g>
+      <line x1="36" x2="470" y1={Y(v)} y2={Y(v)} stroke="var(--g-claro)" stroke-width="1.5" />
+      <text class="t-fim" x="30" y={Y(v) + 4} font-size="12">{v}</text>
+    </g>
+  ))}
+  {[2006, 2010, 2014, 2018, 2022, 2026].map((ano) => (
+    <text class="t-meio" x={X(ano)} y="352">{ano}</text>
+  ))}
+
+  <path class="rv rv-fade" style="--d:0;--s:1" d={area} fill="var(--g-laranja)" fill-opacity="0.15" />
+  <path
+    class="rv linha"
+    style="--d:0;--s:1"
+    d={linha}
+    pathLength="1"
+    fill="none"
+    stroke="var(--g-laranja)"
+    stroke-width="3.5"
+    stroke-linejoin="round"
+  />
+
+  <text class="rv rv-fade t-forte t-fim" style="--d:0.45;--s:0.1" x={X(2014) - 8} y={Y(4.2) - 12}>4,2 GW em 2014</text>
+  <text class="rv rv-fade t-laranja t-fim" style="--d:0.92;--s:0.08" x={X(2026)} y={Y(34.5) - 10} font-size="16">{fmt(34.5)} GW em 2026</text>
+</Moldura>
+
+<style>
+  .linha {
+    stroke-dasharray: 1;
+    stroke-dashoffset: calc(1 - var(--k));
+  }
+</style>

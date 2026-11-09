@@ -1,12 +1,12 @@
 ---
+import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AutorNome from '../../components/AutorNome.astro';
-import PostCoverDefault from '../../components/PostCoverDefault.astro';
+import { SITE } from '../../consts';
 import { getPostsPorSerie, getSeries } from '../../lib/data';
 
 export async function getStaticPaths() {
   const series = await getSeries();
-
   return series.map((serie) => ({
     params: { id: serie.id },
     props: { serie },
@@ -18,264 +18,289 @@ interface Props {
 }
 
 const { serie } = Astro.props;
-
-// Buscar posts desta série
+const { Content } = await render(serie);
 const postsDaSerie = await getPostsPorSerie(serie.id);
+const proximos: string[] = serie.data.proximos;
 
-const formatarData = (date: Date): string => {
-  return new Intl.DateTimeFormat('pt-BR', {
-    month: 'long',
-    year: 'numeric'
-  }).format(new Date(date));
-};
+const formatarData = (date: Date): string =>
+  new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(date));
+
+// linha do tempo: capítulos publicados (com link) seguidos dos que ainda vêm
+const capitulos = [
+  ...postsDaSerie.map((post, i) => ({
+    numero: post.data.ordem_na_serie ?? i + 1,
+    titulo: post.data.titulo,
+    descricao: post.data.descricao,
+    href: `/posts/${post.id}`,
+    data: formatarData(post.data.publicado_em),
+    autor: post.data.autores[0]?.id,
+  })),
+  ...proximos.map((titulo, i) => ({
+    numero: postsDaSerie.length + i + 1,
+    titulo,
+    descricao: undefined,
+    href: undefined,
+    data: undefined,
+    autor: undefined,
+  })),
+];
+
+const assunto = encodeURIComponent(`Dado para a série ${serie.data.titulo}`);
 ---
 
 <BaseLayout title={serie.data.titulo} description={serie.data.descricao}>
-  <section class="serie-page">
-    <div class="container serie-container">
-
-      <header class="serie-header">
-        {serie.data.capa && (
-          <figure class="serie-capa">
-            <img src={serie.data.capa.src} alt={serie.data.titulo} />
-          </figure>
-        )}
-
-        <div class="serie-info">
-          <h1 class="serie-titulo">{serie.data.titulo}</h1>
-          <p class="serie-status">
-            {serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento'} · {postsDaSerie.length} {postsDaSerie.length === 1 ? 'parte' : 'partes'}
-          </p>
-          <p class="serie-descricao">{serie.data.descricao}</p>
-        </div>
-      </header>
-
-      {postsDaSerie.length > 0 && (
-        <section class="serie-posts">
-          <h2 class="posts-titulo">Posts desta série</h2>
-          <div class="posts-grid">
-            {postsDaSerie.map((post, idx) => (
-              <article class="post-card">
-                <div class="post-numero">Parte {(post.data.ordem_na_serie || idx + 1)}</div>
-
-                {post.data.capa ? (
-                  <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
-                ) : (
-                  <PostCoverDefault class="post-thumb" />
-                )}
-
-                <div class="post-card-body">
-                  <h3 class="post-titulo">
-                    <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
-                  </h3>
-
-                  {post.data.descricao && (
-                    <p class="post-excerpt">{post.data.descricao}</p>
-                  )}
-
-                  <div class="post-foot">
-                    <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
-                    <span class="dot"></span>
-                    <span>{formatarData(post.data.publicado_em)}</span>
-                  </div>
-                </div>
-
-                <a href={`/posts/${post.id}`} class="post-link">Ler →</a>
-              </article>
-            ))}
-          </div>
-        </section>
+  <article class="serie">
+    <header class="serie-topo">
+      {serie.data.capa && (
+        <figure class="serie-capa">
+          <img src={serie.data.capa.src} alt={`Mapa do Brasil com os nove estados do Nordeste se acendendo, capa da série ${serie.data.titulo}`} />
+        </figure>
       )}
+      <div class="serie-intro">
+        <p class="serie-status">
+          Série · {serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento'}
+        </p>
+        <h1 class="serie-titulo">{serie.data.titulo}</h1>
+        <p class="serie-descricao">{serie.data.descricao}</p>
+      </div>
+    </header>
 
+    <div class="serie-corpo">
+      <section class="serie-sobre">
+        <Content />
+      </section>
+
+      <ul class="serie-regra" aria-label="Regra da série">
+        <li><strong>Dado público</strong><span>só entram bases abertas, que qualquer pessoa pode baixar.</span></li>
+        <li><strong>Fonte citada</strong><span>cada gráfico diz de onde vêm os números.</span></li>
+        <li><strong>Método aberto</strong><span>cada capítulo explica como a conta foi feita.</span></li>
+      </ul>
+
+      <section class="serie-capitulos" aria-labelledby="capitulos">
+        <h2 id="capitulos">Capítulos</h2>
+        <ol class="linha-do-tempo">
+          {capitulos.map((c) => (
+            <li class:list={['capitulo', { 'em-breve': !c.href }]}>
+              <span class="capitulo-numero" aria-hidden="true">{c.numero}</span>
+              <div class="capitulo-corpo">
+                {c.href ? (
+                  <h3 class="capitulo-titulo"><a href={c.href}>{c.titulo}</a></h3>
+                ) : (
+                  <h3 class="capitulo-titulo">{c.titulo}</h3>
+                )}
+                {c.descricao && <p class="capitulo-descricao">{c.descricao}</p>}
+                <p class="capitulo-meta">
+                  {c.href ? (
+                    <>
+                      <AutorNome autorId={c.autor} /> · {c.data}
+                    </>
+                  ) : (
+                    <span class="selo">Em breve</span>
+                  )}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <aside class="serie-sugestao">
+        <h2>Tem um dado sobre o Nordeste?</h2>
+        <p>Se você conhece uma base pública que merece um gráfico, conte para a gente. Os próximos capítulos nascem dessas sugestões.</p>
+        <a class="btn btn-primary" href={`mailto:${SITE.email_contato}?subject=${assunto}`}>Sugerir um dado</a>
+      </aside>
     </div>
-  </section>
+  </article>
 </BaseLayout>
 
 <style>
-  .serie-page {
-    padding-block: var(--space-32);
-    border-bottom: 1px solid var(--border-default);
+  .serie {
+    padding-bottom: var(--space-32);
   }
 
-  .serie-container {
-    max-width: 960px;
+  /* ---- topo: mapa animado ocupa a largura toda ---- */
+  .serie-topo {
+    background: var(--dvb-purple-deep, #2a1640);
+    color: #fff;
   }
-
-  .serie-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-20);
-    align-items: center;
-    margin-bottom: var(--space-32);
-  }
-
   .serie-capa {
-    border-radius: var(--radius-large);
-    overflow: hidden;
     margin: 0;
+    background: var(--dvb-purple-deep, #2a1640);
   }
-
   .serie-capa img {
-    width: 100%;
-    height: auto;
     display: block;
+    width: 100%;
+    max-height: 60svh;
+    object-fit: contain;
   }
-
-  .serie-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
+  .serie-intro {
+    max-width: 720px;
+    margin-inline: auto;
+    padding: var(--space-12) var(--space-8) var(--space-20);
   }
-
-  .serie-titulo {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-h1);
-    letter-spacing: var(--ls-h1);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin: 0;
-  }
-
   .serie-status {
+    margin: 0 0 var(--space-4);
     font-size: var(--fs-caption);
-    color: var(--fg-meta);
+    letter-spacing: 0.4px;
     text-transform: uppercase;
-    letter-spacing: 0.2px;
+    color: var(--dvb-orange-300, #f4b07a);
+  }
+  .serie-titulo {
+    margin: 0 0 var(--space-6);
+    font-size: clamp(2rem, 8vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: #fff;
+  }
+  .serie-descricao {
     margin: 0;
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: rgba(255, 255, 255, 0.86);
   }
 
-  .serie-descricao {
+  /* ---- corpo ---- */
+  .serie-corpo {
+    max-width: 720px;
+    margin-inline: auto;
+    padding: var(--space-16) var(--space-8) 0;
+  }
+  .serie-sobre :global(p) {
     font-size: var(--fs-body-lg);
     line-height: var(--lh-body-lg);
     color: var(--fg-body);
-    margin: 0;
   }
 
-  .serie-posts {
-    margin-top: var(--space-32);
+  .serie-regra {
+    list-style: none;
+    margin: var(--space-16) 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-6);
+  }
+  .serie-regra li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-8) var(--space-8);
+    background: var(--dvb-orange-50, #fef5ec);
+    border-left: 4px solid var(--dvb-orange, #e67e2c);
+    border-radius: var(--radius-relaxed);
+  }
+  .serie-regra strong {
+    color: var(--fg-heading);
+  }
+  .serie-regra span {
+    font-size: var(--fs-body-sm);
+    color: var(--fg-body);
   }
 
-  .posts-titulo {
+  /* ---- linha do tempo ---- */
+  .serie-capitulos h2,
+  .serie-sugestao h2 {
     font-size: var(--fs-h3);
     line-height: var(--lh-h3);
     letter-spacing: var(--ls-h3);
-    font-weight: 700;
     color: var(--fg-heading);
-    margin-bottom: var(--space-16);
+    margin: 0 0 var(--space-8);
   }
-
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--space-12);
-  }
-
-  .post-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-card);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    overflow: hidden;
-    transition: box-shadow 160ms ease;
+  .linha-do-tempo {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     position: relative;
   }
-
-  .post-card:hover {
-    box-shadow: var(--elev-2);
-  }
-
-  .post-numero {
+  .linha-do-tempo::before {
+    content: '';
     position: absolute;
-    top: var(--space-8);
-    right: var(--space-8);
-    background: var(--color-primary);
-    color: white;
-    font-size: var(--fs-caption);
-    font-weight: 700;
-    padding: var(--space-4) var(--space-6);
-    border-radius: var(--radius-relaxed);
-    z-index: 1;
+    left: 17px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--border-default);
   }
-
-  .post-thumb {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-  }
-
-  .post-card-body {
-    padding: var(--space-10);
+  .capitulo {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    flex: 1;
+    gap: var(--space-8);
+    padding-bottom: var(--space-12);
   }
-
-  .post-titulo {
-    font-size: var(--fs-body-lg);
+  .capitulo-numero {
+    flex: none;
+    z-index: 1;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--dvb-orange, #e67e2c);
+    color: #fff;
     font-weight: 700;
-    line-height: var(--lh-h4);
-    letter-spacing: var(--ls-h4);
-    color: var(--fg-heading);
-    margin: 0;
   }
-
-  .post-titulo a {
+  .em-breve .capitulo-numero {
+    background: var(--bg-page, #fff);
+    border: 2px solid var(--border-default);
+    color: var(--fg-meta);
+  }
+  .capitulo-corpo {
+    padding-top: 4px;
+  }
+  .capitulo-titulo {
+    margin: 0;
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-h4);
+    color: var(--fg-heading);
+  }
+  .em-breve .capitulo-titulo {
+    color: var(--fg-meta);
+  }
+  .capitulo-titulo a {
     color: inherit;
     border-bottom: none;
   }
-
-  .post-titulo a:hover {
+  .capitulo-titulo a:hover {
     color: var(--color-primary);
   }
-
-  .post-excerpt {
+  .capitulo-descricao {
+    margin: var(--space-2) 0 0;
     font-size: var(--fs-body-sm);
-    line-height: var(--lh-body-sm);
     color: var(--fg-body);
-    margin: 0;
-    flex: 1;
   }
-
-  .post-foot {
-    display: flex;
-    gap: var(--space-4);
-    align-items: center;
+  .capitulo-meta {
+    margin: var(--space-2) 0 0;
     font-size: var(--fs-caption);
     color: var(--fg-meta);
-    margin: 0;
   }
-
-  .dot {
+  .selo {
     display: inline-block;
-    width: 4px;
-    height: 4px;
-    background: var(--fg-meta);
-    border-radius: 50%;
+    padding: 1px 8px;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
   }
 
-  .post-link {
-    align-self: flex-start;
-    font-size: var(--fs-caption);
-    font-weight: 600;
-    color: var(--color-primary);
-    border-bottom: none;
-    padding: var(--space-4) var(--space-10);
-    margin: 0 var(--space-10) var(--space-10) var(--space-10);
+  /* ---- sugestão ---- */
+  .serie-sugestao {
+    margin-top: var(--space-16);
+    padding: var(--space-12);
+    background: var(--dvb-purple-50, #f6eefb);
+    border-radius: var(--radius-large);
+  }
+  .serie-sugestao p {
+    margin: 0 0 var(--space-8);
+    color: var(--fg-body);
   }
 
-  .post-link:hover {
-    color: var(--color-primary-hover);
-  }
-
-  @media (max-width: 768px) {
-    .serie-header {
-      grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    .serie-regra {
+      grid-template-columns: repeat(3, 1fr);
     }
-
-    .posts-grid {
-      grid-template-columns: 1fr;
+    .serie-intro {
+      padding-inline: 0;
+    }
+    .serie-corpo {
+      padding-inline: 0;
     }
   }
 </style>

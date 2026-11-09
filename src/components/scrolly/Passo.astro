@@ -1,0 +1,24 @@
+---
+// Um passo do scrollytelling: o texto (slot) e o gráfico que o acompanha.
+// O gráfico é renderizado aqui dentro uma única vez. Sem JS, ele aparece sob o
+// texto (versão estática). Com JS, o <Scrolly> clona o gráfico para o palco fixo
+// e esconde esta cópia.
+import { graficos, type IdGrafico } from './graficos';
+
+interface Props {
+  grafico: IdGrafico;
+  /** Número do passo dentro do capítulo. Gráficos podem reagir a [data-etapa]. */
+  etapa: number;
+  /** false: o gráfico só existe no palco (útil quando o passo seguinte reusa o mesmo gráfico). */
+  estatico?: boolean;
+}
+const { grafico, etapa, estatico = true } = Astro.props;
+const Grafico = graficos[grafico];
+---
+
+<section class="passo" data-grafico={grafico} data-etapa={etapa}>
+  <div class="passo-texto"><slot /></div>
+  <div class="passo-fig" data-etapa={etapa} data-so-palco={estatico ? undefined : ''}>
+    <Grafico />
+  </div>
+</section>

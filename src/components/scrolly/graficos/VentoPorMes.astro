@@ -1,0 +1,81 @@
+---
+// Passo 1 e 2: geração eólica ÷ carga do Nordeste, mês a mês (2026).
+// Etapa 1: as barras crescem com a rolagem. Etapa 2: destaca agosto.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/vento/blogdata.json';
+
+const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov*'];
+const base = 330;
+const esc = 290 / 120;
+const slot = 460 / 11;
+const largura = 30;
+const barras = dados.mon.map((v, i) => ({
+  v,
+  mes: meses[i],
+  x: 10 + i * slot + (slot - largura) / 2,
+  h: v * esc,
+  quente: v >= 100,
+  d: i * 0.055,
+  rotulo: v >= 100 ? `${Math.round(v)}%` : String(Math.round(v)),
+}));
+const y100 = base - 100 * esc;
+const xAgosto = barras[7].x + largura / 2;
+---
+
+<Moldura
+  titulo="Geração eólica do Nordeste como % do consumo da região, mês a mês, 2026"
+  rotulo="Gráfico de barras com a geração eólica do Nordeste como percentual do consumo da região, de janeiro a novembro de 2026. Agosto é o único mês acima de 100%, com 106%. Julho tem 99,3% e setembro 97,6%."
+  fonte="Fonte: ONS, dados abertos. Elaboração: datavizbr. *nov: até o dia 5."
+>
+  <g class="mes">
+    <line x1="0" x2="480" y1={y100} y2={y100} class="linha100" />
+    <text x="2" y={y100 - 6} font-size="12">100% do consumo</text>
+
+    {barras.map((b) => (
+      <g class:list={['barra', { dim: !b.quente }]}>
+        <rect
+          class="rv rv-barra-v"
+          style={`--d:${b.d};--s:0.4`}
+          x={b.x}
+          y={base - b.h}
+          width={largura}
+          height={b.h}
+          rx="3"
+          fill={b.quente ? 'var(--g-laranja)' : 'var(--g-cinza)'}
+        />
+        <text
+          class:list={['rv rv-fade t-meio', b.quente ? 't-laranja' : '']}
+          style={`--d:${b.d + 0.3};--s:0.15`}
+          x={b.x + largura / 2}
+          y={base - b.h - 6}
+          font-size={b.quente ? 15 : 13}>{b.rotulo}</text>
+        <text class="t-meio" x={b.x + largura / 2} y={base + 20}>{b.mes}</text>
+      </g>
+    ))}
+
+    <text class="destaque t-laranja t-fim" x={xAgosto + 20} y="26">só o vento passou do consumo</text>
+  </g>
+</Moldura>
+
+<style>
+  .linha100 {
+    stroke: var(--g-tinta);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 5;
+  }
+  .barra {
+    transition: opacity 0.4s ease;
+  }
+  .destaque {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    font-size: 14px;
+  }
+  /* etapa 2: realça agosto */
+  :global([data-etapa='2']) .destaque {
+    opacity: 1;
+  }
+  :global([data-etapa='2']) .barra.dim {
+    opacity: 0.45;
+  }
+</style>

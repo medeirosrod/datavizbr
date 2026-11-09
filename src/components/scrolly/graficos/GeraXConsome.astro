@@ -1,0 +1,37 @@
+---
+// Passo 4: geração × consumo médios de 2026 em cada subsistema do ONS.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/vento/blogdata.json';
+
+const fmt = (v: number) => v.toFixed(1).replace('.', ',');
+const nomes: Record<string, string> = { 'Sudeste/Centro-Oeste': 'Sudeste e Centro-Oeste' };
+const esc = 370 / 46;
+const linhas = Object.entries(dados.bal).map(([nome, [gera, consome]], i) => ({
+  nome: nomes[nome] ?? nome,
+  gera,
+  consome,
+  ne: nome === 'Nordeste',
+  y: 8 + i * 88,
+  d: 0.05 + i * 0.18,
+}));
+const ne = linhas.find((l) => l.ne)!;
+---
+
+<Moldura
+  titulo="Quem gera mais do que consome — média de 2026, em gigawatts (GW)"
+  rotulo="Gráfico de barras comparando geração e consumo médios de 2026 em cada subsistema. O Nordeste gera 19,8 GW e consome 13,7 GW. O Norte gera 10,8 e consome 8,8. O Sul gera 11,4 e consome 14,1. O Sudeste e Centro-Oeste gera 39,0 e consome 44,3."
+  fonte="Fonte: ONS, dados abertos. Elaboração: datavizbr. Usinas ligadas ao sistema nacional (sem solar distribuída)."
+>
+  {linhas.map((l) => (
+    <g>
+      <text class:list={['rv rv-fade', l.ne ? 't-laranja' : 't-forte']} style={`--d:${l.d};--s:0.1`} x="0" y={l.y + 14} font-size="15">{l.nome}</text>
+      <rect class="rv rv-barra-h" style={`--d:${l.d};--s:0.3`} x="0" y={l.y + 22} width={l.gera * esc} height="20" rx="3" fill={l.ne ? 'var(--g-laranja)' : '#8e86a0'} />
+      <text class="rv rv-fade" style={`--d:${l.d + 0.25};--s:0.1`} x={l.gera * esc + 6} y={l.y + 37}>gera {fmt(l.gera)}</text>
+      <rect class="rv rv-barra-h" style={`--d:${l.d + 0.1};--s:0.3`} x="0" y={l.y + 46} width={l.consome * esc} height="20" rx="3" fill="var(--g-claro)" />
+      <text class="rv rv-fade" style={`--d:${l.d + 0.35};--s:0.1`} x={l.consome * esc + 6} y={l.y + 61}>consome {fmt(l.consome)}</text>
+    </g>
+  ))}
+  <text class="rv rv-fade t-laranja t-fim" style="--d:0.85;--s:0.12" x="476" y={ne.y + 40} font-size="16">
+    +{fmt(ne.gera - ne.consome)} GW que sobram
+  </text>
+</Moldura>

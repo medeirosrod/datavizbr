@@ -15,7 +15,8 @@ const formatarData = (date: Date): string => {
   return new Intl.DateTimeFormat('pt-BR', {
     day: 'numeric',
     month: 'long',
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'UTC' // datas do frontmatter são UTC; sem isso, builds em fuso -3 mostram o dia anterior
   }).format(new Date(date));
 };
 ---
