@@ -7,7 +7,7 @@ import AutorNome from '../components/AutorNome.astro';
 import PostCard from '../components/PostCard.astro';
 import PostCoverDefault from '../components/PostCoverDefault.astro';
 import { getSecaoLabel, SITE } from '../consts';
-import { getPosts, getSeries, porData, tempoLeitura } from '../lib/data';
+import { formatarMesAno, getPosts, getSeries, porData, tempoLeitura } from '../lib/data';
 
 // Curador (seção "Curadoria" da home)
 const curador = await getEntry('autores', SITE.autor_padrao);
@@ -55,8 +55,8 @@ if (import.meta.env.DEV) {
   }
 }
 
-// Recentes: 4 posts mais novos ordenados por data de publicação
-const recentPosts = [...allPosts].sort(porData).slice(0, 4);
+// Recentes: 6 posts mais novos ordenados por data de publicação
+const recentPosts = [...allPosts].sort(porData).slice(0, 6);
 
 // Posts por seção
 const postsPorSecao = {
@@ -196,39 +196,42 @@ const formatarData = (date: Date): string => {
           )}
           <div class="curador-texto">
             <p class="curador-bio">
-              O datavizbr é o caderno de campo de quem faz, ensina e pesquisa dataviz no Brasil
-              há quase duas décadas — <strong>{curador.data.nome}</strong>, professor da UFRPE,
-              doutor em Ciência da Computação (UFPE), mestre em Tecnologia e Arte Digital
-              (Universidade do Minho) e especialista em Design da Informação pela UFPE.
+              Curadoria de quem pratica visualização de dados no Brasil desde 2007: cada texto
+              nasce de projeto real, não de tradução nem de teoria genérica.
             </p>
-            <a href="/sobre" class="curador-link">Conheça o projeto →</a>
+            <p class="curador-credenciais">
+              Por <strong>{curador.data.nome}</strong>, professor da UFRPE e doutor em Ciência da
+              Computação pela UFPE.
+              <a href="/sobre" class="curador-link">Conheça o projeto →</a>
+            </p>
           </div>
         </div>
       )}
 
-      <p class="t-caption curadoria-subtitulo">Recomendados pela curadoria para começar por aqui.</p>
+      <h3 class="subsecao-titulo">Comece por aqui</h3>
 
       <div class="posts-grid stagger-children">
         {curatedPosts.map((post, idx) => (
           <PostCard post={post} indice={idx} />
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════
-       BLOCO 4 — RECENTES
-  ════════════════════════════════════════════ -->
-  <section class="section recentes-section">
-    <div class="container">
-      <div class="section-head">
-        <h2>Recentes</h2>
-        <a href="/arquivo" class="section-head-link">Ver arquivo completo →</a>
-      </div>
-      <div class="posts-grid stagger-children">
-        {recentPosts.map((post, idx) => (
-          <PostCard post={post} indice={idx} />
-        ))}
+      <div class="recentes">
+        <div class="section-head">
+          <h3 class="subsecao-titulo">Recentes</h3>
+          <a href="/arquivo" class="section-head-link">Ver arquivo completo →</a>
+        </div>
+        <ol class="recentes-lista">
+          {recentPosts.map((post) => (
+            <li class="recente">
+              <time class="recente-data t-tnum" datetime={post.data.publicado_em.toISOString().slice(0, 10)}>
+                {formatarMesAno(post.data.publicado_em)}
+              </time>
+              <a class="recente-titulo" href={`/posts/${post.id}`}>{post.data.titulo}</a>
+              <span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   </section>
@@ -689,7 +692,45 @@ const formatarData = (date: Date): string => {
     align-self: flex-start;
   }
   .curador-link:hover { color: var(--dvb-orange-hover); }
-  .curadoria-subtitulo { margin-bottom: var(--space-8); }
+  .curador-credenciais {
+    font-size: var(--fs-body-sm);
+    line-height: var(--lh-body-sm);
+    color: var(--fg-meta);
+    margin: 0;
+  }
+  .curador-credenciais strong { color: var(--fg-label); }
+  .curador-credenciais .curador-link { margin-left: var(--space-3); white-space: nowrap; }
+
+  .subsecao-titulo {
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
+    letter-spacing: var(--ls-h4);
+    margin-bottom: var(--space-8);
+  }
+
+  /* ── RECENTES (lista compacta, para quebrar o ritmo dos cards) ── */
+  .recentes { margin-top: var(--space-24); }
+  .recentes .section-head { margin-bottom: var(--space-4); }
+  .recentes .subsecao-titulo { margin-bottom: 0; }
+  .recente {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr auto;
+    gap: var(--space-8);
+    align-items: baseline;
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--border-default);
+  }
+  .recente-data {
+    font-family: var(--font-mono);
+    font-size: var(--fs-caption);
+    color: var(--fg-meta);
+  }
+  .recente-titulo {
+    font-weight: 600;
+    color: var(--fg-heading);
+    border-bottom: none;
+  }
+  .recente-titulo:hover { color: var(--fg-accent-hover); }
 
   /* ── GRID DE POSTS ──────────────────────────── */
   .posts-grid {
@@ -1055,6 +1096,7 @@ const formatarData = (date: Date): string => {
     .newsletter-form         { flex-direction: column; }
     .acervo-card             { min-height: unset; }
     .curador-card            { flex-direction: column; align-items: flex-start; }
+    .recente                 { grid-template-columns: 1fr; gap: var(--space-2); }
   }
 
 </style>
