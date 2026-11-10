@@ -185,7 +185,7 @@ a:hover:not(.btn) { border-bottom-color: currentColor; }
 }
 .tag:hover {
   background: var(--color-primary-soft);
-  color: var(--color-primary-hover);
+  color: var(--fg-accent-hover);
   border-color: var(--color-primary-tint);
 }
 .tag-primary {

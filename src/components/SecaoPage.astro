@@ -1,0 +1,57 @@
+---
+// Página de listagem de uma seção editorial (Bastidores, Panorama, Práticas, Ensaios).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from './PostCard.astro';
+import { getPostsPorSecao } from '../lib/data';
+
+interface Props {
+  secao: string;
+  titulo: string;
+  /** Linha de apoio abaixo do título. */
+  subtitulo: string;
+  /** Meta description (SEO). */
+  descricao: string;
+}
+
+const { secao, titulo, subtitulo, descricao } = Astro.props;
+const posts = await getPostsPorSecao(secao);
+---
+
+<BaseLayout title={titulo} description={descricao}>
+  <section class="section-page">
+    <div class="container">
+      <header class="section-header">
+        <h1>{titulo}</h1>
+        <p class="section-subtitle">{subtitulo}</p>
+      </header>
+
+      <div class="posts-grid">
+        {posts.map((post) => <PostCard post={post} variante="cartao" />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-page {
+    padding-block: var(--space-40);
+    border-bottom: 1px solid var(--border-default);
+  }
+  .section-header {
+    margin-bottom: var(--space-32);
+    max-width: 800px;
+  }
+  .section-header h1 { margin-bottom: var(--space-6); }
+  .section-subtitle {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body-lg);
+    color: var(--fg-body);
+  }
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-12);
+  }
+  @media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .posts-grid { grid-template-columns: 1fr; } }
+</style>

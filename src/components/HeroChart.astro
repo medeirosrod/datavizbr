@@ -99,6 +99,10 @@
     }
   }
 
+  // Largura do último desenho: o ResizeObserver só redesenha se o contêiner
+  // mudou de fato (a medição inicial pode acontecer antes do layout assentar).
+  let larguraDesenhada = 0;
+
   window.renderChart = function() {
     if (typeof d3 === 'undefined') {
       console.warn('D3 not loaded yet');
@@ -111,11 +115,13 @@
 
     if (!container) return;
 
-    container.innerHTML = '';
-
     const rect = container.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
+    if (width === 0) return;
+    larguraDesenhada = width;
+
+    container.innerHTML = '';
 
     const margin = { top: 12, right: 28, bottom: 30, left: 36 };
     const innerWidth = width - margin.left - margin.right;
@@ -312,4 +318,16 @@
       }, '-=1.2');
     }
   };
+
+  const alvo = document.getElementById('chart');
+  if (alvo && 'ResizeObserver' in window) {
+    let quadro = 0;
+    new ResizeObserver(() => {
+      cancelAnimationFrame(quadro);
+      quadro = requestAnimationFrame(() => {
+        const largura = alvo.getBoundingClientRect().width;
+        if (largura > 0 && Math.abs(largura - larguraDesenhada) > 8) window.renderChart();
+      });
+    }).observe(alvo);
+  }
 </script>

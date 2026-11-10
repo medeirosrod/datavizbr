@@ -4,6 +4,7 @@ import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroChart from '../components/HeroChart.astro';
 import AutorNome from '../components/AutorNome.astro';
+import PostCard from '../components/PostCard.astro';
 import PostCoverDefault from '../components/PostCoverDefault.astro';
 import { getSecaoLabel, SITE } from '../consts';
 import { getPosts, getSeries, porData, tempoLeitura } from '../lib/data';
@@ -209,25 +210,7 @@ const formatarData = (date: Date): string => {
 
       <div class="posts-grid stagger-children">
         {curatedPosts.map((post, idx) => (
-          <article class="post-card" style={`--stagger-index: ${idx}`}>
-            {post.data.capa ? (
-              <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
-            ) : (
-              <PostCoverDefault class="post-thumb" />
-            )}
-            <div class="post-card-body">
-              <div class="post-meta"><span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span></div>
-              <h3 class="post-titulo">
-                <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
-              </h3>
-              <p class="post-excerpt">
-                {post.data.descricao || post.data.subtitulo}
-              </p>
-              <div class="post-foot">
-                <span><AutorNome autorId={post.data.autores[0]?.id} /></span><span class="dot"></span><span>{formatarData(post.data.publicado_em)}</span>
-              </div>
-            </div>
-          </article>
+          <PostCard post={post} indice={idx} />
         ))}
       </div>
     </div>
@@ -244,25 +227,7 @@ const formatarData = (date: Date): string => {
       </div>
       <div class="posts-grid stagger-children">
         {recentPosts.map((post, idx) => (
-          <article class="post-card" style={`--stagger-index: ${idx}`}>
-            {post.data.capa ? (
-              <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
-            ) : (
-              <PostCoverDefault class="post-thumb" />
-            )}
-            <div class="post-card-body">
-              <div class="post-meta"><span class={`badge badge-${post.data.secao}`}>{getSecaoLabel(post.data.secao)}</span></div>
-              <h3 class="post-titulo">
-                <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
-              </h3>
-              <p class="post-excerpt">
-                {post.data.descricao || post.data.subtitulo}
-              </p>
-              <div class="post-foot">
-                <span><AutorNome autorId={post.data.autores[0]?.id} /></span><span class="dot"></span><span>{formatarData(post.data.publicado_em)}</span>
-              </div>
-            </div>
-          </article>
+          <PostCard post={post} indice={idx} />
         ))}
       </div>
     </div>
@@ -525,7 +490,7 @@ const formatarData = (date: Date): string => {
     color: var(--fg-meta);
     border-bottom: none;
   }
-  .section-head-link:hover { color: var(--color-primary); }
+  .section-head-link:hover { color: var(--fg-accent); }
 
   /* ── HERO ───────────────────────────────────── */
   .hero {
@@ -649,7 +614,7 @@ const formatarData = (date: Date): string => {
     color: inherit;
     border-bottom: none;
   }
-  .destaque-titulo a:hover { color: var(--color-primary); }
+  .destaque-titulo a:hover { color: var(--fg-accent); }
   .destaque-excerpt {
     font-size: var(--fs-body-lg);
     line-height: var(--lh-body-lg);
@@ -682,10 +647,10 @@ const formatarData = (date: Date): string => {
     display: inline-block;
     font-size: var(--fs-body-sm);
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--fg-accent);
     border-bottom: none;
   }
-  .destaque-cta:hover { color: var(--color-primary-hover); }
+  .destaque-cta:hover { color: var(--fg-accent-hover); }
 
   /* ── CURADOR ────────────────────────────────── */
   .curador-card {
@@ -731,42 +696,6 @@ const formatarData = (date: Date): string => {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-12);
-  }
-  .post-card { display: flex; flex-direction: column; }
-  .post-thumb {
-    aspect-ratio: 16/10;
-    border-radius: var(--radius-relaxed);
-    border: 1px solid var(--border-default);
-    overflow: hidden;
-    margin-bottom: var(--space-7);
-    transition: box-shadow 160ms ease;
-  }
-  .post-thumb-placeholder { background: var(--bg-soft); }
-  .post-card:hover .post-thumb { box-shadow: var(--elev-2); }
-  .post-card-body { display: flex; flex-direction: column; flex: 1; gap: var(--space-3); }
-  .post-meta { margin-bottom: var(--space-2); }
-  .post-titulo {
-    font-size: var(--fs-body-lg);
-    font-weight: 700;
-    line-height: var(--lh-h4);
-    letter-spacing: var(--ls-h4);
-    color: var(--fg-heading);
-  }
-  .post-titulo a { color: inherit; border-bottom: none; }
-  .post-titulo a:hover { color: var(--color-primary); }
-  .post-excerpt {
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-body-sm);
-    color: var(--fg-body);
-    flex: 1;
-  }
-  .post-foot {
-    display: flex;
-    gap: var(--space-4);
-    align-items: center;
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-    margin-top: var(--space-4);
   }
 
   /* ── ACERVO (redesign) ─────────────────────── */
@@ -1051,7 +980,7 @@ const formatarData = (date: Date): string => {
     font-weight: 700;
     color: var(--fg-heading);
   }
-  .serie-card:hover .serie-card-titulo { color: var(--color-primary); }
+  .serie-card:hover .serie-card-titulo { color: var(--fg-accent); }
   .serie-card-descricao {
     font-size: var(--fs-body-sm);
     line-height: var(--lh-body-sm);

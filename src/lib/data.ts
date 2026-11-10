@@ -168,3 +168,9 @@ export function tempoLeitura(body: string, palavrasPorMinuto = 200): number {
   const palavras = stripMarkdown(body).split(' ').filter(Boolean).length;
   return Math.max(1, Math.ceil(palavras / palavrasPorMinuto));
 }
+
+// "julho de 2026". As datas do frontmatter são UTC; sem timeZone, builds em fuso -3
+// mostram o dia anterior (e, no dia 1º, o mês anterior).
+export function formatarMesAno(date: Date): string {
+  return new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(date));
+}

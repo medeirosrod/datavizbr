@@ -29,6 +29,7 @@
   --dvb-orange:        #e67e2c;
   --dvb-orange-hover:  #c8651a;
   --dvb-orange-deep:   #9a4a0d;
+  --dvb-orange-ink:    #7a3a08;
   --dvb-orange-300:    #f4b07a;
   --dvb-orange-100:    #fce8d6;
   --dvb-orange-50:     #fef5ec;
@@ -78,6 +79,10 @@
   --fg-body:       var(--dvb-ink-3);
   --fg-meta:       var(--dvb-ink-4);
   --fg-link:       var(--dvb-orange-deep);
+  /* Texto de acento (links, hover de título, rótulos): sempre AA sobre o fundo do tema.
+     O laranja vivo (--color-primary) fica para foco, sublinhado e gráficos. */
+  --fg-accent:       var(--dvb-orange-deep);
+  --fg-accent-hover: var(--dvb-orange-ink);
   --fg-on-primary: #ffffff;
 
   --bg-page:        var(--dvb-bg);
@@ -156,6 +161,8 @@
   --color-secondary-hover:  var(--dvb-orange-hover);
   --color-secondary-tint:   var(--dvb-orange-100);
   --fg-link:      var(--dvb-purple);
+  --fg-accent:       var(--dvb-purple);
+  --fg-accent-hover: var(--dvb-purple-hover);
   --border-focus: var(--dvb-purple);
   --focus-ring:   0 0 0 3px rgba(85, 43, 123, 0.25);
 }
@@ -169,6 +176,8 @@
   --fg-body:             rgba(255, 255, 255, 0.75);
   --fg-meta:             rgba(255, 255, 255, 0.55);
   --fg-link:             var(--dvb-orange);
+  --fg-accent:           var(--dvb-orange);
+  --fg-accent-hover:     var(--dvb-orange-300);
   --fg-on-primary:       var(--dvb-purple-deep);
   --bg-page:             var(--dvb-purple);
   --bg-card:             rgba(255, 255, 255, 0.06);
