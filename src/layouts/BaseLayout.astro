@@ -61,6 +61,8 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 
   <body>
 
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
     <!-- NAV -->
     <nav class="nav">
       <div class="nav-inner">
@@ -120,7 +122,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
     <SearchModal />
 
     <!-- CONTEÚDO DA PÁGINA -->
-    <main>
+    <main id="conteudo" tabindex="-1">
       <slot />
     </main>
 
@@ -214,6 +216,22 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 
 <style is:global>
   @import '../styles/global.css';
+
+  /* PULAR PARA O CONTEÚDO — visível só com foco de teclado */
+  .skip-link {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    z-index: 20;
+    padding: var(--space-4) var(--space-8);
+    background: var(--color-primary-deep);
+    color: var(--fg-on-primary);
+    border-radius: var(--radius-standard);
+    font-weight: 600;
+    transform: translateY(-200%);
+  }
+  .skip-link:focus { transform: none; box-shadow: var(--focus-ring); }
+  main:focus { outline: none; }
 
   /* NAV */
   .nav {
