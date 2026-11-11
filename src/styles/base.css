@@ -22,10 +22,21 @@ html, body {
 
 img, svg { display: block; max-width: 100%; }
 
+/* Títulos em Bricolage Grotesque (DESIGN.md: The Signboard Rule) */
+h1, h2, h3, h4, .t-display, .t-h1, .t-h2, .t-h3, .t-h4 { font-family: var(--font-display); }
+
+/* Superfícies do navegador, desenhadas a partir da paleta */
+::selection { background: var(--lc-peach); color: var(--dvb-ink); }
+:focus-visible { outline: 2px solid var(--dvb-orange); outline-offset: 2px; }
+html { scrollbar-color: var(--lc-lilac) var(--lc-cal-shade); }
+.t-tnum, time, .mono { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: .2px; }
+
 /* LINKS */
 a {
   color: var(--fg-link);
   text-decoration: none;
+  text-underline-offset: 3px;
   border-bottom: 1px solid transparent;
   transition: border-color 120ms ease, color 120ms ease;
 }
@@ -81,7 +92,7 @@ a:hover:not(.btn) { border-bottom-color: currentColor; }
   display: inline-flex; align-items: center; justify-content: center;
   gap: var(--space-3);
   padding: var(--space-5) var(--space-10);
-  border-radius: var(--radius-standard);
+  border-radius: 3px;
   font-family: var(--font-sans);
   font-feature-settings: var(--feat-display);
   font-size: 15px; line-height: 1; font-weight: 600;
@@ -90,7 +101,10 @@ a:hover:not(.btn) { border-bottom-color: currentColor; }
   text-decoration: none;
   transition: background 120ms ease, color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
 }
-.btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.btn:focus-visible { outline: 2px solid var(--dvb-orange); outline-offset: 2px; box-shadow: none; }
+.btn-sol { background: var(--dvb-orange); color: var(--lc-dusk); }
+.btn-sol:hover { filter: brightness(1.08); }
+.btn-outline { background: transparent; color: inherit; border-color: currentColor; }
 
 .btn-primary   { background: var(--color-primary-deep); color: var(--fg-on-primary); }
 .btn-primary:hover { filter: brightness(0.85); }

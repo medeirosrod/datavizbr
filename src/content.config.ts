@@ -66,6 +66,8 @@ const posts = defineCollection({
       order_homepage: z.number().optional(),
       capa: image().optional(),
       capa_alt: z.string().optional(),
+      /** Imagem larga para o palco de "Em destaque" na home (cai para `capa` quando não existe). */
+      capa_destaque: image().optional(),
       arquivo: z.boolean().default(false),
       medium_url_original: z.string().url().optional(),
       publicado_originalmente_em: z.date().optional(),

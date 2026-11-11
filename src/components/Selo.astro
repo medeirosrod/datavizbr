@@ -1,0 +1,33 @@
+---
+// Selo de seção: a forma (18 px) seguida do nome. A forma vem antes da cor.
+import { formaD, PALETA, NOME_SECAO, type Secao } from '../lib/formas';
+
+interface Props {
+  secao: Secao;
+  tamanho?: number;
+  /** Troca a cor do texto e da forma (ex.: sobre fundo escuro). */
+  cor?: string;
+  semNome?: boolean;
+}
+const { secao, tamanho = 18, cor, semNome = false } = Astro.props;
+const p = PALETA[secao];
+---
+
+<span class="selo" style={cor ? `--selo-forma:${cor};--selo-texto:${cor}` : `--selo-forma:${p.forma};--selo-texto:${p.texto}`}>
+  <svg width={tamanho} height={tamanho} viewBox="8 8 64 64" aria-hidden="true"><path d={formaD(secao)} fill="var(--selo-forma)" /></svg>
+  {!semNome && <span>{NOME_SECAO[secao]}</span>}
+</span>
+
+<style>
+  .selo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--selo-texto);
+  }
+  .selo svg { flex: none; }
+</style>

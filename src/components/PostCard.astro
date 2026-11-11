@@ -29,7 +29,7 @@ const Titulo = variante === 'cartao' ? 'h2' : 'h3';
   {capa ? (
     <img src={capa.src} alt={capa_alt || titulo} class="post-thumb" />
   ) : (
-    <PostCoverDefault class="post-thumb" />
+    <PostCoverDefault secao={post.data.secao} class="post-thumb" />
   )}
   <div class="post-card-body">
     {variante === 'plano' && (

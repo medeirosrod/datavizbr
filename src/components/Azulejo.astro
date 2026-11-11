@@ -1,0 +1,34 @@
+---
+// Painel de azulejo: as formas de uma seção em xadrez de dois tons.
+// Capa da seção e capa padrão de texto sem imagem.
+import { formaD, PALETA, type Secao } from '../lib/formas';
+
+interface Props {
+  secao: Secao;
+  colunas?: number;
+  linhas?: number;
+  modulo?: number;
+  class?: string;
+}
+const { secao, colunas = 5, linhas = 3, modulo = 40, class: cls = '' } = Astro.props;
+const p = PALETA[secao];
+const k = modulo / 80;
+const celulas = Array.from({ length: colunas * linhas }, (_, i) => {
+  const c = i % colunas, r = Math.floor(i / colunas);
+  return { x: c * 80, y: r * 80, cor: (c + r) % 2 ? p.b : p.a };
+});
+---
+
+<svg
+  class={`azulejo ${cls}`}
+  viewBox={`0 0 ${colunas * 80} ${linhas * 80}`}
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+>
+  <rect width="100%" height="100%" fill={p.fundo} />
+  {celulas.map((c) => <path d={formaD(secao, c.x, c.y)} fill={c.cor} />)}
+</svg>
+
+<style>
+  .azulejo { display: block; width: 100%; height: 100%; }
+</style>

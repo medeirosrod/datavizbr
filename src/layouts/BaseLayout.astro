@@ -2,19 +2,24 @@
 // src/layouts/BaseLayout.astro
 import Analytics from '@vercel/analytics/astro';
 import SearchModal from '../components/SearchModal.astro';
+import Friso from '../components/Friso.astro';
 import { SITE, NAV_PRINCIPAL, NAV_RODAPE, REDES } from '../consts';
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  /** 'escuro': topo em anoitecer (home e páginas com topo escuro). 'claro': página de texto. */
+  tema?: 'claro' | 'escuro';
 }
 
 const {
   title,
   description = SITE.descricao,
   ogImage = '/og-default.png',
+  tema = 'claro',
 } = Astro.props;
+const escuro = tema === 'escuro';
 
 const pageTitle = title ? `${title} · ${SITE.nome}` : `${SITE.nome} — ${SITE.tagline}`;
 const canonicalURL = new URL(Astro.url.pathname, SITE.url);
@@ -64,10 +69,10 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
     <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
     <!-- NAV -->
-    <nav class="nav">
+    <nav class:list={['nav', escuro && 'nav--escuro']}>
       <div class="nav-inner">
         <a href="/" class="nav-logo-link" aria-label={SITE.nome}>
-          <img class="nav-logo" src="/logo.svg" alt={SITE.nome} />
+          <img class="nav-logo" src={escuro ? '/logo-branco.svg' : '/logo.svg'} alt={SITE.nome} />
         </a>
 
         <div class="nav-links">
@@ -82,7 +87,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
           ))}
         </div>
 
-        <a href="/newsletter" class="btn btn-primary btn-sm nav-cta">
+        <a href="/newsletter" class:list={['btn', 'btn-sm', 'nav-cta', escuro ? 'btn-sol' : 'btn-primary']}>
           Newsletter
         </a>
 
@@ -104,7 +109,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 
     <!-- Fora do .nav: backdrop-filter no nav criaria um containing block
          e quebraria o position: fixed deste painel -->
-    <div class="nav-mobile" id="navMobile">
+    <div class:list={['nav-mobile', escuro && 'nav-mobile--escuro']} id="navMobile">
       <div class="nav-mobile-inner">
         {NAV_PRINCIPAL.map((item) => (
           <a
@@ -127,7 +132,8 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
     </main>
 
     <!-- FOOTER -->
-    <footer data-theme="roxo-dark" class="footer" style="background: var(--dvb-purple-deep);">
+    <footer data-theme="roxo-dark" class="footer">
+      <Friso />
       <div class="footer-inner container">
 
         <div class="footer-brand">
@@ -367,7 +373,8 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
   }
 
   /* FOOTER */
-  .footer { padding: var(--space-32) 0 var(--space-24); }
+  .footer { background: var(--lc-dusk); padding: 0 0 var(--space-24); }
+  .footer > .footer-inner { padding-top: var(--space-32); }
   .footer-inner {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -415,6 +422,17 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
   }
   .footer-bottom a { color: var(--fg-meta); border-bottom-color: var(--border-default); }
   .footer-bottom a:hover { color: var(--fg-accent); }
+
+  /* TEMA ESCURO (topo de página em anoitecer) */
+  .nav--escuro { background: rgba(19, 10, 27, .92); border-bottom-color: rgba(255,255,255,.08); }
+  .nav--escuro .nav-link { color: rgba(255,255,255,.78); }
+  .nav--escuro .nav-link:hover, .nav--escuro .nav-link.active { color: #fff; }
+  .nav--escuro .nav-link::after { background: var(--dvb-orange); }
+  .nav--escuro .nav-toggle-bar { background: #fff; }
+  .nav--escuro .search-trigger { color: rgba(255,255,255,.85); }
+  .nav-mobile--escuro { background: var(--lc-dusk); }
+  .nav-mobile--escuro .nav-mobile-link { color: #fff; }
+  .nav-mobile--escuro .nav-mobile-link:hover, .nav-mobile--escuro .nav-mobile-link.active { color: var(--lc-peach); }
 
   /* RESPONSIVO */
   @media (max-width: 768px) {
