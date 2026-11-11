@@ -33,6 +33,7 @@ export const NAV_RODAPE = [
   { texto: 'Escrever', url: '/sobre/escrever' },
   { texto: 'Contato',  url: '/sobre/contato'  },
   { texto: 'RSS',      url: '/rss.xml'        },
+  { texto: 'Arquivo',  url: '/arquivo'        },
 ];
 
 export const SECOES_LABELS = {
