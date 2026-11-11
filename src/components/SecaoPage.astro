@@ -164,7 +164,7 @@ const resumo = destaque?.data.descricao || destaque?.data.subtitulo;
 
 <style>
   .cab { display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 60px; align-items: end; padding: 56px 0 52px; }
-  .cab h1 { font-size: clamp(56px, 11vw, 144px); line-height: .86; letter-spacing: -.042em; color: #fbf7ff; margin: 18px 0 26px; }
+  .cab h1 { font-size: clamp(56px, 11vw, 144px); line-height: .86; letter-spacing: -.0126em; color: #fbf7ff; margin: 18px 0 26px; }
   .lead { color: rgba(255,255,255,.76); max-width: 52ch; margin: 0; }
   .painel { height: 330px; border-radius: 3px; overflow: hidden; box-shadow: 0 40px 60px -30px rgba(0,0,0,.7); }
   .linha-t { display: flex; justify-content: space-between; gap: 16px; color: rgba(255,255,255,.55); margin: 12px 0 0; padding-bottom: 40px; font-size: 12.5px; }
@@ -182,7 +182,7 @@ const resumo = destaque?.data.descricao || destaque?.data.subtitulo;
   .abre-capa { display: block; height: 412px; border-radius: 3px; overflow: hidden; box-shadow: 0 0 0 1px var(--lc-hairline); border-bottom: 0; }
   .abre-capa :global(img), .abre-capa :global(svg) { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms var(--ease-out); }
   .abre-capa:hover :global(img) { transform: scale(1.04); }
-  .abre-titulo { font-size: clamp(40px, 4.6vw, 64px); line-height: .96; letter-spacing: -.034em; margin: 16px 0 18px; text-wrap: balance; }
+  .abre-titulo { font-size: clamp(40px, 4.6vw, 64px); line-height: .96; letter-spacing: -.0102em; margin: 16px 0 18px; text-wrap: balance; }
   .abre-titulo a { color: var(--fg-heading); border-bottom: 0; }
   .abre-titulo a:hover { color: var(--lc-ink-orange); }
   .abre-resumo { color: var(--dvb-ink-2); font-size: 16.5px; margin: 0 0 22px; }
@@ -202,7 +202,7 @@ const resumo = destaque?.data.descricao || destaque?.data.subtitulo;
   }
   @media (max-width: 760px) {
     .cab { grid-template-columns: 1fr; gap: 24px; padding: 30px 0 28px; }
-    .cab h1 { margin: 12px 0 16px; letter-spacing: -.035em; }
+    .cab h1 { margin: 12px 0 16px; letter-spacing: -.0105em; }
     .painel { height: 150px; order: -1; }
     .lead { font-size: 15px; }
     .so-desktop { display: none; }

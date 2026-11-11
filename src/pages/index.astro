@@ -206,7 +206,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   /* ── Topo escuro ── */
   .topo { background: var(--lc-dusk); color: #fff; overflow: hidden; padding: 74px 0 0; }
   .topo-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 60px; align-items: end; margin-bottom: 34px; }
-  .topo h1 { font-size: clamp(46px, 7vw, 96px); line-height: .93; letter-spacing: -.038em; color: #fbf7ff; text-wrap: balance; }
+  .topo h1 { font-size: clamp(46px, 7vw, 96px); line-height: .93; letter-spacing: -.0114em; color: #fbf7ff; text-wrap: balance; }
   .topo h1 em { font-style: normal; color: var(--lc-peach); }
   .apoio { font-family: var(--font-mono); font-size: 17px; line-height: 1.55; letter-spacing: -.2px; color: rgba(255,255,255,.72); margin-bottom: 10px; }
   .apoio strong { color: #fff; font-weight: 700; }
@@ -240,7 +240,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   /* ── Acervo ── */
   .acervo { background: var(--lc-cal-shade); }
   .acervo-topo { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 44px; }
-  .acervo h2, .recentes h2 { font-size: 44px; letter-spacing: -1.4px; }
+  .acervo h2, .recentes h2 { font-size: 44px; letter-spacing: -.42px; }
   .paineis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .painel {
     display: flex; flex-direction: column; background: var(--lc-cal); border-radius: 3px; overflow: hidden; border-bottom: 0;
@@ -250,7 +250,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   .painel:hover { transform: translateY(-4px); box-shadow: 0 1px 0 var(--lc-hairline), 0 34px 44px -28px rgba(42,22,64,.5); }
   .painel-capa { aspect-ratio: 2 / 1; }
   .painel-corpo { padding: 22px 24px 26px; display: flex; flex-direction: column; flex: 1; }
-  .painel-n { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: .9; letter-spacing: -2.4px; color: var(--dvb-ink); }
+  .painel-n { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: .9; letter-spacing: -.72px; color: var(--dvb-ink); }
   .painel h3 { font-size: 25px; letter-spacing: -.5px; margin-top: 6px; }
   .painel p { font-size: 14.5px; line-height: 1.5; color: var(--dvb-ink-3); margin: 12px 0 18px; flex: 1; }
   .painel-recente { padding-top: 14px; border-top: 1px solid var(--lc-hairline); font-size: 13.5px; line-height: 1.4; color: var(--dvb-ink-2); }
@@ -260,7 +260,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   /* ── Quem escreve ── */
   .gente { background: var(--lc-dusk); padding: 100px 0; overflow: hidden; }
   .gente-grid { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 84px; align-items: center; }
-  .gente h2 { font-size: 60px; line-height: .95; letter-spacing: -2.2px; color: #fbf7ff; }
+  .gente h2 { font-size: 60px; line-height: .95; letter-spacing: -.66px; color: #fbf7ff; }
   .gente h2 em { font-style: normal; color: var(--lc-peach); }
   .gente .apoio-escuro { margin: 24px 0 28px; }
   .curador { display: flex; gap: 14px; align-items: center; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.14); font-size: 13.5px; line-height: 1.45; color: rgba(255,255,255,.7); border-bottom: 0; }
@@ -302,8 +302,8 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   .serie:hover { transform: translateY(-4px); }
   .serie img { width: 100%; height: 330px; object-fit: cover; }
   .serie-corpo { display: block; padding: 20px 24px 24px; font-size: 14.5px; color: var(--dvb-ink-3); }
-  .serie-corpo strong { display: block; font-family: var(--font-display); font-size: 28px; letter-spacing: -.7px; color: var(--dvb-ink); margin-bottom: 6px; }
-  .eixo h2 { font-size: 56px; line-height: 1; letter-spacing: -2px; color: #fbf7ff; margin-bottom: 18px; text-wrap: balance; }
+  .serie-corpo strong { display: block; font-family: var(--font-display); font-size: 28px; letter-spacing: -.21px; color: var(--dvb-ink); margin-bottom: 6px; }
+  .eixo h2 { font-size: 56px; line-height: 1; letter-spacing: -.6px; color: #fbf7ff; margin-bottom: 18px; text-wrap: balance; }
   .campo { display: flex; gap: 10px; margin-top: 30px; max-width: 470px; }
   .campo .input { flex: 1; height: 50px; background: transparent; border-color: rgba(255,255,255,.3); color: #fff; }
   .campo .input::placeholder { color: rgba(255,255,255,.55); }
@@ -323,7 +323,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
     .bloco { padding-block: 52px; }
     .topo { padding-top: 30px; }
     .topo-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
-    .topo h1 { font-size: 45px; letter-spacing: -1.7px; }
+    .topo h1 { font-size: 45px; letter-spacing: -.51px; }
     .apoio, .frase { font-size: 15px; }
     .frase { line-height: 2.7; }
     .parede-area { padding-bottom: 28px; }
@@ -339,7 +339,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
     .painel p { font-size: 13.5px; }
     .painel-recente { font-size: 12.5px; }
     .gente { padding: 56px 0; }
-    .gente h2 { font-size: 44px; letter-spacing: -1.6px; }
+    .gente h2 { font-size: 44px; letter-spacing: -.48px; }
     .muro { grid-template-columns: repeat(6, 1fr); }
     .linha { grid-template-columns: 26px 1fr; gap: 4px 12px; padding: 14px 0; }
     .linha .forma { grid-area: 1 / 1; }
@@ -349,7 +349,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
     .linha:hover { background: none; padding-inline: 0; margin-inline: 0; }
     .faixa { padding: 52px 0; }
     .serie img { height: 200px; }
-    .eixo h2 { font-size: 40px; letter-spacing: -1.4px; }
+    .eixo h2 { font-size: 40px; letter-spacing: -.42px; }
     .campo { flex-direction: column; }
   }
 </style>

@@ -37,25 +37,25 @@ typography:
     fontSize: "96px"
     fontWeight: 700
     lineHeight: 0.93
-    letterSpacing: "-3.6px"
+    letterSpacing: "-1.1px"
   headline:
     fontFamily: "Bricolage Grotesque, IBM Plex Sans, system-ui, sans-serif"
     fontSize: "64px"
     fontWeight: 700
     lineHeight: 0.96
-    letterSpacing: "-2.2px"
+    letterSpacing: "-0.7px"
   title:
     fontFamily: "Bricolage Grotesque, IBM Plex Sans, system-ui, sans-serif"
     fontSize: "44px"
     fontWeight: 700
     lineHeight: 1
-    letterSpacing: "-1.4px"
+    letterSpacing: "-0.4px"
   card-title:
     fontFamily: "Bricolage Grotesque, IBM Plex Sans, system-ui, sans-serif"
     fontSize: "24px"
     fontWeight: 700
     lineHeight: 1.1
-    letterSpacing: "-0.6px"
+    letterSpacing: "-0.2px"
   body:
     fontFamily: "IBM Plex Sans, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
     fontSize: "16px"
@@ -210,7 +210,7 @@ Cada seção tem um painel de azulejo em duas cores, usado como capa da seção 
 
 ## Typography
 
-**Títulos:** Bricolage Grotesque, peso 700, entrelinha apertada e espaçamento negativo. Ocupa o espaço como letreiro de fachada.
+**Títulos:** Bricolage Grotesque variável (eixos opsz 12–96, wght 200–800 e wdth 75–100), peso 700, entrelinha apertada e espaçamento levemente negativo. O eixo de tamanho óptico acompanha o corpo: títulos grandes ganham o corte de exibição, já bem apertado, então o espaçamento extra é pequeno (cerca de 1% do corpo). Ocupa o espaço como letreiro de fachada.
 **Texto:** IBM Plex Sans, de 400 a 600.
 **Apoio e dado:** IBM Plex Mono, em dois papéis. Nos textos de apoio grandes (a frase logo abaixo de um título, o subtítulo de um texto) e nos rótulos de dado (datas, contagens, legendas de eixo, o ano gravado no bloco). É a única família mono do site e substitui a Source Code Pro.
 

@@ -8,8 +8,8 @@
    FONTES — auto-hospedadas em /public/fonts
    Bricolage Grotesque (títulos), IBM Plex Sans (texto), IBM Plex Mono (apoio e dado)
    -------------------------------------------------------------------------- */
-@font-face { font-family: 'Bricolage Grotesque'; font-weight: 400; font-style: normal; src: url('/fonts/BricolageGrotesque-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Bricolage Grotesque'; font-weight: 700; font-style: normal; src: url('/fonts/BricolageGrotesque-Bold.ttf') format('truetype'); font-display: swap; }
+/* Variável: opsz 12–96 (o navegador liga o eixo ao tamanho da fonte, então títulos grandes ganham o corte de exibição), wght 200–800, wdth 75–100. */
+@font-face { font-family: 'Bricolage Grotesque'; font-weight: 200 800; font-stretch: 75% 100%; font-style: normal; src: url('/fonts/BricolageGrotesque-Variable.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-style: normal; src: url('/fonts/IBMPlexMono-Regular.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'IBM Plex Mono'; font-weight: 700; font-style: normal; src: url('/fonts/IBMPlexMono-Bold.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'IBM Plex Sans'; font-weight: 100 700; font-style: normal;  src: url('/fonts/IBMPlexSans-VariableFont_wdth,wght.ttf') format('truetype-variations');        font-display: swap; }
@@ -141,8 +141,8 @@
   --feat-display: "kern", "calt", "liga";
   --feat-tabular: "tnum";
 
-  --fs-display: 56px;   --lh-display: 1.05;  --ls-display: -1.6px;
-  --fs-h1:      44px;   --lh-h1:      1.10;  --ls-h1:      -1.0px;
+  --fs-display: 56px;   --lh-display: 1.05;  --ls-display: -.48px;
+  --fs-h1:      44px;   --lh-h1:      1.10;  --ls-h1:      -.3px;
   --fs-h2:      32px;   --lh-h2:      1.15;  --ls-h2:      -0.6px;
   --fs-h3:      24px;   --lh-h3:      1.20;  --ls-h3:      -0.3px;
   --fs-h4:      20px;   --lh-h4:      1.25;  --ls-h4:      -0.15px;

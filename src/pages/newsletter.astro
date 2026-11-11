@@ -57,7 +57,7 @@ const itens: { secao: Secao; titulo: string; texto: string }[] = [
 
 <style>
   .topo { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 72px; align-items: center; padding-block: 72px 88px; }
-  .topo h1 { font-size: clamp(44px, 6.6vw, 92px); line-height: .92; letter-spacing: -.04em; color: #fbf7ff; margin: 22px 0 28px; text-wrap: balance; }
+  .topo h1 { font-size: clamp(44px, 6.6vw, 92px); line-height: .92; letter-spacing: -.012em; color: #fbf7ff; margin: 22px 0 28px; text-wrap: balance; }
   .topo h1 em { font-style: normal; color: var(--lc-peach); }
   .lead { color: rgba(255,255,255,.76); margin: 0 0 32px; }
   .form { display: flex; gap: 10px; max-width: 540px; }
@@ -70,11 +70,11 @@ const itens: { secao: Secao; titulo: string; texto: string }[] = [
   .guia:hover { transform: rotate(1deg) translateY(-6px); }
   .guia-capa { aspect-ratio: 1; }
   .guia-corpo { padding: 20px 24px 26px; display: flex; flex-direction: column; gap: 10px; }
-  .guia-corpo b { font-family: var(--font-display); font-size: 34px; line-height: 1; letter-spacing: -1px; color: var(--dvb-ink); }
+  .guia-corpo b { font-family: var(--font-display); font-size: 34px; line-height: 1; letter-spacing: -.3px; color: var(--dvb-ink); }
   .guia-corpo span { font-size: 14px; color: var(--dvb-ink-3); }
 
   .esperar { padding-block: 96px 112px; }
-  .esperar h2 { font-size: clamp(34px, 4vw, 52px); letter-spacing: -.035em; margin: 0 0 44px; }
+  .esperar h2 { font-size: clamp(34px, 4vw, 52px); letter-spacing: -.0105em; margin: 0 0 44px; }
   .itens { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
   .itens li { border-top: 2px solid var(--dvb-ink); padding-top: 28px; }
   .itens h3 { font-size: 27px; letter-spacing: -.6px; margin: 22px 0 10px; }

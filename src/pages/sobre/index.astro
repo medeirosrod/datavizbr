@@ -160,7 +160,7 @@ const marcos = [
 
 <style>
   .topo { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 72px; align-items: center; padding-block: 72px 80px; }
-  .topo h1 { font-size: clamp(44px, 7vw, 100px); line-height: .92; letter-spacing: -.042em; color: #fbf7ff; margin: 20px 0 30px; text-wrap: balance; }
+  .topo h1 { font-size: clamp(44px, 7vw, 100px); line-height: .92; letter-spacing: -.0126em; color: #fbf7ff; margin: 20px 0 30px; text-wrap: balance; }
   .topo h1 em { font-style: normal; color: var(--lc-peach); }
   .lead { color: rgba(255,255,255,.76); max-width: 54ch; margin: 0; }
   .curador { display: block; border-bottom: 0; color: rgba(255,255,255,.66); font-size: 14px; line-height: 1.45; }
@@ -170,16 +170,16 @@ const marcos = [
   .curador b { display: block; color: #fff; font-weight: 600; font-size: 15px; }
 
   .numeros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin: 0; padding: 56px 0 48px; border-bottom: 1px solid var(--lc-hairline); }
-  .numeros dd { font-family: var(--font-display); font-weight: 700; font-size: clamp(54px, 7vw, 96px); line-height: .9; letter-spacing: -.05em; color: var(--dvb-ink); margin: 0; }
+  .numeros dd { font-family: var(--font-display); font-weight: 700; font-size: clamp(54px, 7vw, 96px); line-height: .9; letter-spacing: -.015em; color: var(--dvb-ink); margin: 0; }
   .numeros dt { order: 2; font-size: 15px; color: var(--fg-meta); margin-top: 12px; }
   .numeros > div { display: flex; flex-direction: column; }
 
   .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; padding: 80px 0 96px; }
-  .trio h2 { font-size: 34px; letter-spacing: -.8px; margin: 22px 0 14px; }
+  .trio h2 { font-size: 34px; letter-spacing: -.24px; margin: 22px 0 14px; }
   .trio p { font-size: 17px; line-height: 1.6; color: var(--dvb-ink-2); margin: 0; }
 
   .citacao { background: var(--lc-lilac-tint); padding: 96px 0; }
-  .citacao p { font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 6.4vw, 88px); line-height: .98; letter-spacing: -.04em; color: var(--dvb-ink); max-width: 14em; margin: 0; text-wrap: balance; }
+  .citacao p { font-family: var(--font-display); font-weight: 700; font-size: clamp(40px, 6.4vw, 88px); line-height: .98; letter-spacing: -.012em; color: var(--dvb-ink); max-width: 14em; margin: 0; text-wrap: balance; }
   .citacao em { font-style: normal; color: var(--lc-ink-orange); }
 
   .resto { padding-block: 88px 112px; }
@@ -189,14 +189,14 @@ const marcos = [
   .marcos b { font-family: var(--font-display); font-size: 21px; letter-spacing: -.4px; color: var(--dvb-ink); }
   .marcos .agora { border-top-color: var(--dvb-orange); }
   .pra-quem, .livro { max-width: 720px; margin-bottom: 72px; }
-  .pra-quem h2, .livro h2 { font-size: 40px; letter-spacing: -1.2px; margin: 0 0 18px; }
+  .pra-quem h2, .livro h2 { font-size: 40px; letter-spacing: -.36px; margin: 0 0 18px; }
   .pra-quem p, .livro p { font-size: 19px; line-height: 1.65; color: var(--dvb-ink-2); }
   .link-forte { font-weight: 600; color: var(--lc-ink-orange); border-bottom: 1px solid currentColor; }
 
   .cartoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
   .cartao-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 32px; background: #fff; border-radius: 3px; box-shadow: 0 0 0 1px var(--lc-hairline); }
   .cartao-cta .eyebrow { color: var(--lc-ink-orange); }
-  .cartao-cta h2 { font-size: 34px; letter-spacing: -.8px; margin: 0; }
+  .cartao-cta h2 { font-size: 34px; letter-spacing: -.24px; margin: 0; }
   .cartao-cta p { color: var(--dvb-ink-2); margin: 0 0 12px; }
 
   @media (max-width: 1000px) {
