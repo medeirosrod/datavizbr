@@ -1,5 +1,5 @@
 ---
-// Página de texto: o único topo claro do site. Faixa de leitura que acende conforme a rolagem,
+// Página de texto: fundo claro com o mesmo topo escuro das outras páginas. Faixa de leitura que acende conforme a rolagem,
 // cabeçalho grande, índice e ficha ao lado do texto, capítulos da série e "Leia também".
 import { getEntry, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
@@ -47,7 +47,7 @@ const leiaTambem = todos
   .map((x) => x.p);
 ---
 
-<BaseLayout title={titulo} description={post.data.descricao} tema="claro">
+<BaseLayout title={titulo} description={post.data.descricao} tema="escuro">
   <div class="leitura" id="leitura" data-secao={secao} aria-hidden="true"></div>
 
   <article class="post-page" id="postArticle">
@@ -237,6 +237,16 @@ const leiaTambem = todos
     );
     titulos.forEach((h) => olho.observe(h));
   }
+
+  // ── Os blocos de rolagem com gráfico ocupam a largura toda e passam por cima das colunas
+  // laterais; enquanto algum está na tela, índice e ficha saem de cena. ──
+  const corpo = document.querySelector('.corpo')!;
+  const sobrepostos = new Set<Element>();
+  const vigia = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => (e.isIntersecting ? sobrepostos.add(e.target) : sobrepostos.delete(e.target)));
+    corpo.classList.toggle('sem-laterais', sobrepostos.size > 0);
+  });
+  document.querySelectorAll('#postConteudo [data-scrolly]').forEach((el) => vigia.observe(el));
 </script>
 
 <style>
@@ -307,6 +317,9 @@ const leiaTambem = todos
   .ind :global(a path) { fill: #cfc5da; transition: fill 200ms var(--ease-out); }
   .ind :global(a.on) { color: var(--dvb-ink); font-weight: 600; }
   .ind :global(a.on path) { fill: var(--dvb-orange); }
+
+  .ind, .ficha { transition: opacity 200ms var(--ease-out); }
+  .sem-laterais .ind, .sem-laterais .ficha { opacity: 0; pointer-events: none; }
 
   @media (min-width: 1240px) {
     .corpo { grid-template-columns: 200px minmax(0, 720px) 200px; }
