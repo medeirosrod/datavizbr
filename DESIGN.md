@@ -66,12 +66,18 @@ typography:
     fontSize: "19px"
     fontWeight: 400
     lineHeight: 1.65
+  lead:
+    fontFamily: "IBM Plex Mono, SFMono-Regular, ui-monospace, Menlo, monospace"
+    fontSize: "17px"
+    fontWeight: 400
+    lineHeight: 1.55
+    letterSpacing: "-0.2px"
   label:
     fontFamily: "IBM Plex Sans, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
     fontSize: "13px"
     fontWeight: 600
   mono:
-    fontFamily: "Source Code Pro, SFMono-Regular, ui-monospace, Menlo, monospace"
+    fontFamily: "IBM Plex Mono, SFMono-Regular, ui-monospace, Menlo, monospace"
     fontSize: "12px"
     fontWeight: 400
     letterSpacing: "0.2px"
@@ -206,20 +212,23 @@ Cada seção tem um painel de azulejo em duas cores, usado como capa da seção 
 
 **Títulos:** Bricolage Grotesque, peso 700, entrelinha apertada e espaçamento negativo. Ocupa o espaço como letreiro de fachada.
 **Texto:** IBM Plex Sans, de 400 a 600.
-**Mono:** Source Code Pro, só para rótulos de dado: datas, contagens, legendas de eixo, o ano gravado no bloco.
+**Apoio e dado:** IBM Plex Mono, em dois papéis. Nos textos de apoio grandes (a frase logo abaixo de um título, o subtítulo de um texto) e nos rótulos de dado (datas, contagens, legendas de eixo, o ano gravado no bloco). É a única família mono do site e substitui a Source Code Pro.
 
 ### Hierarchy
 - **Display** (96px, entrelinha 0,93, espaçamento -3,6px): título do topo de página. Um por página.
 - **Headline** (64px): título de destaque e de bloco grande.
 - **Title** (44px): título de seção da página.
 - **Card title** (24px): título de texto em cartão e em lista.
+- **Lead** (17px, IBM Plex Mono, entrelinha 1,55, espaçamento -0,2px): frase de apoio abaixo de um título e subtítulo de texto. Em coluna de até 62 caracteres, porque a mono é mais larga.
 - **Reading** (19px, entrelinha 1,65): corpo de um texto, em coluna de 720px.
 - **Body** (16px, entrelinha 1,55): texto de interface.
 - **Label** (13px, peso 600): selo de seção, filtro, botão pequeno.
-- **Mono** (12px): data, contagem, legenda.
+- **Mono** (12px, IBM Plex Mono): data, contagem, legenda.
 
 ### Named Rules
 **The Signboard Rule.** Só os títulos usam Bricolage. Nenhum parágrafo, rótulo ou botão usa a fonte de título.
+
+**The Mono Lead Rule.** A mono aparece grande só como apoio de um título, nunca em sequência de parágrafos. O corpo de um texto e as descrições de cartão continuam em IBM Plex Sans.
 
 **The Accent Phrase Rule.** O destaque de cor num título (Peach sobre escuro, Terracotta Deep sobre claro) é permitido uma vez por página, no trecho que carrega o sentido, como "sotaque brasileiro".
 
