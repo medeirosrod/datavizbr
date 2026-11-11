@@ -189,7 +189,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 
       <div class="footer-bottom container">
         <span>© {new Date().getFullYear()} datavizbr · Conteúdo sob <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></span>
-        <span>Feito orgulhosamente em Recife</span>
+        <span>Feito orgulhosamente em Recife, <em class="cobogo">onde o cobogó nasceu em 1929.</em></span>
       </div>
     </footer>
 
@@ -420,6 +420,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
     font-size: var(--fs-caption);
     color: var(--fg-meta);
   }
+  .footer-bottom .cobogo { font-style: normal; color: var(--lc-peach); }
   .footer-bottom a { color: var(--fg-meta); border-bottom-color: var(--border-default); }
   .footer-bottom a:hover { color: var(--fg-accent); }
 
