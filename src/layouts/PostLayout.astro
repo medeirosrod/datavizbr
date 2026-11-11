@@ -1,330 +1,408 @@
 ---
+// Página de texto: o único topo claro do site. Faixa de leitura que acende conforme a rolagem,
+// cabeçalho grande, índice e ficha ao lado do texto, capítulos da série e "Leia também".
+import { getEntry, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import AutorNome from '../components/AutorNome.astro';
-import type { CollectionEntry } from 'astro:content';
+import PostCard from '../components/PostCard.astro';
+import Selo from '../components/Selo.astro';
+import { getPosts, getPostsPorAutor, getPostsPorSerie, porData, tempoLeitura } from '../lib/data';
+import { NOME_SECAO, type Secao } from '../lib/formas';
 
 interface Props {
   post: CollectionEntry<'posts'>;
-  previousPost?: CollectionEntry<'posts'>;
-  nextPost?: CollectionEntry<'posts'>;
 }
 
-const { post, previousPost, nextPost } = Astro.props;
+const { post } = Astro.props;
+const { titulo, subtitulo, secao, publicado_em, tags, capa_destaque, capa_destaque_alt } = post.data;
+const secaoTipada = secao as Secao;
 
-const formatarData = (date: Date): string => {
-  return new Intl.DateTimeFormat('pt-BR', {
+const formatarData = (date: Date): string =>
+  new Intl.DateTimeFormat('pt-BR', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
-    timeZone: 'UTC' // datas do frontmatter são UTC; sem isso, builds em fuso -3 mostram o dia anterior
+    timeZone: 'UTC', // datas do frontmatter são UTC; sem isso, builds em fuso -3 mostram o dia anterior
   }).format(new Date(date));
-};
+
+// Título curto ganha corpo maior; título longo cabe sem estourar a linha.
+const porte = titulo.length <= 28 ? 'g' : titulo.length <= 64 ? 'm' : 'p';
+
+const autores = await Promise.all(post.data.autores.map((ref) => getEntry(ref)));
+const bios = await Promise.all(
+  autores.map(async (a) => ({ autor: a!, total: (await getPostsPorAutor(a!.id)).length })),
+);
+
+const serie = post.data.serie ? await getEntry(post.data.serie) : undefined;
+const capitulos = serie ? await getPostsPorSerie(serie.id) : [];
+const proximos = serie?.data.proximos ?? [];
+const numeroNaSerie = capitulos.findIndex((c) => c.id === post.id) + 1;
+
+// "Leia também": textos com mais temas em comum; empate vai para o mais recente.
+const todos = (await getPosts()).filter((p) => p.id !== post.id).sort(porData);
+const leiaTambem = todos
+  .map((p) => ({ p, pontos: p.data.tags.filter((t) => tags.includes(t)).length }))
+  .sort((a, b) => b.pontos - a.pontos)
+  .slice(0, 3)
+  .map((x) => x.p);
 ---
 
-<BaseLayout title={post.data.titulo} description={post.data.descricao}>
-  <article class="post-page">
-    <div class="container post-container">
+<BaseLayout title={titulo} description={post.data.descricao} tema="claro">
+  <div class="leitura" id="leitura" data-secao={secao} aria-hidden="true"></div>
 
-      <!-- Header do post -->
-      <header class="post-header">
-        <div class="post-meta-top">
-          <span class={`badge badge-${post.data.secao}`}>
-            {post.data.secao.charAt(0).toUpperCase() + post.data.secao.slice(1)}
-          </span>
-          <span class="post-date">{formatarData(post.data.publicado_em)}</span>
+  <article class="post-page" id="postArticle">
+    <div class="container">
+      <header class="cab">
+        <div class="cab-tags">
+          <Selo secao={secaoTipada} />
+          {serie && (
+            <a class="cab-serie" href={`/series/${serie.id}`}>
+              Série {serie.data.titulo}{numeroNaSerie ? `, capítulo ${numeroNaSerie}` : ''}
+            </a>
+          )}
         </div>
 
-        <h1 class="post-titulo">{post.data.titulo}</h1>
+        <h1 class:list={['cab-titulo', `porte-${porte}`]}>{titulo}</h1>
+        {subtitulo && <p class="apoio-mono cab-lead">{subtitulo}</p>}
 
-        {post.data.subtitulo && (
-          <p class="post-subtitulo">{post.data.subtitulo}</p>
-        )}
-
-        <div class="post-autores">
-          {post.data.autores.map((autor, idx) => (
-            <>
-              <a href={`/autores/${autor.id}`} class="autor-link">
-                <AutorNome autorId={autor.id} />
-              </a>
-              {idx < post.data.autores.length - 1 && ', '}
-            </>
-          ))}
+        <div class="assina">
+          <div class="fotos">
+            {autores.map((a) => a?.data.foto && <img src={a.data.foto.src} alt="" width="48" height="48" />)}
+          </div>
+          <div class="assina-nomes">
+            <b>
+              {post.data.autores.map((autor, i) => (
+                <>
+                  <a href={`/autores/${autor.id}`}><AutorNome autorId={autor.id} /></a>
+                  {i < post.data.autores.length - 1 && ', '}
+                </>
+              ))}
+            </b>
+            {formatarData(publicado_em)}
+          </div>
+          <span class="mono assina-tempo">{tempoLeitura(post.body ?? '')} min de leitura</span>
         </div>
       </header>
 
-      <!-- Conteúdo do post -->
-      <div class="post-conteudo">
-        <slot />
-      </div>
+      {capa_destaque && (
+        <div class="quadro">
+          <img src={capa_destaque.src} alt={capa_destaque_alt ?? ''} />
+          <div class="veu" aria-hidden="true"></div>
+        </div>
+      )}
 
-      <!-- Footer do post -->
-      <footer class="post-footer">
-        <div class="post-tags">
-          {post.data.tags.map((tag) => (
-            <a href={`/tags/${tag}`} class="tag">#{tag}</a>
-          ))}
+      <div class="corpo">
+        <aside class="ind" id="indice" aria-label="Neste texto" hidden>
+          <h2 class="rotulo">Neste texto</h2>
+          <div id="indice-lista"></div>
+        </aside>
+
+        <div class="post-conteudo" id="postConteudo">
+          <slot />
         </div>
 
-        {(previousPost || nextPost) && (
-          <div class="post-nav-wrap">
-            <h2 class="post-nav-titulo">Veja também</h2>
-            <nav class="post-nav">
-              {previousPost && (
-                <a href={`/posts/${previousPost.id}`} class="nav-link nav-prev">
-                  <span class="nav-label">Anterior</span>
-                  <span class="nav-titulo">{previousPost.data.titulo}</span>
-                </a>
-              )}
-              {nextPost && (
-                <a href={`/posts/${nextPost.id}`} class="nav-link nav-next">
-                  <span class="nav-label">Próximo</span>
-                  <span class="nav-titulo">{nextPost.data.titulo}</span>
-                </a>
-              )}
-            </nav>
-          </div>
-        )}
-      </footer>
-
+        <aside class="ficha" aria-label="Ficha do texto">
+          <h2 class="rotulo">Ficha</h2>
+          <dl>
+            <div><dt>Seção</dt><dd><a href={`/${secao}`}>{NOME_SECAO[secaoTipada]}</a></dd></div>
+            {serie && <div><dt>Série</dt><dd><a href={`/series/${serie.id}`}>{serie.data.titulo}</a></dd></div>}
+            {tags.length > 0 && (
+              <div><dt>Temas</dt><dd>{tags.map((t, i) => <><a href={`/tags/${t}`}>{t}</a>{i < tags.length - 1 && ', '}</>)}</dd></div>
+            )}
+            <div><dt>Licença</dt><dd>CC BY-SA 4.0</dd></div>
+          </dl>
+        </aside>
+      </div>
     </div>
   </article>
+
+  {serie && (capitulos.length > 1 || proximos.length > 0) && (
+    <section class="serie-b grao" aria-labelledby="serie-titulo">
+      <div class="container">
+        <div class="serie-topo">
+          <h2 id="serie-titulo">Continua em <em>{serie.data.titulo}</em></h2>
+          {proximos.length > 0 && (
+            <p class="apoio-mono">Os próximos capítulos ainda são blocos fechados. <a href="/newsletter">Assine a Eixo</a> para saber quando abrem.</p>
+          )}
+        </div>
+        <ol class="caps">
+          {capitulos.map((c, i) => {
+            const aqui = c.id === post.id;
+                      return (
+              <li class:list={['cap', 'cap-aberto', aqui && 'aqui']}>
+                <a href={`/posts/${c.id}`} aria-current={aqui ? 'page' : undefined}>
+                  <span class="n">{i + 1}</span>
+                  <span class="cap-abertura" aria-hidden="true"></span>
+                  <b>{c.data.titulo}</b>
+                  <small>{aqui ? 'você está aqui' : 'ler'}</small>
+                </a>
+              </li>
+            );
+          })}
+          {proximos.map((t, i) => (
+            <li class="cap cap-fechado">
+              <span class="n">{capitulos.length + i + 1}</span>
+              <b>{t}</b>
+              <small>em breve</small>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  <section class="container leia">
+    {bios.map(({ autor, total }) => (
+      <div class="bio">
+        {autor.data.foto && <img src={autor.data.foto.src} alt="" width="84" height="84" />}
+        <div>
+          <b>{autor.data.nome}</b>
+          <p>{autor.data.quem_e}</p>
+        </div>
+        <a class="btn btn-quiet" href={`/autores/${autor.id}`}>Ver {total === 1 ? 'o texto' : `os ${total} textos`}</a>
+      </div>
+    ))}
+    {leiaTambem.length > 0 && (
+      <>
+        <h2 class="leia-titulo">Leia também</h2>
+        <div class="leia-grade">
+          {leiaTambem.map((p, i) => <PostCard post={p} indice={i} />)}
+        </div>
+      </>
+    )}
+  </section>
 </BaseLayout>
 
+<script>
+  import { formaD, type Secao } from '../lib/formas';
+
+  // ── Faixa de leitura: uma abertura por 24 px; acende até onde a pessoa leu ──
+  const faixa = document.getElementById('leitura')!;
+  const artigo = document.getElementById('postArticle')!;
+  const secao = faixa.dataset.secao as Secao;
+  const caminho = formaD(secao);
+  const nav = document.querySelector<HTMLElement>('.nav');
+  let celulas: SVGSVGElement[] = [];
+  let acesas = -1;
+
+  function montar() {
+    const n = Math.max(12, Math.floor(faixa.clientWidth / 24));
+    faixa.innerHTML = Array.from(
+      { length: n },
+      () => `<svg viewBox="0 0 80 80" width="24" height="24"><path d="${caminho}"/></svg>`,
+    ).join('');
+    celulas = [...faixa.querySelectorAll('svg')];
+    acesas = -1;
+    atualizar();
+  }
+
+  function atualizar() {
+    if (nav) faixa.style.setProperty('--nav-h', `${nav.offsetHeight}px`);
+    const total = artigo.offsetHeight - window.innerHeight;
+    const feito = total > 0 ? (window.scrollY - artigo.offsetTop) / total : 1;
+    const alvo = Math.round(Math.min(1, Math.max(0, feito)) * celulas.length);
+    if (alvo === acesas) return;
+    celulas.forEach((c, i) => c.classList.toggle('on', i < alvo));
+    acesas = alvo;
+  }
+
+  let pendente = false;
+  window.addEventListener('scroll', () => {
+    if (!pendente) { pendente = true; requestAnimationFrame(() => { pendente = false; atualizar(); }); }
+  }, { passive: true });
+  window.addEventListener('resize', montar);
+  montar();
+
+  // ── Índice: um item por intertítulo, com o atual em destaque ──
+  const titulos = [...document.querySelectorAll<HTMLHeadingElement>('#postConteudo h2')];
+  if (titulos.length >= 2) {
+    const lista = document.getElementById('indice-lista')!;
+    const marca = `<svg width="14" height="14" viewBox="8 8 64 64" aria-hidden="true"><path d="${caminho}"/></svg>`;
+    titulos.forEach((h, i) => {
+      if (!h.id) h.id = `secao-${i + 1}`;
+      const a = document.createElement('a');
+      a.href = `#${h.id}`;
+      a.innerHTML = `${marca}<span></span>`;
+      a.querySelector('span')!.textContent = h.textContent;
+      lista.appendChild(a);
+    });
+    document.getElementById('indice')!.hidden = false;
+
+    const links = [...lista.querySelectorAll('a')];
+    const marcar = (h: Element) => links.forEach((l, i) => l.classList.toggle('on', titulos[i] === h));
+    marcar(titulos[0]);
+    const olho = new IntersectionObserver(
+      (entradas) => entradas.forEach((e) => e.isIntersecting && marcar(e.target)),
+      { rootMargin: '-15% 0px -75% 0px' },
+    );
+    titulos.forEach((h) => olho.observe(h));
+  }
+</script>
+
 <style>
-  .post-page {
-    padding-block: var(--space-32);
-    border-bottom: 1px solid var(--border-default);
+  /* ── Faixa de leitura ── */
+  .leitura {
+    position: sticky; top: var(--nav-h, 64px); z-index: 9; height: 24px; overflow: hidden;
+    display: flex; background: var(--lc-dusk);
+  }
+  .leitura :global(svg) { flex: none; display: block; }
+  .leitura :global(path) { fill: rgba(255,255,255,.14); transition: fill 260ms var(--ease-out); }
+  .leitura :global(svg.on path) { fill: var(--lc-peach); }
+
+  .post-page { padding-bottom: 40px; }
+
+  /* ── Cabeçalho ── */
+  .cab { padding: 64px 0 48px; max-width: 980px; }
+  .cab-tags { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; }
+  .cab-serie {
+    font-size: 13px; font-weight: 600; color: var(--dvb-ink-2); border: 1px solid var(--lc-hairline); background: #fff;
+    border-radius: 3px; padding: 5px 12px; transition: border-color 160ms var(--ease-out);
+  }
+  .cab-serie:hover { border-color: var(--dvb-ink-3); }
+  .cab-titulo { line-height: .9; letter-spacing: -.012em; margin: 22px 0 26px; text-wrap: balance; color: var(--fg-heading); }
+  .porte-g { font-size: clamp(48px, 9.2vw, 124px); }
+  .porte-m { font-size: clamp(40px, 6.4vw, 88px); line-height: .94; letter-spacing: -.0108em; }
+  .porte-p { font-size: clamp(34px, 4.6vw, 62px); line-height: 1; letter-spacing: -.009em; }
+  .cab-lead { font-size: clamp(17px, 1.9vw, 24px); line-height: 1.4; color: var(--dvb-ink-2); max-width: 36em; margin: 0; }
+  .assina { display: flex; align-items: center; gap: 14px; margin-top: 32px; font-size: 14.5px; color: var(--fg-meta); }
+  .fotos { display: flex; }
+  .fotos img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--lc-cal); }
+  .fotos img + img { margin-left: -14px; }
+  .assina-nomes b { display: block; color: var(--fg-heading); font-weight: 600; font-size: 15.5px; }
+  .assina-nomes a { color: inherit; border-bottom: 0; }
+  .assina-nomes a:hover { color: var(--lc-ink-orange); }
+  .assina-tempo { margin-left: auto; font-size: 12.5px; }
+
+  /* ── Capa com véu ── */
+  .quadro { --u: 80px; position: relative; height: calc(var(--u) * 7); overflow: hidden; border-radius: 3px; background: var(--lc-dusk); }
+  .quadro img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; margin: 0; border: 0; border-radius: 0; transform: scale(1.08); transform-origin: 70% 50%; }
+  .veu {
+    position: absolute; right: 0; top: 0; bottom: 0; width: calc(var(--u) * 2);
+    background:
+      linear-gradient(to right, transparent calc(50% - 1px), #a9520f calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+      repeating-linear-gradient(to bottom, transparent 0 calc(var(--u) - 1px), #a9520f calc(var(--u) - 1px) var(--u)),
+      var(--lc-clay);
+    -webkit-mask: radial-gradient(circle at 50% 50%, transparent 0 calc(var(--u) * .35), #000 calc(var(--u) * .353)) 0 0 / var(--u) var(--u);
+            mask: radial-gradient(circle at 50% 50%, transparent 0 calc(var(--u) * .35), #000 calc(var(--u) * .353)) 0 0 / var(--u) var(--u);
+    filter: drop-shadow(-10px 0 18px rgba(42, 22, 64, .35));
   }
 
-  .post-container {
-    max-width: 720px;
+  /* ── Corpo: índice | texto | ficha ── */
+  .corpo { display: grid; grid-template-columns: minmax(0, 720px); justify-content: center; gap: 40px; padding: 64px 0 40px; align-items: start; }
+  .rotulo { font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--fg-meta); margin: 0 0 14px; }
+  .ind { display: none; }
+  .ind[hidden] { display: none; }
+  .ficha dl { margin: 0; }
+  .ficha dl > div { padding: 10px 0; border-top: 1px solid var(--lc-hairline); font-size: 14px; color: var(--dvb-ink-2); }
+  .ficha dt { font-size: 12px; color: var(--fg-meta); }
+  .ficha dd { margin: 0; }
+  .ficha a { color: inherit; border-bottom: 1px solid var(--lc-hairline); }
+  .ficha a:hover { color: var(--lc-ink-orange); border-bottom-color: currentColor; }
+  .ind :global(a) {
+    display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid var(--lc-hairline); border-bottom: 0;
+    font-size: 14px; line-height: 1.35; color: var(--fg-meta); transition: color 160ms var(--ease-out);
+  }
+  .ind :global(a:hover) { color: var(--dvb-ink); }
+  .ind :global(a svg) { margin-top: 2px; flex: none; }
+  .ind :global(a path) { fill: #cfc5da; transition: fill 200ms var(--ease-out); }
+  .ind :global(a.on) { color: var(--dvb-ink); font-weight: 600; }
+  .ind :global(a.on path) { fill: var(--dvb-orange); }
+
+  @media (min-width: 1240px) {
+    .corpo { grid-template-columns: 200px minmax(0, 720px) 200px; }
+    .post-conteudo { grid-column: 2; }
+    .ficha { grid-column: 3; }
+    .ind { grid-column: 1; }
+    .ind:not([hidden]) { display: block; position: sticky; top: 112px; }
+    .ficha { position: sticky; top: 112px; }
+  }
+  @media (max-width: 1239px) {
+    .ficha dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); column-gap: 24px; }
   }
 
-  .post-header {
-    margin-bottom: var(--space-16);
-  }
-
-  .post-meta-top {
-    display: flex;
-    gap: var(--space-8);
-    align-items: center;
-    margin-bottom: var(--space-8);
-    flex-wrap: wrap;
-  }
-
-  .post-date {
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-  }
-
-  .post-titulo {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-h1);
-    letter-spacing: var(--ls-h1);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-bottom: var(--space-8);
-  }
-
-  .post-subtitulo {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
-    margin-bottom: var(--space-12);
-  }
-
-  .post-autores {
-    font-size: var(--fs-body-sm);
-    color: var(--fg-meta);
-    display: flex;
-    gap: var(--space-2);
-    flex-wrap: wrap;
-  }
-
-  .autor-link {
-    color: var(--color-primary);
-    border-bottom: none;
-    font-weight: 500;
-  }
-
-  .autor-link:hover {
-    color: var(--color-primary-hover);
-  }
-
-  .post-conteudo {
-    margin: var(--space-20) 0;
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    color: var(--fg-body);
-  }
-
+  /* ── Texto ── */
+  .post-conteudo { font-size: 19px; line-height: 1.65; color: var(--dvb-ink-2); }
+  .post-conteudo > :global(p:first-child) { font-size: 23px; line-height: 1.5; color: var(--dvb-ink); }
+  .post-conteudo :global(p) { margin-bottom: 24px; }
+  .post-conteudo :global(strong) { color: var(--dvb-ink); }
   .post-conteudo :global(h2) {
-    font-size: var(--fs-h3);
-    line-height: var(--lh-h3);
-    letter-spacing: var(--ls-h3);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-top: var(--space-16);
-    margin-bottom: var(--space-8);
+    font-size: clamp(30px, 3.4vw, 40px); line-height: 1.05; letter-spacing: -.009em; color: var(--fg-heading);
+    margin: 46px 0 20px; scroll-margin-top: 110px;
   }
-
-  .post-conteudo :global(h3) {
-    font-size: var(--fs-body-lg);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-top: var(--space-12);
-    margin-bottom: var(--space-6);
-  }
-
-  .post-conteudo :global(p) {
-    margin-bottom: var(--space-6);
-  }
-
-  .post-conteudo :global(ul),
-  .post-conteudo :global(ol) {
-    margin-bottom: var(--space-6);
-    margin-left: var(--space-16);
-  }
-
-  .post-conteudo :global(li) {
-    margin-bottom: var(--space-4);
-  }
-
-  .post-conteudo :global(a) {
-    color: var(--color-primary);
-    border-bottom: 1px solid var(--color-primary);
-  }
-
-  .post-conteudo :global(a:hover) {
-    color: var(--color-primary-hover);
-    border-bottom-color: var(--color-primary-hover);
-  }
-
+  .post-conteudo :global(h3) { font-size: 24px; letter-spacing: -.006em; color: var(--fg-heading); margin: 36px 0 14px; scroll-margin-top: 110px; }
+  .post-conteudo :global(ul), .post-conteudo :global(ol) { margin: 0 0 24px 24px; }
+  .post-conteudo :global(li) { margin-bottom: 8px; }
+  .post-conteudo :global(a) { color: var(--lc-ink-orange); border-bottom: 1px solid currentColor; }
+  .post-conteudo :global(a:hover) { color: var(--color-primary-deep); }
   .post-conteudo :global(blockquote) {
-    border-left: 3px solid var(--color-primary);
-    padding-left: var(--space-12);
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: var(--space-12);
-    font-style: italic;
-    color: var(--fg-body);
+    margin: 0 0 28px; padding-left: 24px; border-left: 3px solid var(--lc-clay); font-style: italic; color: var(--dvb-ink-2);
   }
-
-  .post-conteudo :global(code) {
-    background: var(--bg-soft);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-  }
-
-  .post-conteudo :global(pre) {
-    background: var(--bg-soft);
-    padding: var(--space-12);
-    border-radius: var(--radius-relaxed);
-    overflow-x: auto;
-    margin-bottom: var(--space-12);
-  }
-
-  .post-conteudo :global(pre code) {
-    background: none;
-    padding: 0;
-    border-radius: 0;
-  }
-
+  .post-conteudo :global(code) { background: var(--lc-cal-shade); padding: 2px 6px; border-radius: 3px; font-family: var(--font-mono); font-size: .9em; }
+  .post-conteudo :global(pre) { background: var(--lc-cal-shade); padding: 20px; border-radius: 3px; overflow-x: auto; margin-bottom: 28px; }
+  .post-conteudo :global(pre code) { background: none; padding: 0; }
   .post-conteudo :global(img) {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: var(--space-12) 0;
-    border-radius: var(--radius-relaxed);
-    border: 1px solid var(--border-default);
+    max-width: 100%; height: auto; display: block; margin: 32px 0; border-radius: 3px; box-shadow: 0 0 0 1px var(--lc-hairline);
   }
+  .post-conteudo :global(hr) { border: 0; border-top: 1px solid var(--lc-hairline); margin: 40px 0; }
 
-  .post-footer {
-    margin-top: var(--space-24);
-    padding-top: var(--space-16);
-    border-top: 1px solid var(--border-default);
+  /* ── Série ── */
+  .serie-b { background: var(--lc-dusk); color: #fff; padding: 72px 0 84px; overflow: hidden; }
+  .serie-topo { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 30px; }
+  .serie-b h2 { font-size: clamp(34px, 4.2vw, 52px); line-height: 1; letter-spacing: -.0105em; color: #fbf7ff; margin: 0; text-wrap: balance; }
+  .serie-b h2 em { font-style: normal; color: var(--lc-peach); }
+  .serie-topo p { color: rgba(255,255,255,.7); max-width: 38ch; text-align: right; font-size: 15px; margin: 0; }
+  .serie-topo p a { color: var(--lc-peach); border-bottom: 1px solid currentColor; }
+  .caps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .cap { position: relative; min-height: 250px; border-radius: 3px; overflow: hidden; display: flex; flex-direction: column; }
+  .cap .n { font-family: var(--font-display); font-weight: 700; font-size: 56px; line-height: .9; letter-spacing: -.6px; }
+  .cap b { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.08; letter-spacing: -.6px; margin-top: auto; text-wrap: balance; }
+  .cap small { font-size: 13px; font-weight: 500; margin-top: 8px; }
+  .cap-aberto a {
+    display: flex; flex-direction: column; flex: 1; padding: 20px 22px; color: #fbf7ff; border-bottom: 0;
+    background: linear-gradient(to bottom, #2a1837, #1d1028); border: 1px solid rgba(255,255,255,.14); border-radius: 3px;
+    transition: transform 240ms var(--ease-out), border-color 160ms var(--ease-out);
   }
-
-  .post-tags {
-    display: flex;
-    gap: var(--space-6);
-    flex-wrap: wrap;
-    margin-bottom: var(--space-16);
+  .cap-aberto a:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.34); }
+  .cap-aberto small { color: rgba(255,255,255,.74); }
+  .cap-abertura {
+    position: absolute; right: 22px; top: 22px; width: 96px; height: 96px; border-radius: 50%;
+    background: linear-gradient(to bottom, #4b2c80, #8a58ad 30%, #d98aa6 55%, #f6ab72 78%, #e9772a);
+    box-shadow: -4px -5px 0 0 #6d3550, 0 0 0 1px rgba(0,0,0,.4);
   }
+  .cap-fechado { padding: 20px 22px; border: 1px dashed rgba(255,255,255,.34); color: rgba(255,255,255,.74); }
 
-  .tag {
-    font-size: var(--fs-caption);
-    color: var(--color-primary);
-    border: 1px solid var(--border-default);
-    padding: var(--space-3) var(--space-6);
-    border-radius: var(--radius-relaxed);
-    text-decoration: none;
-    transition: all 160ms ease;
+  /* ── Autor e leia também ── */
+  .leia { padding-block: 72px 96px; }
+  .bio { display: grid; grid-template-columns: 84px minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 30px 0; border-top: 1px solid var(--lc-hairline); border-bottom: 1px solid var(--lc-hairline); margin-bottom: 8px; }
+  .bio img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; }
+  .bio b { font-family: var(--font-display); font-size: 26px; letter-spacing: -.6px; color: var(--dvb-ink); }
+  .bio p { font-size: 15.5px; color: var(--fg-meta); margin: 4px 0 0; max-width: 62ch; }
+  .leia-titulo { font-size: clamp(30px, 3.4vw, 40px); letter-spacing: -.0105em; margin: 72px 0 34px; }
+  .leia-grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
+
+  @media (max-width: 1000px) {
+    .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .serie-topo { flex-direction: column; align-items: flex-start; }
+    .serie-topo p { text-align: left; }
+    .leia-grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-
-  .tag:hover {
-    background: var(--bg-soft);
-    color: var(--color-primary-hover);
-    border-color: var(--color-primary-hover);
-  }
-
-  .post-nav-wrap {
-    margin-top: var(--space-16);
-  }
-
-  .post-nav-titulo {
-    font-size: var(--fs-body-lg);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-bottom: var(--space-8);
-  }
-
-  .post-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-12);
-  }
-
-  .nav-link {
-    padding: var(--space-8);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    text-decoration: none;
-    color: inherit;
-    transition: box-shadow 160ms ease;
-  }
-
-  .nav-link:hover {
-    box-shadow: var(--elev-2);
-  }
-
-  .nav-label {
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-    font-weight: 600;
-  }
-
-  .nav-titulo {
-    font-size: var(--fs-body-sm);
-    font-weight: 600;
-    color: var(--color-primary);
-    line-height: var(--lh-body-sm);
-  }
-
-  .nav-next {
-    text-align: right;
-  }
-
-  @media (max-width: 640px) {
-    .post-nav {
-      grid-template-columns: 1fr;
-    }
+  @media (max-width: 760px) {
+    .cab { padding: 36px 0 32px; }
+    .cab-titulo { margin: 16px 0 20px; }
+    .assina { flex-wrap: wrap; margin-top: 24px; }
+    .assina-tempo { margin-left: 62px; flex-basis: 100%; }
+    .quadro { --u: 44px; }
+    .corpo { padding: 40px 0 24px; }
+    .post-conteudo { font-size: 18px; }
+    .post-conteudo > :global(p:first-child) { font-size: 20px; }
+    .serie-b { padding: 52px 0 56px; }
+    .caps { grid-template-columns: 1fr; }
+    .cap { min-height: 190px; }
+    .bio { grid-template-columns: 64px minmax(0, 1fr); gap: 16px; }
+    .bio img { width: 64px; height: 64px; }
+    .bio .btn { grid-column: 1 / -1; justify-self: start; }
+    .leia { padding-block: 48px 64px; }
+    .leia-titulo { margin: 48px 0 24px; }
+    .leia-grade { grid-template-columns: 1fr; }
   }
 </style>

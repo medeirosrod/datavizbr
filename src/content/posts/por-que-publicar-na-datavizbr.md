@@ -6,7 +6,7 @@ autores:
 publicado_em: 2026-08-07
 secao: ensaios
 tags: ["Comunidade", "Acessibilidade", "Cultura", "Dados", "Dataviz"]
-order_homepage: 1
+order_homepage: 2
 ---
 
 Há alguns anos, em 2020, publiquei aqui no datavizbr o artigo [Dez dicas para deixar sua visualização de dados mais acessível](https://www.datavizbr.com.br/posts/dez-dicas-para-deixar-sua-visualizacao-de-dados-mais-acessivel). O texto nasceu de uma necessidade muito prática: embora existissem diversos materiais sobre visualização de dados, havia pouca literatura reunindo recomendações claras para tornar gráficos, tabelas e mapas mais acessíveis. 

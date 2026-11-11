@@ -66,6 +66,10 @@ const posts = defineCollection({
       order_homepage: z.number().optional(),
       capa: image().optional(),
       capa_alt: z.string().optional(),
+      /** Imagem larga para o palco de "Em destaque" na home (cai para `capa` quando não existe). */
+      capa_destaque: image().optional(),
+      /** Descrição da `capa_destaque`. Na página do texto ela aparece como imagem de abertura. */
+      capa_destaque_alt: z.string().optional(),
       arquivo: z.boolean().default(false),
       medium_url_original: z.string().url().optional(),
       publicado_originalmente_em: z.date().optional(),
@@ -82,6 +86,8 @@ const livros = defineCollection({
       titulo: z.string(),
       subtitulo: z.string().optional(),
       organizadores: z.array(reference('autores')).min(1),
+      /** Organizadores sem página de autor no site, na ordem em que aparecem depois dos de `organizadores`. */
+      organizadores_externos: z.array(z.string()).default([]),
       autores_capitulos: z.array(reference('autores')).optional(),
       ano: z.number(),
       editora: z.string().optional(),

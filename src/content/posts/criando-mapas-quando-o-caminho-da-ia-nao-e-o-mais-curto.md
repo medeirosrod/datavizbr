@@ -10,6 +10,7 @@ serie: mapas-cartografia-e-visualizacao-de-dados-no-brasil
 ordem_na_serie: 1
 capa: ../../assets/blog/criando-mapas-quando-o-caminho-da-ia-nao-e-o-mais-curto/03.png
 capa_alt: "Mapa das rotas da dourada pela bacia amazônica"
+order_homepage: 1
 ---
 
 Durante alguns dias tentei fazer com inteligência artificial (ChatGPT 5.5) um mapa dos rios da Amazônia para uma reportagem sobre a dourada, peixe migratório que percorre milhares de quilômetros e cuja sobrevivência depende de uma rede hidrográfica que atravessa fronteiras. A tarefa parecia adequada para um momento em que quase todo problema tecnológico começa com a mesma pergunta: será que a IA consegue fazer?

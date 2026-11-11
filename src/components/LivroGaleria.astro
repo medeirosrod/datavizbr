@@ -66,8 +66,8 @@ const { fotos = [], premios = [], tituloLivro, premiosTitulo } = Astro.props;
     flex: 0 0 240px;
     height: 240px;
     object-fit: cover;
-    border-radius: var(--radius-relaxed);
-    border: 1px solid var(--border-default);
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px var(--lc-hairline);
   }
 
   .livro-premios-bloco {
@@ -77,9 +77,10 @@ const { fotos = [], premios = [], tituloLivro, premiosTitulo } = Astro.props;
   }
 
   .livro-premios-titulo {
-    font-size: var(--fs-body);
-    font-weight: 700;
-    color: var(--fg-heading);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--fg-meta);
     margin: 0;
   }
 
@@ -98,7 +99,7 @@ const { fotos = [], premios = [], tituloLivro, premiosTitulo } = Astro.props;
 
   .livro-selos img.selo-escuro {
     background: var(--dvb-ink, #1a1a1a);
-    border-radius: var(--radius-standard);
+    border-radius: 3px;
     padding: 6px;
   }
 

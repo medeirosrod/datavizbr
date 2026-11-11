@@ -1,340 +1,239 @@
 ---
+// Arquivo: todos os textos. A faixa de aberturas serve de mapa; a lista agrupa por ano.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Faixa from '../components/Faixa.astro';
+import Selo from '../components/Selo.astro';
 import AutorNome from '../components/AutorNome.astro';
-import PostCoverDefault from '../components/PostCoverDefault.astro';
-import { getSecaoLabel } from '../consts';
 import { getPosts, porData } from '../lib/data';
+import { formaD, NOME_SECAO, SECOES, type Secao } from '../lib/formas';
 
-const posts = (await getPosts()).sort(porData);
+const recentes = (await getPosts()).sort(porData); // do mais recente ao mais antigo
+const antigos = [...recentes].reverse();
+const anoDe = (p: (typeof recentes)[number]) => new Date(p.data.publicado_em).getUTCFullYear();
+const mesDe = new Intl.DateTimeFormat('pt-BR', { month: 'long', timeZone: 'UTC' });
 
-// Agrupar posts por ano
-const postsPorAno: Record<number, typeof posts> = {};
-posts.forEach(post => {
-  const ano = new Date(post.data.publicado_em).getFullYear();
-  if (!postsPorAno[ano]) postsPorAno[ano] = [];
-  postsPorAno[ano].push(post);
-});
-
-// Ordenar anos descendentes
-const anosOrdenados = Object.keys(postsPorAno)
-  .map(Number)
-  .sort((a, b) => b - a);
-
-const formatarData = (date: Date): string => {
-  return new Intl.DateTimeFormat('pt-BR', {
-    month: 'long',
-    year: 'numeric'
-  }).format(new Date(date));
-};
+const grupos = new Map<number, typeof recentes>();
+recentes.forEach((p) => grupos.set(anoDe(p), [...(grupos.get(anoDe(p)) ?? []), p]));
+const anos = [...grupos.keys()];
+const contagem = Object.fromEntries(SECOES.map((s) => [s, recentes.filter((p) => p.data.secao === s).length]));
 ---
 
-<BaseLayout title="Arquivo" description="Todos os posts publicados no datavizbr.">
-  <section class="section-page">
+<BaseLayout title="Arquivo" description="Todos os textos publicados no datavizbr, de 2016 até hoje." tema="escuro">
+  <header class="topo-pag grao">
     <div class="container">
-      <header class="section-header">
+      <div class="cab">
         <h1>Arquivo</h1>
-        <p class="section-subtitle">Todos os posts publicados</p>
-      </header>
-
-      <div class="filtros">
-        <div class="filtro-grupo">
-          <label for="filtro-ano" class="filtro-label">Filtrar por ano:</label>
-          <select id="filtro-ano" class="filtro-select">
-            <option value="todos">Todos os anos</option>
-            {anosOrdenados.map(ano => (
-              <option value={ano}>{ano}</option>
-            ))}
-          </select>
-        </div>
-
-        <div class="filtro-grupo">
-          <label for="filtro-ordem" class="filtro-label">Ordenar:</label>
-          <select id="filtro-ordem" class="filtro-select">
-            <option value="recente">Mais recente</option>
-            <option value="antigo">Mais antigo</option>
-          </select>
-        </div>
+        <p class="apoio-mono lead">Os {recentes.length} textos do datavizbr, de {anoDe(antigos[0])} a {anoDe(recentes[0])}. A parede serve de mapa: toque numa abertura para ir ao texto.</p>
       </div>
-
-      <div id="arquivo-container" class="arquivo-content">
-        {anosOrdenados.map(ano => (
-          <section class="ano-section" data-year={ano}>
-            <h2 class="ano-title">{ano}</h2>
-            <div class="posts-grid" data-posts={postsPorAno[ano].map(p => p.id).join(',')}>
-              {postsPorAno[ano].map((post) => (
-                <article class="post-card" data-id={post.id}>
-                  {post.data.capa ? (
-                    <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
-                  ) : (
-                    <PostCoverDefault class="post-thumb" />
-                  )}
-                  <div class="post-card-body">
-                    <div class="post-meta">
-                      <span class={`badge badge-${post.data.secao}`}>
-                        {getSecaoLabel(post.data.secao)}
-                      </span>
-                    </div>
-                    <h3 class="post-titulo">
-                      <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
-                    </h3>
-                    {post.data.descricao && (
-                      <p class="post-excerpt">{post.data.descricao}</p>
-                    )}
-                    <div class="post-foot">
-                      <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
-                      <span class="dot"></span>
-                      <span>{formatarData(post.data.publicado_em)}</span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        ))}
+      <Faixa posts={antigos} id="faixa-arquivo" colunas={25} fechados={2} />
+      <div class="linha-t mono">
+        <span>{anoDe(antigos[0])}</span>
+        <span class="so-desktop">ordem de publicação, da esquerda para a direita</span>
+        <span>{anoDe(recentes[0])}</span>
       </div>
     </div>
-  </section>
+  </header>
 
-  <script>
-    const filtroAno = document.getElementById('filtro-ano') as HTMLSelectElement;
-    const filtroOrdem = document.getElementById('filtro-ordem') as HTMLSelectElement;
-    const container = document.getElementById('arquivo-container') as HTMLElement;
+  <div class="container pagina">
+    <div class="barra-filtro" role="group" aria-label="Filtrar textos">
+      <div class="chips">
+        <button type="button" class="chip" data-secao="todos" aria-pressed="true">Todos {recentes.length}</button>
+        {SECOES.map((s) => (
+          <button type="button" class="chip" data-secao={s} aria-pressed="false">
+            <Selo secao={s} tamanho={15} />
+          </button>
+        ))}
+        <button type="button" class="chip" id="ordem" aria-pressed="false">Mais recentes primeiro</button>
+      </div>
+      <label class="sr" for="busca-arquivo">Buscar por título, autor ou tema</label>
+      <input id="busca-arquivo" class="input busca" type="search" placeholder="Buscar por título, autor ou tema" autocomplete="off" />
+    </div>
 
-    function aplicarFiltros() {
-      const anoSelecionado = filtroAno.value;
-      const ordemSelecionada = filtroOrdem.value;
+    <div id="anos">
+      {anos.map((ano) => {
+        const lista = grupos.get(ano)!;
+        return (
+          <section class="ano" data-ano={ano}>
+            <div class="ano-cab">
+              <h2>{ano}</h2>
+              <p class="mono ano-n"><span class="n">{lista.length}</span> textos</p>
+              <div class="mini-glifos" aria-hidden="true">
+                {lista.map((p) => (
+                  <svg data-id={p.id} viewBox="0 0 80 80"><rect width="80" height="80" rx="6" fill="#24142f" /><path d={formaD(p.data.secao as Secao)} fill="#f4b07a" /></svg>
+                ))}
+              </div>
+            </div>
+            <ul class="linhas">
+              {lista.map((p) => (
+                <li
+                  data-id={p.id}
+                  data-secao={p.data.secao}
+                  data-busca={`${p.data.titulo} ${p.data.descricao ?? ''} ${p.data.autores.map((a) => a.id).join(' ')} ${(p.data.tags ?? []).join(' ')}`.toLowerCase()}
+                >
+                  <a class="linha" href={`/posts/${p.id}`}>
+                    <span class="linha-selo"><Selo secao={p.data.secao as Secao} semNome tamanho={18} /><span class="sr">{NOME_SECAO[p.data.secao as Secao]}</span></span>
+                    <span class="linha-titulo">{p.data.titulo}</span>
+                    <span class="linha-autor"><AutorNome autorId={p.data.autores[0]?.id} /></span>
+                    <span class="linha-mes mono">{mesDe.format(new Date(p.data.publicado_em))}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+    </div>
+    <p class="vazio" id="vazio" hidden>Nenhum texto encontrado.</p>
 
-      const secoes = Array.from(container.querySelectorAll('.ano-section')) as HTMLElement[];
-      secoes.forEach(secao => {
-        const ano = secao.getAttribute('data-year');
-        const exibir = anoSelecionado === 'todos' || ano === anoSelecionado;
-        secao.style.display = exibir ? 'block' : 'none';
-      });
-
-      // Reordenar os blocos de ano (2016→2026 quando "mais antigo")
-      secoes
-        .sort((a, b) => {
-          const anoA = Number(a.getAttribute('data-year'));
-          const anoB = Number(b.getAttribute('data-year'));
-          return ordemSelecionada === 'antigo' ? anoA - anoB : anoB - anoA;
-        })
-        .forEach(secao => container.appendChild(secao));
-
-      // Reordenar cards dentro de cada grid visível
-      const grids = container.querySelectorAll('.posts-grid');
-      grids.forEach(grid => {
-        const cards = Array.from(grid.querySelectorAll('.post-card')) as HTMLElement[];
-        if (ordemSelecionada === 'antigo') {
-          cards.reverse();
-        }
-        cards.forEach(card => {
-          (grid as HTMLElement).appendChild(card);
-        });
-      });
-    }
-
-    filtroAno.addEventListener('change', aplicarFiltros);
-    filtroOrdem.addEventListener('change', aplicarFiltros);
-  </script>
+    <div class="mais">
+      <button type="button" class="btn btn-quiet" id="mais" hidden></button>
+      <span class="mono estado" id="estado" aria-live="polite"></span>
+    </div>
+  </div>
 </BaseLayout>
 
+<script>
+  const MIN_VISIVEIS = 25;
+  const raiz = document.getElementById('anos')!;
+  const grupos = () => [...raiz.querySelectorAll<HTMLElement>('.ano')];
+  const mais = document.getElementById('mais') as HTMLButtonElement;
+  const estado = document.getElementById('estado')!;
+  const vazio = document.getElementById('vazio')!;
+  const busca = document.getElementById('busca-arquivo') as HTMLInputElement;
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip[data-secao]')];
+  const ordem = document.getElementById('ordem') as HTMLButtonElement;
+
+  let secao = 'todos';
+  let termo = '';
+  let antigoPrimeiro = false;
+  let tudo = false;
+
+  function desenhar() {
+    const filtrando = secao !== 'todos' || termo !== '';
+    let acumulado = 0;
+    let visiveis = 0;
+    let escondidos = 0;
+
+    grupos().forEach((g) => {
+      const itens = [...g.querySelectorAll<HTMLElement>('li')];
+      const casados = itens.filter(
+        (li) => (secao === 'todos' || li.dataset.secao === secao) && (!termo || li.dataset.busca!.includes(termo)),
+      );
+      itens.forEach((li) => (li.hidden = !casados.includes(li)));
+      g.querySelectorAll<SVGElement>('.mini-glifos svg').forEach((s) => {
+        s.style.display = casados.some((li) => li.dataset.id === s.dataset.id) ? '' : 'none';
+      });
+      g.querySelector('.n')!.textContent = String(casados.length);
+
+      // Sem filtro, só os anos mais recentes aparecem até o botão "Mostrar".
+      const cabe = filtrando || tudo || acumulado < MIN_VISIVEIS;
+      g.hidden = casados.length === 0 || !cabe;
+      if (casados.length) {
+        if (cabe) visiveis += casados.length;
+        else escondidos += casados.length;
+        acumulado += casados.length;
+      }
+    });
+
+    vazio.hidden = visiveis + escondidos > 0;
+    mais.hidden = escondidos === 0;
+    if (escondidos) {
+      const ocultos = grupos().filter((g) => g.hidden && g.querySelector('li:not([hidden])'));
+      const anos = ocultos.map((g) => g.dataset.ano!);
+      mais.textContent = `Mostrar ${anos[0]} a ${anos[anos.length - 1]}`;
+    }
+    estado.textContent = visiveis + escondidos ? `${visiveis} de ${visiveis + escondidos} textos` : '';
+  }
+
+  function ordenar() {
+    // Anos trocam de posição; a ordem padrão é do mais recente ao mais antigo.
+    grupos()
+      .sort((a, b) => (Number(a.dataset.ano) - Number(b.dataset.ano)) * (antigoPrimeiro ? 1 : -1))
+      .forEach((g) => raiz.appendChild(g));
+  }
+
+  function inverterDentro() {
+    grupos().forEach((g) => {
+      const ul = g.querySelector('ul')!;
+      [...ul.children].reverse().forEach((li) => ul.appendChild(li));
+      const mini = g.querySelector('.mini-glifos')!;
+      [...mini.children].reverse().forEach((s) => mini.appendChild(s));
+    });
+  }
+
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      secao = chip.dataset.secao!;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      desenhar();
+    }),
+  );
+  busca.addEventListener('input', () => { termo = busca.value.trim().toLowerCase(); desenhar(); });
+  mais.addEventListener('click', () => { tudo = true; desenhar(); });
+  ordem.addEventListener('click', () => {
+    antigoPrimeiro = !antigoPrimeiro;
+    ordem.setAttribute('aria-pressed', String(antigoPrimeiro));
+    ordem.textContent = antigoPrimeiro ? 'Mais antigos primeiro' : 'Mais recentes primeiro';
+    ordenar();
+    inverterDentro();
+    desenhar();
+  });
+  desenhar();
+</script>
+
 <style>
-  .section-page {
-    padding-block: var(--space-40);
-    border-bottom: 1px solid var(--border-default);
-  }
+  .cab { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; padding: 56px 0 36px; }
+  .cab h1 { font-size: clamp(64px, 11vw, 150px); line-height: .86; letter-spacing: -.0126em; color: #fbf7ff; margin: 0; }
+  .lead { color: rgba(255,255,255,.76); max-width: 38ch; text-align: right; margin: 0 0 8px; }
+  .linha-t { display: flex; justify-content: space-between; gap: 16px; color: rgba(255,255,255,.55); margin: 12px 0 0; padding-bottom: 56px; font-size: 12.5px; }
 
-  .section-header {
-    margin-bottom: var(--space-24);
-    max-width: 800px;
-  }
+  .pagina { padding-bottom: 96px; }
+  .barra-filtro { border-bottom: 1px solid var(--lc-dusk); padding-bottom: 28px; }
+  .chip :global(.selo) { gap: 8px; }
+  .chip[aria-pressed="true"] :global(.selo) { --selo-forma: #fff !important; --selo-texto: #fff !important; }
+  #ordem { margin-left: 0; }
 
-  .section-header h1 {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-h1);
-    letter-spacing: var(--ls-h1);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-bottom: var(--space-6);
-  }
+  .ano { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 40px; padding: 36px 0 44px; border-bottom: 1px solid var(--lc-hairline); }
+  .ano:first-child { border-top: 0; }
+  .ano h2 { font-size: clamp(56px, 6.6vw, 88px); line-height: .9; letter-spacing: -.0135em; margin: 0; }
+  .ano-n { font-size: 12.5px; color: var(--fg-meta); margin: 10px 0 14px; }
+  .mini-glifos { display: flex; flex-wrap: wrap; gap: 2px; max-width: 160px; }
+  .mini-glifos svg { width: 24px; height: 24px; }
 
-  .section-subtitle {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
-    margin: 0;
+  .linhas { list-style: none; margin: 0; padding: 0; }
+  .linhas li + li .linha { border-top: 1px solid var(--lc-hairline); }
+  .linha {
+    display: grid; grid-template-columns: 22px minmax(0, 1fr) 190px 96px; gap: 20px; align-items: center;
+    padding: 15px 0; border-bottom: 0; color: inherit;
+    transition: background 160ms var(--ease-out), padding 220ms var(--ease-out), margin 220ms var(--ease-out);
   }
+  .linha:hover, .linha:focus-visible { background: #fff; padding-inline: 14px; margin-inline: -14px; }
+  .linha-selo { display: flex; }
+  .linha-titulo { font-family: var(--font-display); font-weight: 700; font-size: 21px; line-height: 1.16; letter-spacing: -.4px; color: var(--dvb-ink); text-wrap: balance; }
+  .linha:hover .linha-titulo { color: var(--lc-ink-orange); }
+  .linha-autor { font-size: 13.5px; color: var(--fg-meta); }
+  .linha-mes { font-size: 12.5px; color: var(--fg-meta); text-align: right; }
+  .vazio { padding: 64px 0; text-align: center; color: var(--fg-meta); }
+  .mais { display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: 40px; }
+  .estado { font-size: 12.5px; color: var(--fg-meta); }
 
-  /* ── FILTROS ────────────────────────────────── */
-  .filtros {
-    display: flex;
-    gap: var(--space-12);
-    margin-bottom: var(--space-32);
-    align-items: flex-end;
-  }
-
-  .filtro-grupo {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .filtro-label {
-    font-size: var(--fs-body-sm);
-    font-weight: 600;
-    color: var(--fg-heading);
-  }
-
-  .filtro-select {
-    padding: var(--space-4) var(--space-6);
-    font-size: var(--fs-body-sm);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    background: var(--bg-card);
-    color: var(--fg-heading);
-    cursor: pointer;
-  }
-
-  .filtro-select:hover {
-    border-color: var(--color-primary);
-  }
-
-  .filtro-select:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: var(--focus-ring);
-  }
-
-  /* ── ANOS ────────────────────────────────────── */
-  .arquivo-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-40);
-  }
-
-  .ano-section {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-16);
-    padding-bottom: var(--space-32);
-    border-bottom: 1px solid var(--border-default);
-  }
-
-  .ano-section:last-child {
-    border-bottom: none;
-  }
-
-  .ano-title {
-    font-size: var(--fs-h2);
-    line-height: var(--lh-h2);
-    letter-spacing: var(--ls-h2);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin: 0;
-  }
-
-  /* ── GRID ────────────────────────────────────── */
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-12);
-  }
-
-  .post-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-card);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    overflow: hidden;
-    transition: box-shadow 160ms ease;
-  }
-
-  .post-card:hover {
-    box-shadow: var(--elev-2);
-  }
-
-  .post-thumb {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-  }
-
-  .post-thumb-placeholder {
-    background: linear-gradient(135deg, var(--dvb-ink-3) 0%, var(--dvb-ink-2) 100%);
-  }
-
-  .post-card-body {
-    padding: var(--space-10);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    flex: 1;
-  }
-
-  .post-meta {
-    margin: 0;
-  }
-
-  .post-titulo {
-    font-size: var(--fs-body-lg);
-    font-weight: 700;
-    line-height: var(--lh-h4);
-    letter-spacing: var(--ls-h4);
-    color: var(--fg-heading);
-    margin: 0;
-  }
-
-  .post-titulo a {
-    color: inherit;
-    border-bottom: none;
-  }
-
-  .post-titulo a:hover {
-    color: var(--color-primary);
-  }
-
-  .post-excerpt {
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-body-sm);
-    color: var(--fg-body);
-    margin: 0;
-    flex: 1;
-  }
-
-  .post-foot {
-    display: flex;
-    gap: var(--space-4);
-    align-items: center;
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-    margin: 0;
-  }
-
-  .dot {
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background: var(--fg-meta);
-    border-radius: 50%;
-  }
-
-  /* ── RESPONSIVO ──────────────────────────────– */
   @media (max-width: 900px) {
-    .filtros {
-      flex-direction: column;
-      gap: var(--space-6);
-      align-items: flex-start;
-    }
-
-    .posts-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .cab { flex-direction: column; align-items: flex-start; }
+    .lead { text-align: left; max-width: 52ch; }
+    .ano { grid-template-columns: 1fr; gap: 14px; padding: 28px 0 32px; }
+    .mini-glifos { display: none; }
+    .ano h2 { font-size: 64px; }
+    .ano-n { margin: 6px 0 0; }
   }
-
-  @media (max-width: 480px) {
-    .posts-grid {
-      grid-template-columns: 1fr;
-    }
+  @media (max-width: 760px) {
+    .cab { padding: 30px 0 24px; }
+    .lead { font-size: 15px; }
+    .so-desktop { display: none; }
+    .linha-t { padding-bottom: 32px; }
+    .linha { grid-template-columns: 22px minmax(0, 1fr); gap: 4px 14px; padding: 14px 0; }
+    .linha-titulo { font-size: 19px; }
+    .linha-autor { grid-column: 2; font-size: 13px; }
+    .linha-mes { grid-column: 2; grid-row: 3; text-align: left; font-size: 12px; }
+    .linha:hover, .linha:focus-visible { padding-inline: 0; margin-inline: 0; }
   }
 </style>

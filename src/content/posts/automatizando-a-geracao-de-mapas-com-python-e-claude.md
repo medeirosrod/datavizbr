@@ -8,7 +8,7 @@ secao: praticas
 tags: ["Dados", "Dataviz", "Mapa", "Urbanismo"]
 capa: ../../assets/blog/automatizando-a-geracao-de-mapas-com-python-e-claude/03.jpg
 capa_alt: "Capa do post Mapas contando história: o PIB dos municípios brasileiros"
-order_homepage: 1
+order_homepage: 2
 ---
 
 Os dois mapas abaixo são bem parecidos e isso não é por acaso. Apesar de ambos serem mapas de São Paulo, eles foram gerados por um script de Python que recebe um par de coordenadas como parâmetro, verifica qual a área alcançável em até 1 hora de carro a partir desse ponto e gera o mapa de renda média por setor censitário conforme dados do IBGE para esse recorte especial. Tudo nas duas imagens foi gerado pelo Python com a supervisão do Claude Code, por isso a semelhança de cores, posição de legenda e tudo mais nos dois mapas.

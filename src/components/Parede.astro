@@ -1,0 +1,215 @@
+---
+// A parede do acervo (DESIGN.md, "A parede"): uma abertura por texto, em ordem
+// cronológica. A forma diz a seção; por trás das aberturas fica o céu do fim de
+// tarde (The Sunset Wall Rule: só aqui). 15 colunas no desktop, 8 no celular.
+import type { CollectionEntry } from 'astro:content';
+import { formaD, NOME_SECAO, type Secao } from '../lib/formas';
+import { formatarMesAno } from '../lib/data';
+
+interface Props {
+  /** Posts em ordem de publicação (mais antigo primeiro). */
+  posts: CollectionEntry<'posts'>[];
+  /** Nomes de autores por id, para o cartão de apoio. */
+  autores: Record<string, string>;
+  /** Blocos fechados no fim, à espera do próximo texto. */
+  fechados?: number;
+}
+
+const { posts, autores, fechados = 2 } = Astro.props;
+const M = 80; // módulo
+const DX = 3.5, DY = 4.5; // espessura da aresta
+
+const itens = posts.map((p, i) => ({
+  i,
+  id: p.id,
+  secao: p.data.secao as Secao,
+  titulo: p.data.titulo,
+  autor: p.data.autores.map((a) => autores[a.id] ?? a.id).join(' e '),
+  data: formatarMesAno(p.data.publicado_em),
+  ano: p.data.publicado_em.getUTCFullYear(),
+  capa: p.data.capa?.src ?? '',
+}));
+const total = itens.length + fechados;
+
+function layout(cols: number, tag: string) {
+  const rows = Math.ceil(total / cols);
+  const W = cols * M, H = rows * M;
+  const celulas = Array.from({ length: total }, (_, i) => {
+    const x = (i % cols) * M, y = Math.floor(i / cols) * M;
+    const item = itens[i];
+    const anoNovo = item && (i === 0 || itens[i - 1].ano !== item.ano);
+    return { i, x, y, item, anoNovo };
+  });
+  return { cols, rows, W, H, celulas, tag };
+}
+const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
+---
+
+<div class="parede" data-parede style={`--piso:${(0.46 * variantes[0].rows / variantes[0].cols * 100).toFixed(2)}%`}>
+  <div class="parede-svs">
+  {variantes.map((v) => (
+    <svg
+      class={`parede-svg parede-${v.tag}`}
+      viewBox={`0 0 ${v.W} ${v.H}`}
+      role="group"
+      aria-label={`Acervo do datavizbr: ${itens.length} textos em ordem de publicação`}
+    >
+      <defs>
+        <linearGradient id={`ceu-${v.tag}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2={v.H}>
+          <stop offset="0" stop-color="#4b2c80" />
+          <stop offset=".3" stop-color="#8a58ad" />
+          <stop offset=".55" stop-color="#d98aa6" />
+          <stop offset=".78" stop-color="#f6ab72" />
+          <stop offset="1" stop-color="#e9772a" />
+        </linearGradient>
+        <radialGradient id={`sol-${v.tag}`} gradientUnits="userSpaceOnUse" cx={v.tag === 'larga' ? 560 : v.W * 0.62} cy={v.H * 0.82} r={v.tag === 'larga' ? 250 : 260}>
+          <stop offset="0" stop-color="#fff7de" />
+          <stop offset=".43" stop-color="#ffe9b8" />
+          <stop offset=".445" stop-color="#ffd08a" stop-opacity=".55" />
+          <stop offset="1" stop-color="#ffb86b" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id={`aresta-${v.tag}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2={v.H}>
+          <stop offset="0" stop-color="#2a1746" />
+          <stop offset=".55" stop-color="#6d3550" />
+          <stop offset="1" stop-color="#a04c16" />
+        </linearGradient>
+        <linearGradient id={`bloco-${v.tag}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2a1837" />
+          <stop offset="1" stop-color="#1d1028" />
+        </linearGradient>
+        {v.tag === 'larga' && (
+          <g id="luz-larga">
+            {itens.map((it) => (
+              <>
+                <path d={formaD(it.secao, v.celulas[it.i].x + DX, v.celulas[it.i].y + DY)} fill="url(#ceu-larga)" />
+                <path d={formaD(it.secao, v.celulas[it.i].x + DX, v.celulas[it.i].y + DY)} fill="url(#sol-larga)" />
+              </>
+            ))}
+          </g>
+        )}
+      </defs>
+
+      {v.celulas.map((c) =>
+        c.item ? (
+          <a
+            class="ab"
+            href={`/posts/${c.item.id}`}
+            data-s={c.item.secao}
+            data-t={c.item.titulo}
+            data-a={c.item.autor}
+            data-d={c.item.data}
+            data-c={c.item.capa}
+            aria-label={`${c.item.titulo}, ${NOME_SECAO[c.item.secao]}, ${c.item.data}`}
+            style={`--i:${c.i}`}
+          >
+            <rect class="bloco" x={c.x + 2} y={c.y + 2} width={M - 4} height={M - 4} rx="2.5" fill={`url(#bloco-${v.tag})`} />
+            <rect x={c.x + 2} y={c.y + 2} width={M - 4} height="1" fill="rgba(255,255,255,.09)" />
+            <g class="lit">
+              <path d={formaD(c.item.secao, c.x, c.y)} fill={`url(#aresta-${v.tag})`} />
+              <path d={formaD(c.item.secao, c.x + DX, c.y + DY)} fill={`url(#ceu-${v.tag})`} />
+              <path class="sol" d={formaD(c.item.secao, c.x + DX, c.y + DY)} fill={`url(#sol-${v.tag})`} />
+            </g>
+            <rect class="anel" x={c.x + 1.25} y={c.y + 1.25} width={M - 2.5} height={M - 2.5} rx="3" />
+            {c.anoNovo && <text class="ano" x={c.x + 7} y={c.y + 13}>{c.item.ano}</text>}
+          </a>
+        ) : (
+          <a class="ab ab-fechado" href="/sobre/escrever" aria-label="Espaço para o próximo texto. Veja como escrever para o datavizbr" data-fechado>
+            <rect class="bloco-fechado" x={c.x + 2.5} y={c.y + 2.5} width={M - 5} height={M - 5} rx="2.5" />
+            <path d={`M${c.x + 40} ${c.y + 33}v14M${c.x + 33} ${c.y + 40}h14`} />
+            <rect class="anel" x={c.x + 1.25} y={c.y + 1.25} width={M - 2.5} height={M - 2.5} rx="3" />
+          </a>
+        ),
+      )}
+    </svg>
+  ))}
+
+  <svg class="piso" viewBox={`0 0 ${variantes[0].W} ${variantes[0].H}`} aria-hidden="true">
+    <use href="#luz-larga" />
+  </svg>
+  </div>
+
+  <div class="dica" data-dica hidden>
+    <img class="dica-capa" alt="" width="84" height="64" />
+    <div class="dica-texto">
+      <span class="dica-secao"></span>
+      <strong class="dica-titulo"></strong>
+      <span class="dica-meta"></span>
+    </div>
+    <a class="dica-ler" href="#">Ler</a>
+  </div>
+</div>
+
+<style>
+  .parede { position: relative; padding-bottom: var(--piso); }
+  .parede-svs { position: relative; }
+  .parede-svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .parede-estreita { display: none; }
+
+  .ab { cursor: pointer; outline: none; }
+  .ab .lit {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 220ms var(--ease-spring), opacity 200ms var(--ease-out);
+    animation: acende 520ms var(--ease-out) backwards;
+    animation-delay: calc(var(--i) * 26ms + 260ms);
+  }
+  .ab .sol { animation: respira 9s ease-in-out infinite alternate; }
+  .ab:hover .lit, .ab:focus-visible .lit, .ab.ativo .lit { transform: scale(1.12); }
+  .ab.fora .lit { opacity: .09; }
+  .ab .anel { fill: none; stroke: #fbf7ff; stroke-width: 2.5; opacity: 0; transition: opacity 160ms var(--ease-out); pointer-events: none; }
+  .ab:hover .anel, .ab:focus-visible .anel, .ab.ativo .anel { opacity: 1; }
+  .ab .ano { font-family: var(--font-mono); font-size: 8.5px; fill: rgba(255,255,255,.62); pointer-events: none; }
+
+  .ab-fechado .bloco-fechado { fill: none; stroke: rgba(255,255,255,.3); stroke-dasharray: 3 5; }
+  .ab-fechado path { fill: none; stroke: rgba(255,255,255,.5); stroke-width: 1.2; }
+
+  /* Luz projetada no chão: a parede reflete o próprio desenho */
+  .piso {
+    position: absolute; left: 0; top: 100%; width: 100%; height: auto;
+    transform-origin: 0 0;
+    transform: translateY(46%) skewX(-34deg) scaleY(-.46);
+    filter: blur(2.2px); opacity: .6; pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 32%, #000 100%);
+            mask-image: linear-gradient(to bottom, transparent 0, #000 32%, #000 100%);
+  }
+
+  /* Cartão de apoio: título, seção, autor e data da abertura em foco */
+  .dica {
+    position: absolute; z-index: 4; width: 300px;
+    display: grid; grid-template-columns: 84px 1fr; gap: 6px 14px; align-items: center;
+    padding: 10px; background: #fbf7ff; border-radius: 4px;
+    box-shadow: 0 24px 50px -18px rgba(0,0,0,.8);
+    pointer-events: none;
+    animation: sobe 180ms var(--ease-out);
+  }
+  .dica[hidden] { display: none; }
+  .dica-capa { width: 84px; height: 64px; object-fit: cover; border-radius: 2px; background: var(--lc-cal-shade); }
+  .dica-texto { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .dica-secao { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; }
+  .dica-titulo { font-family: var(--font-display); font-size: 17px; line-height: 1.1; letter-spacing: -.3px; color: var(--dvb-ink); }
+  .dica-meta { font-size: 12px; color: var(--dvb-ink-3); }
+  .dica-ler { display: none; }
+
+  @keyframes acende { from { opacity: 0; transform: scale(.82); } }
+  @keyframes respira { from { opacity: .82; } to { opacity: 1; } }
+  @keyframes sobe { from { opacity: 0; transform: translateY(6px); } }
+
+  /* Celular: 8 colunas, rolagem vertical, cartão fixo logo abaixo da parede */
+  @media (max-width: 760px) {
+    .parede { padding-bottom: 0; }
+    .parede-larga, .piso { display: none; }
+    .parede-estreita { display: block; }
+    .dica { position: static; width: auto; margin-top: 14px; pointer-events: auto; grid-template-columns: 72px 1fr auto; }
+    .dica-capa { width: 72px; height: 54px; }
+    .dica-ler {
+      display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 3px;
+      background: var(--dvb-orange); color: var(--lc-dusk); font-weight: 600; font-size: 14px; border-bottom: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ab .lit { animation: none; transition: none; }
+    .ab .sol { animation: none; }
+    .dica { animation: none; }
+  }
+</style>

@@ -1,211 +1,201 @@
 ---
+// Autores: um muro de retratos (uma abertura por pessoa), a curadoria em destaque e a lista de quem escreve.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import Selo from '../components/Selo.astro';
+import { getAutores, getPosts } from '../lib/data';
+import { SECOES, type Secao } from '../lib/formas';
 
-const allAutores = await getCollection('autores');
-const autores = allAutores
-  .filter(autor => autor.data.ativo)
-  .sort((a, b) => {
-    // Rodrigo Medeiros sempre primeiro
-    if (a.id === 'rodrigo-medeiros') return -1;
-    if (b.id === 'rodrigo-medeiros') return 1;
-    // Depois em ordem alfabética por nome
-    return a.data.nome.localeCompare(b.data.nome, 'pt-BR');
-  });
+const POR_VEZ = 14;
+
+const [todos, posts] = await Promise.all([getAutores(), getPosts()]);
+const textos = new Map<string, number>();
+const secoesDe = new Map<string, Set<Secao>>();
+posts.forEach((p) =>
+  p.data.autores.forEach((ref) => {
+    textos.set(ref.id, (textos.get(ref.id) ?? 0) + 1);
+    secoesDe.set(ref.id, (secoesDe.get(ref.id) ?? new Set()).add(p.data.secao as Secao));
+  }),
+);
+
+const porTextos = [...todos].sort(
+  (a, b) => (textos.get(b.id) ?? 0) - (textos.get(a.id) ?? 0) || a.data.nome.localeCompare(b.data.nome, 'pt-BR'),
+);
+const curador = porTextos.find((a) => a.data.papel === 'curadoria');
+const demais = porTextos.filter((a) => a !== curador);
+const totalTextosCurador = curador ? (textos.get(curador.id) ?? 0) : 0;
+// Colunas do muro: as aberturas fechadas (de 2 a 4) completam a última fileira.
+let colunas = 12;
+while (![2, 3, 4].includes((colunas - (porTextos.length % colunas)) % colunas) && colunas < 18) colunas++;
+const fechados = (colunas - (porTextos.length % colunas)) % colunas;
+const iniciais = (nome: string) => nome.split(' ').filter(Boolean).slice(0, 2).map((n) => n[0]).join('');
 ---
 
-<BaseLayout title="Autores">
-  <section class="section-page">
+<BaseLayout title="Autores" description="Quem escreve sobre visualização de dados no datavizbr." tema="escuro">
+  <header class="topo-pag grao">
     <div class="container">
-      <header class="section-header">
-        <h1>Autores</h1>
-        <p class="section-subtitle">Quem escreve sobre dataviz no datavizbr</p>
-      </header>
-
-      <div class="autores-grid">
-        {autores.map((autor) => (
-          <article class="autor-card" id={autor.id}>
-            <a href={`/autores/${autor.id}`} class="autor-link-wrap" tabindex="-1" aria-hidden="true">
-              {autor.data.foto && (
-                <img src={autor.data.foto.src} alt={autor.data.nome} class="autor-foto" />
-              )}
-            </a>
-            <div class="autor-conteudo">
-              <h2 class="autor-nome">
-                <a href={`/autores/${autor.id}`}>{autor.data.nome}</a>
-              </h2>
-              <p class="autor-role">{autor.data.papel}</p>
-              <p class="autor-quem">{autor.data.quem_e}</p>
-
-              {autor.data.trabalhando_em && (
-                <p class="autor-info">
-                  <span class="label">Trabalhando em:</span>
-                  {autor.data.trabalhando_em}
-                </p>
-              )}
-
-              {autor.data.redes || (autor.data.twitter || autor.data.instagram || autor.data.linkedin) && (
-                <div class="autor-redes">
-                  {autor.data.twitter && (
-                    <a href={`https://twitter.com/${autor.data.twitter}`} class="rede-link" title="Twitter">
-                      Twitter
-                    </a>
-                  )}
-                  {autor.data.instagram && (
-                    <a href={`https://instagram.com/${autor.data.instagram}`} class="rede-link" title="Instagram">
-                      Instagram
-                    </a>
-                  )}
-                  {autor.data.linkedin && (
-                    <a href={autor.data.linkedin} class="rede-link" title="LinkedIn">
-                      LinkedIn
-                    </a>
-                  )}
-                  {autor.data.site && (
-                    <a href={autor.data.site} class="rede-link" title="Site">
-                      Site
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
-          </article>
-        ))}
+      <div class="cab">
+        <h1>{porTextos.length} pessoas <em>escrevem aqui.</em></h1>
+        <p class="apoio-mono lead">Jornalistas, designers, cientistas de dados e pesquisadores que trabalham com visualização no Brasil. Cada abertura do muro é uma delas.</p>
       </div>
+
+      <ul class="muro" style={`--cols-d:${colunas}`} aria-label="Autores, do que mais publicou ao que menos publicou">
+        {porTextos.map((a, i) => (
+          <li style={`--i:${Math.min(i, 40)}`}>
+            <a class="av" href={`/autores/${a.id}`} title={a.data.nome} aria-label={a.data.nome}>
+              {a.data.foto ? <img src={a.data.foto.src} alt="" loading="lazy" /> : <span class="av-ini">{iniciais(a.data.nome)}</span>}
+            </a>
+          </li>
+        ))}
+        {Array.from({ length: fechados }, () => <li class="av av-fechado" aria-hidden="true">+</li>)}
+      </ul>
+      <div class="linha-t mono">
+        <span>ordenado por número de textos publicados</span>
+        <span class="so-desktop">os {fechados} últimos blocos esperam quem ainda vai escrever</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container pagina">
+    {curador && (
+      <a class="curador" href={`/autores/${curador.id}`}>
+        {curador.data.foto && <img src={curador.data.foto.src} alt="" />}
+        <div>
+          <span class="eyebrow">Curador e fundador</span>
+          <h2>{curador.data.nome}</h2>
+          <p>{curador.data.quem_e}</p>
+        </div>
+        <div class="curador-n"><b>{totalTextosCurador}</b><span>textos, nas quatro seções</span></div>
+      </a>
+    )}
+
+    <ul class="lista" id="lista">
+      {demais.map((a) => {
+        const n = textos.get(a.id) ?? 0;
+        const sec = SECOES.filter((s) => secoesDe.get(a.id)?.has(s));
+        return (
+          <li class="item">
+            <a class="item-link" href={`/autores/${a.id}`}>
+              <span class="foto">{a.data.foto ? <img src={a.data.foto.src} alt="" loading="lazy" /> : <span>{iniciais(a.data.nome)}</span>}</span>
+              <span class="item-txt">
+                <b>{a.data.nome}</b>
+                <small>{a.data.quem_e}</small>
+              </span>
+              <span class="item-n mono">
+                {sec.map((s) => <Selo secao={s} tamanho={14} semNome />)}
+                <span>{n} {n === 1 ? 'texto' : 'textos'}</span>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+
+    <div class="mais">
+      <button type="button" class="btn btn-quiet" id="mais" hidden></button>
+      <span class="mono estado" id="estado" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <section class="convite grao">
+    <div class="container convite-grid">
+      <div>
+        <h2>O próximo texto <em>pode ser seu.</em></h2>
+        <p class="apoio-mono">O datavizbr publica quem faz dataviz no Brasil. Veja como enviar um texto.</p>
+      </div>
+      <a class="btn btn-sol btn-lg" href="/sobre/escrever">Escrever para o datavizbr</a>
     </div>
   </section>
 </BaseLayout>
 
+<script define:vars={{ POR_VEZ }}>
+  const itens = [...document.querySelectorAll('#lista .item')];
+  const mais = document.getElementById('mais');
+  const estado = document.getElementById('estado');
+  let limite = POR_VEZ;
+  function desenhar() {
+    itens.forEach((li, i) => (li.hidden = i >= limite));
+    mais.hidden = itens.length - limite <= 0;
+    mais.textContent = `Mostrar os ${itens.length + 1} autores`;
+    estado.textContent = `${Math.min(limite, itens.length) + 1} de ${itens.length + 1}`;
+  }
+  mais.addEventListener('click', () => { limite = Infinity; desenhar(); });
+  desenhar();
+</script>
+
 <style>
-  .section-page {
-    padding-block: var(--space-40);
-    border-bottom: 1px solid var(--border-default);
-  }
+  .cab { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 60px; align-items: end; padding: 64px 0 52px; }
+  .cab h1 { font-size: clamp(48px, 8vw, 112px); line-height: .9; letter-spacing: -.0126em; color: #fbf7ff; margin: 0; text-wrap: balance; }
+  .cab h1 em { font-style: normal; color: var(--lc-peach); }
+  .lead { color: rgba(255,255,255,.76); margin: 0 0 8px; }
 
-  .section-header {
-    margin-bottom: var(--space-32);
-    max-width: 800px;
+  .muro { --cols: var(--cols-d, 12); display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; filter: drop-shadow(0 40px 50px rgba(0,0,0,.55)); }
+  .av {
+    position: relative; display: grid; place-items: center; aspect-ratio: 1; margin: 1px; border-radius: 2.5px; border-bottom: 0;
+    background: linear-gradient(to bottom, #d0701d, var(--lc-clay)); box-shadow: inset 0 1px 0 rgba(255,255,255,.28);
   }
-
-  .section-header h1 {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-h1);
-    letter-spacing: var(--ls-h1);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-bottom: var(--space-6);
+  .muro li:not(.av-fechado) { animation: acende 520ms var(--ease-out) both; animation-delay: calc(var(--i) * 16ms); }
+  .muro li:not(.av-fechado) { position: relative; aspect-ratio: 1; margin: 1px; }
+  .muro li > .av { position: absolute; inset: 0; margin: 0; }
+  .muro img, .av-ini {
+    width: 72%; height: 72%; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3.5px #8a4210;
+    transition: transform 220ms var(--ease-spring), filter 200ms; filter: saturate(.75);
   }
+  .av-ini { display: grid; place-items: center; background: #e6dcee; color: var(--lc-wall); font-weight: 700; font-size: 18px; }
+  .av:hover img, .av:focus-visible img, .av:hover .av-ini { transform: scale(1.12); filter: saturate(1); }
+  .av:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+  .av-fechado { background: none; box-shadow: none; border: 1.5px dashed rgba(251,227,204,.55); margin: 5px; color: #fbe3cc; font-size: 26px; font-weight: 300; }
+  @keyframes acende { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .muro li { animation: none !important; } }
+  .linha-t { display: flex; justify-content: space-between; gap: 16px; color: rgba(255,255,255,.5); margin: 14px 0 0; padding-bottom: 48px; font-size: 12.5px; }
 
-  .section-subtitle {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
+  .pagina { padding-block: 72px 96px; }
+  .curador { display: grid; grid-template-columns: 160px minmax(0, 1fr) auto; gap: 40px; align-items: center; padding-bottom: 56px; border-bottom: 1px solid var(--lc-hairline); color: inherit; }
+  .curador > img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; transition: transform 300ms var(--ease-spring); }
+  .curador:hover > img { transform: scale(1.04); }
+  .curador .eyebrow { color: var(--lc-ink-orange); }
+  .curador h2 { font-size: clamp(36px, 4.4vw, 56px); letter-spacing: -.012em; line-height: 1; margin: 8px 0 12px; }
+  .curador p { font-size: 18px; line-height: 1.5; color: var(--dvb-ink-2); margin: 0; max-width: 40em; }
+  .curador-n { text-align: right; font-size: 14px; color: var(--fg-meta); }
+  .curador-n b { display: block; font-family: var(--font-display); font-size: clamp(56px, 7vw, 96px); line-height: .9; letter-spacing: -.015em; color: var(--dvb-ink); }
+
+  .lista { list-style: none; margin: 0; padding: 48px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; }
+  .item { border-bottom: 1px solid var(--lc-hairline); }
+  .item-link { display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 20px 0; border-bottom: 0; color: inherit; transition: background 160ms var(--ease-out), padding 220ms var(--ease-out), margin 220ms var(--ease-out); }
+  .item-link:hover, .item-link:focus-visible { background: #fff; padding-inline: 12px; margin-inline: -12px; }
+  .foto { width: 58px; height: 58px; border-radius: 50%; overflow: hidden; background: #e6dcee; display: grid; place-items: center; font-weight: 700; color: var(--lc-wall); }
+  .foto img { width: 100%; height: 100%; object-fit: cover; }
+  .item-txt { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .item-txt b { font-family: var(--font-display); font-size: 23px; letter-spacing: -.5px; line-height: 1.1; color: var(--dvb-ink); }
+  .item-link:hover b { color: var(--lc-ink-orange); }
+  .item-txt small { font-size: 14px; line-height: 1.4; color: var(--fg-meta); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .item-n { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--fg-meta); white-space: nowrap; }
+  .item-n > span:last-child { margin-left: 2px; }
+  .mais { display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: 48px; }
+  .estado { font-size: 12.5px; color: var(--fg-meta); }
+
+  .convite { background: var(--lc-dusk-raised); color: #fff; padding: 96px 0; }
+  .convite-grid .btn { flex: none; white-space: nowrap; }
+  .convite-grid { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+  .convite h2 { font-size: clamp(36px, 5.4vw, 72px); line-height: 1; letter-spacing: -.012em; color: #fbf7ff; margin: 0 0 18px; }
+  .convite h2 em { font-style: normal; color: var(--lc-peach); }
+  .convite .apoio-mono { color: rgba(255,255,255,.74); margin: 0; max-width: 40ch; }
+
+  @media (max-width: 1000px) {
+    .cab { grid-template-columns: 1fr; gap: 24px; padding: 40px 0 36px; }
+    .muro { --cols: 8; }
+    .lista { grid-template-columns: 1fr; }
+    .curador { grid-template-columns: 110px minmax(0, 1fr); gap: 24px; }
+    .curador > img { width: 110px; height: 110px; }
+    .curador-n { grid-column: 1 / -1; text-align: left; }
+    .convite-grid { flex-direction: column; align-items: flex-start; }
   }
-
-  .autores-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--space-16);
-  }
-
-  .autor-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    overflow: hidden;
-    transition: box-shadow 160ms ease;
-    scroll-margin-top: 80px;
-  }
-
-  .autor-card:hover {
-    box-shadow: var(--elev-2);
-  }
-
-  .autor-link-wrap {
-    display: block;
-    border-bottom: none;
-  }
-
-  .autor-foto {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  .autor-conteudo {
-    padding: var(--space-10);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-  }
-
-  .autor-nome {
-    font-size: var(--fs-body-lg);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin: 0;
-  }
-
-  .autor-nome a {
-    color: inherit;
-    border-bottom: none;
-  }
-
-  .autor-nome a:hover {
-    color: var(--color-primary);
-  }
-
-  .autor-role {
-    font-size: var(--fs-caption);
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-    color: var(--color-primary);
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .autor-quem {
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-body-sm);
-    color: var(--fg-body);
-    margin: 0;
-  }
-
-  .autor-info {
-    font-size: var(--fs-body-sm);
-    color: var(--fg-body);
-    margin: 0;
-  }
-
-  .label {
-    font-weight: 600;
-    color: var(--fg-heading);
-  }
-
-  .autor-redes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-6);
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--border-default);
-  }
-
-  .rede-link {
-    font-size: var(--fs-caption);
-    font-weight: 500;
-    color: var(--color-primary);
-    border-bottom: none;
-  }
-
-  .rede-link:hover {
-    color: var(--color-primary-hover);
-  }
-
-  @media (max-width: 768px) {
-    .autores-grid {
-      grid-template-columns: 1fr;
-    }
+  @media (max-width: 760px) {
+    .muro { --cols: 6; }
+    .so-desktop { display: none; }
+    .pagina { padding-block: 48px 64px; }
+    .item-link { grid-template-columns: 52px minmax(0, 1fr); }
+    .foto { width: 52px; height: 52px; }
+    .item-n { grid-column: 2; }
+    .convite { padding: 64px 0; }
   }
 </style>

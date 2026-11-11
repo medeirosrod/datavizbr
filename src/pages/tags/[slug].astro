@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import AutorNome from '../../components/AutorNome.astro';
-import PostCoverDefault from '../../components/PostCoverDefault.astro';
-import { getSecaoLabel } from '../../consts';
+import PostCard from '../../components/PostCard.astro';
 import { getAllTags, getPostsPorTag } from '../../lib/data';
 
 export async function getStaticPaths() {
@@ -18,193 +16,44 @@ interface Props { tag: string; }
 const { tag } = Astro.props;
 
 const posts = await getPostsPorTag(tag);
-
-const formatarData = (date: Date): string => {
-  return new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(new Date(date));
-};
+const total = `${posts.length} ${posts.length === 1 ? 'texto' : 'textos'}`;
 ---
 
 <BaseLayout
   title={`#${tag}`}
-  description={`${posts.length} ${posts.length === 1 ? 'post' : 'posts'} com a tag "${tag}" no datavizbr.`}
+  description={`${total} com a tag "${tag}" no datavizbr.`}
+  tema="escuro"
 >
-  <section class="section-page">
-    <div class="container">
-
-      <header class="section-header">
-        <a href="/tags" class="voltar">← Todas as tags</a>
-        <h1>#{tag}</h1>
-        <p class="section-subtitle">
-          {posts.length} {posts.length === 1 ? 'post' : 'posts'}
-        </p>
-      </header>
-
-      <div class="posts-grid">
-        {posts.map(post => (
-          <article class="post-card">
-            {post.data.capa ? (
-              <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
-            ) : (
-              <PostCoverDefault class="post-thumb" />
-            )}
-            <div class="post-card-body">
-              <div class="post-meta">
-                <span class={`badge badge-${post.data.secao}`}>
-                  {getSecaoLabel(post.data.secao)}
-                </span>
-              </div>
-              <h2 class="post-titulo">
-                <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
-              </h2>
-              {post.data.descricao && (
-                <p class="post-excerpt">{post.data.descricao}</p>
-              )}
-              <div class="post-foot">
-                <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
-                <span class="dot"></span>
-                <span>{formatarData(post.data.publicado_em)}</span>
-              </div>
-            </div>
-          </article>
-        ))}
+  <header class="topo-pag grao">
+    <div class="container cab">
+      <div>
+        <a href="/tags" class="voltar mono">← Todos os temas</a>
+        <h1><em>#</em>{tag}</h1>
       </div>
-
+      <p class="apoio-mono lead">{total}</p>
     </div>
-  </section>
+  </header>
+
+  <div class="container pagina">
+    <div class="grade">
+      {posts.map((post, i) => <PostCard post={post} indice={i} />)}
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  .section-page {
-    padding-block: var(--space-40);
-    border-bottom: 1px solid var(--border-default);
-  }
-
-  .section-header {
-    margin-bottom: var(--space-32);
-    max-width: 800px;
-  }
-
-  .voltar {
-    display: inline-block;
-    font-size: var(--fs-body-sm);
-    font-weight: 500;
-    color: var(--fg-meta);
-    margin-bottom: var(--space-10);
-  }
-
-  .voltar:hover {
-    color: var(--color-primary);
-  }
-
-  .section-header h1 {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-h1);
-    letter-spacing: var(--ls-h1);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-bottom: var(--space-6);
-  }
-
-  .section-subtitle {
-    font-size: var(--fs-body-lg);
-    color: var(--fg-body);
-    margin: 0;
-  }
-
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-12);
-  }
-
-  .post-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-card);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    overflow: hidden;
-    transition: box-shadow 160ms ease;
-  }
-
-  .post-card:hover {
-    box-shadow: var(--elev-2);
-  }
-
-  .post-thumb {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-  }
-
-  .post-thumb-placeholder {
-    background: linear-gradient(135deg, var(--dvb-purple-deep) 0%, var(--dvb-purple) 100%);
-  }
-
-  .post-card-body {
-    padding: var(--space-10);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    flex: 1;
-  }
-
-  .post-meta {
-    margin: 0;
-  }
-
-  .post-titulo {
-    font-size: var(--fs-body-lg);
-    font-weight: 700;
-    line-height: var(--lh-h4);
-    letter-spacing: var(--ls-h4);
-    color: var(--fg-heading);
-    margin: 0;
-  }
-
-  .post-titulo a {
-    color: inherit;
-    border-bottom: none;
-  }
-
-  .post-titulo a:hover {
-    color: var(--color-primary);
-  }
-
-  .post-excerpt {
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-body-sm);
-    color: var(--fg-body);
-    margin: 0;
-    flex: 1;
-  }
-
-  .post-foot {
-    display: flex;
-    gap: var(--space-4);
-    align-items: center;
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-    margin: 0;
-  }
-
-  .dot {
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background: var(--fg-meta);
-    border-radius: 50%;
-  }
-
-  @media (max-width: 900px) {
-    .posts-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .posts-grid {
-      grid-template-columns: 1fr;
-    }
+  .cab { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; padding-block: 56px 64px; }
+  .voltar { font-size: 13px; color: var(--lc-peach); border-bottom: 0; }
+  .voltar:hover { color: #fff; }
+  .cab h1 { font-size: clamp(52px, 9vw, 128px); line-height: .9; letter-spacing: -.0135em; color: #fbf7ff; margin: 18px 0 0; overflow-wrap: anywhere; }
+  .cab h1 em { font-style: normal; color: var(--lc-peach); }
+  .lead { color: rgba(255,255,255,.76); margin: 0 0 8px; }
+  .pagina { padding-block: 72px 112px; }
+  .grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px 32px; }
+  @media (max-width: 1000px) { .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) {
+    .cab { flex-direction: column; align-items: flex-start; gap: 16px; padding-block: 32px 40px; }
+    .grade { grid-template-columns: 1fr; gap: 40px; }
+    .pagina { padding-block: 40px 72px; }
   }
 </style>

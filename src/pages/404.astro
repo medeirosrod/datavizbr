@@ -1,64 +1,98 @@
 ---
+// Erro 404 escrito com as aberturas da parede: "404" aceso em degradê, o resto apagado.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { formaD } from '../lib/formas';
+
+const M = 80, L = 5;
+const digitos: Record<string, string[]> = {
+  '4': ['X.X', 'X.X', 'XXX', '..X', '..X'],
+  '0': ['XXX', 'X.X', 'X.X', 'X.X', 'XXX'],
+};
+// "404" ocupa 11 colunas (três dígitos de 3 e dois espaços). A parede larga deixa 2 colunas de cada lado;
+// a estreita (celular) mostra só o número, para as aberturas ficarem grandes o bastante para ler.
+const variantes = [
+  { tag: 'larga', C: 15, desloca: 2 },
+  { tag: 'estreita', C: 11, desloca: 0 },
+].map((v) => {
+  const acesas = new Set<string>();
+  [...'404'].forEach((d, i) =>
+    digitos[d].forEach((linha, r) =>
+      [...linha].forEach((x, c) => x === 'X' && acesas.add(`${v.desloca + i * 4 + c},${r}`)),
+    ),
+  );
+  const celulas = Array.from({ length: v.C * L }, (_, i) => {
+    const c = i % v.C, r = Math.floor(i / v.C);
+    return { x: c * M, y: r * M, on: acesas.has(`${c},${r}`), i };
+  });
+  return { ...v, celulas, W: v.C * M, H: L * M };
+});
 ---
 
 <BaseLayout
   title="Página não encontrada"
   description="A página que você procura não existe no datavizbr."
+  tema="escuro"
 >
-  <section class="page-section">
+  <header class="topo-pag grao">
     <div class="container">
-
-      <header class="page-header">
-        <p class="t-eyebrow">Erro 404</p>
-        <h1>Página não encontrada</h1>
-        <p class="page-lead">
-          A página que você procura pode ter sido removida, renomeada ou
-          nunca existiu. Volte ao início para encontrar o que precisa.
-        </p>
-      </header>
-
-      <div class="acoes">
-        <a href="/" class="btn btn-primary">Voltar ao início</a>
-        <a href="/arquivo" class="btn btn-quiet">Ver arquivo de posts</a>
+      <div class="cab">
+        <h1>Este bloco <em>ainda está fechado.</em></h1>
+        <div class="lado">
+          <p class="apoio-mono">A página que você procura não existe ou mudou de lugar.</p>
+          <div class="acoes">
+            <a class="btn btn-sol btn-lg" href="/">Voltar para a home</a>
+            <button type="button" class="btn btn-outline btn-lg" id="abrir-busca">Buscar no acervo</button>
+          </div>
+        </div>
       </div>
 
+      {variantes.map((v) => (
+        <svg class={`parede parede-${v.tag}`} viewBox={`0 0 ${v.W} ${v.H}`} role="img" aria-label="Erro 404, escrito com as aberturas da parede">
+          <defs>
+            <linearGradient id={`ceu-404-${v.tag}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={v.W} y2={v.H}>
+              <stop offset="0" stop-color="#4b2c80" />
+              <stop offset=".3" stop-color="#8a58ad" />
+              <stop offset=".55" stop-color="#d98aa6" />
+              <stop offset=".78" stop-color="#f6ab72" />
+              <stop offset="1" stop-color="#e9772a" />
+            </linearGradient>
+          </defs>
+          {v.celulas.map((c) => (
+            <g>
+              <rect x={c.x + 1} y={c.y + 1} width={M - 2} height={M - 2} rx="3" fill="#24142f" />
+              <path class:list={['ab', c.on && 'on']} style={`--i:${c.i}`} d={formaD('panorama', c.x, c.y)} fill={c.on ? `url(#ceu-404-${v.tag})` : '#3a2549'} />
+            </g>
+          ))}
+        </svg>
+      ))}
+      <p class="mono legenda">erro 404, escrito com as aberturas da parede</p>
     </div>
-  </section>
+  </header>
 </BaseLayout>
 
+<script>
+  // Abre a busca da navegação, a mesma que o ícone de lupa dispara.
+  document.getElementById('abrir-busca')?.addEventListener('click', () => document.getElementById('searchTrigger')?.click());
+</script>
+
 <style>
-  .page-section {
-    padding-block: var(--space-48) var(--space-48);
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-  }
-
-  .page-header {
-    max-width: 600px;
-    margin-bottom: var(--space-24);
-  }
-
-  .page-header h1 {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-h1);
-    letter-spacing: var(--ls-h1);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-block: var(--space-6) var(--space-10);
-  }
-
-  .page-lead {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
-    margin: 0;
-  }
-
-  .acoes {
-    display: flex;
-    gap: var(--space-6);
-    flex-wrap: wrap;
+  .cab { display: grid; grid-template-columns: minmax(0, 1fr) 460px; gap: 60px; align-items: end; padding: 64px 0 56px; }
+  .cab h1 { font-size: clamp(48px, 8vw, 112px); line-height: .9; letter-spacing: -.0126em; color: #fbf7ff; margin: 0; text-wrap: balance; }
+  .cab h1 em { font-style: normal; color: var(--lc-peach); }
+  .lado .apoio-mono { color: rgba(255,255,255,.74); margin: 0 0 28px; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+  .acoes .btn-outline { color: #fbf7ff; }
+  .parede { display: block; width: 100%; height: auto; }
+  .parede-estreita { display: none; }
+  .ab { transform-box: fill-box; transform-origin: center; }
+  .ab.on { animation: acende 600ms var(--ease-out) both; animation-delay: calc(var(--i) * 18ms); }
+  @keyframes acende { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .ab.on { animation: none; } }
+  .legenda { font-size: 12.5px; color: rgba(255,255,255,.5); margin: 14px 0 0; padding-bottom: 72px; }
+  @media (max-width: 900px) {
+    .cab { grid-template-columns: 1fr; gap: 28px; padding: 36px 0 32px; }
+    .legenda { padding-bottom: 48px; }
+    .parede-larga { display: none; }
+    .parede-estreita { display: block; }
   }
 </style>

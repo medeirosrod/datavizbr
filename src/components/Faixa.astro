@@ -1,0 +1,104 @@
+---
+// Faixa de aberturas: uma abertura por texto, em ordem de publicação, em uma ou mais fileiras.
+// Usada no topo das páginas de seção e do arquivo. A luz do pôr do sol passa pelas aberturas
+// (The Sunset Wall Rule): um único degradê em diagonal atravessa a faixa inteira.
+import { formaD, NOME_SECAO, type Secao } from '../lib/formas';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  /** Textos em ordem cronológica (do mais antigo ao mais recente). */
+  posts: CollectionEntry<'posts'>[];
+  /** Id do SVG, único na página. */
+  id: string;
+  /** Aberturas por fileira no desktop. */
+  colunas: number;
+  /** Aberturas fechadas (tracejadas) ao fim, para os próximos textos. */
+  fechados?: number;
+  /** Id do texto marcado com moldura. */
+  foco?: string;
+}
+
+const { posts, id, colunas, fechados = 0, foco } = Astro.props;
+const M = 80;
+
+const mes = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+const itens = posts.map((p, i) => {
+  const ano = new Date(p.data.publicado_em).getUTCFullYear();
+  const anterior = i > 0 ? new Date(posts[i - 1].data.publicado_em).getUTCFullYear() : null;
+  return {
+    id: p.id,
+    secao: p.data.secao as Secao,
+    rotulo: `${p.data.titulo} (${NOME_SECAO[p.data.secao as Secao]}, ${mes.format(new Date(p.data.publicado_em))})`,
+    ano: ano !== anterior ? String(ano) : '',
+  };
+});
+const total = itens.length + fechados;
+
+const variantes = [
+  { tag: 'larga', C: Math.min(colunas, total) },
+  { tag: 'estreita', C: 8 },
+].map((v) => {
+  const L = Math.ceil(total / v.C);
+  return { ...v, L, W: v.C * M, H: L * M };
+});
+---
+
+<div class="faixa" data-faixa={id}>
+  {variantes.map((v) => (
+    <svg class={`faixa-svg faixa-${v.tag}`} viewBox={`0 0 ${v.W} ${v.H}`} role="group" aria-label="Textos da seção, em ordem de publicação">
+      <defs>
+        <linearGradient id={`${id}-ceu-${v.tag}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={v.W} y2={v.H}>
+          <stop offset="0" stop-color="#4b2c80" />
+          <stop offset=".3" stop-color="#8a58ad" />
+          <stop offset=".55" stop-color="#d98aa6" />
+          <stop offset=".78" stop-color="#f6ab72" />
+          <stop offset="1" stop-color="#e9772a" />
+        </linearGradient>
+      </defs>
+      {Array.from({ length: total }, (_, i) => {
+        const c = i % v.C, r = Math.floor(i / v.C), x = c * M, y = r * M;
+        const it = itens[i];
+        if (!it) {
+          return (
+            <g aria-hidden="true">
+              <rect x={x + 3} y={y + 3} width={M - 6} height={M - 6} rx="3" fill="none" stroke="#f4b07a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="6 6" />
+              <text x={x + M / 2} y={y + M / 2 + 8} text-anchor="middle" font-size="24" fill="#f4b07a" fill-opacity=".7">+</text>
+            </g>
+          );
+        }
+        return (
+          <a class="ab" href={`/posts/${it.id}`} style={`--i:${Math.min(i, 40)}`} aria-label={it.rotulo}>
+            <title>{it.rotulo}</title>
+            <rect class="b" x={x + 1} y={y + 1} width={M - 2} height={M - 2} rx="3" fill="#24142f" />
+            <path class="f" d={formaD(it.secao, x, y)} fill={`url(#${id}-ceu-${v.tag})`} />
+            {it.id === foco && <rect class="moldura" x={x + 2} y={y + 2} width={M - 4} height={M - 4} rx="3" fill="none" stroke="#fbf7ff" stroke-width="3" />}
+            {it.ano && <text class="ano" x={x + 7} y={y + 17} font-size="15">{it.ano}</text>}
+          </a>
+        );
+      })}
+    </svg>
+  ))}
+</div>
+
+<style>
+  .faixa { display: block; }
+  .faixa-svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .faixa-estreita { display: none; }
+  .ab { cursor: pointer; outline: none; }
+  .ab .f {
+    transform-box: fill-box; transform-origin: center;
+    transition: transform 240ms var(--ease-spring);
+    animation: acende-faixa 520ms var(--ease-out) both;
+    animation-delay: calc(var(--i) * 14ms);
+  }
+  .ab:hover .f, .ab:focus-visible .f { transform: scale(1.22); }
+  .ab:focus-visible .b { stroke: #fbf7ff; stroke-width: 3; }
+  .ano { font-family: var(--font-mono); fill: rgba(255,255,255,.55); pointer-events: none; }
+  @keyframes acende-faixa { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .ab .f { animation: none; transition: none; } }
+  @media (max-width: 760px) {
+    .faixa-larga { display: none; }
+    .faixa-estreita { display: block; }
+    .ano { font-size: 17px; }
+  }
+</style>

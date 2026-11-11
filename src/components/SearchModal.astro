@@ -33,6 +33,7 @@
 
 <script>
   import MiniSearch from 'minisearch';
+  import { formaD, type Secao } from '../lib/formas';
 
   interface SearchDoc {
     id: string;
@@ -118,6 +119,7 @@
           return `
             <a href="${doc.url}" class="search-result">
               <span class="search-result-meta">
+                <svg class="search-result-forma" width="16" height="16" viewBox="8 8 64 64" aria-hidden="true"><path d="${formaD(doc.secao as Secao)}"/></svg>
                 <span class="search-result-secao">${escapeHtml(doc.secaoLabel)}</span>
                 <span class="search-result-date">${formatDate(doc.publicado_em)}</span>
               </span>
@@ -199,7 +201,7 @@
     border-radius: var(--radius-standard);
     transition: color 180ms ease, background 180ms ease;
   }
-  :global(.search-trigger:hover) { color: var(--color-primary); background: var(--color-primary-tint); }
+  :global(.search-trigger:hover) { color: var(--fg-accent); background: var(--color-primary-tint); }
   :global(.search-trigger:focus-visible) { outline: none; box-shadow: var(--focus-ring); }
 
   .search-overlay {
@@ -210,58 +212,59 @@
     align-items: flex-start;
     justify-content: center;
     padding: 10vh var(--padding-x) var(--space-24);
-    background: rgba(20, 12, 30, 0.5);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(19, 10, 27, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     opacity: 0;
-    transition: opacity 200ms ease;
+    transition: opacity 200ms var(--ease-out);
   }
   .search-overlay.open { opacity: 1; }
   .search-overlay[hidden] { display: none; }
 
   .search-panel {
     width: 100%;
-    max-width: 640px;
+    max-width: 680px;
     max-height: 70vh;
     display: flex;
     flex-direction: column;
-    background: var(--bg-card);
-    border-radius: var(--radius-large);
-    box-shadow: var(--elev-3, var(--shadow-far));
+    background: var(--lc-dusk-raised);
+    color: #fbf7ff;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 40px 80px -30px rgba(0,0,0,.8);
     overflow: hidden;
-    transform: translateY(-8px);
-    transition: transform 200ms ease;
+    transform: translateY(-8px) scale(.99);
+    transition: transform 260ms var(--ease-spring);
   }
-  .search-overlay.open .search-panel { transform: translateY(0); }
+  .search-overlay.open .search-panel { transform: none; }
 
   .search-field {
     display: flex;
     align-items: center;
     gap: var(--space-8);
     padding: var(--space-12) var(--space-16);
-    border-bottom: 1px solid var(--border-default);
+    border-bottom: 1px solid rgba(255,255,255,.14);
   }
-  .search-field-icon { color: var(--fg-meta); flex-shrink: 0; }
+  .search-field-icon { color: var(--lc-peach); flex-shrink: 0; }
   .search-field-input {
     flex: 1;
     border: none;
     outline: none;
     background: none;
-    font-size: var(--fs-body);
-    color: var(--fg-heading);
+    font-size: 20px;
+    color: #fff;
     font-family: var(--font-sans);
   }
-  .search-field-input::placeholder { color: var(--fg-meta); }
+  .search-field-input::placeholder { color: rgba(255,255,255,.5); }
   .search-close {
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--fg-meta);
+    color: rgba(255,255,255,.6);
     padding: var(--space-3);
     display: flex;
-    border-radius: var(--radius-standard);
+    border-radius: 3px;
   }
-  .search-close:hover { color: var(--fg-heading); background: var(--bg-soft); }
+  .search-close:hover { color: #fff; background: rgba(255,255,255,.08); }
 
   .search-results {
     overflow-y: auto;
@@ -274,8 +277,9 @@
   :global(.search-hint) {
     padding: var(--space-8) var(--space-16);
     padding-left: calc(var(--space-16) + 18px + var(--space-8));
-    color: var(--fg-meta);
-    font-size: var(--fs-body-sm);
+    color: rgba(255,255,255,.6);
+    font-family: var(--font-mono);
+    font-size: 14px;
   }
 
   /* Resultados são injetados via innerHTML no client, então precisam de :global()
@@ -286,40 +290,40 @@
     gap: var(--space-2);
     padding: var(--space-8) var(--space-16);
     border-bottom: none;
-    color: var(--fg-body);
-    transition: background 120ms ease;
+    color: rgba(255,255,255,.72);
+    transition: background 140ms var(--ease-out), padding 220ms var(--ease-out);
   }
   :global(.search-result:hover),
-  :global(.search-result:focus-visible) { background: var(--bg-soft); outline: none; }
+  :global(.search-result:focus-visible) { background: rgba(255,255,255,.07); padding-left: calc(var(--space-16) + 6px); outline: none; }
 
   :global(.search-result-meta) {
     display: flex;
     align-items: center;
-    gap: var(--space-6);
-    font-size: var(--fs-micro);
-    color: var(--fg-meta);
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
   }
-  :global(.search-result-secao) {
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    color: var(--color-primary);
-    font-weight: 600;
-  }
+  :global(.search-result-forma path) { fill: var(--lc-peach); }
+  :global(.search-result-secao) { color: var(--lc-peach); font-weight: 700; }
   :global(.search-result-title) {
-    font-size: var(--fs-body);
-    font-weight: 600;
-    color: var(--fg-heading);
+    font-family: var(--font-display);
+    font-size: 21px;
+    line-height: 1.15;
+    letter-spacing: -.4px;
+    font-weight: 700;
+    color: #fbf7ff;
   }
   :global(.search-result-desc) {
     font-size: var(--fs-body-sm);
-    color: var(--fg-body);
+    color: rgba(255,255,255,.66);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   :global(.search-result-autor) {
     font-size: var(--fs-micro);
-    color: var(--fg-meta);
+    color: rgba(255,255,255,.5);
   }
 
   @media (max-width: 768px) {

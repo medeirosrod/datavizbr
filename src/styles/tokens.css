@@ -5,18 +5,13 @@
    ============================================================================= */
 
 /* --------------------------------------------------------------------------
-   FONTES — IBM Plex Sans + Source Code Pro (Google Fonts)
-   Carregados via Google Fonts CDN para máxima compatibilidade
+   FONTES — auto-hospedadas em /public/fonts
+   Bricolage Grotesque (títulos), IBM Plex Sans (texto), IBM Plex Mono (apoio e dado)
    -------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Source+Code+Pro:wght@400;500;700&display=swap');
-
-/* Fallback se Google Fonts não carregar */
-@supports not (font-family: 'IBM Plex Sans') {
-  :root {
-    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'Courier New', monospace;
-  }
-}
+/* Variável: opsz 12–96 (o navegador liga o eixo ao tamanho da fonte, então títulos grandes ganham o corte de exibição), wght 200–800, wdth 75–100. */
+@font-face { font-family: 'Bricolage Grotesque'; font-weight: 200 800; font-stretch: 75% 100%; font-style: normal; src: url('/fonts/BricolageGrotesque-Variable.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-style: normal; src: url('/fonts/IBMPlexMono-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'IBM Plex Mono'; font-weight: 700; font-style: normal; src: url('/fonts/IBMPlexMono-Bold.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'IBM Plex Sans'; font-weight: 100 700; font-style: normal;  src: url('/fonts/IBMPlexSans-VariableFont_wdth,wght.ttf') format('truetype-variations');        font-display: swap; }
 @font-face { font-family: 'IBM Plex Sans'; font-weight: 100 700; font-style: italic;  src: url('/fonts/IBMPlexSans-Italic-VariableFont_wdth,wght.ttf') format('truetype-variations'); font-display: swap; }
 
@@ -29,6 +24,7 @@
   --dvb-orange:        #e67e2c;
   --dvb-orange-hover:  #c8651a;
   --dvb-orange-deep:   #9a4a0d;
+  --dvb-orange-ink:    #7a3a08;
   --dvb-orange-300:    #f4b07a;
   --dvb-orange-100:    #fce8d6;
   --dvb-orange-50:     #fef5ec;
@@ -49,6 +45,25 @@
   --dvb-bg:            #ffffff;
   --dvb-bg-soft:       #faf8fc;
   --dvb-bg-card:       #ffffff;
+
+  /* LUZ COADA — anoitecer, cal, céu (ver DESIGN.md) */
+  --lc-dusk:        #130a1b;
+  --lc-dusk-raised: #1c1027;
+  --lc-wall:        #24142f;
+  --lc-wall-2:      #1d1028;
+  --lc-cal:         #f6f2f8;
+  --lc-cal-shade:   #ebe4f0;
+  --lc-hairline:    #ddd3e5;
+  --lc-clay:        #c8651a;
+  --lc-ink-orange:  #7a3a08;
+  --lc-peach:       #f4b07a;
+  --lc-peach-tint:  #fbe3cc;
+  --lc-lilac:       #b9a3d6;
+  --lc-lilac-tint:  #e2d2f3;
+  --lc-rose:        #d98aa6;
+  --lc-sky-1: #4b2c80; --lc-sky-2: #8a58ad; --lc-sky-3: #d98aa6; --lc-sky-4: #f6ab72; --lc-sky-5: #e9772a;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* STATUS */
   --dvb-success:       #15be53;
@@ -76,12 +91,16 @@
   --fg-heading:    var(--dvb-ink);
   --fg-label:      var(--dvb-ink-2);
   --fg-body:       var(--dvb-ink-3);
-  --fg-meta:       var(--dvb-ink-4);
+  --fg-meta:       var(--dvb-ink-3);
   --fg-link:       var(--dvb-orange-deep);
+  /* Texto de acento (links, hover de título, rótulos): sempre AA sobre o fundo do tema.
+     O laranja vivo (--color-primary) fica para foco, sublinhado e gráficos. */
+  --fg-accent:       var(--dvb-orange-deep);
+  --fg-accent-hover: var(--dvb-orange-ink);
   --fg-on-primary: #ffffff;
 
-  --bg-page:        var(--dvb-bg);
-  --bg-soft:        var(--dvb-bg-soft);
+  --bg-page:        var(--lc-cal);
+  --bg-soft:        var(--lc-cal-shade);
   --bg-card:        var(--dvb-bg-card);
 
   --border-default: var(--dvb-line);
@@ -117,12 +136,13 @@
 
   /* TIPOGRAFIA */
   --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono: 'Source Code Pro', SFMono-Regular, ui-monospace, Menlo, monospace;
+  --font-mono: 'IBM Plex Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+  --font-display: 'Bricolage Grotesque', 'IBM Plex Sans', system-ui, sans-serif;
   --feat-display: "kern", "calt", "liga";
   --feat-tabular: "tnum";
 
-  --fs-display: 56px;   --lh-display: 1.05;  --ls-display: -1.6px;
-  --fs-h1:      44px;   --lh-h1:      1.10;  --ls-h1:      -1.0px;
+  --fs-display: 56px;   --lh-display: 1.05;  --ls-display: -.48px;
+  --fs-h1:      44px;   --lh-h1:      1.10;  --ls-h1:      -.3px;
   --fs-h2:      32px;   --lh-h2:      1.15;  --ls-h2:      -0.6px;
   --fs-h3:      24px;   --lh-h3:      1.20;  --ls-h3:      -0.3px;
   --fs-h4:      20px;   --lh-h4:      1.25;  --ls-h4:      -0.15px;
@@ -134,7 +154,7 @@
   --fs-code:    13px;   --lh-code:    1.70;
 
   /* LAYOUT */
-  --max-width:      1080px;
+  --max-width:      1264px;
   --content-width:   720px;
   --padding-x:        32px;
 
@@ -156,6 +176,8 @@
   --color-secondary-hover:  var(--dvb-orange-hover);
   --color-secondary-tint:   var(--dvb-orange-100);
   --fg-link:      var(--dvb-purple);
+  --fg-accent:       var(--dvb-purple);
+  --fg-accent-hover: var(--dvb-purple-hover);
   --border-focus: var(--dvb-purple);
   --focus-ring:   0 0 0 3px rgba(85, 43, 123, 0.25);
 }
@@ -169,6 +191,8 @@
   --fg-body:             rgba(255, 255, 255, 0.75);
   --fg-meta:             rgba(255, 255, 255, 0.55);
   --fg-link:             var(--dvb-orange);
+  --fg-accent:           var(--dvb-orange);
+  --fg-accent-hover:     var(--dvb-orange-300);
   --fg-on-primary:       var(--dvb-purple-deep);
   --bg-page:             var(--dvb-purple);
   --bg-card:             rgba(255, 255, 255, 0.06);

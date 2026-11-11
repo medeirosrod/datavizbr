@@ -3,6 +3,8 @@ titulo: "Dataviz em perspectiva"
 subtitulo: "Visualização de dados no Brasil e na América Latina"
 organizadores:
   - rodrigo-medeiros
+organizadores_externos:
+  - Júlia Giannella
 ano: 2023
 paginas: 320
 idioma: pt-BR
