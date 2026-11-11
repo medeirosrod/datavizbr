@@ -28,7 +28,7 @@ const meta = [
   livro.data.paginas ? `${livro.data.paginas} páginas` : undefined,
   livro.data.tipo_acesso === 'gratuito' ? 'Acesso gratuito' : 'Pago',
 ].filter(Boolean).join(' · ');
-const nomes = organizadores.map((o) => o!.data.nome);
+const nomes = [...organizadores.map((o) => o!.data.nome), ...livro.data.organizadores_externos];
 const nomesOrganizadores = nomes.length > 1 ? `${nomes.slice(0, -1).join(', ')} e ${nomes.at(-1)}` : (nomes[0] ?? '');
 ---
 
@@ -39,7 +39,7 @@ const nomesOrganizadores = nomes.length > 1 ? `${nomes.slice(0, -1).join(', ')} 
         <span class="eyebrow">{meta}</span>
         <h1>{livro.data.titulo}</h1>
         {livro.data.subtitulo && <p class="apoio-mono lead">{livro.data.subtitulo}</p>}
-        {organizadores.length > 0 && <p class="org">Organizado por <b>{nomesOrganizadores}</b></p>}
+        {nomes.length > 0 && <p class="org">Organizado por <b>{nomesOrganizadores}</b></p>}
         <p class="sinopse">{livro.data.sinopse}</p>
 
         {livro.data.links.length > 0 && (
