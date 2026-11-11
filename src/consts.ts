@@ -29,11 +29,10 @@ export const NAV_PRINCIPAL = [
 ];
 
 export const NAV_RODAPE = [
-  { texto: 'Sobre',    url: '/sobre'          },
+  { texto: 'O projeto', url: '/sobre'         },
   { texto: 'Escrever', url: '/sobre/escrever' },
   { texto: 'Contato',  url: '/sobre/contato'  },
   { texto: 'RSS',      url: '/rss.xml'        },
-  { texto: 'Arquivo',  url: '/arquivo'        },
 ];
 
 export const SECOES_LABELS = {
