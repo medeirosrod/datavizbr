@@ -1,377 +1,81 @@
 ---
+// Séries: coleções de textos sobre um mesmo tema. Cada série traz a capa, o resumo e os textos.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AutorNome from '../components/AutorNome.astro';
-import PostCoverDefault from '../components/PostCoverDefault.astro';
+import PostCard from '../components/PostCard.astro';
 import { getPostsPorSerie, getSeries } from '../lib/data';
 
-const allSeries = await getSeries();
-const seriesOrdenadas = allSeries.sort((a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime());
-
-const series = await Promise.all(
-  seriesOrdenadas.map(async (serie) => ({
-    serie,
-    postsDaSerie: await getPostsPorSerie(serie.id),
-  }))
+const todas = (await getSeries()).sort(
+  (a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime(),
 );
-
-const formatarData = (date: Date): string => {
-  return new Intl.DateTimeFormat('pt-BR', {
-    month: 'long',
-    year: 'numeric'
-  }).format(new Date(date));
-};
+const series = await Promise.all(
+  todas.map(async (serie) => ({ serie, posts: await getPostsPorSerie(serie.id) })),
+);
+const mesAno = (d: Date) =>
+  new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(d));
 ---
 
-<BaseLayout title="Séries" description="Coleções temáticas de posts do datavizbr.">
-  <div class="series-page">
-
-    <div class="container">
-      <header class="page-header">
-        <h1>Séries</h1>
-        <p class="page-subtitle">Conjunto de artigos sobre uma temática específica e aprofundada.</p>
-      </header>
+<BaseLayout title="Séries" description="Coleções temáticas de textos do datavizbr." tema="escuro">
+  <header class="topo-pag grao">
+    <div class="container cab">
+      <h1>Séries</h1>
+      <p class="apoio-mono lead">Conjuntos de textos sobre uma temática específica e aprofundada. {todas.length} séries, uma abertura de cada vez.</p>
     </div>
+  </header>
 
-    {series.map(({ serie, postsDaSerie }) => {
-      const statusText = serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento';
-      const corClass = `serie-capa-${serie.data.cor || 'laranja'}`;
-
-      return (
-        <section class="serie-bloco">
-          <div class="container serie-container">
-
-            <header class="serie-header">
-              <a href={`/series/${serie.id}`} class="serie-capa-link">
-                {serie.data.capa ? (
-                  <figure class="serie-capa">
-                    <img src={serie.data.capa.src} alt={serie.data.titulo} />
-                  </figure>
-                ) : (
-                  <div class={`serie-capa-placeholder ${corClass}`} aria-hidden="true"></div>
-                )}
-              </a>
-
-              <div class="serie-info">
-                <p class="serie-meta">
-                  <span class="badge badge-serie">Série</span>
-                  <span class="serie-status">{statusText} · {postsDaSerie.length} {postsDaSerie.length === 1 ? 'parte' : 'partes'}</span>
-                </p>
-                <h2 class="serie-titulo">
-                  <a href={`/series/${serie.id}`}>{serie.data.titulo}</a>
-                </h2>
-                <p class="serie-descricao">{serie.data.descricao}</p>
-                <a href={`/series/${serie.id}`} class="serie-cta">Ver série completa →</a>
-              </div>
-            </header>
-
-            {postsDaSerie.length > 0 && (
-              <div class="posts-grid">
-                {postsDaSerie.map((post, idx) => (
-                  <article class="post-card">
-                    <div class="post-numero">Parte {post.data.ordem_na_serie || idx + 1}</div>
-                    {post.data.capa ? (
-                      <img src={post.data.capa.src} alt={post.data.capa_alt || post.data.titulo} class="post-thumb" />
-                    ) : (
-                      <PostCoverDefault secao={post.data.secao} class="post-thumb" />
-                    )}
-                    <div class="post-card-body">
-                      <h3 class="post-titulo">
-                        <a href={`/posts/${post.id}`}>{post.data.titulo}</a>
-                      </h3>
-                      {post.data.descricao && (
-                        <p class="post-excerpt">{post.data.descricao}</p>
-                      )}
-                      <div class="post-foot">
-                        <span><AutorNome autorId={post.data.autores[0]?.id} /></span>
-                        <span class="dot"></span>
-                        <span>{formatarData(post.data.publicado_em)}</span>
-                      </div>
-                    </div>
-                    <a href={`/posts/${post.id}`} class="post-link">Ler →</a>
-                  </article>
-                ))}
-              </div>
-            )}
-
+  <div class="container pagina">
+    {series.map(({ serie, posts }) => (
+      <section class="bloco" aria-labelledby={`s-${serie.id}`}>
+        <div class="bloco-topo">
+          <a class="capa" href={`/series/${serie.id}`} tabindex="-1" aria-hidden="true">
+            {serie.data.capa && <img src={serie.data.capa.src} alt="" loading="lazy" />}
+          </a>
+          <div class="info">
+            <span class="eyebrow">
+              {`${serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento'} · ${posts.length} ${posts.length === 1 ? 'parte' : 'partes'} · desde ${mesAno(serie.data.iniciada_em)}`}
+            </span>
+            <h2 id={`s-${serie.id}`}><a href={`/series/${serie.id}`}>{serie.data.titulo}</a></h2>
+            <p>{serie.data.descricao}</p>
+            <a class="link-forte" href={`/series/${serie.id}`}>Ver série completa →</a>
           </div>
-        </section>
-      );
-    })}
-
+        </div>
+        {posts.length > 0 && (
+          <div class="grade">
+            {posts.map((post, i) => <PostCard post={post} indice={i} />)}
+          </div>
+        )}
+      </section>
+    ))}
   </div>
 </BaseLayout>
 
 <style>
-  .series-page {
-    padding-block: var(--space-40) var(--space-48);
+  .cab { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; padding-block: 64px 64px; }
+  .cab h1 { font-size: clamp(64px, 11vw, 150px); line-height: .86; letter-spacing: -.045em; color: #fbf7ff; margin: 0; }
+  .lead { color: rgba(255,255,255,.76); max-width: 38ch; text-align: right; margin: 0 0 8px; }
+
+  .pagina { padding-block: 24px 96px; }
+  .bloco { padding-block: 64px; border-bottom: 1px solid var(--lc-hairline); }
+  .bloco:last-child { border-bottom: 0; }
+  .bloco-topo { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 56px; align-items: center; margin-bottom: 48px; }
+  .capa { display: block; border-radius: 3px; overflow: hidden; border-bottom: 0; box-shadow: 0 0 0 1px var(--lc-hairline), 0 30px 44px -30px rgba(42,22,64,.5); }
+  .capa img { display: block; width: 100%; height: auto; transition: transform 600ms var(--ease-out); }
+  .capa:hover img { transform: scale(1.03); }
+  .info .eyebrow { color: var(--lc-ink-orange); }
+  .info h2 { font-size: clamp(36px, 4.6vw, 64px); line-height: .96; letter-spacing: -.04em; margin: 14px 0 16px; text-wrap: balance; }
+  .info h2 a { color: var(--fg-heading); border-bottom: 0; }
+  .info h2 a:hover { color: var(--lc-ink-orange); }
+  .info p { font-size: 17px; line-height: 1.55; color: var(--dvb-ink-2); max-width: 52ch; margin: 0 0 20px; }
+  .link-forte { font-weight: 600; color: var(--lc-ink-orange); border-bottom: 1px solid currentColor; }
+  .grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 32px; }
+
+  @media (max-width: 1000px) {
+    .bloco-topo { grid-template-columns: 1fr; gap: 28px; }
+    .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-
-  .page-header {
-    padding-bottom: var(--space-32);
-    border-bottom: 1px solid var(--border-default);
-    margin-bottom: 0;
-  }
-
-  .page-header h1 {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-h1);
-    letter-spacing: var(--ls-h1);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin-bottom: var(--space-6);
-  }
-
-  .page-subtitle {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
-    margin: 0;
-  }
-
-  .serie-bloco {
-    padding-block: var(--space-40);
-    border-bottom: 1px solid var(--border-default);
-  }
-
-  .serie-bloco:last-child {
-    border-bottom: none;
-  }
-
-  .serie-container {
-    max-width: 960px;
-  }
-
-  /* ── HEADER ─────────────────────────────────── */
-  .serie-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-20);
-    align-items: center;
-    margin-bottom: var(--space-24);
-  }
-
-  .serie-capa-link {
-    display: block;
-    border-bottom: none;
-  }
-
-  .serie-capa {
-    border-radius: var(--radius-large);
-    overflow: hidden;
-    margin: 0;
-    box-shadow: var(--elev-2);
-    transition: box-shadow 160ms ease;
-  }
-
-  .serie-capa:hover {
-    box-shadow: var(--elev-3);
-  }
-
-  .serie-capa img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .serie-capa-placeholder {
-    aspect-ratio: 4/3;
-    border-radius: var(--radius-large);
-    box-shadow: var(--elev-2);
-    transition: box-shadow 160ms ease;
-  }
-
-  .serie-capa-link:hover .serie-capa-placeholder {
-    box-shadow: var(--elev-3);
-  }
-
-  .serie-capa-laranja {
-    background: linear-gradient(135deg, var(--dvb-orange-100) 0%, var(--dvb-orange-50) 100%);
-  }
-
-  .serie-capa-roxa {
-    background: linear-gradient(135deg, var(--dvb-purple-100) 0%, var(--dvb-purple-50) 100%);
-  }
-
-  .serie-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
-  }
-
-  .serie-meta {
-    display: flex;
-    gap: var(--space-6);
-    align-items: center;
-    margin: 0;
-  }
-
-  .serie-status {
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-  }
-
-  .serie-titulo {
-    font-size: var(--fs-h2);
-    line-height: var(--lh-h2);
-    letter-spacing: var(--ls-h2);
-    font-weight: 700;
-    color: var(--fg-heading);
-    margin: 0;
-  }
-
-  .serie-titulo a {
-    color: inherit;
-    border-bottom: none;
-  }
-
-  .serie-titulo a:hover {
-    color: var(--fg-accent);
-  }
-
-  .serie-descricao {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
-    margin: 0;
-  }
-
-  .serie-cta {
-    align-self: flex-start;
-    font-size: var(--fs-body-sm);
-    font-weight: 600;
-    color: var(--fg-accent);
-    border-bottom: none;
-  }
-
-  .serie-cta:hover {
-    color: var(--fg-accent-hover);
-  }
-
-  /* ── POSTS GRID ─────────────────────────────── */
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: var(--space-10);
-  }
-
-  .post-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-card);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    overflow: hidden;
-    transition: box-shadow 160ms ease;
-    position: relative;
-  }
-
-  .post-card:hover {
-    box-shadow: var(--elev-2);
-  }
-
-  .post-numero {
-    position: absolute;
-    top: var(--space-6);
-    left: var(--space-6);
-    background: rgba(0,0,0,.55);
-    color: #fff;
-    font-size: var(--fs-caption);
-    font-weight: 700;
-    padding: var(--space-2) var(--space-5);
-    border-radius: var(--radius-pill);
-    backdrop-filter: blur(4px);
-    z-index: 1;
-  }
-
-  .post-thumb {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-  }
-
-  .post-thumb-placeholder {
-    aspect-ratio: 16/10;
-  }
-
-  .post-card-body {
-    padding: var(--space-8);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    flex: 1;
-  }
-
-  .post-titulo {
-    font-size: var(--fs-body);
-    font-weight: 700;
-    line-height: var(--lh-h4);
-    letter-spacing: var(--ls-h4);
-    color: var(--fg-heading);
-    margin: 0;
-  }
-
-  .post-titulo a {
-    color: inherit;
-    border-bottom: none;
-  }
-
-  .post-titulo a:hover {
-    color: var(--fg-accent);
-  }
-
-  .post-excerpt {
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-body-sm);
-    color: var(--fg-body);
-    margin: 0;
-    flex: 1;
-  }
-
-  .post-foot {
-    display: flex;
-    gap: var(--space-4);
-    align-items: center;
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-  }
-
-  .dot {
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background: var(--fg-meta);
-    border-radius: 50%;
-  }
-
-  .post-link {
-    align-self: flex-start;
-    font-size: var(--fs-caption);
-    font-weight: 600;
-    color: var(--fg-accent);
-    border-bottom: none;
-    padding: var(--space-3) var(--space-8) var(--space-8);
-  }
-
-  .post-link:hover {
-    color: var(--fg-accent-hover);
-  }
-
-  /* ── RESPONSIVO ─────────────────────────────── */
-  @media (max-width: 768px) {
-    .serie-header {
-      grid-template-columns: 1fr;
-    }
-
-    .posts-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .posts-grid {
-      grid-template-columns: 1fr;
-    }
+  @media (max-width: 760px) {
+    .cab { flex-direction: column; align-items: flex-start; padding-block: 36px; }
+    .lead { text-align: left; font-size: 15px; }
+    .bloco { padding-block: 44px; }
+    .grade { grid-template-columns: 1fr; }
   }
 </style>

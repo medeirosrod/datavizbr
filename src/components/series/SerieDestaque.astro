@@ -1,7 +1,7 @@
 ---
 // Layout de destaque: mapa em largura total, regra da série, linha do tempo e sugestão de dados.
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import AutorNome from '../AutorNome.astro';
+import OutrasSeries from './OutrasSeries.astro';
 import { SITE } from '../../consts';
 
 interface Props {
@@ -12,285 +12,117 @@ interface Props {
 const { serie, postsDaSerie } = Astro.props;
 const proximos: string[] = serie.data.proximos;
 
-const formatarData = (date: Date): string =>
-  new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(date));
-
-// linha do tempo: capítulos publicados (com link) seguidos dos que ainda vêm
-const capitulos = [
-  ...postsDaSerie.map((post, i) => ({
-    numero: post.data.ordem_na_serie ?? i + 1,
-    titulo: post.data.titulo,
-    descricao: post.data.descricao,
-    href: `/posts/${post.id}`,
-    data: formatarData(post.data.publicado_em),
-    autor: post.data.autores[0]?.id,
-  })),
-  ...proximos.map((titulo, i) => ({
-    numero: postsDaSerie.length + i + 1,
-    titulo,
-    descricao: undefined,
-    href: undefined,
-    data: undefined,
-    autor: undefined,
-  })),
-];
+const mesAno = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(serie.data.iniciada_em));
+const [primeira, ...resto] = serie.data.titulo.split(' ');
 
 const assunto = encodeURIComponent(`Dado para a série ${serie.data.titulo}`);
 ---
 
-<BaseLayout title={serie.data.titulo} description={serie.data.descricao}>
-  <article class="serie">
-    <header class="serie-topo">
-      {serie.data.capa && (
-        <figure class="serie-capa">
-          <img src={serie.data.capa.src} alt={`Mapa do Brasil com os nove estados do Nordeste se acendendo, capa da série ${serie.data.titulo}`} />
-        </figure>
-      )}
-      <div class="serie-intro">
-        <p class="serie-status">
-          Série · {serie.data.status === 'encerrada' ? 'Encerrada' : 'Em andamento'}
-        </p>
-        <h1 class="serie-titulo">{serie.data.titulo}</h1>
-        <p class="serie-descricao">{serie.data.descricao}</p>
+<BaseLayout title={serie.data.titulo} description={serie.data.descricao} tema="escuro">
+  <header class="topo-pag grao">
+    <div class="container">
+      <div class="cab">
+        <div>
+          <span class="eyebrow">Série {serie.data.status === 'encerrada' ? 'encerrada' : 'em andamento'}, iniciada em {mesAno}</span>
+          <h1>{primeira} {resto.length > 0 && <em>{resto.join(' ')}</em>}</h1>
+          <p class="apoio-mono lead">{serie.data.descricao}</p>
+        </div>
+        {serie.data.capa && (
+          <figure class="capa">
+            <img src={serie.data.capa.src} alt={`Capa da série ${serie.data.titulo}`} />
+          </figure>
+        )}
       </div>
-    </header>
 
-    <div class="serie-corpo">
-      <section class="serie-sobre">
-        <slot />
-      </section>
+      <ol class="caps" aria-label="Capítulos">
+        {postsDaSerie.map((post, i) => (
+          <li class="cap cap-aberto">
+            <span class="n">{post.data.ordem_na_serie ?? i + 1}</span>
+            <span class="cap-abertura" aria-hidden="true"></span>
+            <h2><a href={`/posts/${post.id}`}>{post.data.titulo}</a></h2>
+            {post.data.descricao && <p>{post.data.descricao}</p>}
+            <a class="btn btn-sol" href={`/posts/${post.id}`}>Ler o capítulo</a>
+          </li>
+        ))}
+        {proximos.map((titulo, i) => (
+          <li class="cap cap-fechado">
+            <span class="n">{postsDaSerie.length + i + 1}</span>
+            <h2>{titulo}</h2>
+            <small>em breve</small>
+          </li>
+        ))}
+      </ol>
+      <p class="mono legenda">{`${postsDaSerie.length} ${postsDaSerie.length === 1 ? 'capítulo aberto' : 'capítulos abertos'}, ${proximos.length} por abrir`}</p>
+    </div>
+  </header>
 
-      <ul class="serie-regra" aria-label="Regra da série">
-        <li><strong>Dado público</strong><span>só entram bases abertas, que qualquer pessoa pode baixar.</span></li>
-        <li><strong>Fonte citada</strong><span>cada gráfico diz de onde vêm os números.</span></li>
-        <li><strong>Método aberto</strong><span>cada capítulo explica como a conta foi feita.</span></li>
-      </ul>
+  <div class="container corpo">
+    <section class="sobre">
+      <slot />
+    </section>
 
-      <section class="serie-capitulos" aria-labelledby="capitulos">
-        <h2 id="capitulos">Capítulos</h2>
-        <ol class="linha-do-tempo">
-          {capitulos.map((c) => (
-            <li class:list={['capitulo', { 'em-breve': !c.href }]}>
-              <span class="capitulo-numero" aria-hidden="true">{c.numero}</span>
-              <div class="capitulo-corpo">
-                {c.href ? (
-                  <h3 class="capitulo-titulo"><a href={c.href}>{c.titulo}</a></h3>
-                ) : (
-                  <h3 class="capitulo-titulo">{c.titulo}</h3>
-                )}
-                {c.descricao && <p class="capitulo-descricao">{c.descricao}</p>}
-                <p class="capitulo-meta">
-                  {c.href ? (
-                    <>
-                      <AutorNome autorId={c.autor} /> · {c.data}
-                    </>
-                  ) : (
-                    <span class="selo">Em breve</span>
-                  )}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
+    <ul class="regra" aria-label="Regra da série">
+      <li><strong>Dado público</strong><span>só entram bases abertas, que qualquer pessoa pode baixar.</span></li>
+      <li><strong>Fonte citada</strong><span>cada gráfico diz de onde vêm os números.</span></li>
+      <li><strong>Método aberto</strong><span>cada capítulo explica como a conta foi feita.</span></li>
+    </ul>
 
-      <aside class="serie-sugestao">
+    <aside class="sugestao">
+      <div>
         <h2>Tem um dado sobre o Nordeste?</h2>
         <p>Se você conhece uma base pública que merece um gráfico, conte para a gente. Os próximos capítulos nascem dessas sugestões.</p>
-        <a class="btn btn-primary" href={`mailto:${SITE.email_contato}?subject=${assunto}`}>Sugerir um dado</a>
-      </aside>
-    </div>
-  </article>
+      </div>
+      <a class="btn btn-primary" href={`mailto:${SITE.email_contato}?subject=${assunto}`}>Sugerir um dado</a>
+    </aside>
+  </div>
+
+  <OutrasSeries atual={serie.id} />
 </BaseLayout>
 
 <style>
-  .serie {
-    padding-bottom: var(--space-32);
-  }
+  .cab { display: grid; grid-template-columns: minmax(0, 1fr) 520px; gap: 60px; align-items: center; padding: 56px 0 56px; }
+  .cab h1 { font-size: clamp(48px, 8.4vw, 124px); line-height: .88; letter-spacing: -.045em; color: #fbf7ff; margin: 20px 0 28px; text-wrap: balance; }
+  .cab h1 em { font-style: normal; color: var(--lc-peach); display: block; }
+  .lead { color: rgba(255,255,255,.76); max-width: 52ch; margin: 0; }
+  .capa { margin: 0; border-radius: 3px; overflow: hidden; box-shadow: 0 40px 60px -30px rgba(0,0,0,.7); }
+  .capa img { display: block; width: 100%; height: auto; }
 
-  /* ---- topo: mapa animado ocupa a largura toda ---- */
-  .serie-topo {
-    background: var(--dvb-purple-deep, #2a1640);
-    color: #fff;
-  }
-  .serie-capa {
-    margin: 0;
-    background: var(--dvb-purple-deep, #2a1640);
-  }
-  .serie-capa img {
-    display: block;
-    width: 100%;
-    max-height: 60svh;
-    object-fit: contain;
-  }
-  .serie-intro {
-    max-width: 720px;
-    margin-inline: auto;
-    padding: var(--space-12) var(--space-8) var(--space-20);
-  }
-  .serie-status {
-    margin: 0 0 var(--space-4);
-    font-size: var(--fs-caption);
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
-    color: var(--dvb-orange-300, #f4b07a);
-  }
-  .serie-titulo {
-    margin: 0 0 var(--space-6);
-    font-size: clamp(2rem, 8vw, 3.25rem);
-    line-height: 1.05;
-    letter-spacing: -1px;
-    color: #fff;
-  }
-  .serie-descricao {
-    margin: 0;
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: rgba(255, 255, 255, 0.86);
-  }
+  .caps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .cap { position: relative; min-height: 330px; padding: 22px 24px 24px; border-radius: 3px; display: flex; flex-direction: column; align-items: flex-start; }
+  .cap .n { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: .9; letter-spacing: -2.4px; }
+  .cap h2 { font-size: 25px; line-height: 1.08; letter-spacing: -.6px; margin: auto 0 0; text-wrap: balance; }
+  .cap-aberto { background: linear-gradient(to bottom, #2a1837, #1d1028); border: 1px solid rgba(255,255,255,.14); color: #fbf7ff; }
+  .cap-aberto h2, .cap-aberto h2 a { color: #fbf7ff; border-bottom: 0; }
+  .cap-fechado h2 { color: rgba(255,255,255,.82); }
+  .cap-aberto p { font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.74); margin: 12px 0 18px; }
+  .cap-abertura { position: absolute; right: 22px; top: 22px; width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(to bottom, #4b2c80, #8a58ad 30%, #d98aa6 55%, #f6ab72 78%, #e9772a); box-shadow: -4px -5px 0 0 #6d3550, 0 0 0 1px rgba(0,0,0,.4); }
+  .cap-fechado { border: 1px dashed rgba(255,255,255,.34); color: rgba(255,255,255,.74); }
+  .cap-fechado small { font-size: 13px; font-weight: 500; margin-top: 8px; }
+  .legenda { font-size: 12.5px; color: rgba(255,255,255,.5); margin: 18px 0 0; padding-bottom: 72px; }
 
-  /* ---- corpo ---- */
-  .serie-corpo {
-    max-width: 720px;
-    margin-inline: auto;
-    padding: var(--space-16) var(--space-8) 0;
-  }
-  .serie-sobre :global(p) {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
-  }
+  .corpo { padding-block: 88px 24px; }
+  .sobre { max-width: 720px; font-size: 19px; line-height: 1.65; color: var(--dvb-ink-2); }
+  .sobre :global(p) { margin-bottom: 24px; }
+  .sobre :global(a) { color: var(--lc-ink-orange); border-bottom: 1px solid currentColor; }
+  .regra { list-style: none; margin: 56px 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+  .regra li { display: flex; flex-direction: column; gap: 8px; padding-top: 20px; border-top: 2px solid var(--dvb-ink); font-size: 16px; line-height: 1.5; color: var(--dvb-ink-2); }
+  .regra strong { font-family: var(--font-display); font-size: 26px; letter-spacing: -.6px; color: var(--dvb-ink); }
+  .sugestao { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: 32px; background: #fff; border-radius: 3px; box-shadow: 0 0 0 1px var(--lc-hairline); }
+  .sugestao h2 { font-size: 32px; letter-spacing: -.8px; margin: 0 0 10px; }
+  .sugestao p { margin: 0; color: var(--dvb-ink-2); max-width: 56ch; }
+  .sugestao .btn { flex: none; }
 
-  .serie-regra {
-    list-style: none;
-    margin: var(--space-16) 0;
-    padding: 0;
-    display: grid;
-    gap: var(--space-6);
+  @media (max-width: 1100px) {
+    .cab { grid-template-columns: 1fr; gap: 36px; }
+    .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-  .serie-regra li {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: var(--space-8) var(--space-8);
-    background: var(--dvb-orange-50, #fef5ec);
-    border-left: 4px solid var(--dvb-orange, #e67e2c);
-    border-radius: var(--radius-relaxed);
-  }
-  .serie-regra strong {
-    color: var(--fg-heading);
-  }
-  .serie-regra span {
-    font-size: var(--fs-body-sm);
-    color: var(--fg-body);
-  }
-
-  /* ---- linha do tempo ---- */
-  .serie-capitulos h2,
-  .serie-sugestao h2 {
-    font-size: var(--fs-h3);
-    line-height: var(--lh-h3);
-    letter-spacing: var(--ls-h3);
-    color: var(--fg-heading);
-    margin: 0 0 var(--space-8);
-  }
-  .linha-do-tempo {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-  }
-  .linha-do-tempo::before {
-    content: '';
-    position: absolute;
-    left: 17px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: var(--border-default);
-  }
-  .capitulo {
-    position: relative;
-    display: flex;
-    gap: var(--space-8);
-    padding-bottom: var(--space-12);
-  }
-  .capitulo-numero {
-    flex: none;
-    z-index: 1;
-    width: 36px;
-    height: 36px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--dvb-orange, #e67e2c);
-    color: #fff;
-    font-weight: 700;
-  }
-  .em-breve .capitulo-numero {
-    background: var(--bg-page, #fff);
-    border: 2px solid var(--border-default);
-    color: var(--fg-meta);
-  }
-  .capitulo-corpo {
-    padding-top: 4px;
-  }
-  .capitulo-titulo {
-    margin: 0;
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-h4);
-    color: var(--fg-heading);
-  }
-  .em-breve .capitulo-titulo {
-    color: var(--fg-meta);
-  }
-  .capitulo-titulo a {
-    color: inherit;
-    border-bottom: none;
-  }
-  .capitulo-titulo a:hover {
-    color: var(--fg-accent);
-  }
-  .capitulo-descricao {
-    margin: var(--space-2) 0 0;
-    font-size: var(--fs-body-sm);
-    color: var(--fg-body);
-  }
-  .capitulo-meta {
-    margin: var(--space-2) 0 0;
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-  }
-  .selo {
-    display: inline-block;
-    padding: 1px 8px;
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-pill);
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-  }
-
-  /* ---- sugestão ---- */
-  .serie-sugestao {
-    margin-top: var(--space-16);
-    padding: var(--space-12);
-    background: var(--dvb-purple-50, #f6eefb);
-    border-radius: var(--radius-large);
-  }
-  .serie-sugestao p {
-    margin: 0 0 var(--space-8);
-    color: var(--fg-body);
-  }
-
-  @media (min-width: 768px) {
-    .serie-regra {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .serie-intro {
-      padding-inline: 0;
-    }
-    .serie-corpo {
-      padding-inline: 0;
-    }
+  @media (max-width: 760px) {
+    .cab { padding-block: 32px; }
+    .caps { grid-template-columns: 1fr; }
+    .cap { min-height: 260px; }
+    .legenda { padding-bottom: 48px; }
+    .corpo { padding-top: 56px; }
+    .regra { grid-template-columns: 1fr; gap: 24px; }
+    .sugestao { flex-direction: column; align-items: flex-start; padding: 24px; }
   }
 </style>

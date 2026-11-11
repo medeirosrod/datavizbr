@@ -1,0 +1,49 @@
+---
+// "Outras séries": cartões com a capa, o nome e o número de partes das demais séries.
+import { getPostsPorSerie, getSeries } from '../../lib/data';
+
+interface Props {
+  /** Série da página atual, que não entra na lista. */
+  atual: string;
+}
+
+const { atual } = Astro.props;
+const todas = (await getSeries()).filter((s) => s.id !== atual);
+const series = await Promise.all(
+  todas
+    .sort((a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime())
+    .slice(0, 3)
+    .map(async (s) => ({ s, partes: (await getPostsPorSerie(s.id)).length })),
+);
+---
+
+{series.length > 0 && (
+  <section class="outras container">
+    <h2>Outras séries</h2>
+    <div class="grade">
+      {series.map(({ s, partes }) => (
+        <a class="serie-cartao" href={`/series/${s.id}`}>
+          <span class="capa">{s.data.capa && <img src={s.data.capa.src} alt="" loading="lazy" />}</span>
+          <b>{s.data.titulo}</b>
+          <small>{`${partes} ${partes === 1 ? 'parte' : 'partes'}`}</small>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .outras { padding-block: 88px 104px; }
+  .outras h2 { font-size: clamp(32px, 3.6vw, 44px); letter-spacing: -.035em; margin: 0 0 32px; }
+  .grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 32px; }
+  .serie-cartao { display: flex; flex-direction: column; gap: 8px; color: inherit; border-bottom: 0; }
+  .capa { display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 3px; background: var(--lc-cal-shade); box-shadow: 0 0 0 1px var(--lc-hairline); transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out); }
+  .capa img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 500ms var(--ease-out); }
+  .serie-cartao:hover .capa { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--lc-hairline), 0 24px 34px -24px rgba(42,22,64,.5); }
+  .serie-cartao:hover .capa img { transform: scale(1.04); }
+  .serie-cartao b { font-family: var(--font-display); font-size: 26px; line-height: 1.1; letter-spacing: -.6px; color: var(--dvb-ink); margin-top: 12px; text-wrap: balance; }
+  .serie-cartao:hover b { color: var(--lc-ink-orange); }
+  .serie-cartao small { font-size: 14px; color: var(--fg-meta); }
+  @media (max-width: 900px) { .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .outras { padding-block: 56px 72px; } .grade { grid-template-columns: 1fr; } }
+</style>

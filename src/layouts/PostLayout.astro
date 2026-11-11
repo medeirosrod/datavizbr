@@ -128,12 +128,11 @@ const leiaTambem = todos
         <ol class="caps">
           {capitulos.map((c, i) => {
             const aqui = c.id === post.id;
-            const imagem = c.data.capa_destaque ?? c.data.capa;
-            return (
+                      return (
               <li class:list={['cap', 'cap-aberto', aqui && 'aqui']}>
                 <a href={`/posts/${c.id}`} aria-current={aqui ? 'page' : undefined}>
                   <span class="n">{i + 1}</span>
-                  {imagem && <span class="cap-abertura" style={`background-image:url(${imagem.src})`}></span>}
+                  <span class="cap-abertura" aria-hidden="true"></span>
                   <b>{c.data.titulo}</b>
                   <small>{aqui ? 'você está aqui' : 'ler'}</small>
                 </a>
@@ -367,7 +366,8 @@ const leiaTambem = todos
   .cap-aberto small { color: rgba(255,255,255,.74); }
   .cap-abertura {
     position: absolute; right: 22px; top: 22px; width: 96px; height: 96px; border-radius: 50%;
-    background-size: 330% auto; background-position: 62% 42%; box-shadow: -4px -5px 0 0 #6d3550, 0 0 0 1px rgba(0,0,0,.4);
+    background: linear-gradient(to bottom, #4b2c80, #8a58ad 30%, #d98aa6 55%, #f6ab72 78%, #e9772a);
+    box-shadow: -4px -5px 0 0 #6d3550, 0 0 0 1px rgba(0,0,0,.4);
   }
   .cap-fechado { padding: 20px 22px; border: 1px dashed rgba(255,255,255,.34); color: rgba(255,255,255,.74); }
 

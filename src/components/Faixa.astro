@@ -1,8 +1,7 @@
 ---
 // Faixa de aberturas: uma abertura por texto, em ordem de publicação, em uma ou mais fileiras.
-// Usada no topo das páginas de seção e do arquivo. As aberturas mostram a aquarela do projeto
-// (The Watercolor Rule); o degradê do céu fica na parede da home e no friso.
-import aquarela from '../assets/blog/o-vento-que-sobra/ilustracao-aquarela.jpg';
+// Usada no topo das páginas de seção e do arquivo. A luz do pôr do sol passa pelas aberturas
+// (The Sunset Wall Rule): um único degradê em diagonal atravessa a faixa inteira.
 import { formaD, NOME_SECAO, type Secao } from '../lib/formas';
 import type { CollectionEntry } from 'astro:content';
 
@@ -48,9 +47,13 @@ const variantes = [
   {variantes.map((v) => (
     <svg class={`faixa-svg faixa-${v.tag}`} viewBox={`0 0 ${v.W} ${v.H}`} role="group" aria-label="Textos da seção, em ordem de publicação">
       <defs>
-        <pattern id={`${id}-aq-${v.tag}`} patternUnits="userSpaceOnUse" width={v.W} height={v.H}>
-          <image href={aquarela.src} x="0" y="0" width={v.W} height={v.H} preserveAspectRatio="xMidYMid slice" />
-        </pattern>
+        <linearGradient id={`${id}-ceu-${v.tag}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={v.W} y2={v.H}>
+          <stop offset="0" stop-color="#4b2c80" />
+          <stop offset=".3" stop-color="#8a58ad" />
+          <stop offset=".55" stop-color="#d98aa6" />
+          <stop offset=".78" stop-color="#f6ab72" />
+          <stop offset="1" stop-color="#e9772a" />
+        </linearGradient>
       </defs>
       {Array.from({ length: total }, (_, i) => {
         const c = i % v.C, r = Math.floor(i / v.C), x = c * M, y = r * M;
@@ -67,7 +70,7 @@ const variantes = [
           <a class="ab" href={`/posts/${it.id}`} style={`--i:${Math.min(i, 40)}`} aria-label={it.rotulo}>
             <title>{it.rotulo}</title>
             <rect class="b" x={x + 1} y={y + 1} width={M - 2} height={M - 2} rx="3" fill="#24142f" />
-            <path class="f" d={formaD(it.secao, x, y)} fill={`url(#${id}-aq-${v.tag})`} />
+            <path class="f" d={formaD(it.secao, x, y)} fill={`url(#${id}-ceu-${v.tag})`} />
             {it.id === foco && <rect class="moldura" x={x + 2} y={y + 2} width={M - 4} height={M - 4} rx="3" fill="none" stroke="#fbf7ff" stroke-width="3" />}
             {it.ano && <text class="ano" x={x + 7} y={y + 17} font-size="15">{it.ano}</text>}
           </a>
