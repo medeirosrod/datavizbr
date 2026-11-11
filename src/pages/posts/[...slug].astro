@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
-import { getPosts, porData } from '../../lib/data';
+import { getPosts } from '../../lib/data';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -18,15 +18,8 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-
-// Buscar posts anteriores e próximos
-const activePosts = (await getPosts()).sort(porData);
-
-const currentIndex = activePosts.findIndex(p => p.id === post.id);
-const previousPost = currentIndex > 0 ? activePosts[currentIndex - 1] : undefined;
-const nextPost = currentIndex < activePosts.length - 1 ? activePosts[currentIndex + 1] : undefined;
 ---
 
-<PostLayout post={post} previousPost={previousPost} nextPost={nextPost}>
+<PostLayout post={post}>
   <Content />
 </PostLayout>

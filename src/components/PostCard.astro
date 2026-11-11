@@ -1,116 +1,55 @@
 ---
-// Card de post usado na home (variante "plano") e nas páginas de seção (variante "cartao").
-// "plano": só a capa tem borda; mostra o badge da seção (a home mistura seções).
-// "cartao": card inteiro com borda; sem badge (a página já é da seção) e com tempo de leitura.
+// Cartão de texto das páginas de seção: capa, selo da seção, título, autor e data.
 import type { CollectionEntry } from 'astro:content';
 import AutorNome from './AutorNome.astro';
 import PostCoverDefault from './PostCoverDefault.astro';
-import { getSecaoLabel } from '../consts';
-import { formatarMesAno, tempoLeitura } from '../lib/data';
+import Selo from './Selo.astro';
+import { formatarMesAno } from '../lib/data';
 
 interface Props {
   post: CollectionEntry<'posts'>;
-  variante?: 'plano' | 'cartao';
-  /** Posição na lista, para o atraso do efeito `stagger-children`. */
+  /** Posição na lista, para o atraso da entrada. */
   indice?: number;
+  /** Escondido de início (o texto já aparece no destaque). */
+  oculto?: boolean;
 }
 
-const { post, variante = 'plano', indice } = Astro.props;
-const { titulo, secao, capa, capa_alt, descricao, subtitulo, autores, publicado_em } = post.data;
-const resumo = descricao || subtitulo;
-// Nas seções o card é filho direto do h1 da página; na home, de um h2.
-const Titulo = variante === 'cartao' ? 'h2' : 'h3';
+const { post, indice = 0, oculto = false } = Astro.props;
+const { titulo, secao, capa, capa_alt, autores, publicado_em } = post.data;
+const ano = new Date(publicado_em).getUTCFullYear();
 ---
 
-<article
-  class:list={['post-card', `post-card--${variante}`]}
-  style={indice !== undefined ? `--stagger-index: ${indice}` : undefined}
->
-  {capa ? (
-    <img src={capa.src} alt={capa_alt || titulo} class="post-thumb" />
-  ) : (
-    <PostCoverDefault secao={post.data.secao} class="post-thumb" />
-  )}
-  <div class="post-card-body">
-    {variante === 'plano' && (
-      <div class="post-meta"><span class={`badge badge-${secao}`}>{getSecaoLabel(secao)}</span></div>
+<article class="cartao" hidden={oculto} data-ano={ano} data-busca={`${titulo} ${post.data.descricao ?? ''} ${autores.map((a) => a.id).join(' ')}`.toLowerCase()} style={`--i:${Math.min(indice, 9)}`}>
+  <a class="cartao-capa" href={`/posts/${post.id}`} tabindex="-1" aria-hidden="true">
+    {capa ? (
+      <img src={capa.src} alt="" loading="lazy" />
+    ) : (
+      <PostCoverDefault secao={secao} />
     )}
-    <Titulo class="post-titulo">
-      <a href={`/posts/${post.id}`}>{titulo}</a>
-    </Titulo>
-    {resumo && <p class="post-excerpt">{resumo}</p>}
-    <div class="post-foot">
-      <span><AutorNome autorId={autores[0]?.id} /></span>
-      <span class="dot"></span>
-      <span>{formatarMesAno(publicado_em)}</span>
-      {variante === 'cartao' && (
-        <>
-          <span class="dot"></span>
-          <span>{tempoLeitura(post.body ?? '')} min</span>
-        </>
-      )}
-    </div>
+  </a>
+  <div class="cartao-corpo">
+    <Selo secao={secao} tamanho={16} />
+    <h3 class="cartao-titulo"><a href={`/posts/${post.id}`}>{titulo}</a></h3>
+    <p class="cartao-meta"><AutorNome autorId={autores[0]?.id} />, {formatarMesAno(publicado_em)}</p>
   </div>
 </article>
 
 <style>
-  .post-card { display: flex; flex-direction: column; }
-
-  .post-thumb {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
+  .cartao { display: flex; flex-direction: column; animation: sobe 520ms var(--ease-out) both; animation-delay: calc(var(--i) * 50ms); }
+  .cartao[hidden] { display: none; }
+  .cartao-capa {
+    display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 3px; border-bottom: 0;
+    background: var(--lc-cal-shade); box-shadow: 0 0 0 1px var(--lc-hairline);
+    transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
   }
-
-  .post-card-body { display: flex; flex-direction: column; flex: 1; }
-  .post-titulo {
-    font-size: var(--fs-body-lg);
-    font-weight: 700;
-    line-height: var(--lh-h4);
-    letter-spacing: var(--ls-h4);
-    color: var(--fg-heading);
-  }
-  .post-titulo a { color: inherit; border-bottom: none; }
-  .post-titulo a:hover { color: var(--fg-accent-hover); }
-  .post-excerpt {
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-body-sm);
-    color: var(--fg-body);
-    flex: 1;
-  }
-  .post-foot {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-4);
-    align-items: center;
-    font-size: var(--fs-caption);
-    color: var(--fg-meta);
-  }
-  .post-foot > span { white-space: nowrap; }
-
-  /* ── plano (home) ── */
-  .post-card--plano .post-thumb {
-    border-radius: var(--radius-relaxed);
-    border: 1px solid var(--border-default);
-    margin-bottom: var(--space-7);
-    transition: box-shadow 160ms ease;
-  }
-  .post-card--plano:hover .post-thumb { box-shadow: var(--elev-2); }
-  .post-card--plano .post-card-body { gap: var(--space-3); }
-  .post-card--plano .post-meta { margin-bottom: var(--space-2); }
-  .post-card--plano .post-foot { margin-top: var(--space-4); }
-
-  /* ── cartão (seções) ── */
-  .post-card--cartao {
-    background: var(--bg-card);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-relaxed);
-    overflow: hidden;
-    transition: box-shadow 160ms ease;
-  }
-  .post-card--cartao:hover { box-shadow: var(--elev-2); }
-  .post-card--cartao .post-card-body {
-    padding: var(--space-10);
-    gap: var(--space-6);
-  }
+  .cartao-capa :global(img), .cartao-capa :global(svg) { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 500ms var(--ease-out); }
+  .cartao:hover .cartao-capa { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--lc-hairline), 0 24px 34px -24px rgba(42,22,64,.5); }
+  .cartao:hover .cartao-capa :global(img) { transform: scale(1.04); }
+  .cartao-corpo { display: flex; flex-direction: column; gap: 10px; padding-top: 16px; }
+  .cartao-titulo { font-size: 23px; line-height: 1.14; letter-spacing: -.5px; text-wrap: balance; }
+  .cartao-titulo a { color: var(--fg-heading); border-bottom: 0; }
+  .cartao-titulo a:hover { color: var(--lc-ink-orange); }
+  .cartao-meta { font-size: 13.5px; color: var(--fg-meta); margin: 0; }
+  @keyframes sobe { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .cartao { animation: none; } .cartao-capa, .cartao-capa :global(img) { transition: none; } }
 </style>

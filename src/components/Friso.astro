@@ -1,7 +1,6 @@
 ---
 // Friso do rodapé: fileira de blocos de 48 px alternando as quatro formas.
-// Mostra a aquarela do projeto pelas aberturas (The Watercolor Rule).
-import aquarela from '../assets/blog/o-vento-que-sobra/ilustracao-aquarela.jpg';
+// A luz do pôr do sol passa pelas aberturas (Sunset Wall): o degradê cruza o friso inteiro.
 import { formaD, SECOES } from '../lib/formas';
 
 const M = 48, N = 30;
@@ -11,13 +10,17 @@ const blocos = Array.from({ length: N }, (_, c) => ({ x: c * M, s: SECOES[c % 4]
 
 <svg class="friso" viewBox={`0 0 ${N * M} ${M}`} preserveAspectRatio="xMinYMid slice" aria-hidden="true">
   <defs>
-    <pattern id="friso-aq" patternUnits="userSpaceOnUse" width={N * 80} height="80">
-      <image href={aquarela.src} x="0" y="-560" width={N * 80} height="1500" preserveAspectRatio="xMidYMid slice" />
-    </pattern>
+    <linearGradient id="friso-ceu" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={N * M} y2="0">
+      <stop offset="0" stop-color="#4b2c80" />
+      <stop offset=".3" stop-color="#8a58ad" />
+      <stop offset=".55" stop-color="#d98aa6" />
+      <stop offset=".78" stop-color="#f6ab72" />
+      <stop offset="1" stop-color="#e9772a" />
+    </linearGradient>
   </defs>
   {blocos.map((b) => <rect x={b.x + 1.5} y="1.5" width={M - 3} height={M - 3} rx="2" fill="#24142f" />)}
   <g transform={`scale(${k})`}>
-    {blocos.map((b) => <path d={formaD(b.s, b.x / k, 0)} fill="url(#friso-aq)" />)}
+    {blocos.map((b) => <path d={formaD(b.s, b.x / k, 0)} fill="url(#friso-ceu)" />)}
   </g>
 </svg>
 

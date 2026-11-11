@@ -68,6 +68,8 @@ const posts = defineCollection({
       capa_alt: z.string().optional(),
       /** Imagem larga para o palco de "Em destaque" na home (cai para `capa` quando não existe). */
       capa_destaque: image().optional(),
+      /** Descrição da `capa_destaque`. Na página do texto ela aparece como imagem de abertura. */
+      capa_destaque_alt: z.string().optional(),
       arquivo: z.boolean().default(false),
       medium_url_original: z.string().url().optional(),
       publicado_originalmente_em: z.date().optional(),

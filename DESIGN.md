@@ -189,9 +189,9 @@ A paleta mantém as cores de marca do site (terracota e roxo) e ganha um papel n
 Degradê de fim de tarde em cinco paradas, de cima para baixo: #4b2c80, #8a58ad (30%), #d98aa6 (55%), #f6ab72 (78%), #e9772a.
 
 ### Named Rules
-**The Sunset Wall Rule.** O degradê do céu aparece em um único lugar: por trás das aberturas da parede da home, com o sol atrás. Ele nunca preenche um cartão, um botão ou um bloco inteiro.
+**The Sunset Wall Rule.** O degradê do céu aparece só onde a luz atravessa uma parede: por trás das aberturas da parede da home, com o sol atrás, e no friso do rodapé, onde o degradê corre na horizontal pelas 30 aberturas. Ele nunca preenche um cartão, um botão ou um bloco inteiro.
 
-**The Watercolor Rule.** Em todas as outras paredes, faixas e frisos, as aberturas mostram uma aquarela do projeto, e não o degradê. Cartões de capítulo, capas e blocos abertos seguem a mesma regra: o que se vê pela abertura é ilustração.
+**The Watercolor Rule.** Em todas as outras paredes e faixas, as aberturas mostram uma aquarela do projeto, e não o degradê. Cartões de capítulo, capas e blocos abertos seguem a mesma regra: o que se vê pela abertura é ilustração.
 
 **The Readable Terracotta Rule.** Texto em terracota sobre fundo claro usa Terracotta Deep. Signal e Clay ficam para grafismo, onde 3:1 basta. Sobre fundo escuro vale o inverso: Signal e Peach são os tons legíveis.
 
@@ -277,7 +277,16 @@ Blocos em Terracotta Clay com abertura circular e a foto da pessoa por trás, co
 Faixa de blocos de argila na borda direita de uma capa em destaque. A imagem continua visível pelas aberturas.
 
 ### Friso
-Fileira única de blocos de 48px, alternando as quatro formas, no topo do rodapé de todas as páginas.
+Fileira única de blocos de 48px, alternando as quatro formas, no topo do rodapé de todas as páginas. O degradê do pôr do sol corre na horizontal por todas as aberturas, de violeta a laranja, sobre o fundo dusk.
+
+### Faixa de aberturas
+Fileira (ou fileiras) de aberturas de 80 px, uma por texto, em ordem de publicação, no topo das páginas de seção e do arquivo. Mostram a aquarela do projeto, levam ao texto e crescem com mola ao passar o mouse. Rótulos de ano em Plex Mono no canto do primeiro texto de cada ano; o texto mais recente da seção leva moldura clara. No celular a faixa quebra em 8 colunas.
+
+### Faixa de leitura
+Fileira de aberturas de 24 px sob a navegação da página de texto, na forma da seção. Acende em Peach conforme a rolagem e fica fixa abaixo da navegação. Substitui a barra de progresso.
+
+### Índice e ficha
+Na página de texto, a coluna da esquerda lista os intertítulos, cada um com a forma da seção; o atual acende em Signal. A coluna da direita traz seção, série, temas e licença. Abaixo de 1240px o índice some e a ficha desce para depois do texto.
 
 ### Cartão de texto
 Capa em 16:10 (imagem ou painel de azulejo), selo de seção, título em Card title, autor e data em Mist Ink.
@@ -309,7 +318,7 @@ Janela modal sobre a página escurecida. Resultados à esquerda, com o termo mar
 
 ### Do:
 - **Do** indicar a seção pela forma em todo lugar — **The Shape First Rule**.
-- **Do** usar o degradê do céu só na parede da home — **The Sunset Wall Rule**.
+- **Do** usar o degradê do céu só na parede da home e no friso do rodapé — **The Sunset Wall Rule**.
 - **Do** mostrar aquarela pelas aberturas das outras páginas — **The Watercolor Rule**.
 - **Do** usar Terracotta Deep para texto em terracota sobre claro — **The Readable Terracotta Rule**.
 - **Do** usar Mist Ink para datas, autores e legendas.

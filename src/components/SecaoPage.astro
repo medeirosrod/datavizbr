@@ -1,11 +1,18 @@
 ---
-// Página de listagem de uma seção editorial (Bastidores, Panorama, Práticas, Ensaios).
+// Página de uma seção editorial (Bastidores, Panorama, Práticas, Ensaios):
+// topo escuro com a faixa de aberturas, destaque do texto mais recente e grade com filtros.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Azulejo from './Azulejo.astro';
+import Faixa from './Faixa.astro';
 import PostCard from './PostCard.astro';
-import { getPostsPorSecao } from '../lib/data';
+import PostCoverDefault from './PostCoverDefault.astro';
+import AutorNome from './AutorNome.astro';
+import Selo from './Selo.astro';
+import { getPostsPorSecao, formatarMesAno, tempoLeitura } from '../lib/data';
+import { NOME_SECAO, SECOES, type Secao } from '../lib/formas';
 
 interface Props {
-  secao: string;
+  secao: Secao;
   titulo: string;
   /** Linha de apoio abaixo do título. */
   subtitulo: string;
@@ -14,44 +21,196 @@ interface Props {
 }
 
 const { secao, titulo, subtitulo, descricao } = Astro.props;
-const posts = await getPostsPorSecao(secao);
+const posts = await getPostsPorSecao(secao); // do mais recente ao mais antigo
+const contagem = Object.fromEntries(
+  await Promise.all(SECOES.map(async (s) => [s, (await getPostsPorSecao(s)).length] as const)),
+);
+const destaque = posts[0];
+const anos = [...new Set(posts.map((p) => new Date(p.data.publicado_em).getUTCFullYear()))];
+const imagemDestaque = destaque?.data.capa_destaque ?? destaque?.data.capa;
+const resumo = destaque?.data.descricao || destaque?.data.subtitulo;
 ---
 
-<BaseLayout title={titulo} description={descricao}>
-  <section class="section-page">
+<BaseLayout title={titulo} description={descricao} tema="escuro">
+  <header class="topo-pag grao">
     <div class="container">
-      <header class="section-header">
-        <h1>{titulo}</h1>
-        <p class="section-subtitle">{subtitulo}</p>
-      </header>
-
-      <div class="posts-grid">
-        {posts.map((post) => <PostCard post={post} variante="cartao" />)}
+      <div class="cab">
+        <div>
+          <span class="eyebrow">Seção</span>
+          <h1>{titulo}</h1>
+          <p class="apoio-mono lead">{subtitulo}</p>
+        </div>
+        <div class="painel"><Azulejo secao={secao} colunas={6} linhas={4} /></div>
       </div>
+
+      <Faixa posts={[...posts].reverse()} id="faixa-secao" colunas={posts.length} foco={destaque?.id} />
+      <div class="linha-t mono">
+        <span>{posts.length} textos, em ordem de publicação</span>
+        <span class="so-desktop">cada abertura é um texto desta seção</span>
+      </div>
+
+      <nav class="abas" aria-label="Seções">
+        {SECOES.map((s) => (
+          <a href={`/${s}`} class="aba" aria-current={s === secao ? 'page' : undefined}>
+            <Selo secao={s} tamanho={20} cor={s === secao ? '#f4b07a' : 'rgba(255,255,255,.6)'} semNome />
+            {NOME_SECAO[s]} <i>{contagem[s]}</i>
+          </a>
+        ))}
+      </nav>
     </div>
-  </section>
+  </header>
+
+  <div class="container pagina">
+    <div class="barra-filtro" role="group" aria-label="Filtrar textos">
+      <div class="chips">
+        <button type="button" class="chip" data-ano="todos" aria-pressed="true">Todos os anos</button>
+        {anos.map((a) => <button type="button" class="chip" data-ano={a} aria-pressed="false">{a}</button>)}
+      </div>
+      <label class="sr" for="busca-secao">Buscar em {titulo}</label>
+      <input id="busca-secao" class="input busca" type="search" placeholder={`Buscar em ${titulo}`} autocomplete="off" />
+    </div>
+
+    {destaque && (
+      <section class="abre" id="destaque" aria-label="Texto mais recente">
+        <a class="abre-capa" href={`/posts/${destaque.id}`} tabindex="-1" aria-hidden="true">
+          {imagemDestaque ? <img src={imagemDestaque.src} alt="" /> : <PostCoverDefault secao={secao} />}
+        </a>
+        <div>
+          <Selo secao={secao} />
+          <h2 class="abre-titulo"><a href={`/posts/${destaque.id}`}>{destaque.data.titulo}</a></h2>
+          {resumo && <p class="apoio-mono abre-resumo">{resumo}</p>}
+          <small class="abre-meta"><AutorNome autorId={destaque.data.autores[0]?.id} />, {formatarMesAno(destaque.data.publicado_em)}. {tempoLeitura(destaque.body ?? '')} min de leitura.</small>
+          <a class="btn btn-primary" href={`/posts/${destaque.id}`}>Ler o texto</a>
+        </div>
+      </section>
+    )}
+
+    <div class="grade" id="grade">
+      {posts.map((p, i) => <PostCard post={p} indice={i} oculto={i === 0} />)}
+    </div>
+    <p class="vazio" id="vazio" hidden>Nenhum texto encontrado. <button type="button" class="limpar" id="limpar">Limpar filtros</button></p>
+
+    <div class="mais">
+      <button type="button" class="btn btn-quiet" id="mais" hidden></button>
+      <span class="mono estado" id="estado" aria-live="polite"></span>
+    </div>
+  </div>
 </BaseLayout>
 
+<script>
+  const POR_VEZ = 9;
+  const grade = document.getElementById('grade')!;
+  const cartoes = [...grade.querySelectorAll<HTMLElement>('.cartao')];
+  const destaque = document.getElementById('destaque');
+  const vazio = document.getElementById('vazio')!;
+  const mais = document.getElementById('mais') as HTMLButtonElement;
+  const estado = document.getElementById('estado')!;
+  const busca = document.getElementById('busca-secao') as HTMLInputElement;
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip')];
+
+  let ano = 'todos';
+  let termo = '';
+  let limite = POR_VEZ;
+
+  function desenhar() {
+    const filtrando = ano !== 'todos' || termo !== '';
+    let casados = cartoes.filter(
+      (c) => (ano === 'todos' || c.dataset.ano === ano) && (!termo || c.dataset.busca!.includes(termo)),
+    );
+    // Sem filtro, o primeiro texto já está no destaque.
+    if (!filtrando && destaque) casados = casados.slice(1);
+    if (destaque) destaque.hidden = filtrando;
+
+    cartoes.forEach((c) => (c.hidden = true));
+    casados.slice(0, limite).forEach((c) => (c.hidden = false));
+
+    const extra = filtrando || !destaque ? 0 : 1;
+    const resto = casados.length - limite;
+    mais.hidden = resto <= 0;
+    mais.textContent = `Mostrar mais ${resto} textos`;
+    vazio.hidden = casados.length > 0;
+    estado.textContent = casados.length
+      ? `${Math.min(limite, casados.length) + extra} de ${casados.length + extra}`
+      : '';
+  }
+
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      ano = chip.dataset.ano!;
+      limite = POR_VEZ;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      desenhar();
+    }),
+  );
+  busca.addEventListener('input', () => {
+    termo = busca.value.trim().toLowerCase();
+    limite = POR_VEZ;
+    desenhar();
+  });
+  mais.addEventListener('click', () => {
+    limite = Infinity;
+    desenhar();
+  });
+  document.getElementById('limpar')!.addEventListener('click', () => {
+    busca.value = '';
+    termo = '';
+    ano = 'todos';
+    limite = POR_VEZ;
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.ano === 'todos')));
+    desenhar();
+  });
+  desenhar();
+</script>
+
 <style>
-  .section-page {
-    padding-block: var(--space-40);
-    border-bottom: 1px solid var(--border-default);
+  .cab { display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 60px; align-items: end; padding: 56px 0 52px; }
+  .cab h1 { font-size: clamp(56px, 11vw, 144px); line-height: .86; letter-spacing: -.042em; color: #fbf7ff; margin: 18px 0 26px; }
+  .lead { color: rgba(255,255,255,.76); max-width: 52ch; margin: 0; }
+  .painel { height: 330px; border-radius: 3px; overflow: hidden; box-shadow: 0 40px 60px -30px rgba(0,0,0,.7); }
+  .linha-t { display: flex; justify-content: space-between; gap: 16px; color: rgba(255,255,255,.55); margin: 12px 0 0; padding-bottom: 40px; font-size: 12.5px; }
+  .abas { display: flex; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.14); }
+  .aba {
+    display: flex; align-items: center; gap: 10px; padding: 18px 22px 18px 0; margin-right: 22px; border-bottom: 0;
+    font-size: 15px; font-weight: 600; color: rgba(255,255,255,.62); transition: color 160ms var(--ease-out);
   }
-  .section-header {
-    margin-bottom: var(--space-32);
-    max-width: 800px;
+  .aba:hover { color: #fff; }
+  .aba i { font-style: normal; font-family: var(--font-mono); font-weight: 400; font-size: 12px; opacity: .7; }
+  .aba[aria-current="page"] { color: #fff; box-shadow: inset 0 3px 0 var(--dvb-orange); }
+
+  .pagina { padding-bottom: 96px; }
+  .abre { display: grid; grid-template-columns: minmax(0, 660px) minmax(0, 1fr); gap: 56px; align-items: center; padding-bottom: 64px; border-bottom: 1px solid var(--lc-hairline); }
+  .abre-capa { display: block; height: 412px; border-radius: 3px; overflow: hidden; box-shadow: 0 0 0 1px var(--lc-hairline); border-bottom: 0; }
+  .abre-capa :global(img), .abre-capa :global(svg) { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms var(--ease-out); }
+  .abre-capa:hover :global(img) { transform: scale(1.04); }
+  .abre-titulo { font-size: clamp(40px, 4.6vw, 64px); line-height: .96; letter-spacing: -.034em; margin: 16px 0 18px; text-wrap: balance; }
+  .abre-titulo a { color: var(--fg-heading); border-bottom: 0; }
+  .abre-titulo a:hover { color: var(--lc-ink-orange); }
+  .abre-resumo { color: var(--dvb-ink-2); font-size: 16.5px; margin: 0 0 22px; }
+  .abre-meta { display: block; font-size: 14px; color: var(--fg-meta); margin-bottom: 26px; }
+
+  .grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px 32px; padding: 64px 0 56px; }
+  .vazio { padding: 64px 0; text-align: center; color: var(--fg-meta); }
+  .limpar { background: none; border: 0; border-bottom: 1px solid currentColor; color: var(--lc-ink-orange); font: inherit; cursor: pointer; padding: 0; margin-left: 8px; }
+  .mais { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .estado { font-size: 12.5px; color: var(--fg-meta); }
+
+  @media (max-width: 1100px) {
+    .cab { grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; }
+    .abre { grid-template-columns: 1fr; gap: 32px; }
+    .abre-capa { height: auto; aspect-ratio: 16 / 10; }
+    .grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-  .section-header h1 { margin-bottom: var(--space-6); }
-  .section-subtitle {
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body-lg);
-    color: var(--fg-body);
+  @media (max-width: 760px) {
+    .cab { grid-template-columns: 1fr; gap: 24px; padding: 30px 0 28px; }
+    .cab h1 { margin: 12px 0 16px; letter-spacing: -.035em; }
+    .painel { height: 150px; order: -1; }
+    .lead { font-size: 15px; }
+    .so-desktop { display: none; }
+    .linha-t { padding-bottom: 26px; }
+    .abas { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    .aba { padding-right: 0; margin-right: 20px; white-space: nowrap; }
+    .grade { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
+    .abre { padding-bottom: 40px; }
+    .pagina { padding-bottom: 64px; }
   }
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-12);
-  }
-  @media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .posts-grid { grid-template-columns: 1fr; } }
 </style>
