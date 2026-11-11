@@ -61,13 +61,15 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
       <p class="frase">
         Cada abertura é um texto de
         {SECOES.map((s, i) => (
+          <>
           <span class="par">
             <button type="button" class="pil" data-filtro={s} aria-pressed="false">
               <Selo secao={s} cor="#f4b07a" semNome />
               <span class="pil-nome">{NOME_SECAO[s]}</span>
               <span class="pil-n">{porSecao[s].total}</span>
             </button>{i < 2 ? ',' : i === 2 ? ' ou' : ''}
-          </span>
+          </span>{' '}
+          </>
         ))}
         <span class="par">em ordem de publicação.</span>
       </p>
