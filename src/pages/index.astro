@@ -18,10 +18,14 @@ const emOrdem = [...todos].sort((a, b) => a.data.publicado_em.valueOf() - b.data
 const autoresTodos = await getCollection('autores');
 const nomes: Record<string, string> = Object.fromEntries(autoresTodos.map((a) => [a.id, a.data.nome]));
 const contagem = await contarPostsPorAutor();
-const muro = autoresTodos
-  .filter((a) => (contagem.get(a.id) ?? 0) > 0 && a.data.foto && !a.data.foto.src.endsWith('.svg'))
-  .sort((a, b) => (contagem.get(b.id) ?? 0) - (contagem.get(a.id) ?? 0) || a.data.nome.localeCompare(b.data.nome, 'pt-BR'))
-  .slice(0, 22);
+// Curadoria do muro: quem sai da home (segue na página de autores) e quem entra mesmo fora do corte por textos.
+const foraDoMuro = new Set(['glaudemias-g-junior']);
+const fixosNoMuro = new Set(['tatyana-mendes']);
+const candidatos = autoresTodos
+  .filter((a) => (contagem.get(a.id) ?? 0) > 0 && a.data.foto && !a.data.foto.src.endsWith('.svg') && !foraDoMuro.has(a.id))
+  .sort((a, b) => (contagem.get(b.id) ?? 0) - (contagem.get(a.id) ?? 0) || a.data.nome.localeCompare(b.data.nome, 'pt-BR'));
+const porTextos = candidatos.filter((a) => !fixosNoMuro.has(a.id)).slice(0, 22 - fixosNoMuro.size);
+const muro = candidatos.filter((a) => fixosNoMuro.has(a.id) || porTextos.includes(a));
 const totalAutores = [...contagem.values()].filter((n) => n > 0).length;
 const curador = await getEntry('autores', SITE.autor_padrao);
 
