@@ -3,74 +3,81 @@ name: datavizbr
 description: Visualização de dados com sotaque brasileiro
 colors:
   terracotta-signal: "#e67e2c"
-  terracotta-hover: "#c8651a"
+  terracotta-clay: "#c8651a"
   terracotta-deep: "#9a4a0d"
-  terracotta-tint: "#fce8d6"
-  terracotta-soft: "#fef5ec"
+  terracotta-ink: "#7a3a08"
+  peach: "#f4b07a"
+  peach-tint: "#fbe3cc"
   ink-purple: "#552b7b"
-  ink-purple-hover: "#3f1f5d"
   ink-purple-deep: "#2a1640"
-  purple-tint: "#ead8f7"
+  lilac: "#b9a3d6"
+  lilac-tint: "#e2d2f3"
+  rose: "#d98aa6"
+  dusk: "#130a1b"
+  dusk-raised: "#1c1027"
+  wall: "#24142f"
   charcoal-ink: "#1a0f24"
   slate-ink: "#3a2a48"
   mist-ink: "#6b5d76"
   fog-ink: "#948aa0"
-  hairline: "#e8e3ee"
-  hairline-strong: "#d2c9dd"
+  hairline: "#ddd3e5"
+  cal: "#f6f2f8"
+  cal-shade: "#ebe4f0"
   paper: "#ffffff"
-  paper-soft: "#faf8fc"
+  sky-1: "#4b2c80"
+  sky-2: "#8a58ad"
+  sky-3: "#d98aa6"
+  sky-4: "#f6ab72"
+  sky-5: "#e9772a"
   signal-success: "#15be53"
   signal-error: "#c83838"
-  acervo-bastidores-bg: "#1f1028"
-  acervo-panorama-bg: "#1a1030"
-  acervo-praticas-bg: "#1a1528"
-  acervo-ensaios-bg: "#0e0a18"
 typography:
   display:
-    fontFamily: "IBM Plex Sans, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
-    fontSize: "56px"
+    fontFamily: "Bricolage Grotesque, IBM Plex Sans, system-ui, sans-serif"
+    fontSize: "96px"
     fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: "-1.6px"
+    lineHeight: 0.93
+    letterSpacing: "-3.6px"
   headline:
-    fontFamily: "IBM Plex Sans, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
+    fontFamily: "Bricolage Grotesque, IBM Plex Sans, system-ui, sans-serif"
+    fontSize: "64px"
+    fontWeight: 700
+    lineHeight: 0.96
+    letterSpacing: "-2.2px"
+  title:
+    fontFamily: "Bricolage Grotesque, IBM Plex Sans, system-ui, sans-serif"
     fontSize: "44px"
     fontWeight: 700
-    lineHeight: 1.10
-    letterSpacing: "-1.0px"
-  title:
-    fontFamily: "IBM Plex Sans, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
-    fontSize: "32px"
+    lineHeight: 1
+    letterSpacing: "-1.4px"
+  card-title:
+    fontFamily: "Bricolage Grotesque, IBM Plex Sans, system-ui, sans-serif"
+    fontSize: "24px"
     fontWeight: 700
-    lineHeight: 1.15
+    lineHeight: 1.1
     letterSpacing: "-0.6px"
   body:
     fontFamily: "IBM Plex Sans, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
     fontSize: "16px"
     fontWeight: 400
-    lineHeight: 1.60
+    lineHeight: 1.55
+  reading:
+    fontFamily: "IBM Plex Sans, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
+    fontSize: "19px"
+    fontWeight: 400
+    lineHeight: 1.65
   label:
     fontFamily: "IBM Plex Sans, -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
-    fontSize: "12px"
+    fontSize: "13px"
     fontWeight: 600
-    letterSpacing: "0.8px"
   mono:
     fontFamily: "Source Code Pro, SFMono-Regular, ui-monospace, Menlo, monospace"
-    fontSize: "13px"
-    fontWeight: 500
-    lineHeight: 1.70
-  numeral:
-    fontFamily: "Source Code Pro, SFMono-Regular, ui-monospace, Menlo, monospace"
-    fontSize: "2.8rem"
-    fontWeight: 700
-    lineHeight: 1
-    letterSpacing: "-0.04em"
+    fontSize: "12px"
+    fontWeight: 400
+    letterSpacing: "0.2px"
 rounded:
-  micro: "1px"
-  standard: "4px"
-  comfortable: "5px"
-  relaxed: "6px"
-  large: "8px"
+  block: "3px"
+  modal: "6px"
   pill: "999px"
 spacing:
   space-4: "8px"
@@ -79,180 +86,232 @@ spacing:
   space-16: "32px"
   space-24: "48px"
   space-32: "64px"
+  space-48: "96px"
 components:
   button-primary:
     backgroundColor: "{colors.terracotta-deep}"
     textColor: "#ffffff"
-    rounded: "{rounded.standard}"
-    padding: "10px 20px"
-  button-primary-hover:
-    backgroundColor: "{colors.terracotta-deep}"
-  button-ghost:
+    rounded: "{rounded.block}"
+    padding: "0 24px"
+    height: "46px"
+  button-on-dusk:
+    backgroundColor: "{colors.terracotta-signal}"
+    textColor: "{colors.dusk}"
+    rounded: "{rounded.block}"
+  button-outline:
     backgroundColor: "transparent"
-    textColor: "{colors.terracotta-deep}"
-    rounded: "{rounded.standard}"
-    padding: "10px 20px"
-  button-quiet:
-    backgroundColor: "transparent"
-    textColor: "{colors.mist-ink}"
-    rounded: "{rounded.standard}"
-    padding: "10px 20px"
+    textColor: "inherit"
+    rounded: "{rounded.block}"
+  wall-block:
+    backgroundColor: "{colors.wall}"
+    rounded: "{rounded.block}"
+    size: "80px"
   card:
-    backgroundColor: "{colors.paper}"
-    rounded: "{rounded.relaxed}"
-  badge-primary:
-    backgroundColor: "{colors.terracotta-tint}"
-    textColor: "{colors.terracotta-deep}"
-    rounded: "{rounded.standard}"
-  tag:
-    backgroundColor: "{colors.paper-soft}"
-    textColor: "{colors.mist-ink}"
-    rounded: "{rounded.standard}"
+    backgroundColor: "{colors.cal}"
+    rounded: "{rounded.block}"
 ---
 
 # Design System: datavizbr
 
 ## Overview
 
-**Creative North Star: "O Caderno de Campo"**
+**Creative North Star: "Luz Coada"**
 
-datavizbr é o caderno de campo de quem estuda e produz visualização de dados no Brasil desde 2007 — não uma vitrine de agência, não um blog corporativo. O laranja funciona como marca-texto: o gesto de destacar uma ideia importante no meio da leitura. O roxo profundo funciona como tinta de anotação: a camada mais analítica, presente em títulos de seção e no rodapé, onde o site assume um tom mais denso e reflexivo. A tipografia técnica (IBM Plex Sans para texto, Source Code Pro para código) reforça que este é um instrumento de trabalho de quem lida com dados todos os dias, não uma peça de marketing.
+A referência é o cobogó, o elemento vazado criado no Recife em 1929. Ele é uma parede de módulos iguais que deixa a luz passar em pedaços regulares, e é a regularidade que permite ler o todo. Uma grade de unidades repetidas que transforma luz em padrão é também uma boa definição de visualização de dados.
 
-O sistema é editorial antes de ser "de produto": hierarquia tipográfica forte, pouca decoração, cor usada com intenção e não como preenchimento. Este não é o visual de um SaaS genérico — sem gradiente roxo-azul, sem cards aninhados dentro de cards, sem ícone em tile arredondado acima de cada título. Também não é um blog corporativo frio: a voz autoral e a presença do laranja como acento vivo mantêm a personalidade humana do curador em primeiro plano.
+No datavizbr, a parede é o acervo. Cada abertura é um texto, na ordem em que foi publicado, e a forma da abertura diz a seção. O mesmo vocabulário de quatro formas reaparece em todas as escalas: na parede da home, nos selos ao lado dos títulos, nos filtros, nos painéis de azulejo, na capa padrão de um texto sem imagem e no friso do rodapé.
 
-**Key Characteristics:**
-- Contraste quente-frio deliberado: laranja quente para ação e destaque, roxo frio e profundo para densidade analítica.
-- Tipografia técnica (IBM Plex Sans/Mono) tratada como interface de trabalho, não como enfeite editorial.
-- Componentes precisos e discretos — bordas finas, sombras ambiente, raios de canto pequenos.
-- Cor usada com intenção: o laranja aparece em pontos de decisão (links, CTAs, ativo), nunca como fundo decorativo generalizado.
+Este conceito substitui o "Caderno de Campo", que orientou o site até novembro de 2026.
+
+**Características:**
+- A forma vem antes da cor. A seção de um texto se lê pela forma, com ou sem cor.
+- A cor é luz. A matéria é escura e fosca; o que brilha é o que passa pelas aberturas.
+- Dois cômodos: interior escuro (anoitecer) nos topos de página, exterior claro (cal) no conteúdo.
+- Ornamento só existe se carregar dado ou identidade. Nada de decoração solta.
+- Pouco texto e de peso: um título grande, rótulos curtos, números.
+
+## The Four Shapes
+
+As quatro formas são a identidade das seções. São desenhadas sobre o mesmo módulo de 80 px, com a mesma margem, e nunca são redesenhadas por página.
+
+| Seção | Forma | Desenho no módulo de 80 px |
+|---|---|---|
+| Bastidores | Pétala | Quatro lentes que se encontram no centro, apontando para os cantos |
+| Panorama | Círculo | Círculo de raio 25 no centro |
+| Práticas | Veneziana | Três frestas horizontais de 50 × 12, com cantos arredondados |
+| Ensaios | Losango | Quadrado girado, com vértices a 27 do centro |
+
+### Named Rules
+**The Shape First Rule.** Toda indicação de seção usa a forma. A cor é reforço e nunca a única pista. Isso vale para selo, filtro, legenda de gráfico e capa padrão.
+
+**The Same Module Rule.** As formas só mudam de escala, nunca de proporção. Um selo de 18 px e um bloco de 80 px usam o mesmo desenho.
 
 ## Colors
 
-Paleta quente e intelectual: laranja terroso como energia e chamada à ação, roxo profundo como camada analítica e de marca, neutros de base violeta (não cinza puro) para texto e fundo.
+A paleta mantém as cores de marca do site (terracota e roxo) e ganha um papel novo para cada uma: a terracota é a argila do bloco e a luz do sol; o roxo é a sombra do fim de tarde.
 
-### Primary
-- **Terracotta Signal** (#e67e2c): cor de marca e ação — estado ativo de navegação, foco de seção "Bastidores", focus ring, linhas de gráfico. Usada como o marca-texto do sistema: pontual, nunca como fundo de área grande, e nunca como cor de texto (links inclusive — ver The Readable Terracotta Rule).
-- **Terracotta Hover** (#c8651a): estado de hover/pressed de elementos gráficos em Terracotta Signal (ex.: links).
-- **Terracotta Deep** (#9a4a0d): texto e fundos de botão que carregam a identidade terracota mas precisam de contraste AA — eyebrow labels, texto de badge, fundo do botão primário.
-- **Terracotta Tint** (#fce8d6) / **Terracotta Soft** (#fef5ec): fundos suaves para badges e realces sutis em tom laranja.
+### Terracota
+- **Terracotta Signal** (#e67e2c): a cor do sol. Botão sobre fundo escuro, estado ativo, foco, marcas de gráfico. Não é cor de texto sobre fundo claro (2,6:1 sobre cal).
+- **Terracotta Clay** (#c8651a): a argila. Fundo do painel de Bastidores, do muro de autores e do véu sobre capas. Em fundo claro, só para grafismo (3,6:1 sobre cal).
+- **Terracotta Deep** (#9a4a0d): texto e botão em terracota sobre fundo claro (5,7:1 sobre cal; branco sobre ele dá 6,3:1).
+- **Terracotta Ink** (#7a3a08): estado de hover de texto em terracota.
+- **Peach** (#f4b07a) / **Peach Tint** (#fbe3cc): destaque de texto sobre fundo escuro (10,4:1 sobre dusk) e tons claros dos azulejos.
 
-### Secondary
-- **Ink Purple** (#552b7b): cor de marca secundária — seção "Panorama", tema alternativo do site, footer (como fundo escuro `[data-theme="roxo-dark"]`). É a camada intelectual/densa do sistema.
-- **Ink Purple Hover** (#3f1f5d) / **Ink Purple Deep** (#2a1640): estados de hover e fundo mais escuro (footer).
-- **Purple Tint** (#ead8f7): fundo suave para badges em tom roxo (seção "Panorama", séries).
+### Roxo
+- **Ink Purple** (#552b7b): cor de Panorama e de marca secundária (9,4:1 sobre cal).
+- **Ink Purple Deep** (#2a1640): fundo do painel de Ensaios.
+- **Lilac** (#b9a3d6) / **Lilac Tint** (#e2d2f3) / **Rose** (#d98aa6): tons claros dos azulejos e do céu.
 
-### Neutral
-- **Charcoal Ink** (#1a0f24): cor de título/heading — não é preto puro, tem matiz violeta.
-- **Slate Ink** (#3a2a48): texto de label/UI secundária.
-- **Mist Ink** (#6b5d76): cor de corpo de texto padrão.
-- **Fog Ink** (#948aa0): metadados, datas, legendas discretas.
-- **Hairline** (#e8e3ee) / **Hairline Strong** (#d2c9dd): bordas e divisores.
-- **Paper** (#ffffff) / **Paper Soft** (#faf8fc): fundo de página e fundo levemente destacado (cards secundários, seções alternadas).
+### Anoitecer (superfícies escuras)
+- **Dusk** (#130a1b): fundo dos topos de página, das faixas escuras e do rodapé.
+- **Dusk Raised** (#1c1027): faixa escura secundária.
+- **Wall** (#24142f): o bloco da parede. Um degradê vertical sutil (de #2a1837 a #1d1028) e um fio claro no topo dão relevo.
 
-### Surfaces escuras do Acervo
-- **Acervo Bastidores BG** (#1f1028) / **Acervo Panorama BG** (#1a1030) / **Acervo Práticas BG** (#1a1528) / **Acervo Ensaios BG** (#0e0a18): fundos escuros bespoke da seção "Navegue pelo acervo" — uma variação tonal roxa/violeta por seção editorial, mais escura que qualquer neutro do resto do sistema. Uso exclusivo dessa seção; não reutilizar como fundo de card comum.
+### Cal (superfícies claras)
+- **Cal** (#f6f2f8): fundo de página. Branco levemente violeta, nunca creme.
+- **Cal Shade** (#ebe4f0): seção alternada.
+- **Paper** (#ffffff): cartões e campos sobre cal.
+- **Hairline** (#ddd3e5): bordas e divisores.
+
+### Texto
+- **Charcoal Ink** (#1a0f24): títulos.
+- **Slate Ink** (#3a2a48): texto de leitura (11,8:1 sobre cal).
+- **Mist Ink** (#6b5d76): texto de apoio e metadados (5,5:1 sobre cal).
+- **Fog Ink** (#948aa0): só para elementos não essenciais, como texto de campo vazio. Não atinge AA sobre cal (3,0:1), então não serve para data, autor nem legenda.
+
+### O céu
+Degradê de fim de tarde em cinco paradas, de cima para baixo: #4b2c80, #8a58ad (30%), #d98aa6 (55%), #f6ab72 (78%), #e9772a.
 
 ### Named Rules
-**The Marker Rule.** Terracotta Signal é usado como marca-texto, não como preenchimento: aparece em estados ativos, focus ring e acentos gráficos pontuais, nunca como fundo de blocos grandes de conteúdo nem como cor de texto de link (ver The Readable Terracotta Rule).
+**The Sunset Wall Rule.** O degradê do céu aparece em um único lugar: por trás das aberturas da parede da home, com o sol atrás. Ele nunca preenche um cartão, um botão ou um bloco inteiro.
 
-**The Readable Terracotta Rule.** Terracotta Signal (#e67e2c) sozinho não atinge 4.5:1 sobre branco — reservado a usos gráficos/decorativos (linhas de gráfico, sublinhados, focus ring, ícones grandes) onde 3:1 basta. Qualquer texto ou botão que carregue significado — incluindo links de texto corrido (`--fg-link` no tema padrão) — usa **Terracotta Deep** (#9a4a0d, ~6.25:1) em vez do tom vivo. Exceção: nos temas escuros (`roxo-dark`), o laranja vivo é o que atinge contraste suficiente sobre o fundo roxo escuro — não trocar por Terracotta Deep ali.
+**The Watercolor Rule.** Em todas as outras paredes, faixas e frisos, as aberturas mostram uma aquarela do projeto, e não o degradê. Cartões de capítulo, capas e blocos abertos seguem a mesma regra: o que se vê pela abertura é ilustração.
+
+**The Readable Terracotta Rule.** Texto em terracota sobre fundo claro usa Terracotta Deep. Signal e Clay ficam para grafismo, onde 3:1 basta. Sobre fundo escuro vale o inverso: Signal e Peach são os tons legíveis.
+
+**The Violet Neutral Rule.** Nenhum neutro é cinza puro nem preto puro. Texto, bordas e sombras têm matiz violeta.
+
+## Section Palettes
+
+Cada seção tem um painel de azulejo em duas cores, usado como capa da seção e como capa padrão de texto sem imagem. As formas alternam entre o tom A e o tom B em xadrez.
+
+| Seção | Fundo | Tom A | Tom B | Cor do selo sobre cal |
+|---|---|---|---|---|
+| Bastidores | #c8651a | #fbe3cc | #f4b07a | forma #c8651a, texto #9a4a0d |
+| Panorama | #552b7b | #e2d2f3 | #b9a3d6 | forma e texto #552b7b |
+| Práticas | #f4b07a | #9a4a0d | #c8651a | forma #9a4a0d, texto #7a3a08 |
+| Ensaios | #2a1640 | #b9a3d6 | #d98aa6 | forma e texto #2a1640 |
 
 ## Typography
 
-**Display/Body Font:** IBM Plex Sans (com fallback -apple-system, BlinkMacSystemFont, system-ui, sans-serif)
-**Mono/Code Font:** Source Code Pro (com fallback SFMono-Regular, ui-monospace, Menlo, monospace)
-
-**Character:** Uma sans técnica e neutra com toque editorial — pesos fortes (700) em títulos com tracking negativo dão presença sem recorrer a serifas; o mono aparece só onde o conteúdo é literalmente código ou dado tabular.
+**Títulos:** Bricolage Grotesque, peso 700, entrelinha apertada e espaçamento negativo. Ocupa o espaço como letreiro de fachada.
+**Texto:** IBM Plex Sans, de 400 a 600.
+**Mono:** Source Code Pro, só para rótulos de dado: datas, contagens, legendas de eixo, o ano gravado no bloco.
 
 ### Hierarchy
-- **Display** (700, 56px, lh 1.05, ls -1.6px): hero da home, usada raramente — no máximo um título por página.
-- **Headline** (700, 44px, lh 1.10, ls -1.0px): título principal de post/página (`h1`).
-- **Title** (700, 32px, lh 1.15, ls -0.6px): título de seção dentro da página (`h2`).
-- **Sub-title** (700, 24px, lh 1.20, ls -0.3px): título de card/bloco (`h3`).
-- **Body** (400, 16px, lh 1.60): texto corrido; largura de leitura confortável em `--content-width: 720px`.
-- **Body Large** (400, 19px, lh 1.55): lead/chapada de abertura de post.
-- **Label/Eyebrow** (600, 12px, ls 0.8px, uppercase, cor Terracotta Deep): rótulo de categoria/seção acima de títulos.
-- **Caption/Micro** (500, 13px/11px): metadados — data, autor, tempo de leitura.
-- **Numeral** (700, 2.8rem, lh 1, ls -0.04em, mono): numerais gigantes de contagem por seção na "Navegue pelo acervo" — único uso desse tamanho no sistema, reservado a esse papel de "índice/contador editorial".
+- **Display** (96px, entrelinha 0,93, espaçamento -3,6px): título do topo de página. Um por página.
+- **Headline** (64px): título de destaque e de bloco grande.
+- **Title** (44px): título de seção da página.
+- **Card title** (24px): título de texto em cartão e em lista.
+- **Reading** (19px, entrelinha 1,65): corpo de um texto, em coluna de 720px.
+- **Body** (16px, entrelinha 1,55): texto de interface.
+- **Label** (13px, peso 600): selo de seção, filtro, botão pequeno.
+- **Mono** (12px): data, contagem, legenda.
 
 ### Named Rules
-**The Tabular Numbers Rule.** Números que aparecem lado a lado ou em sequência (datas, contadores) usam `font-feature-settings: "tnum"` (classe `.t-tnum`) para não desalinhar visualmente.
+**The Signboard Rule.** Só os títulos usam Bricolage. Nenhum parágrafo, rótulo ou botão usa a fonte de título.
+
+**The Accent Phrase Rule.** O destaque de cor num título (Peach sobre escuro, Terracotta Deep sobre claro) é permitido uma vez por página, no trecho que carrega o sentido, como "sotaque brasileiro".
 
 ## Layout
 
-Grade de largura única, sem sistema de colunas: `--max-width: 1080px` para o layout geral, `--content-width: 720px` para o corpo de texto de um post (largura de leitura confortável), padding lateral de `--padding-x: 32px`. Espaçamento em base 8px (`--space-4` a `--space-48`). Nav é `sticky` no topo com fundo translúcido (`backdrop-filter: blur(12px)`); abaixo de 768px, a navegação principal colapsa em overlay full-screen (`.nav-mobile`) acionado por um botão hambúrguer animado em três barras.
+Largura de conteúdo de 1200px, com coluna de leitura de 720px nos textos. Espaçamento em base 8px.
+
+- **Topo escuro:** home, seções, autores, séries, arquivo, sobre, newsletter, escrever e 404 abrem com um topo em Dusk, com a navegação dentro dele.
+- **Página de texto:** fundo claro do começo ao fim, para a leitura. A navegação fica sobre cal.
+- **Alternância:** depois do topo, o conteúdo alterna cal e cal shade. Uma faixa escura pode voltar no meio da página para um bloco de destaque (autores, série, newsletter).
+
+### A parede
+- **Desktop:** 15 colunas de 80px na home. Em outras páginas a parede aparece menor: 25 colunas de 48px no arquivo, uma faixa de uma linha na seção.
+- **Celular:** 8 colunas, com rolagem vertical. Nunca rolagem lateral, que esconde a maior parte do acervo.
+- **Ordem:** sempre cronológica, da esquerda para a direita e de cima para baixo. O primeiro bloco de cada ano traz o ano gravado no canto.
+- **Blocos fechados:** os dois últimos blocos ficam fechados, com contorno tracejado, à espera do próximo texto. O mesmo desenho marca capítulo de série ainda não publicado.
 
 ## Elevation & Depth
 
-O sistema usa sombras ambiente e discretas, nunca estruturais: profundidade é sinal de "isto é uma superfície separada", não de hierarquia de importância. Todas as sombras usam a cor de marca roxa como base (`rgba(85, 43, 123, ...)`), o que dá um tom mais quente e integrado do que sombras cinza neutras.
+A profundidade é pequena e exata.
 
-### Shadow Vocabulary
-- **elev-1** (`0 2px 6px rgba(85,43,123,0.06)`): elevação mínima — cards em listas, badges.
-- **elev-2** (`0 12px 28px rgba(85,43,123,0.08)`): elevação padrão de `.card`.
-- **elev-3** (dupla sombra difusa): `.card-elevated` — destaque editorial, ex. card em carrossel "Em destaque".
-- **elev-4**: elevação máxima, reservada a overlays/modais (busca).
-- **focus-ring** (`0 0 0 3px rgba(230,126,44,0.25)`): anel de foco em laranja translúcido, usado em `.btn`, `.input`.
-
-### Named Rules
-**The Purple Ambient Rule.** Toda sombra do sistema nasce da cor de marca roxa, nunca de preto puro — mesmo em elementos com tema laranja.
+- **Aresta:** cada abertura tem espessura. A imagem de fundo é deslocada 3,5px para a direita e 4,5px para baixo, e a faixa que sobra mostra a aresta do bloco, mais clara de um lado.
+- **Luz projetada:** na home, a parede projeta o próprio desenho no chão, alongado, inclinado e desfocado.
+- **Sombra:** cartões sobre cal usam sombra difusa em roxo (`rgba(42, 22, 64, .4)`), deslocada para baixo. Elementos sobre fundo escuro usam sombra preta translúcida.
+- **Grão:** superfícies escuras recebem um grão fino em `soft-light`. É textura de reboco, quase imperceptível.
 
 ## Shapes
 
-Cantos discretos e consistentes: `--radius-standard: 4px` para botões, badges, inputs e tags; `--radius-relaxed: 6px` para cards; `--radius-pill: 999px` reservado a elementos circulares/pill explícitos (não é o padrão de botão). Bordas finas de 1px em `--border-default` definem a maior parte dos contornos; a única borda grossa do sistema é o acento de citação (`blockquote`, 3px sólido em Terracotta Signal), reservada para esse único uso editorial.
+Cantos de 3px em blocos, cartões, botões e campos. 6px só em janela modal. Círculo perfeito para fotos de pessoas. Bordas de 1px em Hairline sobre claro e em branco a 12–16% sobre escuro.
 
 ## Components
 
-### Buttons
-- **Shape:** `--radius-standard` (4px), padding `--space-5 --space-10` (padrão), `--space-3 --space-7` (`.btn-sm`), `--space-7 --space-12` (`.btn-lg`).
-- **Primary:** fundo Terracotta Deep, texto branco (~6.25:1, AA); hover escurece via `filter: brightness(0.85)`.
-- **Ghost:** fundo transparente, texto Terracotta Deep, borda Terracotta Signal; hover preenche com Terracotta Soft.
-- **Quiet:** fundo transparente, texto Slate/Label, borda Hairline; hover escurece borda e texto para Heading.
-- **Focus:** anel laranja translúcido (`--focus-ring`), sem outline padrão do navegador.
+### Parede
+Grade de blocos com uma abertura por texto. Estados de uma abertura: acesa (padrão), apagada (fora do filtro ou da busca), em foco (contorno claro de 2,5px no bloco) e fechada (tracejado com um sinal de mais). Passar o mouse ou focar mostra título, seção, autor e data. Clicar abre o texto. Toda abertura é alcançável por teclado.
 
-### Badges
-- **Estilo:** pill discreto, fundo tinta clara da cor correspondente, texto na versão "deep" da mesma cor, `--radius-standard`.
-- **Por seção editorial:** cada seção (Bastidores, Panorama, Práticas, Ensaios) tem sua própria combinação de badge, derivada da paleta de marca — nunca uma cor arbitrária fora do sistema.
-- **Estado especial:** `.badge-arquivo` usa itálico + neutro para sinalizar conteúdo histórico sem tratá-lo como erro ou aviso.
+### Selo de seção
+Forma de 18px seguida do nome da seção em Label. Cores na tabela de Section Palettes.
 
-### Cards / Containers
-- **Corner Style:** `--radius-relaxed` (6px).
-- **Background:** Paper (#ffffff).
-- **Shadow Strategy:** `elev-2` padrão, `elev-3` (`.card-elevated`) para destaque editorial pontual.
-- **Border:** 1px Hairline.
+### Painel de azulejo
+Padrão em xadrez das formas de uma seção. Usado no topo da página de seção, no cartão da seção em "Navegue pelo acervo" e como capa padrão.
 
-### Inputs / Fields
-- **Style:** fundo Paper, borda Hairline, `--radius-standard`, padding `--space-5 --space-7`.
-- **Focus:** borda muda para cor de marca (`--border-focus`) + `--focus-ring`.
+### Muro de autores
+Blocos em Terracotta Clay com abertura circular e a foto da pessoa por trás, com saturação reduzida a 70%. Blocos fechados no fim convidam quem ainda vai escrever.
 
-### Navigation
-- **Style:** links com sublinhado animado (`::after`, `scaleX` da direita para a esquerda no hover/active) em vez de fundo ou pill — mantém a nav limpa e tipográfica.
-- **Estado ativo/hover:** cor muda para Terracotta Signal.
-- **Mobile:** colapsa em overlay full-screen com links grandes (19px) empilhados verticalmente.
+### Véu
+Faixa de blocos de argila na borda direita de uma capa em destaque. A imagem continua visível pelas aberturas.
 
-### Tags
-- **Style:** fundo Paper Soft, borda Hairline, texto Mist Ink; hover preenche com Terracotta Soft e muda texto/borda para tons de marca.
+### Friso
+Fileira única de blocos de 48px, alternando as quatro formas, no topo do rodapé de todas as páginas.
 
-### Curador (assinatura autoral na home)
-- **Estrutura:** foto circular (72px, `object-fit: cover`) + bio curta em terceira pessoa + link "Conheça o projeto →", separados do restante da seção por uma linha divisória (`border-bottom: 1px solid var(--border-default)`).
-- **Propósito:** dar rosto e nome ao curador do datavizbr logo na segunda dobra da home, sem precisar de uma seção "sobre" completa. Abaixo dele, uma legenda curta ("Recomendados pela curadoria para começar por aqui.") introduz os posts escolhidos a dedo em tom impessoal/comunidade, mantendo a curadoria pessoal implícita sem usar primeira pessoa.
-- **Mobile:** foto e texto empilham verticalmente abaixo de 640px.
+### Cartão de texto
+Capa em 16:10 (imagem ou painel de azulejo), selo de seção, título em Card title, autor e data em Mist Ink.
 
-### Curador em Destaque (página Sobre)
-- **Estrutura:** variante maior do componente Curador — foto circular de 120px (vs. 72px na home), nome como link direto para a página do autor (`/autores/{id}`) em heading (`--fs-h3`), bio completa (`quem_e`) abaixo. Fica logo após o `<h1>` da página, antes de qualquer parágrafo narrativo.
-- **Propósito:** a página "Sobre" é o único lugar do site cujo trabalho é provar que existe uma pessoa real e credível por trás do projeto — por isso usa a versão mais destacada do componente, e a posiciona no topo em vez de no fim, garantindo que a identidade não dependa de o leitor rolar a página inteira.
-- **Mobile:** foto e texto empilham verticalmente abaixo de 600px.
+### Botões
+- **Primário:** fundo Terracotta Deep, texto branco, 46px de altura.
+- **Sobre escuro:** fundo Terracotta Signal, texto Dusk.
+- **Contorno:** fundo transparente, borda de 1px na cor do texto.
+- **Foco:** contorno visível de 2px em Terracotta Signal, com 2px de afastamento.
+
+### Capítulo de série
+Bloco aberto para capítulo publicado: fundo Wall, número, título e uma abertura circular que mostra a ilustração do capítulo. Bloco fechado para capítulo futuro: tracejado, com título e "em breve".
+
+### Barra de leitura
+Na página de texto, uma faixa de aberturas de 24px sob a navegação. As aberturas acendem da esquerda para a direita conforme a leitura avança.
+
+### Busca
+Janela modal sobre a página escurecida. Resultados à esquerda, com o termo marcado no título. À direita, uma parede pequena em que só as aberturas encontradas ficam acesas.
+
+## Motion
+
+- **Um momento orquestrado por página.** Na home, as aberturas acendem em ordem cronológica no carregamento. Nenhum outro bloco anima sozinho ao entrar na tela.
+- **Resposta a ações:** filtro, foco, hover e abertura de modal animam em 150 a 250ms, com curva de desaceleração (`cubic-bezier(0.23, 1, 0.32, 1)`).
+- **Um movimento contínuo, no máximo:** a luz por trás da parede da home pode variar de intensidade bem devagar.
+- **Menos movimento:** com `prefers-reduced-motion`, tudo aparece no estado final e o movimento contínuo é desligado.
+- **Troca automática:** qualquer coisa que avance sozinha mostra o progresso e pausa com hover, foco ou toque.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** usar Terracotta Signal como acento gráfico pontual (focus ring, estado ativo, linhas de gráfico) — **The Marker Rule**.
-- **Do** usar Terracotta Deep para links e qualquer texto em terracota no tema padrão — **The Readable Terracotta Rule**.
-- **Do** basear toda sombra em roxo translúcido, nunca em preto puro — **The Purple Ambient Rule**.
-- **Do** manter badges de seção fiéis à cor de marca daquela seção (Bastidores/Panorama = laranja/roxo, Práticas/Ensaios = tons neutros de roxo).
-- **Do** preservar o conteúdo dos 70+ posts migrados do Medium como registro histórico — mudanças aqui são de formatação/exibição, nunca de conteúdo.
+- **Do** indicar a seção pela forma em todo lugar — **The Shape First Rule**.
+- **Do** usar o degradê do céu só na parede da home — **The Sunset Wall Rule**.
+- **Do** mostrar aquarela pelas aberturas das outras páginas — **The Watercolor Rule**.
+- **Do** usar Terracotta Deep para texto em terracota sobre claro — **The Readable Terracotta Rule**.
+- **Do** usar Mist Ink para datas, autores e legendas.
+- **Do** manter a parede em ordem cronológica e em 8 colunas no celular.
+- **Do** preservar o conteúdo dos textos migrados do Medium como registro histórico. Mudanças são de exibição, nunca de conteúdo.
 
 ### Don't:
-- **Don't** introduzir gradiente roxo-azul, cards aninhados dentro de cards, ou ícone em tile arredondado acima de título — os tiques visuais típicos de UI genérica gerada por IA que este sistema deliberadamente evita.
-- **Don't** usar preto ou cinza neutro puro em texto ou sombra — todos os neutros do sistema têm matiz violeta.
-- **Don't** aplicar `--radius-pill` a botões padrão; pill é reservado a elementos explicitamente circulares.
-- **Don't** dar à borda-acento do blockquote (3px sólido) um uso genérico em cards — é um gesto editorial único, não um padrão reutilizável de "destaque".
+- **Don't** preencher cartão, botão ou bloco com degradê.
+- **Don't** usar Terracotta Signal, Terracotta Clay ou Fog Ink como cor de texto sobre fundo claro.
+- **Don't** redesenhar as quatro formas nem criar uma quinta sem criar uma seção.
+- **Don't** usar Bricolage em parágrafo, rótulo ou botão.
+- **Don't** animar a entrada de cada bloco ao rolar a página.
+- **Don't** usar creme como fundo claro nem cinza ou preto puros.
+- **Don't** usar o cobogó como textura decorativa de fundo. Cada bloco na tela representa um texto, uma pessoa ou uma seção.
