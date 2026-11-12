@@ -12,6 +12,10 @@ interface Props {
   posts: CollectionEntry<'posts'>[];
 }
 const { posts } = Astro.props;
+
+// Corpo do título por tamanho do texto: título longo desce de corpo em vez de empilhar linhas,
+// para a coluna de texto nunca ficar mais alta que a capa (e o palco não crescer por causa de um slide).
+const porte = (titulo: string) => (titulo.length <= 30 ? 'g' : titulo.length <= 64 ? 'm' : 'p');
 ---
 
 <section class="destaque" data-destaque aria-roledescription="carrossel" aria-label="Em destaque">
@@ -31,7 +35,7 @@ const { posts } = Astro.props;
         </div>
         <div class="texto">
           <Selo secao={p.data.secao as Secao} />
-          <h2><a href={`/posts/${p.id}`}>{p.data.titulo}</a></h2>
+          <h2 class={`porte-${porte(p.data.titulo)}`}><a href={`/posts/${p.id}`}>{p.data.titulo}</a></h2>
           <p class="lead">{p.data.descricao || p.data.subtitulo}</p>
           <div class="autor">
             <span class="autor-nome"><AutorNome autorId={p.data.autores[0]?.id} /></span>
@@ -80,7 +84,7 @@ const { posts } = Astro.props;
 
 <style>
   .destaque { --u: 78px; }
-  .palco { display: grid; }
+  .palco { display: grid; transition: height 420ms var(--ease-out); }
   .slide {
     grid-area: 1 / 1;
     display: grid; grid-template-columns: minmax(0, 700px) minmax(0, 1fr); gap: 64px; align-items: center;
@@ -105,7 +109,10 @@ const { posts } = Astro.props;
   }
 
   .texto { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
-  .texto h2 { font-size: 52px; line-height: 1; letter-spacing: -.54px; text-wrap: balance; }
+  .texto h2 { line-height: 1; letter-spacing: -.01em; text-wrap: balance; }
+  .texto h2.porte-g { font-size: 52px; }
+  .texto h2.porte-m { font-size: 40px; }
+  .texto h2.porte-p { font-size: 32px; line-height: 1.04; }
   .texto h2 a { color: var(--dvb-ink); border-bottom: 0; }
   .texto h2 a:hover { color: var(--lc-ink-orange); }
   .lead { font-family: var(--font-mono); font-size: 17px; line-height: 1.55; letter-spacing: -.2px; color: var(--dvb-ink-2); max-width: 62ch; }
@@ -151,10 +158,17 @@ const { posts } = Astro.props;
 
   @media (max-width: 1100px) {
     .slide { grid-template-columns: minmax(0, 1fr); gap: 26px; }
-    .texto h2 { font-size: 44px; letter-spacing: -.45px; }
+    /* Em coluna única o resumo mostra até 3 linhas, para os slides ficarem com alturas próximas */
+    .lead { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .texto h2.porte-g { font-size: 46px; }
+    .texto h2.porte-m { font-size: 38px; }
+    .texto h2.porte-p { font-size: 32px; }
   }
   @media (max-width: 760px) {
     .destaque { --u: 39px; }
+    .texto h2.porte-g { font-size: 38px; }
+    .texto h2.porte-m { font-size: 32px; }
+    .texto h2.porte-p { font-size: 28px; }
     .capa img { left: -30px; top: -26px; width: calc(100% + 60px); height: calc(100% + 50px); }
     .abas { grid-template-columns: 1fr; gap: 0; margin-top: 36px; }
     .aba { padding: 18px 0 16px; grid-template-columns: 84px 1fr; gap: 14px; border-bottom: 1px solid var(--lc-hairline); }
@@ -163,7 +177,7 @@ const { posts } = Astro.props;
     .btn-cantos { width: 100%; justify-content: center; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .slide { transition: none; }
+    .slide, .palco { transition: none; }
     .aba.on .prog i { animation: none; width: 100%; }
   }
 </style>
@@ -173,12 +187,18 @@ const { posts } = Astro.props;
   if (raiz) {
     const slides = [...raiz.querySelectorAll<HTMLElement>('[data-slide]')];
     const abas = [...raiz.querySelectorAll<HTMLButtonElement>('[data-aba]')];
+    const palco = raiz.querySelector<HTMLElement>('.palco')!;
     const botao = raiz.querySelector<HTMLButtonElement>('[data-pausa]');
     const status = raiz.querySelector<HTMLElement>('[data-status]');
     const semMovimento = matchMedia('(prefers-reduced-motion: reduce)').matches;
     raiz.style.setProperty('--n', String(abas.length));
     let atual = 0;
     let manual = false; // pausa pedida pelo botão
+
+    // O palco tem a altura do slide à vista: sem sobra de espaço quando o texto é curto.
+    const ajustar = () => { palco.style.height = `${slides[atual].offsetHeight}px`; };
+    const olho = new ResizeObserver(ajustar);
+    slides.forEach((s) => olho.observe(s));
 
     const pausar = () => raiz.toggleAttribute('data-pausado', manual || raiz.matches(':hover, :focus-within') || document.hidden);
 
@@ -194,6 +214,7 @@ const { posts } = Astro.props;
         if (p) { p.style.animation = 'none'; void p.offsetWidth; p.style.animation = ''; }
       });
       if (status) status.textContent = `${atual + 1} de ${slides.length}. ${manual || semMovimento ? 'Troca só quando você escolhe.' : 'Troca sozinho e pausa quando você passa o mouse.'}`;
+      ajustar();
       if (foco) abas[atual].focus();
     }
 
