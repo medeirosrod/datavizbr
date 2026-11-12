@@ -251,7 +251,6 @@ Largura de conteúdo de 1200px, com coluna de leitura de 720px nos textos. Espa�
 A profundidade é pequena e exata.
 
 - **Aresta:** cada abertura tem espessura. A imagem de fundo é deslocada 3,5px para a direita e 4,5px para baixo, e a faixa que sobra mostra a aresta do bloco, mais clara de um lado.
-- **Luz projetada:** na home, a parede projeta o próprio desenho no chão, alongado, inclinado e desfocado.
 - **Sombra:** cartões sobre cal usam sombra difusa em roxo (`rgba(42, 22, 64, .4)`), deslocada para baixo. Elementos sobre fundo escuro usam sombra preta translúcida.
 - **Grão:** superfícies escuras recebem um grão fino em `soft-light`. É textura de reboco, quase imperceptível.
 

@@ -206,7 +206,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   .grao > .container { position: relative; z-index: 1; }
 
   /* ── Topo escuro ── */
-  .topo { background: var(--lc-dusk); color: #fff; overflow: hidden; padding: 74px 0 0; }
+  .topo { background: var(--lc-dusk); color: #fff; overflow: hidden; padding: 56px 0 0; }
   .topo-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 60px; align-items: end; margin-bottom: 34px; }
   .topo h1 { font-size: clamp(46px, 7vw, 96px); line-height: .93; letter-spacing: -.0114em; color: #fbf7ff; text-wrap: balance; }
   .topo h1 em { font-style: normal; color: var(--lc-peach); }
@@ -229,7 +229,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   .estado { color: rgba(255,255,255,.7); margin: 0 0 14px; }
   .estado :global(button) { color: var(--lc-peach); background: none; border: 0; border-bottom: 1px solid currentColor; padding: 0; font: inherit; cursor: pointer; margin-left: 10px; }
   .parede-area { position: relative; padding-bottom: 40px; }
-  .convite { position: absolute; left: 0; bottom: 48px; max-width: 340px; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.66); }
+  .convite { margin-top: 20px; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.66); }
   .convite a { color: var(--lc-peach); }
 
   /* ── Textos de apoio ── */
@@ -329,7 +329,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
     .apoio, .frase { font-size: 15px; }
     .frase { line-height: 2.7; }
     .parede-area { padding-bottom: 28px; }
-    .convite { position: static; margin-top: 14px; max-width: none; }
+    .convite { margin-top: 14px; }
     .destaque-bloco { padding-block: 52px; }
     .acervo-topo { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 26px; }
     .apoio-claro { text-align: left; font-size: 15px; }
@@ -389,7 +389,8 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
       const w = parede.getBoundingClientRect(), r = el.getBoundingClientRect();
       const x = Math.min(Math.max(r.left - w.left + r.width / 2 - 150, 0), w.width - 300);
       const abaixo = r.bottom - w.top + 14;
-      const cabe = abaixo + dica.offsetHeight < w.height + 120;
+      // O cartão abre abaixo da abertura se couber dentro da parede; senão, acima dela.
+      const cabe = abaixo + dica.offsetHeight < w.height;
       dica.style.left = `${x}px`;
       dica.style.top = `${cabe ? abaixo : r.top - w.top - dica.offsetHeight - 14}px`;
     }
