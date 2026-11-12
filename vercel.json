@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "eixo.datavizbr.com.br" }],
+      "destination": "https://www.datavizbr.com.br/newsletter",
+      "permanent": false
+    }
+  ]
+}
