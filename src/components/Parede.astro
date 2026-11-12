@@ -45,7 +45,7 @@ function layout(cols: number, tag: string) {
 const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
 ---
 
-<div class="parede" data-parede style={`--piso:${(0.46 * variantes[0].rows / variantes[0].cols * 100).toFixed(2)}%`}>
+<div class="parede" data-parede>
   <div class="parede-svs">
   {variantes.map((v) => (
     <svg
@@ -77,16 +77,6 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
           <stop offset="0" stop-color="#2a1837" />
           <stop offset="1" stop-color="#1d1028" />
         </linearGradient>
-        {v.tag === 'larga' && (
-          <g id="luz-larga">
-            {itens.map((it) => (
-              <>
-                <path d={formaD(it.secao, v.celulas[it.i].x + DX, v.celulas[it.i].y + DY)} fill="url(#ceu-larga)" />
-                <path d={formaD(it.secao, v.celulas[it.i].x + DX, v.celulas[it.i].y + DY)} fill="url(#sol-larga)" />
-              </>
-            ))}
-          </g>
-        )}
       </defs>
 
       {v.celulas.map((c) =>
@@ -123,9 +113,6 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
     </svg>
   ))}
 
-  <svg class="piso" viewBox={`0 0 ${variantes[0].W} ${variantes[0].H}`} aria-hidden="true">
-    <use href="#luz-larga" />
-  </svg>
   </div>
 
   <div class="dica" data-dica hidden>
@@ -140,7 +127,7 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
 </div>
 
 <style>
-  .parede { position: relative; padding-bottom: var(--piso); }
+  .parede { position: relative; }
   .parede-svs { position: relative; }
   .parede-svg { display: block; width: 100%; height: auto; overflow: visible; }
   .parede-estreita { display: none; }
@@ -162,16 +149,6 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
 
   .ab-fechado .bloco-fechado { fill: none; stroke: rgba(255,255,255,.3); stroke-dasharray: 3 5; }
   .ab-fechado path { fill: none; stroke: rgba(255,255,255,.5); stroke-width: 1.2; }
-
-  /* Luz projetada no chão: a parede reflete o próprio desenho */
-  .piso {
-    position: absolute; left: 0; top: 100%; width: 100%; height: auto;
-    transform-origin: 0 0;
-    transform: translateY(46%) skewX(-34deg) scaleY(-.46);
-    filter: blur(2.2px); opacity: .6; pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 32%, #000 100%);
-            mask-image: linear-gradient(to bottom, transparent 0, #000 32%, #000 100%);
-  }
 
   /* Cartão de apoio: título, seção, autor e data da abertura em foco */
   .dica {
@@ -196,8 +173,7 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
 
   /* Celular: 8 colunas, rolagem vertical, cartão fixo logo abaixo da parede */
   @media (max-width: 760px) {
-    .parede { padding-bottom: 0; }
-    .parede-larga, .piso { display: none; }
+    .parede-larga { display: none; }
     .parede-estreita { display: block; }
     .dica { position: static; width: auto; margin-top: 14px; pointer-events: auto; grid-template-columns: 72px 1fr auto; }
     .dica-capa { width: 72px; height: 54px; }
