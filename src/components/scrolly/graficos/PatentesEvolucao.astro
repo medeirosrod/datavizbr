@@ -1,0 +1,55 @@
+---
+// Passo 6: pedidos de patente das nove universidades do Nordeste no top 30 de 2025, de 2023 a 2025.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/universidades/dados.json';
+
+const anos = dados.evolucao.anos;
+const X = [60, 210, 360];
+const base = 340;
+const esc = 300 / 110;
+const y = (v: number) => base - v * esc;
+const forte = ['UFCG', 'UFRPE'];
+let series = Object.entries(dados.evolucao.series as Record<string, number[]>).map(([sigla, v]) => ({
+  sigla, v, forte: forte.includes(sigla),
+  pts: v.map((n, i) => `${X[i]},${y(n).toFixed(1)}`).join(' '),
+  yFim: y(v[2]), yIni: y(v[0]),
+}));
+// afasta os rótulos do fim para não encavalar (mínimo de 13 px)
+const ord = [...series].sort((a, b) => a.yFim - b.yFim);
+let ant = -99;
+const yRot: Record<string, number> = {};
+ord.forEach((s) => { const yy = Math.max(s.yFim, ant + 13); yRot[s.sigla] = yy; ant = yy; });
+---
+
+<Moldura
+  titulo="Pedidos de patente de invenção por ano, universidades do Nordeste"
+  rotulo="Gráfico de linhas com os pedidos de patente de invenção de nove universidades federais do Nordeste em 2023, 2024 e 2025. A UFCG foi de 101 para 86 e 84. A UFRPE subiu de 24 para 43 e 62. UFPB: 24, 76 e 52. UFPE: 30, 50 e 50. UFS: 37, 44 e 49. UFC: 31, 45 e 44. UFPI: 21, 33 e 40. UFRN: 16, 19 e 38. UFMA: 33, 27 e 33."
+  fonte="Fonte: INPI, Rankings de Depositantes Residentes 2023, 2024 e 2025. Elaboração: datavizbr."
+>
+  {[0, 50, 100].map((v) => (
+    <g>
+      <line x1="40" x2="380" y1={y(v)} y2={y(v)} class="grade" />
+      <text class="t-fim t-num" x="34" y={y(v) + 4} font-size="12">{v}</text>
+    </g>
+  ))}
+  {anos.map((a, i) => <text class="t-meio t-num" x={X[i]} y={base + 22}>{a}</text>)}
+  {series.map((s) => (
+    <g class:list={['serie', { forte: s.forte }]}>
+      <polyline points={s.pts} />
+      {s.v.map((n, i) => <circle cx={X[i]} cy={y(n)} r={s.forte ? 4.5 : 3} />)}
+      <text x="372" y={yRot[s.sigla] + 4} font-size={s.forte ? 14 : 12}>{s.sigla} · {s.v[2]}</text>
+    </g>
+  ))}
+  <text class="t-forte" x="70" y={y(101) - 8} font-size="13">101 em 2023</text>
+  <text class="t-laranja" x="150" y="22" font-size="13">UFRPE: de 24 para 62 pedidos em dois anos</text>
+</Moldura>
+
+<style>
+  .grade { stroke: var(--lc-hairline, #ddd3e5); stroke-width: 1; }
+  .serie polyline { fill: none; stroke: var(--g-lilas); stroke-width: 2; }
+  .serie circle { fill: var(--g-lilas); }
+  .serie.forte polyline { stroke: var(--g-roxo); stroke-width: 3.5; }
+  .serie.forte circle { fill: var(--g-roxo); }
+  .serie.forte circle:last-of-type { fill: var(--g-laranja); r: 6px; }
+  .serie.forte text { fill: var(--g-deep); font-weight: 700; }
+</style>

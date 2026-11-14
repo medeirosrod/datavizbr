@@ -5,13 +5,14 @@
 import type { CollectionEntry } from 'astro:content';
 import Selo from './Selo.astro';
 import AutorNome from './AutorNome.astro';
-import { formatarMesAno } from '../lib/data';
+import { formatarMesAno, getSeriesCategoria, rotuloCategoria } from '../lib/data';
 import type { Secao } from '../lib/formas';
 
 interface Props {
   posts: CollectionEntry<'posts'>[];
 }
 const { posts } = Astro.props;
+const categorias = await getSeriesCategoria();
 
 // Corpo do título por tamanho do texto: título longo desce de corpo em vez de empilhar linhas,
 // para a coluna de texto nunca ficar mais alta que a capa (e o palco não crescer por causa de um slide).
@@ -34,7 +35,7 @@ const porte = (titulo: string) => (titulo.length <= 30 ? 'g' : titulo.length <= 
           <div class="veu" aria-hidden="true"></div>
         </div>
         <div class="texto">
-          <Selo secao={p.data.secao as Secao} />
+          <Selo secao={p.data.secao as Secao} nome={rotuloCategoria(p, categorias)} />
           <h2 class={`porte-${porte(p.data.titulo)}`}><a href={`/posts/${p.id}`}>{p.data.titulo}</a></h2>
           <p class="lead">{p.data.descricao || p.data.subtitulo}</p>
           <div class="autor">
@@ -64,7 +65,7 @@ const porte = (titulo: string) => (titulo.length <= 30 ? 'g' : titulo.length <= 
         <span class="prog" aria-hidden="true"><i></i></span>
         {p.data.capa ? <img src={p.data.capa.src} alt="" /> : <span class="miniatura-vazia"></span>}
         <span class="aba-texto">
-          <Selo secao={p.data.secao as Secao} />
+          <Selo secao={p.data.secao as Secao} nome={rotuloCategoria(p, categorias)} />
           <strong>{p.data.titulo}</strong>
         </span>
       </button>

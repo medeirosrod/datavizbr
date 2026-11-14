@@ -5,6 +5,7 @@ status: "em_andamento"
 iniciada_em: 2026-11-09
 cor: "laranja"
 layout: "destaque"
+como_categoria: true
 capa: ./_capas/nordeste-em-dados.gif
 proximos:
   - "A interiorização das universidades federais"

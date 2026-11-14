@@ -3,8 +3,8 @@
 // cronológica. A forma diz a seção; por trás das aberturas fica o céu do fim de
 // tarde (The Sunset Wall Rule: só aqui). 15 colunas no desktop, 8 no celular.
 import type { CollectionEntry } from 'astro:content';
-import { formaD, NOME_SECAO, type Secao } from '../lib/formas';
-import { formatarMesAno } from '../lib/data';
+import { formaD, type Secao } from '../lib/formas';
+import { formatarMesAno, getSeriesCategoria, rotuloCategoria } from '../lib/data';
 
 interface Props {
   /** Posts em ordem de publicação (mais antigo primeiro). */
@@ -16,6 +16,7 @@ interface Props {
 }
 
 const { posts, autores, fechados = 2 } = Astro.props;
+const categorias = await getSeriesCategoria();
 const M = 80; // módulo
 const DX = 3.5, DY = 4.5; // espessura da aresta
 
@@ -23,6 +24,7 @@ const itens = posts.map((p, i) => ({
   i,
   id: p.id,
   secao: p.data.secao as Secao,
+  rotulo: rotuloCategoria(p, categorias),
   titulo: p.data.titulo,
   autor: p.data.autores.map((a) => autores[a.id] ?? a.id).join(' e '),
   data: formatarMesAno(p.data.publicado_em),
@@ -89,7 +91,7 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
             data-a={c.item.autor}
             data-d={c.item.data}
             data-c={c.item.capa}
-            aria-label={`${c.item.titulo}, ${NOME_SECAO[c.item.secao]}, ${c.item.data}`}
+            aria-label={`${c.item.titulo}, ${c.item.rotulo}, ${c.item.data}`}
             style={`--i:${c.i}`}
           >
             <rect class="bloco" x={c.x + 2} y={c.y + 2} width={M - 4} height={M - 4} rx="2.5" fill={`url(#bloco-${v.tag})`} />
