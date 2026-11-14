@@ -21,14 +21,31 @@ const { titulo, rotulo, fonte } = Astro.props;
 </figure>
 
 <style is:global>
+  /* Luz Coada: cartão Paper sobre a cal, base em Lilac Tint, um destaque em Clay,
+     valor do destaque em Deep, título em Bricolage, dado e fonte em IBM Plex Mono.
+     Signal (#e67e2c) não é cor de texto sobre claro. Sem degradê em marca de dado. */
   .grafico {
-    --g-laranja: var(--dvb-orange, #e67e2c);
-    --g-cinza: #c9c3d3;
-    --g-claro: #e2ddd6;
+    --g-laranja: var(--lc-clay, #c8651a);
+    --g-deep: var(--dvb-orange-deep, #9a4a0d);
+    --g-cinza: var(--lc-lilac-tint, #e2d2f3);
+    --g-claro: var(--lc-cal-shade, #ebe4f0);
+    --g-roxo: var(--dvb-purple, #552b7b);
+    --g-lilas: var(--lc-lilac, #b9a3d6);
     --g-tinta: var(--dvb-ink, #1a0f24);
     --g-mudo: var(--dvb-ink-3, #6b5d76);
     margin: 0;
     width: 100%;
+    box-sizing: border-box;
+    padding: 14px 14px 10px;
+    background: #fff;
+    border: 1px solid var(--lc-hairline, #ddd3e5);
+    border-radius: 3px;
+  }
+  /* no palco fixo o contêiner já é o cartão */
+  .scrolly-palco .grafico {
+    padding: 0;
+    border: 0;
+    background: transparent;
   }
   .grafico svg {
     display: block;
@@ -37,16 +54,19 @@ const { titulo, rotulo, fonte } = Astro.props;
     overflow: visible;
   }
   .g-titulo {
-    margin: 0 0 6px;
-    font-size: 0.9375rem;
+    margin: 0 0 8px;
+    font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+    font-size: 1.0625rem;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
     color: var(--g-tinta);
   }
   .g-fonte {
-    margin-top: 4px;
+    margin-top: 6px;
+    font-family: var(--font-mono, 'IBM Plex Mono', monospace);
     font-size: 0.6875rem;
-    line-height: 1.3;
+    line-height: 1.35;
     color: var(--g-mudo);
   }
   /* o tamanho padrão fica no <svg>, para o atributo font-size dos <text> poder sobrescrevê-lo */
@@ -54,7 +74,7 @@ const { titulo, rotulo, fonte } = Astro.props;
     font-size: 13px;
   }
   .grafico text {
-    font-family: inherit;
+    font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
     fill: var(--g-mudo);
   }
   .grafico .t-forte {
@@ -63,7 +83,11 @@ const { titulo, rotulo, fonte } = Astro.props;
   }
   .grafico .t-laranja {
     font-weight: 700;
-    fill: var(--g-laranja);
+    fill: var(--g-deep);
+  }
+  .grafico .t-num {
+    font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+    letter-spacing: -0.02em;
   }
   .grafico .t-fim {
     text-anchor: end;

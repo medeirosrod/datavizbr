@@ -34,6 +34,7 @@ const pontos = geo.sedes
   rotulo="Mapa do Nordeste com a sede das 20 universidades federais da região. As dez que existiam até 2001 ficam em capitais ou ao lado delas: São Luís, Teresina, Fortaleza, Natal, João Pessoa, Recife (duas), Maceió, São Cristóvão e Salvador. As dez criadas desde 2002 têm sede fora das capitais: Campina Grande, Petrolina, Cruz das Almas, Mossoró, Redenção, Juazeiro do Norte, Barreiras, Itabuna, Garanhuns e Parnaíba."
   fonte="Fonte: leis de criação das universidades (2002 a 2018). Elaboração: datavizbr. O ponto marca a sede; os outros câmpus não aparecem."
 >
+  <svg x="0" y="0" width="480" height="380" overflow="hidden">
   <g class="sedes" transform={`translate(${OX} ${OY})`}>
     {Object.values(geo.ne.viz).map((d) => <path d={d} class="vizinho" />)}
     {Object.values(geo.ne.uf).map((d) => <path d={d} class="estado" />)}
@@ -44,6 +45,7 @@ const pontos = geo.sedes
       </g>
     ))}
   </g>
+  </svg>
 
   <g class="legenda">
     <circle cx="336" cy="18" r="5" class="l-antiga" />
@@ -55,24 +57,24 @@ const pontos = geo.sedes
   </g>
 
   <g class="so1">
-    <text class="t-forte t-fim" x="476" y="318" font-size="54">10</text>
+    <text class="t-forte t-fim t-num" x="476" y="318" font-size="54">10</text>
     <text class="t-fim" x="476" y="340">federais em 2001, todas</text>
     <text class="t-fim" x="476" y="358">na capital ou ao lado dela</text>
   </g>
   <g class="nova">
-    <text class="t-laranja t-fim" x="476" y="318" font-size="54">+10</text>
+    <text class="t-laranja t-fim t-num" x="476" y="318" font-size="54">+10</text>
     <text class="t-fim" x="476" y="340">desde 2002, todas com</text>
     <text class="t-fim" x="476" y="358">sede fora das capitais</text>
   </g>
 </Moldura>
 
 <style>
-  .estado { fill: #ebe4f0; stroke: #fff; stroke-width: 1.2; }
-  .vizinho { fill: #f3eff6; stroke: #fff; stroke-width: 1; }
+  .estado { fill: var(--g-claro); stroke: #fff; stroke-width: 1.2; }
+  .vizinho { fill: #f6f2f8; stroke: #fff; stroke-width: 1; }
   .antiga circle, .l-antiga { fill: var(--g-tinta); stroke: #fff; stroke-width: 1.5; }
   .nova circle, .l-nova { fill: var(--g-laranja); stroke: #fff; stroke-width: 1.5; }
   .antiga text { fill: var(--g-tinta); }
-  .sedes .nova text { fill: #9a4a0d; font-weight: 700; }
+  .sedes .nova text { fill: var(--g-deep); font-weight: 700; }
   .nova, .so1 { transition: opacity 0.5s ease; }
   .so1 { opacity: 0; }
   /* etapa 1: só as dez antigas */

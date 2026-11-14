@@ -22,7 +22,7 @@ const pct = ((n7.brasil[1] / n7.avaliados) * 100).toFixed(1).replace('.', ',');
       <text class="t-meio" x={22 + i * 50} y="90" font-size="11.5">{u}</text>
     </g>
   ))}
-  <text class="rv rv-fade t-laranja t-fim" style="--d:0.4;--s:0.1" x="476" y="66" font-size="44">7</text>
+  <text class="rv rv-fade t-laranja t-fim t-num" style="--d:0.4;--s:0.1" x="476" y="66" font-size="44">7</text>
 
   <text class="t-forte" x="0" y="130" font-size="15">Pernambuco</text>
   {pe.map((u, i) => (
@@ -31,15 +31,15 @@ const pct = ((n7.brasil[1] / n7.avaliados) * 100).toFixed(1).replace('.', ',');
       <text class="t-meio" x={22 + i * 50} y="202" font-size="11.5">{u}</text>
     </g>
   ))}
-  <text class="rv rv-fade t-laranja t-fim" style="--d:0.8;--s:0.1" x="476" y="178" font-size="44">6</text>
+  <text class="rv rv-fade t-laranja t-fim t-num" style="--d:0.8;--s:0.1" x="476" y="178" font-size="44">6</text>
 
   <text class="t-forte" x="0" y="250" font-size="15">Brasil: programas nota 7</text>
-  <text x="0" y="280" font-size="12">2017–2020</text>
+  <text class="t-num" x="0" y="280" font-size="11.5">2017–2020</text>
   <rect class="rv rv-barra-h" style="--d:0.82;--s:0.1" x="70" y="266" width={n7.brasil[0] * esc * 0.85} height="20" rx="3" fill="var(--g-cinza)" />
-  <text x={76 + n7.brasil[0] * esc * 0.85} y="281" font-size="13">{n7.brasil[0]}</text>
-  <text x="0" y="308" font-size="12">2021–2024</text>
+  <text x={76 + n7.brasil[0] * esc * 0.85} y="281" font-size="13" class="t-num">{n7.brasil[0]}</text>
+  <text class="t-num" x="0" y="308" font-size="11.5">2021–2024</text>
   <rect class="rv rv-barra-h" style="--d:0.86;--s:0.12" x="70" y="294" width={n7.brasil[1] * esc * 0.85} height="20" rx="3" fill="var(--g-laranja)" />
-  <text class="t-laranja" x={76 + n7.brasil[1] * esc * 0.85} y="309" font-size="14">{n7.brasil[1]}</text>
+  <text class="t-laranja t-num" x={76 + n7.brasil[1] * esc * 0.85} y="309" font-size="14">{n7.brasil[1]}</text>
   <text x="0" y="340" font-size="12">{pct}% dos 4.555 programas avaliados no país chegaram à nota máxima.</text>
 </Moldura>
 

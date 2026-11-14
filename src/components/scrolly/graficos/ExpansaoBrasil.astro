@@ -19,12 +19,12 @@ const esc = 380 / 321;
   {linhas.map((l) => (
     <g>
       <text class="t-forte" x="0" y={l.y} font-size="15">{l.nome}</text>
-      <text x="0" y={l.y + 30} font-size="12">2003</text>
+      <text class="t-num" x="0" y={l.y + 30} font-size="12">2003</text>
       <rect class="rv rv-barra-h" style={`--d:${l.d};--s:0.25`} x="40" y={l.y + 14} width={l.v[0] * esc} height="22" rx="3" fill="var(--g-cinza)" />
-      <text class="rv rv-fade" style={`--d:${l.d + 0.2};--s:0.1`} x={46 + l.v[0] * esc} y={l.y + 30} font-size="14">{l.v[0]}</text>
-      <text x="0" y={l.y + 58} font-size="12">2014</text>
+      <text class="rv rv-fade t-num" style={`--d:${l.d + 0.2};--s:0.1`} x={46 + l.v[0] * esc} y={l.y + 30} font-size="14">{l.v[0]}</text>
+      <text class="t-num" x="0" y={l.y + 58} font-size="12">2014</text>
       <rect class="rv rv-barra-h" style={`--d:${l.d + 0.12};--s:0.3`} x="40" y={l.y + 42} width={l.v[1] * esc} height="22" rx="3" fill="var(--g-laranja)" />
-      <text class="rv rv-fade t-laranja" style={`--d:${l.d + 0.38};--s:0.1`} x={46 + l.v[1] * esc} y={l.y + 59} font-size="15">{l.v[1]}</text>
+      <text class="rv rv-fade t-laranja t-num" style={`--d:${l.d + 0.38};--s:0.1`} x={46 + l.v[1] * esc} y={l.y + 59} font-size="15">{l.v[1]}</text>
       <text class="rv rv-fade" style={`--d:${l.d + 0.42};--s:0.1`} x="0" y={l.y + 84} font-size="12">{l.vezes} vezes o número de 2003</text>
     </g>
   ))}

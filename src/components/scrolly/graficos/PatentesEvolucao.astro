@@ -29,10 +29,10 @@ ord.forEach((s) => { const yy = Math.max(s.yFim, ant + 13); yRot[s.sigla] = yy; 
   {[0, 50, 100].map((v) => (
     <g>
       <line x1="40" x2="380" y1={y(v)} y2={y(v)} class="grade" />
-      <text class="t-fim" x="34" y={y(v) + 4} font-size="12">{v}</text>
+      <text class="t-fim t-num" x="34" y={y(v) + 4} font-size="12">{v}</text>
     </g>
   ))}
-  {anos.map((a, i) => <text class="t-meio" x={X[i]} y={base + 22}>{a}</text>)}
+  {anos.map((a, i) => <text class="t-meio t-num" x={X[i]} y={base + 22}>{a}</text>)}
   {series.map((s) => (
     <g class:list={['serie', { forte: s.forte }]}>
       <polyline points={s.pts} />
@@ -45,10 +45,11 @@ ord.forEach((s) => { const yy = Math.max(s.yFim, ant + 13); yRot[s.sigla] = yy; 
 </Moldura>
 
 <style>
-  .grade { stroke: #ddd3e5; stroke-width: 1; }
-  .serie polyline { fill: none; stroke: var(--g-cinza); stroke-width: 2; }
-  .serie circle { fill: var(--g-cinza); }
-  .serie.forte polyline { stroke: var(--g-laranja); stroke-width: 3.5; }
-  .serie.forte circle { fill: var(--g-laranja); }
-  .serie.forte text { fill: var(--g-laranja); font-weight: 700; }
+  .grade { stroke: var(--lc-hairline, #ddd3e5); stroke-width: 1; }
+  .serie polyline { fill: none; stroke: var(--g-lilas); stroke-width: 2; }
+  .serie circle { fill: var(--g-lilas); }
+  .serie.forte polyline { stroke: var(--g-roxo); stroke-width: 3.5; }
+  .serie.forte circle { fill: var(--g-roxo); }
+  .serie.forte circle:last-of-type { fill: var(--g-laranja); r: 6px; }
+  .serie.forte text { fill: var(--g-deep); font-weight: 700; }
 </style>
