@@ -38,7 +38,6 @@ const assunto = encodeURIComponent(`Dado para a série ${serie.data.titulo}`);
         {postsDaSerie.map((post, i) => (
           <li class="cap cap-aberto">
             <span class="n">{post.data.ordem_na_serie ?? i + 1}</span>
-            <span class="cap-abertura" aria-hidden="true"></span>
             <h2><a href={`/posts/${post.id}`}>{post.data.titulo}</a></h2>
             {post.data.descricao && <p>{post.data.descricao}</p>}
             <a class="btn btn-sol" href={`/posts/${post.id}`}>Ler o capítulo</a>
@@ -89,13 +88,23 @@ const assunto = encodeURIComponent(`Dado para a série ${serie.data.titulo}`);
 
   .caps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
   .cap { position: relative; min-height: 330px; padding: 22px 24px 24px; border-radius: 3px; display: flex; flex-direction: column; align-items: flex-start; }
-  .cap .n { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: .9; letter-spacing: -.72px; }
+  .cap .n { font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: .9; letter-spacing: -.72px; margin-bottom: 18px; }
   .cap h2 { font-size: 25px; line-height: 1.08; letter-spacing: -.6px; margin: auto 0 0; text-wrap: balance; }
   .cap-aberto { background: linear-gradient(to bottom, #2a1837, #1d1028); border: 1px solid rgba(255,255,255,.14); color: #fbf7ff; }
+  /* A luz do pôr do sol aparece só na borda, ao passar o mouse ou focar: o cartão em si não leva degradê. */
+  .cap-aberto { transition: transform 240ms var(--ease-out); }
+  .cap-aberto::before { content: ""; position: absolute; inset: -1px; padding: 1px; border-radius: 3px; pointer-events: none;
+    background: linear-gradient(135deg, #4b2c80, #8a58ad 30%, #d98aa6 55%, #f6ab72 78%, #e9772a);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+    opacity: 0; transition: opacity 240ms var(--ease-out); }
+  .cap-aberto:hover { transform: translateY(-4px); }
+  .cap-aberto:hover::before, .cap-aberto:focus-within::before { opacity: 1; }
   .cap-aberto h2, .cap-aberto h2 a { color: #fbf7ff; border-bottom: 0; }
   .cap-fechado h2 { color: rgba(255,255,255,.82); }
   .cap-aberto p { font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.74); margin: 12px 0 18px; }
-  .cap-abertura { position: absolute; right: 22px; top: 22px; width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(to bottom, #4b2c80, #8a58ad 30%, #d98aa6 55%, #f6ab72 78%, #e9772a); box-shadow: -4px -5px 0 0 #6d3550, 0 0 0 1px rgba(0,0,0,.4); }
   .cap-fechado { border: 1px dashed rgba(255,255,255,.34); color: rgba(255,255,255,.74); }
   .cap-fechado small { font-size: 13px; font-weight: 500; margin-top: 8px; }
   .legenda { font-size: 12.5px; color: rgba(255,255,255,.5); margin: 18px 0 0; padding-bottom: 72px; }
