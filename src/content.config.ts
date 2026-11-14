@@ -42,6 +42,8 @@ const series = defineCollection({
       cor: z.string().optional(),
       // padrao: cabeçalho + grade de cards; destaque: mapa, regra, linha do tempo (Nordeste em dados)
       layout: z.enum(['padrao', 'destaque']).default('padrao'),
+      // a série é a categoria dos capítulos: eles saem das páginas de seção e o rótulo deles é o nome da série
+      como_categoria: z.boolean().default(false),
       // capítulos ainda não publicados, na ordem em que vão sair (aparecem como "em breve")
       proximos: z.array(z.string()).default([]),
     }),

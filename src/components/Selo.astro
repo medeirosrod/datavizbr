@@ -8,14 +8,16 @@ interface Props {
   /** Troca a cor do texto e da forma (ex.: sobre fundo escuro). */
   cor?: string;
   semNome?: boolean;
+  /** Rótulo no lugar do nome da seção (ex.: o nome da série, quando ela é a categoria). */
+  nome?: string;
 }
-const { secao, tamanho = 18, cor, semNome = false } = Astro.props;
+const { secao, tamanho = 18, cor, semNome = false, nome } = Astro.props;
 const p = PALETA[secao];
 ---
 
 <span class="selo" style={cor ? `--selo-forma:${cor};--selo-texto:${cor}` : `--selo-forma:${p.forma};--selo-texto:${p.texto}`}>
   <svg width={tamanho} height={tamanho} viewBox="8 8 64 64" aria-hidden="true"><path d={formaD(secao)} fill="var(--selo-forma)" /></svg>
-  {!semNome && <span>{NOME_SECAO[secao]}</span>}
+  {!semNome && <span>{nome ?? NOME_SECAO[secao]}</span>}
 </span>
 
 <style>

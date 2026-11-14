@@ -1,5 +1,6 @@
 // src/lib/data.ts
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { NOME_SECAO, type Secao } from './formas';
 
 const isProd = import.meta.env.PROD;
 
@@ -11,10 +12,26 @@ export async function getPosts() {
   );
 }
 
+// Séries cujo nome é a categoria dos capítulos (`como_categoria`): id da série -> título.
+export async function getSeriesCategoria(): Promise<Map<string, string>> {
+  const series = await getCollection('series', ({ data }) => data.como_categoria);
+  return new Map(series.map((s) => [s.id, s.data.titulo]));
+}
+
+/** Nome da série quando o texto é capítulo de uma série-categoria; senão, o da seção. */
+export function rotuloCategoria(post: CollectionEntry<'posts'>, categorias: Map<string, string>): string {
+  return (post.data.serie && categorias.get(post.data.serie.id)) || NOME_SECAO[post.data.secao as Secao];
+}
+
+/** Capítulo de série-categoria: não entra nas listas de seção. */
+export function ehDeSerieCategoria(post: CollectionEntry<'posts'>, categorias: Map<string, string>): boolean {
+  return Boolean(post.data.serie && categorias.has(post.data.serie.id));
+}
+
 export async function getPostsPorSecao(secao: string) {
-  const todos = await getPosts();
+  const [todos, categorias] = await Promise.all([getPosts(), getSeriesCategoria()]);
   return todos
-    .filter((p) => p.data.secao === secao)
+    .filter((p) => p.data.secao === secao && !ehDeSerieCategoria(p, categorias))
     .sort(porData);
 }
 

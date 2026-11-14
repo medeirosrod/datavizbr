@@ -54,10 +54,10 @@ const leiaTambem = todos
     <div class="container">
       <header class="cab">
         <div class="cab-tags">
-          <Selo secao={secaoTipada} />
+          <Selo secao={secaoTipada} nome={serie?.data.como_categoria ? serie.data.titulo : undefined} />
           {serie && (
             <a class="cab-serie" href={`/series/${serie.id}`}>
-              Série {serie.data.titulo}{numeroNaSerie ? `, capítulo ${numeroNaSerie}` : ''}
+              {serie.data.como_categoria ? (numeroNaSerie ? `Capítulo ${numeroNaSerie}` : 'Série') : `Série ${serie.data.titulo}${numeroNaSerie ? `, capítulo ${numeroNaSerie}` : ''}`}
             </a>
           )}
         </div>
@@ -104,7 +104,7 @@ const leiaTambem = todos
         <aside class="ficha" aria-label="Ficha do texto">
           <h2 class="rotulo">Ficha</h2>
           <dl>
-            <div><dt>Seção</dt><dd><a href={`/${secao}`}>{NOME_SECAO[secaoTipada]}</a></dd></div>
+            {!serie?.data.como_categoria && <div><dt>Seção</dt><dd><a href={`/${secao}`}>{NOME_SECAO[secaoTipada]}</a></dd></div>}
             {serie && <div><dt>Série</dt><dd><a href={`/series/${serie.id}`}>{serie.data.titulo}</a></dd></div>}
             {tags.length > 0 && (
               <div><dt>Temas</dt><dd>{tags.map((t, i) => <><a href={`/tags/${t}`}>{t}</a>{i < tags.length - 1 && ', '}</>)}</dd></div>

@@ -2,7 +2,8 @@
 // Faixa de aberturas: uma abertura por texto, em ordem de publicação, em uma ou mais fileiras.
 // Usada no topo das páginas de seção e do arquivo. A luz do pôr do sol passa pelas aberturas
 // (The Sunset Wall Rule): um único degradê em diagonal atravessa a faixa inteira.
-import { formaD, NOME_SECAO, type Secao } from '../lib/formas';
+import { formaD, type Secao } from '../lib/formas';
+import { getSeriesCategoria, rotuloCategoria } from '../lib/data';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -20,6 +21,7 @@ interface Props {
 
 const { posts, id, colunas, fechados = 0, foco } = Astro.props;
 const M = 80;
+const categorias = await getSeriesCategoria();
 
 const mes = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 const itens = posts.map((p, i) => {
@@ -28,7 +30,7 @@ const itens = posts.map((p, i) => {
   return {
     id: p.id,
     secao: p.data.secao as Secao,
-    rotulo: `${p.data.titulo} (${NOME_SECAO[p.data.secao as Secao]}, ${mes.format(new Date(p.data.publicado_em))})`,
+    rotulo: `${p.data.titulo} (${rotuloCategoria(p, categorias)}, ${mes.format(new Date(p.data.publicado_em))})`,
     ano: ano !== anterior ? String(ano) : '',
   };
 });

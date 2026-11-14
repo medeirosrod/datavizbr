@@ -4,9 +4,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Faixa from '../components/Faixa.astro';
 import Selo from '../components/Selo.astro';
 import AutorNome from '../components/AutorNome.astro';
-import { getPosts, porData } from '../lib/data';
-import { formaD, NOME_SECAO, SECOES, type Secao } from '../lib/formas';
+import { ehDeSerieCategoria, getPosts, getSeriesCategoria, porData, rotuloCategoria } from '../lib/data';
+import { formaD, SECOES, type Secao } from '../lib/formas';
 
+const categorias = await getSeriesCategoria();
 const recentes = (await getPosts()).sort(porData); // do mais recente ao mais antigo
 const antigos = [...recentes].reverse();
 const anoDe = (p: (typeof recentes)[number]) => new Date(p.data.publicado_em).getUTCFullYear();
@@ -15,7 +16,7 @@ const mesDe = new Intl.DateTimeFormat('pt-BR', { month: 'long', timeZone: 'UTC' 
 const grupos = new Map<number, typeof recentes>();
 recentes.forEach((p) => grupos.set(anoDe(p), [...(grupos.get(anoDe(p)) ?? []), p]));
 const anos = [...grupos.keys()];
-const contagem = Object.fromEntries(SECOES.map((s) => [s, recentes.filter((p) => p.data.secao === s).length]));
+const contagem = Object.fromEntries(SECOES.map((s) => [s, recentes.filter((p) => p.data.secao === s && !ehDeSerieCategoria(p, categorias)).length]));
 ---
 
 <BaseLayout title="Arquivo" description="Todos os textos publicados no datavizbr, de 2016 até hoje." tema="escuro">
@@ -67,11 +68,11 @@ const contagem = Object.fromEntries(SECOES.map((s) => [s, recentes.filter((p) =>
               {lista.map((p) => (
                 <li
                   data-id={p.id}
-                  data-secao={p.data.secao}
+                  data-secao={ehDeSerieCategoria(p, categorias) ? 'serie' : p.data.secao}
                   data-busca={`${p.data.titulo} ${p.data.descricao ?? ''} ${p.data.autores.map((a) => a.id).join(' ')} ${(p.data.tags ?? []).join(' ')}`.toLowerCase()}
                 >
                   <a class="linha" href={`/posts/${p.id}`}>
-                    <span class="linha-selo"><Selo secao={p.data.secao as Secao} semNome tamanho={18} /><span class="sr">{NOME_SECAO[p.data.secao as Secao]}</span></span>
+                    <span class="linha-selo"><Selo secao={p.data.secao as Secao} semNome tamanho={18} /><span class="sr">{rotuloCategoria(p, categorias)}</span></span>
                     <span class="linha-titulo">{p.data.titulo}</span>
                     <span class="linha-autor"><AutorNome autorId={p.data.autores[0]?.id} /></span>
                     <span class="linha-mes mono">{mesDe.format(new Date(p.data.publicado_em))}</span>

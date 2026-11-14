@@ -9,9 +9,10 @@ import Selo from '../components/Selo.astro';
 import Azulejo from '../components/Azulejo.astro';
 import { SITE } from '../consts';
 import { SECOES, NOME_SECAO, DESCRICAO_SECAO, type Secao } from '../lib/formas';
-import { contarPostsPorAutor, formatarMesAno, getPosts, getSeries, porData } from '../lib/data';
+import { contarPostsPorAutor, ehDeSerieCategoria, formatarMesAno, getPosts, getSeries, getSeriesCategoria, porData, rotuloCategoria } from '../lib/data';
 
 const todos = await getPosts();
+const categorias = await getSeriesCategoria();
 const emOrdem = [...todos].sort((a, b) => a.data.publicado_em.valueOf() - b.data.publicado_em.valueOf());
 
 // Autores: nomes para a parede, fotos e contagens para o muro
@@ -36,7 +37,7 @@ const destaques = marcados.length > 0 ? marcados : [...todos].sort(porData).slic
 // Seções: contagem e texto mais recente
 const porSecao = Object.fromEntries(
   SECOES.map((s) => {
-    const lista = todos.filter((p) => p.data.secao === s).sort(porData);
+    const lista = todos.filter((p) => p.data.secao === s && !ehDeSerieCategoria(p, categorias)).sort(porData);
     return [s, { total: lista.length, recente: lista[0] }];
   }),
 ) as Record<Secao, { total: number; recente: (typeof todos)[number] }>;
@@ -157,7 +158,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
               <time class="data mono" datetime={p.data.publicado_em.toISOString().slice(0, 10)}>{formatarMesAno(p.data.publicado_em)}</time>
               <span class="forma"><Selo secao={p.data.secao as Secao} semNome tamanho={26} /></span>
               <span class="titulo">{p.data.titulo}</span>
-              <span class="secao-nome">{NOME_SECAO[p.data.secao as Secao]}</span>
+              <span class="secao-nome">{rotuloCategoria(p, categorias)}</span>
               <span class="mini">
                 {p.data.capa ? <img src={p.data.capa.src} alt="" loading="lazy" /> : <Azulejo secao={p.data.secao as Secao} colunas={3} linhas={2} />}
               </span>
