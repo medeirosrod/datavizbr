@@ -34,7 +34,7 @@ const pontos = geo.sedes
   rotulo="Mapa do Nordeste com a sede das 20 universidades federais da região. As dez que existiam até 2001 ficam em capitais ou ao lado delas: São Luís, Teresina, Fortaleza, Natal, João Pessoa, Recife (duas), Maceió, São Cristóvão e Salvador. As dez criadas desde 2002 têm sede fora das capitais: Campina Grande, Petrolina, Cruz das Almas, Mossoró, Redenção, Juazeiro do Norte, Barreiras, Itabuna, Garanhuns e Parnaíba."
   fonte="Fonte: leis de criação das universidades (2002 a 2018). Elaboração: datavizbr. O ponto marca a sede; os outros câmpus não aparecem."
 >
-  <svg x="0" y="0" width="480" height="380" overflow="hidden">
+  <svg class="recorte" x="0" y="0" width="480" height="380">
   <g class="sedes" transform={`translate(${OX} ${OY})`}>
     {Object.values(geo.ne.viz).map((d) => <path d={d} class="vizinho" />)}
     {Object.values(geo.ne.uf).map((d) => <path d={d} class="estado" />)}
@@ -69,6 +69,9 @@ const pontos = geo.sedes
 </Moldura>
 
 <style>
+  /* O mapa recorta nas bordas do gráfico: sem isso os estados vizinhos (quase brancos) passam do cartão e cobrem o texto ao lado.
+     A moldura deixa todo <svg> com overflow visível, e o CSS ganha do atributo, então o recorte precisa ser por classe. */
+  .recorte { overflow: hidden; }
   .estado { fill: var(--g-claro); stroke: #fff; stroke-width: 1.2; }
   .vizinho { fill: #f6f2f8; stroke: #fff; stroke-width: 1; }
   .antiga circle, .l-antiga { fill: var(--g-tinta); stroke: #fff; stroke-width: 1.5; }
