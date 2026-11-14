@@ -1,0 +1,81 @@
+---
+// Passos 1 e 2: sede das 20 universidades federais do Nordeste.
+// Etapa 1: só as 10 que existiam até 2001. Etapa 2: entram as 10 criadas desde 2002.
+import Moldura from '../Moldura.astro';
+import geo from '../../../data/universidades/geo.json';
+
+const OX = 6;
+const OY = 16;
+// posição do rótulo de cada ponto: [dx, dy, âncora]
+const pos: Record<string, [number, number, string]> = {
+  UFMA: [0, -9, 'middle'], UFPI: [-8, 4, 'end'], UFC: [6, -7, 'start'], UFRN: [8, 4, 'start'], UFPB: [8, 2, 'start'],
+  UFPE: [8, 6, 'start'], UFAL: [8, 6, 'start'], UFS: [8, 6, 'start'], UFBA: [8, 8, 'start'],
+  UFCG: [-8, -3, 'end'], Univasf: [-8, 4, 'end'], UFRB: [-8, 2, 'end'], Ufersa: [-7, 12, 'end'], Unilab: [-8, 6, 'end'],
+  UFCA: [-8, 4, 'end'], Ufob: [0, -9, 'middle'], UFSB: [8, 4, 'start'], Ufape: [-8, 6, 'end'], UFDPar: [4, -9, 'middle'],
+};
+const pontos = geo.sedes
+  .filter((s) => s.sigla !== 'UFRPE')
+  .map((s, i) => {
+    const [dx, dy, anc] = pos[s.sigla];
+    return {
+      ...s,
+      rotulo: s.sigla === 'UFPE' ? 'UFPE · UFRPE' : s.sigla,
+      nova: s.ano !== null,
+      tx: s.x + dx,
+      ty: s.y + dy,
+      anc,
+      d: 0.15 + i * 0.03,
+    };
+  });
+---
+
+<Moldura
+  titulo="Onde fica a sede de cada universidade federal do Nordeste"
+  rotulo="Mapa do Nordeste com a sede das 20 universidades federais da região. As dez que existiam até 2001 ficam em capitais ou ao lado delas: São Luís, Teresina, Fortaleza, Natal, João Pessoa, Recife (duas), Maceió, São Cristóvão e Salvador. As dez criadas desde 2002 têm sede fora das capitais: Campina Grande, Petrolina, Cruz das Almas, Mossoró, Redenção, Juazeiro do Norte, Barreiras, Itabuna, Garanhuns e Parnaíba."
+  fonte="Fonte: leis de criação das universidades (2002 a 2018). Elaboração: datavizbr. O ponto marca a sede; os outros câmpus não aparecem."
+>
+  <g class="sedes" transform={`translate(${OX} ${OY})`}>
+    {Object.values(geo.ne.viz).map((d) => <path d={d} class="vizinho" />)}
+    {Object.values(geo.ne.uf).map((d) => <path d={d} class="estado" />)}
+    {pontos.map((p) => (
+      <g class:list={[p.nova ? 'nova' : 'antiga']}>
+        <circle cx={p.x} cy={p.y} r={p.nova ? 6 : 5} />
+        <text x={p.tx} y={p.ty} text-anchor={p.anc} font-size="12">{p.rotulo}</text>
+      </g>
+    ))}
+  </g>
+
+  <g class="legenda">
+    <circle cx="336" cy="18" r="5" class="l-antiga" />
+    <text x="346" y="22" font-size="12">já existia em 2001</text>
+    <g class="nova">
+      <circle cx="336" cy="38" r="6" class="l-nova" />
+      <text x="346" y="42" font-size="12">criada desde 2002</text>
+    </g>
+  </g>
+
+  <g class="so1">
+    <text class="t-forte t-fim" x="476" y="318" font-size="54">10</text>
+    <text class="t-fim" x="476" y="340">federais em 2001, todas</text>
+    <text class="t-fim" x="476" y="358">na capital ou ao lado dela</text>
+  </g>
+  <g class="nova">
+    <text class="t-laranja t-fim" x="476" y="318" font-size="54">+10</text>
+    <text class="t-fim" x="476" y="340">desde 2002, todas com</text>
+    <text class="t-fim" x="476" y="358">sede fora das capitais</text>
+  </g>
+</Moldura>
+
+<style>
+  .estado { fill: #ebe4f0; stroke: #fff; stroke-width: 1.2; }
+  .vizinho { fill: #f3eff6; stroke: #fff; stroke-width: 1; }
+  .antiga circle, .l-antiga { fill: var(--g-tinta); stroke: #fff; stroke-width: 1.5; }
+  .nova circle, .l-nova { fill: var(--g-laranja); stroke: #fff; stroke-width: 1.5; }
+  .antiga text { fill: var(--g-tinta); }
+  .sedes .nova text { fill: #9a4a0d; font-weight: 700; }
+  .nova, .so1 { transition: opacity 0.5s ease; }
+  .so1 { opacity: 0; }
+  /* etapa 1: só as dez antigas */
+  :global([data-etapa='1']) .nova { opacity: 0; }
+  :global([data-etapa='1']) .so1 { opacity: 1; }
+</style>

@@ -1,0 +1,49 @@
+---
+// Passo 7: programas de pós-graduação nota 7 na Capes (quadrienal 2021–2024, resultado parcial).
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/universidades/dados.json';
+
+const n7 = dados.nota7;
+const ce = [...Array(n7.ceara.UFC).fill('UFC'), ...Array(n7.ceara.Uece).fill('Uece')];
+const pe = Array(n7.ufpe[1]).fill('UFPE');
+const esc = 380 / n7.brasil[1];
+const pct = ((n7.brasil[1] / n7.avaliados) * 100).toFixed(1).replace('.', ',');
+---
+
+<Moldura
+  titulo="Programas de pós-graduação com nota 7, a máxima da Capes"
+  rotulo={`O Ceará tem 7 programas com nota 7 na avaliação quadrienal 2021–2024 da Capes, seis na UFC e um na Uece. A UFPE, em Pernambuco, tem 6. No Brasil, os programas nota 7 passaram de 260 para 326, o que equivale a ${pct}% dos 4.555 avaliados.`}
+  fonte="Fonte: Capes, avaliação quadrienal 2021–2024, resultado parcial (antes dos recursos); UFPE; O Povo. Elaboração: datavizbr."
+>
+  <text class="t-forte" x="0" y="18" font-size="15">Ceará</text>
+  {ce.map((u, i) => (
+    <g class="rv rv-fade" style={`--d:${i * 0.05};--s:0.08`}>
+      <circle cx={22 + i * 50} cy="52" r="19" class:list={[u === 'Uece' ? 'uece' : 'cheio']} />
+      <text class="t-meio" x={22 + i * 50} y="90" font-size="11.5">{u}</text>
+    </g>
+  ))}
+  <text class="rv rv-fade t-laranja t-fim" style="--d:0.4;--s:0.1" x="476" y="66" font-size="44">7</text>
+
+  <text class="t-forte" x="0" y="130" font-size="15">Pernambuco</text>
+  {pe.map((u, i) => (
+    <g class="rv rv-fade" style={`--d:${0.45 + i * 0.05};--s:0.08`}>
+      <circle cx={22 + i * 50} cy="164" r="19" class="cheio" />
+      <text class="t-meio" x={22 + i * 50} y="202" font-size="11.5">{u}</text>
+    </g>
+  ))}
+  <text class="rv rv-fade t-laranja t-fim" style="--d:0.8;--s:0.1" x="476" y="178" font-size="44">6</text>
+
+  <text class="t-forte" x="0" y="250" font-size="15">Brasil: programas nota 7</text>
+  <text x="0" y="280" font-size="12">2017–2020</text>
+  <rect class="rv rv-barra-h" style="--d:0.82;--s:0.1" x="70" y="266" width={n7.brasil[0] * esc * 0.85} height="20" rx="3" fill="var(--g-cinza)" />
+  <text x={76 + n7.brasil[0] * esc * 0.85} y="281" font-size="13">{n7.brasil[0]}</text>
+  <text x="0" y="308" font-size="12">2021–2024</text>
+  <rect class="rv rv-barra-h" style="--d:0.86;--s:0.12" x="70" y="294" width={n7.brasil[1] * esc * 0.85} height="20" rx="3" fill="var(--g-laranja)" />
+  <text class="t-laranja" x={76 + n7.brasil[1] * esc * 0.85} y="309" font-size="14">{n7.brasil[1]}</text>
+  <text x="0" y="340" font-size="12">{pct}% dos 4.555 programas avaliados no país chegaram à nota máxima.</text>
+</Moldura>
+
+<style>
+  .cheio { fill: var(--g-laranja); }
+  .uece { fill: #fff; stroke: var(--g-laranja); stroke-width: 4; }
+</style>

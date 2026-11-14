@@ -1,0 +1,32 @@
+---
+// Passo 5: os 30 maiores depositantes residentes de patentes de invenção, 2023 (INPI).
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/universidades/dados.json';
+
+const esc = 300 / 125;
+const barras = (dados.inpi2023 as [number, string, number, number][]).map(([p, nome, n, ne], i) => ({
+  p, nome, n, ne: ne === 1, y: 2 + i * 12.4, d: i * 0.022,
+  rotulo: ne === 1 || p <= 3,
+}));
+---
+
+<Moldura
+  titulo="Os 30 maiores depositantes de patentes de invenção do Brasil em 2023"
+  rotulo="Gráfico de barras com os 30 maiores depositantes residentes de patentes de invenção em 2023. A Petrobras lidera com 125 pedidos, seguida pela UFCG com 101 e pela FCA Fiat Chrysler com 58. Oito universidades federais do Nordeste estão na lista: UFCG (2ª), UFS (9ª), UFMA (13ª), UFC (15ª), UFPE (16ª), UFPB (19ª), UFRPE (20ª) e UFPI (26ª)."
+  fonte="Fonte: INPI, Ranking de Depositantes Residentes 2023. Elaboração: datavizbr. Laranja: universidades do Nordeste."
+>
+  {barras.map((b) => (
+    <g>
+      <text class:list={['t-fim', b.ne ? 't-laranja' : '']} x="22" y={b.y + 9} font-size="10">{b.p}º</text>
+      <rect class="rv rv-barra-h" style={`--d:${b.d};--s:0.25`} x="28" y={b.y} width={b.n * esc} height="9.4" rx="2" fill={b.ne ? 'var(--g-laranja)' : 'var(--g-cinza)'} />
+      {b.rotulo && (
+        <text class:list={['rv rv-fade', b.ne ? 't-laranja' : 't-forte']} style={`--d:${b.d + 0.22};--s:0.08`} x={34 + b.n * esc} y={b.y + 9} font-size="11.5">{b.nome} · {b.n}</text>
+      )}
+    </g>
+  ))}
+  <g class="rv rv-fade" style="--d:0.85;--s:0.1">
+    <text class="t-laranja t-fim" x="476" y="240" font-size="54">8</text>
+    <text class="t-fim" x="476" y="262">das 30 são universidades</text>
+    <text class="t-fim" x="476" y="280">federais do Nordeste</text>
+  </g>
+</Moldura>

@@ -1,0 +1,20 @@
+{
+  "mec": { "universidades": [45, 63], "campi": [148, 321], "municipios": [114, 275] },
+  "inpi2023": [
+    [1, "Petrobras", 125, 0], [2, "UFCG", 101, 1], [3, "FCA Fiat Chrysler", 58, 0], [4, "UFMG", 48, 0],
+    [5, "Instituto Hercílio Randon", 43, 0], [6, "CNH Industrial", 40, 0], [7, "Unicamp", 40, 0], [8, "Robert Bosch", 38, 0],
+    [9, "UFS", 37, 1], [10, "IF Catarinense", 36, 0], [11, "UFPel", 35, 0], [12, "UEL", 33, 0], [13, "UFMA", 33, 1],
+    [14, "UFV", 32, 0], [15, "UFC", 31, 1], [16, "UFPE", 30, 1], [17, "Unesp", 28, 0], [18, "USP", 26, 0],
+    [19, "UFPB", 24, 1], [20, "UFRPE", 24, 1], [21, "Vale", 23, 0], [22, "WEG", 23, 0], [23, "CPQD", 21, 0],
+    [24, "UFJF", 21, 0], [25, "UFPA", 21, 0], [26, "UFPI", 21, 1], [27, "UFRJ", 21, 0],
+    [28, "Artur Camposo Pereira", 20, 0], [29, "UFMS", 19, 0], [30, "UFU", 19, 0]
+  ],
+  "evolucao": {
+    "anos": [2023, 2024, 2025],
+    "series": {
+      "UFCG": [101, 86, 84], "UFRPE": [24, 43, 62], "UFPB": [24, 76, 52], "UFPE": [30, 50, 50], "UFS": [37, 44, 49],
+      "UFC": [31, 45, 44], "UFPI": [21, 33, 40], "UFRN": [16, 19, 38], "UFMA": [33, 27, 33]
+    }
+  },
+  "nota7": { "brasil": [260, 326], "avaliados": 4555, "ufpe": [4, 6], "ceara": { "UFC": 6, "Uece": 1 } }
+}

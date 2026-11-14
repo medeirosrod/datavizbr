@@ -1,0 +1,132 @@
+---
+titulo: "A universidade saiu da capital"
+subtitulo: "Das 20 universidades federais do Nordeste, dez foram criadas desde 2002, todas com sede fora das capitais. O que os dados mostram sobre patentes e pós-graduação na região."
+descricao: "Dez das 20 universidades federais do Nordeste nasceram desde 2002, todas fora das capitais. Patentes, pós-graduação e interiorização em seis gráficos."
+autores:
+  - rodrigo-medeiros
+publicado_em: 2026-11-16
+secao: panorama
+serie: nordeste-em-dados
+ordem_na_serie: 2
+tags: ["Dados", "Dataviz", "Série"]
+capa: ../../assets/blog/a-universidade-saiu-da-capital/capa.png
+capa_alt: "Mapa do Nordeste com a sede das 20 universidades federais da região. As dez mais antigas, em tinta escura, ficam nas capitais do litoral. As dez criadas desde 2002, em laranja, estão espalhadas pelo interior."
+rascunho: true
+---
+
+import Scrolly from '../../components/scrolly/Scrolly.astro';
+import Passo from '../../components/scrolly/Passo.astro';
+
+No [vídeo que deu origem a esta série](https://www.instagram.com/reel/De2HoRHiS0S/), o economista Gil do Vigor pede que o Nordeste seja reconhecido "como um povo que trabalha, que estuda, que desenvolve". Um dos exemplos que ele dá é a interiorização das universidades federais, e a cidade que ele cita é Serra Talhada, no sertão de Pernambuco.
+
+Eu dou aula na UFRPE, a universidade que tem um câmpus em Serra Talhada. Este capítulo de **Nordeste em dados** parte dessa fala e faz três perguntas: para onde as universidades federais foram, o que elas produzem hoje em patentes e como a pós-graduação da região aparece na avaliação nacional.
+
+<Scrolly>
+
+<Passo grafico="sedes-nordeste" etapa={1} estatico={false}>
+
+## Em 2001, dez universidades, todas no litoral
+
+Em 2001, o Nordeste tinha **dez universidades federais**. Nove tinham sede em capitais: São Luís, Teresina, Fortaleza, Natal, João Pessoa, Maceió, Salvador e duas no Recife. A décima, a UFS, fica em São Cristóvão, vizinha de Aracaju.
+
+Quem morava no sertão ou no agreste e queria uma universidade federal precisava, quase sempre, mudar para a capital.
+
+</Passo>
+
+<Passo grafico="sedes-nordeste" etapa={2}>
+
+## Dez universidades novas, nenhuma em capital
+
+De 2002 para cá, a região ganhou **mais dez universidades federais**. Todas têm sede fora das capitais: Campina Grande, Petrolina, Cruz das Almas, Mossoró, Redenção, Juazeiro do Norte, Barreiras, Itabuna, Garanhuns e Parnaíba.
+
+Nem todas nasceram do zero. A UFCG foi desmembrada da UFPB em 2002, a Ufersa veio de uma escola federal de agricultura que já existia em Mossoró, e a Ufape, em Garanhuns, era uma unidade da UFRPE até 2018. O que mudou foi o endereço da reitoria: metade das universidades federais da região passou a ser dirigida do interior.
+
+O mapa mostra só as sedes. Cada universidade tem outros câmpus, e as antigas também foram para o interior, como se vê a seguir.
+
+</Passo>
+
+<Passo grafico="expansao-brasil" etapa={3}>
+
+## De 114 para 275 municípios
+
+O movimento foi nacional. Segundo o Ministério da Educação, em 2003 o país tinha 45 universidades federais, com 148 câmpus em **114 municípios**. O plano de expansão previa chegar a 2014 com 63 universidades e 321 câmpus em **275 municípios**. Em 2013, a Secretaria de Educação Superior já registrava as 63 universidades e os 321 câmpus.
+
+O número de universidades cresceu 40%. O de municípios atendidos mais que dobrou. A expansão foi menos sobre criar instituições e mais sobre levar câmpus a cidades que não tinham nenhum. Entre 2003 e 2013, as matrículas presenciais de graduação nas federais foram de 527,7 mil para 932,3 mil.
+
+</Passo>
+
+<Passo grafico="pernambuco-campi" etapa={4}>
+
+## Pernambuco, de uma cidade para nove
+
+Pernambuco mostra como isso aconteceu dentro de um estado. Em 2001, universidade federal era só no Recife, com a UFPE e a UFRPE.
+
+A Univasf foi criada por lei em 2002, com sede em Petrolina, e começou as aulas em 2004. A UFRPE abriu unidades em Garanhuns (2005) e em Serra Talhada (2006), e depois no Cabo de Santo Agostinho (2014) e em Belo Jardim (2017). A UFPE chegou a Caruaru e a Vitória de Santo Antão. A Univasf abriu um câmpus em Salgueiro. Em 2018, a unidade de Garanhuns virou uma universidade própria, a Ufape.
+
+Hoje são **nove cidades** pernambucanas com câmpus de universidade federal, do litoral ao sertão do São Francisco. A conta não inclui os institutos federais nem a rede estadual da UPE, que também está no interior.
+
+</Passo>
+
+<Passo grafico="patentes-30" etapa={5}>
+
+## O 2º lugar em patentes fica em Campina Grande
+
+Uma forma de medir o que uma universidade produz é contar os pedidos de patente de invenção que ela deposita no Instituto Nacional da Propriedade Industrial (INPI). No ranking de 2023, o primeiro lugar foi da Petrobras, com 125 pedidos. O segundo foi da **UFCG, com 101**, à frente de montadoras, da USP e da Unicamp.
+
+Não foi um caso isolado. Entre os 30 maiores depositantes do país naquele ano, **oito eram universidades federais do Nordeste**: UFCG, UFS, UFMA, UFC, UFPE, UFPB, UFRPE e UFPI. A UFCG tem sede em Campina Grande, no agreste da Paraíba, a cerca de 120 quilômetros da capital.
+
+</Passo>
+
+<Passo grafico="patentes-evolucao" etapa={6}>
+
+## O que mudou até 2025
+
+O INPI já publicou os rankings de 2024 e 2025. A UFCG continua entre os primeiros: foi 3ª em 2024, com 86 pedidos, e 4ª em 2025, com 84. A liderança passou para a Stellantis, e a UFMG subiu para o terceiro lugar.
+
+Entre as universidades do Nordeste, a que mais cresceu foi a **UFRPE: de 24 pedidos em 2023 para 62 em 2025**, o que a levou do 20º para o 7º lugar no país. A UFPB chegou a ser a 4ª em 2024. No ranking de 2025, são nove universidades federais do Nordeste entre os 30 maiores depositantes, com a entrada da UFRN.
+
+Pedido de patente não é patente concedida, e o número varia bastante de um ano para o outro. O que a série de três anos mostra é que a presença da região no topo da lista se repete.
+
+</Passo>
+
+<Passo grafico="nota-7" etapa={7}>
+
+## Nota máxima na pós-graduação
+
+A Capes avalia os programas de mestrado e doutorado do país a cada quatro anos, com notas que vão até 7. A nota 7 indica desempenho de padrão internacional. No resultado parcial do ciclo 2021–2024, divulgado no começo de 2026, **326 dos 4.555 programas avaliados** receberam nota 7, ou 7,2% do total. No ciclo anterior eram 260.
+
+O Ceará tem **sete programas nota 7**: seis na UFC e um na Uece, que é estadual. Dois deles, Farmacologia e Enfermagem, são os únicos nota 7 de suas áreas fora de São Paulo, segundo levantamento do jornal O Povo. Em Pernambuco, a UFPE passou de quatro para **seis programas nota 7**: Ciências da Computação, Engenharia de Produção e Física mantiveram a nota, e Biologia Animal, Ciências Biológicas e Serviço Social subiram.
+
+Os números são do resultado parcial, antes do julgamento dos recursos. Este texto reúne o que foi possível conferir para o Ceará e para Pernambuco; não é a lista completa da região.
+
+</Passo>
+
+</Scrolly>
+
+## Quem ficou para estudar
+
+Os rankings medem o topo. A interiorização aparece também na base, no número de pessoas que conseguem estudar sem sair do estado. Segundo levantamento do jornal A União com dados do Censo da Educação Superior de 2024, a Paraíba tem 2.999 matrículas em cursos presenciais para cada 100 mil habitantes. É a maior taxa do Nordeste e a segunda do país, atrás apenas do Distrito Federal.
+
+Cada câmpus novo é também um lugar de trabalho. Professores, técnicos e pesquisadores passaram a fazer carreira em cidades onde antes não havia essa opção.
+
+## O que este texto não mostra
+
+Três limites que vale dizer:
+
+- **O mapa é de sedes, não de câmpus.** Um mapa completo da interiorização precisa de todos os câmpus de todas as universidades, com o ano de abertura de cada um. Essa base ainda não está montada aqui.
+- **Só universidades federais.** Institutos federais e universidades estaduais, como a UPE, a UEPB e a Uece, também levaram ensino superior ao interior. Elas aparecem neste texto só quando entram nos rankings.
+- **Patente e nota não são tudo.** São duas medidas que têm dado público e comparável. Extensão, formação de professores e impacto na economia das cidades ficam para outro capítulo.
+
+## Como fizemos
+
+- **Sedes das universidades:** leis de criação de cada instituição. As dez mais recentes são UFCG e Univasf (2002), UFRB e Ufersa (2005), Unilab (2010), UFCA, Ufob e UFSB (2013), Ufape e UFDPar (2018).
+- **Expansão no país:** Ministério da Educação, *Análise sobre a Expansão das Universidades Federais 2003 a 2012*, e apresentação da Secretaria de Educação Superior à Comissão de Educação da Câmara dos Deputados, em 2015. Os números de 2014 são os previstos no relatório de 2012.
+- **Pernambuco:** Relato Institucional da UFRPE (2019) para as unidades de Garanhuns, Serra Talhada, Cabo de Santo Agostinho e Belo Jardim; Lei 10.473/2002 para a Univasf.
+- **Patentes:** INPI, Rankings de Depositantes Residentes de Patentes de Invenção de 2023, 2024 e 2025. O número é de pedidos depositados no ano.
+- **Pós-graduação:** resultado parcial da Avaliação Quadrienal 2021–2024 da Capes, divulgado em fevereiro de 2026; notícia da UFPE de janeiro de 2026; reportagem do jornal O Povo de 1º de abril de 2026.
+
+## O que vem a seguir
+
+O próximo capítulo é sobre as redações nota mil do Enem. Depois, as olimpíadas científicas. A regra continua a mesma: dado público, fonte citada e método aberto.
+
+Se a sua universidade ficou de fora e você tem o dado, escreva para o datavizbr.

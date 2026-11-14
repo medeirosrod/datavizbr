@@ -1,0 +1,31 @@
+---
+// Passo 3: a expansão das federais no país, 2003 x 2014 (MEC).
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/universidades/dados.json';
+
+const linhas = [
+  { nome: 'Municípios com câmpus', v: dados.mec.municipios },
+  { nome: 'Câmpus', v: dados.mec.campi },
+  { nome: 'Universidades', v: dados.mec.universidades },
+].map((l, i) => ({ ...l, y: 20 + i * 112, d: i * 0.22, vezes: (l.v[1] / l.v[0]).toFixed(1).replace('.', ',') }));
+const esc = 380 / 321;
+---
+
+<Moldura
+  titulo="A rede de universidades federais no Brasil, 2003 e 2014"
+  rotulo="Três pares de barras comparando a rede de universidades federais do Brasil em 2003 e 2014. Os municípios com câmpus passaram de 114 para 275, os câmpus de 148 para 321 e as universidades de 45 para 63."
+  fonte="Fonte: MEC, Análise sobre a Expansão das Universidades Federais 2003 a 2012 (o número de 2014 é o previsto no relatório). Elaboração: datavizbr."
+>
+  {linhas.map((l) => (
+    <g>
+      <text class="t-forte" x="0" y={l.y} font-size="15">{l.nome}</text>
+      <text x="0" y={l.y + 30} font-size="12">2003</text>
+      <rect class="rv rv-barra-h" style={`--d:${l.d};--s:0.25`} x="40" y={l.y + 14} width={l.v[0] * esc} height="22" rx="3" fill="var(--g-cinza)" />
+      <text class="rv rv-fade" style={`--d:${l.d + 0.2};--s:0.1`} x={46 + l.v[0] * esc} y={l.y + 30} font-size="14">{l.v[0]}</text>
+      <text x="0" y={l.y + 58} font-size="12">2014</text>
+      <rect class="rv rv-barra-h" style={`--d:${l.d + 0.12};--s:0.3`} x="40" y={l.y + 42} width={l.v[1] * esc} height="22" rx="3" fill="var(--g-laranja)" />
+      <text class="rv rv-fade t-laranja" style={`--d:${l.d + 0.38};--s:0.1`} x={46 + l.v[1] * esc} y={l.y + 59} font-size="15">{l.v[1]}</text>
+      <text class="rv rv-fade" style={`--d:${l.d + 0.42};--s:0.1`} x="0" y={l.y + 84} font-size="12">{l.vezes} vezes o número de 2003</text>
+    </g>
+  ))}
+</Moldura>
