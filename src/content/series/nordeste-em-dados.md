@@ -8,7 +8,6 @@ layout: "destaque"
 como_categoria: true
 capa: ./_capas/nordeste-em-dados.gif
 proximos:
-  - "A interiorização das universidades federais"
   - "As redações nota mil do Enem"
   - "As olimpíadas científicas"
 ---
