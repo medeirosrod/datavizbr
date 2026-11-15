@@ -1,0 +1,46 @@
+---
+// Passo 6: diferença de média por competência, Nordeste menos resto do país (pontos, escala de 0 a 200).
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/enem/dados.json';
+
+const comps = ['C1 · Norma culta', 'C2 · Tema e repertório', 'C3 · Argumentação', 'C4 · Coesão', 'C5 · Intervenção'];
+const X0 = 190, X1 = 460;
+const x = (v: number) => X0 + ((v + 5.5) / 5.5) * (X1 - X0);
+const fmt = (v: number) => v.toFixed(1).replace('.', ',');
+const anos = ['2013', '2024', '2025'] as const;
+const linhas = comps.map((nome, i) => ({
+  nome, y: 50 + i * 56,
+  v13: dados.comp_dif['2013'][i], v24: dados.comp_dif['2024'][i], v25: dados.comp_dif['2025'][i],
+}));
+---
+
+<Moldura
+  titulo="Média por competência: Nordeste menos resto do país, em pontos"
+  rotulo="Gráfico de pontos com a diferença de média entre o Nordeste e o resto do país em cada competência da redação, em pontos de uma escala de 0 a 200. Em 2013 todas eram negativas, de -1,2 a -4,7. Em 2024, C1 era -2,8, C2 -0,7, C3 -1,5, C4 -0,2 e C5 -0,4. Em 2025, C1 -3,1, C2 -2,4, C3 -1,5, C4 -1,0 e C5 -0,2."
+  fonte="Fonte: Inep, microdados do Enem; redações válidas; estado do local da prova. Elaboração: datavizbr. Escala de cada competência: 0 a 200 pontos."
+>
+  <line x1={x(0)} x2={x(0)} y1="22" y2="318" class="zero" />
+  {[-4, -2, 0].map((v) => <text class="t-meio t-num" x={x(v)} y="346" font-size="11">{v}</text>)}
+  <text class="t-num" x={X0} y="364" font-size="10.5">← Nordeste abaixo</text>
+  <text class="t-fim t-num" x={X1} y="364" font-size="10.5">igual →</text>
+  {linhas.map((l) => (
+    <g>
+      <text class:list={['t-fim', { 't-laranja': l.nome.startsWith('C1') }]} x="180" y={l.y + 4} font-size="12.5">{l.nome}</text>
+      <line x1={x(Math.min(l.v13, l.v24, l.v25))} x2={x(Math.max(l.v13, l.v24, l.v25))} y1={l.y} y2={l.y} class="fio" />
+      <circle cx={x(l.v13)} cy={l.y} r="6" fill="var(--g-lilas)" />
+      <circle cx={x(l.v25)} cy={l.y} r="5.5" class="aberto" />
+      <circle cx={x(l.v24)} cy={l.y} r="6" fill="var(--g-laranja)" />
+    </g>
+  ))}
+  <g font-size="12">
+    <circle cx="196" cy="22" r="5" fill="var(--g-lilas)" /><text x="206" y="26">2013</text>
+    <circle cx="262" cy="22" r="5" fill="var(--g-laranja)" /><text x="272" y="26">2024</text>
+    <circle cx="328" cy="22" r="5" class="aberto" /><text x="338" y="26">2025</text>
+  </g>
+</Moldura>
+
+<style>
+  .zero { stroke: var(--g-tinta); stroke-width: 1.5; }
+  .fio { stroke: var(--g-cinza); stroke-width: 4; stroke-linecap: round; }
+  .aberto { fill: #fff; stroke: var(--g-roxo); stroke-width: 2.5; }
+</style>

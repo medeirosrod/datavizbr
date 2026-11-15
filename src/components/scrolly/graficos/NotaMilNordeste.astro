@@ -1,0 +1,44 @@
+---
+// Passo 2: fatia do Nordeste nas redações nota mil, ano a ano, com o total ao lado.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/enem/dados.json';
+
+const X0 = 34, X1 = 456;
+const base = 292, topo = 40;
+const x = (i: number) => X0 + (i * (X1 - X0)) / (dados.anos.length - 1);
+const y = (p: number) => base - (p / 80) * (base - topo);
+const fatia = dados.mil_ne.map((n, i) => (100 * n) / dados.mil_br[i]);
+const pts = fatia.map((p, i) => `${x(i).toFixed(1)},${y(p).toFixed(1)}`).join(' ');
+const ult = dados.anos.length - 1;
+const part = dados.part_ne.reduce((a, b) => a + b, 0) / dados.part_ne.length;
+---
+
+<Moldura
+  titulo="Fatia do Nordeste nas redações nota mil, por ano"
+  rotulo="Gráfico de linha com a parte do Nordeste nas redações nota mil do Brasil, de 2013 a 2025. Oscila entre 22% e 43% até 2024 e chega a 70% em 2025, quando foram 7 das 10 redações nota mil. Abaixo de cada ponto, o total de notas mil do país no ano."
+  fonte="Fonte: Inep, microdados do Enem; estado do local da prova. Elaboração: datavizbr. A linha tracejada é a fatia média do Nordeste entre os participantes (34 a 36%)."
+>
+  {[0, 20, 40, 60, 80].map((v) => (
+    <g>
+      <line x1={X0} x2={X1} y1={y(v)} y2={y(v)} class="grade" />
+      <text class="t-fim t-num" x={X0 - 6} y={y(v) + 4} font-size="11">{v}%</text>
+    </g>
+  ))}
+  <line x1={X0} x2={X1} y1={y(part)} y2={y(part)} class="ref" />
+  <polyline class="rv rv-fade" style="--d:0;--s:0.6" points={pts} />
+  {fatia.map((p, i) => (
+    <g>
+      <circle class="rv rv-fade" style={`--d:${i * 0.05};--s:0.1`} cx={x(i)} cy={y(p)} r={i === ult ? 6 : 3.5} fill={i === ult ? 'var(--g-laranja)' : 'var(--g-roxo)'} />
+      <text class="t-meio t-num" x={x(i)} y={base + 18} font-size="10">{dados.mil_br[i]}</text>
+      <text class="t-meio t-num" x={x(i)} y={base + 32} font-size="10">{String(dados.anos[i]).slice(2)}</text>
+    </g>
+  ))}
+  <text class="t-fim t-laranja t-num" x="470" y={y(fatia[ult]) - 12} font-size="14">70% (7 de 10)</text>
+  <text class="t-num" x={X0} y={base + 52} font-size="10.5">notas mil no país, por ano</text>
+</Moldura>
+
+<style>
+  .grade { stroke: var(--lc-hairline, #ddd3e5); stroke-width: 1; }
+  .ref { stroke: var(--g-lilas); stroke-width: 1.5; stroke-dasharray: 4 4; }
+  polyline { fill: none; stroke: var(--g-roxo); stroke-width: 2.5; }
+</style>
