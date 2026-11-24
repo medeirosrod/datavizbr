@@ -1,0 +1,37 @@
+---
+// Passo 5: fatia de redações 900+ nos nove estados do Nordeste em 2025, contra a média do país.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/enem/dados.json';
+
+const nomes: Record<string, string> = {
+  PI: 'Piauí', CE: 'Ceará', PB: 'Paraíba', SE: 'Sergipe', RN: 'Rio Grande do Norte',
+  PE: 'Pernambuco', AL: 'Alagoas', MA: 'Maranhão', BA: 'Bahia',
+};
+const br = dados.pct900_br[dados.pct900_br.length - 1];
+const fmt = (v: number) => v.toFixed(1).replace('.', ',');
+const esc = 280 / 8;
+const lista = Object.entries(dados.uf['2025'] as Record<string, number>)
+  .sort((a, b) => b[1] - a[1])
+  .map(([uf, v], i) => ({ nome: nomes[uf], v, acima: v > br, y: 26 + i * 34, d: i * 0.06 }));
+const xBr = 136 + br * esc;
+---
+
+<Moldura
+  titulo="Redações com 900 pontos ou mais em 2025, estados do Nordeste"
+  rotulo="Gráfico de barras horizontais com a fatia de redações com 900 pontos ou mais em 2025: Sergipe 6,7%, Piauí 6,7%, Ceará 6,3%, Paraíba 6,3%, Rio Grande do Norte 6,0%, Pernambuco 5,2%, Alagoas 5,1%, Maranhão 4,4% e Bahia 4,1%. A média do Brasil é 5,4%. Cinco estados ficam acima dela."
+  fonte="Fonte: Inep, microdados do Enem 2025; redações válidas; estado do local da prova. Elaboração: datavizbr. Laranja: acima da média do Brasil."
+>
+  <line x1={xBr} x2={xBr} y1="12" y2="334" class="ref" />
+  <text class="t-forte t-num" x={xBr + 6} y="10" font-size="12">Brasil {fmt(br)}%</text>
+  {lista.map((b) => (
+    <g>
+      <text class="rv rv-fade t-fim" style={`--d:${b.d};--s:0.1`} x="128" y={b.y + 17} font-size="13">{b.nome}</text>
+      <rect class="rv rv-barra-h" style={`--d:${b.d};--s:0.4`} x="136" y={b.y} width={b.v * esc} height="24" rx="3" fill={b.acima ? 'var(--g-laranja)' : 'var(--g-cinza)'} />
+      <text class:list={['rv rv-fade t-num t-fim', { 't-laranja': b.acima }]} style={`--d:${b.d + 0.3};--s:0.1`} x="476" y={b.y + 17} font-size="13">{fmt(b.v)}%</text>
+    </g>
+  ))}
+</Moldura>
+
+<style>
+  .ref { stroke: var(--g-roxo); stroke-width: 1.5; stroke-dasharray: 4 4; }
+</style>

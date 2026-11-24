@@ -1,0 +1,42 @@
+---
+// Passo 3: fatia de redações com 900 pontos ou mais, Nordeste e resto do país.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/enem/dados.json';
+
+const X0 = 34, X1 = 410;
+const base = 310, topo = 30;
+const x = (i: number) => X0 + (i * (X1 - X0)) / (dados.anos.length - 1);
+const y = (p: number) => base - (p / 12) * (base - topo);
+const linha = (v: number[]) => v.map((p, i) => `${x(i).toFixed(1)},${y(p).toFixed(1)}`).join(' ');
+const ult = dados.anos.length - 1;
+const fmt = (v: number) => v.toFixed(2).replace('.', ',');
+---
+
+<Moldura
+  titulo="Redações com 900 pontos ou mais, % das redações válidas"
+  rotulo="Gráfico de linhas com a fatia de redações com nota 900 ou mais no Nordeste e no resto do país, de 2013 a 2025. As duas linhas sobem juntas, de cerca de 1% em 2013 para 10 a 11% em 2023, e caem juntas para 5,3% em 2025."
+  fonte="Fonte: Inep, microdados do Enem; redações válidas; estado do local da prova. Elaboração: datavizbr."
+>
+  {[0, 4, 8, 12].map((v) => (
+    <g>
+      <line x1={X0} x2={X1} y1={y(v)} y2={y(v)} class="grade" />
+      <text class="t-fim t-num" x={X0 - 6} y={y(v) + 4} font-size="11">{v}%</text>
+    </g>
+  ))}
+  {[0, 6, 12].map((i) => <text class="t-meio t-num" x={x(i)} y={base + 18} font-size="11">{dados.anos[i]}</text>)}
+  <polyline class="rv rv-fade resto" style="--d:0;--s:0.6" points={linha(dados.pct900_resto)} />
+  <polyline class="rv rv-fade ne" style="--d:0.1;--s:0.6" points={linha(dados.pct900_ne)} />
+  <circle cx={x(ult)} cy={y(dados.pct900_ne[ult])} r="5" fill="var(--g-laranja)" />
+  <text class="t-laranja" x={X1 + 8} y={y(dados.pct900_ne[ult]) - 2} font-size="13">Nordeste</text>
+  <text class="t-num t-laranja" x={X1 + 8} y={y(dados.pct900_ne[ult]) + 14} font-size="13">{fmt(dados.pct900_ne[ult])}%</text>
+  <text x={X1 + 8} y={y(dados.pct900_resto[ult]) + 32} font-size="13">resto do país</text>
+  <text class="t-num" x={X1 + 8} y={y(dados.pct900_resto[ult]) + 48} font-size="13">{fmt(dados.pct900_resto[ult])}%</text>
+  <text class="t-forte" x={X0 + 6} y="40" font-size="13">2023: 10,7% das redações válidas</text>
+</Moldura>
+
+<style>
+  .grade { stroke: var(--lc-hairline, #ddd3e5); stroke-width: 1; }
+  polyline { fill: none; }
+  .resto { stroke: var(--g-lilas); stroke-width: 5; }
+  .ne { stroke: var(--g-laranja); stroke-width: 2.5; }
+</style>

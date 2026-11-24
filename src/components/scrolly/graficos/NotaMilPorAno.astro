@@ -1,0 +1,34 @@
+---
+// Passo 1: redações nota mil no Brasil, por ano (2013 a 2025). Calculado dos microdados do Inep.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/enem/dados.json';
+
+const base = 322;
+const esc = 270 / 481;
+const slot = 460 / dados.anos.length;
+const largura = 26;
+const barras = dados.anos.map((ano, i) => {
+  const v = dados.mil_br[i];
+  const destaque = ano === 2013 || ano === 2025;
+  return { ano, v, destaque, x: 10 + i * slot + (slot - largura) / 2, h: Math.max(v * esc, 2), d: i * 0.05 };
+});
+---
+
+<Moldura
+  titulo="Redações nota mil no Enem, Brasil, por ano"
+  rotulo="Gráfico de barras com o número de redações com nota mil no Enem, no Brasil: 481 em 2013, 250, 104, 77, 53, 55, 53, 28, 22, 32, 60 em 2023, 12 em 2024 e 10 em 2025."
+  fonte="Fonte: Inep, microdados do Enem 2013 a 2025; redações válidas, nota 1000. Elaboração: datavizbr."
+>
+  <line x1="0" x2="480" y1={base} y2={base} class="eixo" />
+  {barras.map((b) => (
+    <g>
+      <rect class="rv rv-barra-v" style={`--d:${b.d};--s:0.4`} x={b.x} y={base - b.h} width={largura} height={b.h} rx="3" fill={b.destaque ? 'var(--g-laranja)' : 'var(--g-cinza)'} />
+      <text class:list={['rv rv-fade t-meio t-num', { 't-laranja': b.destaque }]} style={`--d:${b.d + 0.2};--s:0.1`} x={b.x + largura / 2} y={base - b.h - 6} font-size="11.5">{b.v}</text>
+      <text class="t-meio t-num" x={b.x + largura / 2} y={base + 16} font-size="10.5">{String(b.ano).slice(2)}</text>
+    </g>
+  ))}
+</Moldura>
+
+<style>
+  .eixo { stroke: var(--lc-hairline, #ddd3e5); stroke-width: 1; }
+</style>

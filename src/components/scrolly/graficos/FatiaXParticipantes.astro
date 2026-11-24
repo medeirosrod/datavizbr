@@ -1,0 +1,44 @@
+---
+// Passo 4: fatia do Nordeste nas redações 900+ contra a fatia do Nordeste nas redações válidas.
+import Moldura from '../Moldura.astro';
+import dados from '../../../data/enem/dados.json';
+
+const X0 = 34, X1 = 400;
+const base = 300, topo = 40;
+const x = (i: number) => X0 + (i * (X1 - X0)) / (dados.anos.length - 1);
+const y = (p: number) => base - ((p - 26) / 14) * (base - topo);
+const linha = (v: number[]) => v.map((p, i) => `${x(i).toFixed(1)},${y(p).toFixed(1)}`).join(' ');
+const ult = dados.anos.length - 1;
+const fmt = (v: number) => v.toFixed(1).replace('.', ',');
+---
+
+<Moldura
+  titulo="O Nordeste entre os participantes e entre as redações 900+"
+  rotulo="Gráfico de duas linhas de 2013 a 2025. A fatia do Nordeste entre as redações válidas fica entre 33% e 36%. A fatia do Nordeste entre as redações com 900 pontos ou mais sobe de 29,1% em 2013 para 37,8% em 2023 e 37,4% em 2024, e fica em 36,4% em 2025, praticamente igual."
+  fonte="Fonte: Inep, microdados do Enem; redações válidas; estado do local da prova. Elaboração: datavizbr."
+>
+  {[28, 32, 36, 40].map((v) => (
+    <g>
+      <line x1={X0} x2={X1} y1={y(v)} y2={y(v)} class="grade" />
+      <text class="t-fim t-num" x={X0 - 6} y={y(v) + 4} font-size="11">{v}%</text>
+    </g>
+  ))}
+  {[0, 6, 12].map((i) => <text class="t-meio t-num" x={x(i)} y={base + 18} font-size="11">{dados.anos[i]}</text>)}
+  <polyline class="rv rv-fade part" style="--d:0;--s:0.6" points={linha(dados.part_ne)} />
+  <polyline class="rv rv-fade alta" style="--d:0.1;--s:0.6" points={linha(dados.alta_ne_fatia)} />
+  <circle cx={x(0)} cy={y(dados.alta_ne_fatia[0])} r="4.5" fill="var(--g-laranja)" />
+  <circle cx={x(11)} cy={y(dados.alta_ne_fatia[11])} r="4.5" fill="var(--g-laranja)" />
+  <text class="t-laranja t-num" x={x(0) + 8} y={y(dados.alta_ne_fatia[0]) + 18} font-size="12.5">29,1%</text>
+  <text class="t-laranja t-num t-meio" x={x(11)} y={y(dados.alta_ne_fatia[11]) - 11} font-size="12.5">37,4%</text>
+  <text class="t-laranja" x={X1 + 8} y={y(dados.alta_ne_fatia[ult]) - 4} font-size="12.5">900+</text>
+  <text class="t-num t-laranja" x={X1 + 8} y={y(dados.alta_ne_fatia[ult]) + 11} font-size="12.5">{fmt(dados.alta_ne_fatia[ult])}%</text>
+  <text x={X1 + 8} y={y(dados.part_ne[ult]) + 30} font-size="12.5">participantes</text>
+  <text class="t-num" x={X1 + 8} y={y(dados.part_ne[ult]) + 45} font-size="12.5">{fmt(dados.part_ne[ult])}%</text>
+</Moldura>
+
+<style>
+  .grade { stroke: var(--lc-hairline, #ddd3e5); stroke-width: 1; }
+  polyline { fill: none; }
+  .part { stroke: var(--g-lilas); stroke-width: 5; }
+  .alta { stroke: var(--g-laranja); stroke-width: 2.5; }
+</style>

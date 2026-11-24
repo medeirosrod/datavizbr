@@ -1,0 +1,115 @@
+---
+titulo: "Contar nota mil não mede o Nordeste"
+subtitulo: "De 481 redações nota mil no Enem em 2013 para dez em 2025. Com tão poucas, a fatia do Nordeste vai de 22% a 70% de um ano para o outro. O que dá para medir é a fatia de redações acima de 900."
+descricao: "Em 2013, 481 redações tiraram nota mil no Enem. Em 2025, dez. Com tão poucas, a fatia de redações 900+ mede o Nordeste melhor."
+autores:
+  - rodrigo-medeiros
+publicado_em: 2026-11-24
+secao: panorama
+serie: nordeste-em-dados
+ordem_na_serie: 3
+tags: ["Dados", "Dataviz", "Série", "Enem"]
+capa_destaque: ../../assets/blog/nota-mil-nao-mede-o-nordeste/ilustracao-aquarela.jpg
+capa_destaque_alt: "Ilustração em aquarela de uma sala de aula vazia ao entardecer. Na parede, um painel de cobogó deixa passar a luz do céu, do roxo ao laranja. Em primeiro plano, uma folha de redação pautada e um lápis sobre a carteira, com outras carteiras vazias ao fundo."
+---
+
+import Scrolly from '../../components/scrolly/Scrolly.astro';
+import Passo from '../../components/scrolly/Passo.astro';
+
+No [vídeo que deu origem a esta série](https://www.instagram.com/reel/De2HoRHiS0S/), Gil do Vigor pede que o Nordeste seja reconhecido como um povo que estuda. Um jeito comum de mostrar isso é contar redações nota mil no Enem. Em 11 de novembro, o jornal O Povo publicou uma [reportagem](https://mais.opovo.com.br/reportagens-especiais/enem/2026/11/11/enem-uma-a-cada-tres-redacoes-nota-mil-do-nordeste-e-do-ceara-desde-2013.html) que faz essa conta: desde 2013, uma a cada três redações nota mil do país é do Nordeste.
+
+Refizemos a conta direto dos microdados do Inep, de forma independente, e chegamos aos mesmos números: **1.237 redações nota mil no Brasil entre 2013 e 2025, 384 delas no Nordeste, ou 31%**. Este capítulo de **Nordeste em dados** parte daí e pergunta outra coisa: nota mil é uma boa medida para comparar regiões?
+
+<Scrolly>
+
+<Passo grafico="nota-mil-por-ano" etapa={1}>
+
+## De 481 para 10 em doze anos
+
+Em 2013, **481 redações** tiraram 1000 no Enem. Em 2014 foram 250, em 2015 foram 104, e de 2017 em diante nunca passou de 60: 53 em 2017, 22 em 2021, 60 em 2023, 12 em 2024 e **10 em 2025**.
+
+Contamos como nota mil as redações válidas, as que não foram anuladas, que não ficaram em branco e que não fugiram do tema, com nota final 1000. A contagem de 2025 não saiu em coletiva do Inep. Ela aparece nos microdados, publicados em junho de 2026.
+
+</Passo>
+
+<Passo grafico="nota-mil-nordeste" etapa={2}>
+
+## Com poucas redações, a fatia do Nordeste dá saltos
+
+A fatia do Nordeste nas notas mil foi de **22% a 43% entre 2013 e 2024**, sem tendência: 22% em 2022, 42% em 2024. Em 2025 foi de **70%**: sete das dez, duas na Bahia, duas no Ceará, duas em Pernambuco e uma em Alagoas.
+
+Cada ponto do gráfico é um punhado de pessoas. Em 2022 foram sete nordestinas e nordestinos em 32. Em 2024, cinco em 12. Uma redação a mais ou a menos muda a fatia em vários pontos. Por isso a soma de 13 anos (31%) é mais confiável do que qualquer ano isolado, e por isso um ranking de estados por nota mil de um ano só não diz nada.
+
+</Passo>
+
+<Passo grafico="alta-900-regiao" etapa={3}>
+
+## A medida que se sustenta: redações com 900 ou mais
+
+Nota mil é o ponto mais alto de uma escala que vai de 0 a 1000. Uma medida menos frágil é a fatia de redações com **900 pontos ou mais**. Em 2013 eram 56 mil redações, **1,1%** das válidas. Em 2023 foram 289 mil (10,7%), em 2024 foram 291 mil (9,7%) e em 2025 foram 174 mil (5,3%).
+
+No gráfico, a linha do Nordeste e a do resto do país andam juntas, ano a ano. Isso importa para o que vem a seguir: o que muda de um ano para o outro muda para o país inteiro.
+
+</Passo>
+
+<Passo grafico="fatia-x-participantes" etapa={4}>
+
+## O Nordeste saiu de abaixo da proporção para acompanhá-la
+
+O Nordeste tem entre **33% e 36%** das redações válidas do país. Em 2013, tinha **29%** das redações com 900 ou mais, abaixo do seu peso. De 2021 em diante, a fatia ficou entre 36% e 38%, em torno do peso da região ou um pouco acima. Em 2025, ficou em **36,4%**, para 36,3% de participantes.
+
+Em taxa, em 2013, a fatia de redações 900+ no Nordeste era de 0,98%, contra 1,22% no resto do país. Em 2024, foi de 10,1% contra 9,5%. Em 2025, de 5,35% contra 5,34%. A leitura honesta é que o Nordeste **alcançou o resto do país e passou por pouco**, e não que o supera de forma folgada. É uma história de convergência, e a de "uma a cada três" é, em boa parte, o peso da região entre os participantes.
+
+</Passo>
+
+<Passo grafico="alta-900-estados" etapa={5}>
+
+## Entre os estados, a diferença é pequena
+
+Em 2025, cinco estados do Nordeste ficaram acima da média do país (5,3%): Sergipe e Piauí, com 6,7% cada, Ceará e Paraíba, com 6,3%, e o Rio Grande do Norte, com 6,0%. Sergipe e Piauí ficam atrás apenas de Minas Gerais (7,5%) e no mesmo patamar do Rio de Janeiro (6,7%). Alagoas, Pernambuco, Maranhão e Bahia ficam abaixo, com 5,1%, 5,2%, 4,4% e 4,1%.
+
+O ranking muda de um ano para o outro e as diferenças entre vizinhos são de décimos de ponto. Serve para ver que o Nordeste não é bloco único, e não para eleger um campeão.
+
+</Passo>
+
+<Passo grafico="competencias-diferenca" etapa={6}>
+
+## A média ainda é um pouco menor, e o que pesa é a norma culta
+
+A redação do Enem tem cinco competências, de 0 a 200 pontos cada. A nota média das redações válidas no Nordeste ficou **14 pontos abaixo** da do resto do país em 2013, **6 pontos abaixo** em 2024 e **8 pontos abaixo** em 2025. O topo e a média contam coisas diferentes: a região tem fatia de 900+ igual ou maior e média um pouco menor.
+
+Por competência, a diferença que não fecha é a **C1, o domínio da norma culta**: de 2,6 a 5,3 pontos abaixo em todos os anos. A C4 (coesão) e a C5 (proposta de intervenção) quase fecharam: em 2024, a diferença era de 0,2 e 0,4 ponto. São diferenças de poucos pontos numa escala de 200, e os dados não dizem por que elas existem.
+
+</Passo>
+
+</Scrolly>
+
+## O que mudou em 2025
+
+A queda de 2024 para 2025 é grande: as redações com 900 ou mais passaram de **291.123 para 173.543**, queda de 40%. Ela aconteceu no país inteiro e na mesma medida no Nordeste e no resto. Não veio de uma mudança de quem fez a prova: as redações válidas aumentaram 8%. A nota média das válidas caiu 40 pontos, e a maior queda foi na C2 (compreensão do tema e repertório), de 16 pontos, seguida pela C4, de 9.
+
+A causa não está comprovada. O Inep afirma que não houve mudança nas regras de correção. Uma reportagem do g1, de 5 de fevereiro de 2026, com base em documentos internos e relatos de corretores, diz que orientações complementares tornaram a correção mais rigorosa em 2025, em especial para repertório genérico, coesão e a proposta de intervenção. Os dados deste capítulo são compatíveis com isso, mas não provam, porque todas as competências caíram.
+
+Quanto à alta de 2013 a 2023, que fez a fatia de 900+ ir de 1% a 11%, não encontramos explicação documentada. As hipóteses que circulam são a mudança de quem presta o exame (o número de redações válidas caiu de 5,7 milhões em 2016 para 2,3 milhões em 2021), a pandemia e mudanças de critério. Nenhuma está demonstrada. Por isso, **comparar 2013 com 2024 como "melhora" seria passar da conta**. O que os dados sustentam é a comparação entre regiões no mesmo ano.
+
+## O que este texto não mostra
+
+- **O estado é o do local da prova, não o da escola.** Quem estuda em um estado e faz a prova em outro conta onde fez a prova. A diferença é pequena na prática, mas existe.
+- **Não separamos rede pública e privada.** É um recorte importante, e o jornal O Povo anunciou que vai tratá-lo em outro episódio da série dele. Aqui, ele fica de fora.
+- **Não há causa.** O texto mostra o que mudou e o que ficou parecido. Não explica por que a norma culta pesa mais do que a coesão, nem por que a fatia de 900+ subiu e depois caiu.
+- **Redação válida não é todo mundo.** Ficam de fora as ausentes, as anuladas e as que ficaram em branco, que são parte do resultado do exame.
+
+## Como fizemos
+
+- **Fonte:** microdados do Enem de 2013 a 2025, publicados pelo Inep. Em 2024 e 2025, as notas ficam no arquivo `RESULTADOS`.
+- **Estado:** a UF do local da prova (`SG_UF_PROVA`). Nordeste: AL, BA, CE, MA, PB, PE, PI, RN e SE.
+- **Redação válida:** a situação "sem problemas" (código 1 de 2015 em diante; código 7 em 2013 e 2014, que usam outra codificação). Nota alta: 900 ou mais. Nota mil: 1000.
+- **Conferência:** o total de 1.237 notas mil, as 384 do Nordeste, as 115 do Ceará, as 58 de Pernambuco e as 51 da Bahia coincidem com a reportagem do O Povo. As 56.034 redações 900+ de 2013 e as 173.543 de 2025 coincidem com os números publicados pela imprensa.
+- **Método aberto:** o script que lê os microdados, as tabelas de contagem por ano e estado e a análise estão em [dados/nota-mil-enem](/dados/nota-mil-enem/LEIAME.md). Qualquer pessoa pode refazer a conta.
+- **Correção de 2025:** g1, 5 de fevereiro de 2026, com resposta do Inep.
+
+## O que vem a seguir
+
+O próximo capítulo é sobre as olimpíadas científicas. A regra continua a mesma: dado público, fonte citada e método aberto.
+
+Se você tem o dado de um recorte que ficou de fora, escreva para o datavizbr.

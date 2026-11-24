@@ -8,7 +8,6 @@ layout: "destaque"
 como_categoria: true
 capa: ./_capas/nordeste-em-dados.gif
 proximos:
-  - "As redações nota mil do Enem"
   - "As olimpíadas científicas"
 ---
 
