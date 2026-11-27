@@ -1,5 +1,6 @@
 ---
 // Layout de destaque: mapa em largura total, regra da série, linha do tempo e sugestão de dados.
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import OutrasSeries from './OutrasSeries.astro';
 import { SITE } from '../../consts';
@@ -29,7 +30,7 @@ const assunto = encodeURIComponent(`Dado para a série ${serie.data.titulo}`);
         </div>
         {serie.data.capa && (
           <figure class="capa">
-            <img src={serie.data.capa.src} alt={`Capa da série ${serie.data.titulo}`} />
+            <Image src={serie.data.capa} alt={`Capa da série ${serie.data.titulo}`} width={1200} loading="eager" />
           </figure>
         )}
       </div>

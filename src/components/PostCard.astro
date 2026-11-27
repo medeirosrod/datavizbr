@@ -1,5 +1,6 @@
 ---
 // Cartão de texto das páginas de seção: capa, selo da seção, título, autor e data.
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import AutorNome from './AutorNome.astro';
 import PostCoverDefault from './PostCoverDefault.astro';
@@ -22,7 +23,7 @@ const ano = new Date(publicado_em).getUTCFullYear();
 <article class="cartao" hidden={oculto} data-ano={ano} data-busca={`${titulo} ${post.data.descricao ?? ''} ${autores.map((a) => a.id).join(' ')}`.toLowerCase()} style={`--i:${Math.min(indice, 9)}`}>
   <a class="cartao-capa" href={`/posts/${post.id}`} tabindex="-1" aria-hidden="true">
     {capa ? (
-      <img src={capa.src} alt="" loading="lazy" />
+      <Image src={capa} alt="" width={640} widths={[400, 640, 800]} sizes="(max-width: 760px) 100vw, 400px" />
     ) : (
       <PostCoverDefault secao={secao} />
     )}

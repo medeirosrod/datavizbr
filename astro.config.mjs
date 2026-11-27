@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, sharpImageService } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
@@ -7,8 +7,8 @@ export default defineConfig({
   integrations: [mdx()],
   redirects: { '/nordeste': '/series/nordeste-em-dados' },
   image: {
-    service: {
-      entrypoint: 'astro/assets/services/noop'
-    }
+    // Dois GIFs migrados do Medium somam 421 e 281 milhões de pixels (todos os quadros),
+    // acima do limite padrão do sharp (268 milhões).
+    service: sharpImageService({ limitInputPixels: 500_000_000 })
   }
 });

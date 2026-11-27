@@ -1,6 +1,7 @@
 ---
 // Página de uma seção editorial (Bastidores, Panorama, Práticas, Ensaios):
 // topo escuro com a faixa de aberturas, destaque do texto mais recente e grade com filtros.
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Azulejo from './Azulejo.astro';
 import Faixa from './Faixa.astro';
@@ -73,7 +74,7 @@ const resumo = destaque?.data.descricao || destaque?.data.subtitulo;
     {destaque && (
       <section class="abre" id="destaque" aria-label="Texto mais recente">
         <a class="abre-capa" href={`/posts/${destaque.id}`} tabindex="-1" aria-hidden="true">
-          {imagemDestaque ? <img src={imagemDestaque.src} alt="" /> : <PostCoverDefault secao={secao} />}
+          {imagemDestaque ? <Image src={imagemDestaque} alt="" width={1000} widths={[640, 1000, 1400]} sizes="(max-width: 1100px) 100vw, 700px" loading="eager" /> : <PostCoverDefault secao={secao} />}
         </a>
         <div>
           <Selo secao={secao} />

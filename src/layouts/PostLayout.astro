@@ -1,6 +1,7 @@
 ---
 // Página de texto: fundo claro com o mesmo topo escuro das outras páginas. Faixa de leitura que acende conforme a rolagem,
 // cabeçalho grande, índice e ficha ao lado do texto, capítulos da série e "Leia também".
+import { Image } from 'astro:assets';
 import { getEntry, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import AutorNome from '../components/AutorNome.astro';
@@ -8,6 +9,7 @@ import PostCard from '../components/PostCard.astro';
 import Selo from '../components/Selo.astro';
 import { getPosts, getPostsPorAutor, getPostsPorSerie, porData, tempoLeitura } from '../lib/data';
 import { NOME_SECAO, type Secao } from '../lib/formas';
+import { capaOg } from '../lib/og';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -16,6 +18,7 @@ interface Props {
 const { post } = Astro.props;
 const { titulo, subtitulo, secao, publicado_em, tags, capa_destaque, capa_destaque_alt } = post.data;
 const secaoTipada = secao as Secao;
+const og = capaOg(post);
 
 const formatarData = (date: Date): string =>
   new Intl.DateTimeFormat('pt-BR', {
@@ -47,7 +50,7 @@ const leiaTambem = todos
   .map((x) => x.p);
 ---
 
-<BaseLayout title={titulo} description={post.data.descricao} tema="escuro">
+<BaseLayout title={titulo} description={post.data.descricao} ogImage={og?.url} ogImageAlt={og?.alt} tema="escuro">
   <div class="leitura" id="leitura" data-secao={secao} aria-hidden="true"></div>
 
   <article class="post-page" id="postArticle">
@@ -67,7 +70,7 @@ const leiaTambem = todos
 
         <div class="assina">
           <div class="fotos">
-            {autores.map((a) => a?.data.foto && <img src={a.data.foto.src} alt="" width="48" height="48" />)}
+            {autores.map((a) => a?.data.foto && <Image src={a.data.foto} alt="" width={96} height={96} loading="eager" />)}
           </div>
           <div class="assina-nomes">
             <b>
@@ -86,7 +89,7 @@ const leiaTambem = todos
 
       {capa_destaque && (
         <div class="quadro">
-          <img src={capa_destaque.src} alt={capa_destaque_alt ?? ''} />
+          <Image src={capa_destaque} alt={capa_destaque_alt ?? ''} width={1200} widths={[640, 1200, 1600]} sizes="100vw" loading="eager" />
           <div class="veu" aria-hidden="true"></div>
         </div>
       )}
@@ -153,7 +156,7 @@ const leiaTambem = todos
   <section class="container leia">
     {bios.map(({ autor, total }) => (
       <div class="bio">
-        {autor.data.foto && <img src={autor.data.foto.src} alt="" width="84" height="84" />}
+        {autor.data.foto && <Image src={autor.data.foto} alt="" width={168} height={168} />}
         <div>
           <b>{autor.data.nome}</b>
           <p>{autor.data.quem_e}</p>

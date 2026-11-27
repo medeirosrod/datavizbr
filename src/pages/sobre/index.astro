@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LivroGaleria from '../../components/LivroGaleria.astro';
 import { getCollection, getEntry } from 'astro:content';
@@ -69,7 +70,7 @@ const marcos = [
       {curador && (
         <a class="curador" href={`/autores/${curador.id}`}>
           <span class="curador-foto">
-            {curador.data.foto && <img src={curador.data.foto.src} alt="" />}
+            {curador.data.foto && <Image src={curador.data.foto} alt="" width={400} height={400} />}
           </span>
           <b>{curador.data.nome}</b>
           <span>{curador.data.quem_e}</span>

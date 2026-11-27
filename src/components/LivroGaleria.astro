@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Premio {
@@ -22,7 +23,7 @@ const { fotos = [], premios = [], tituloLivro, premiosTitulo } = Astro.props;
     {fotos.length > 0 && (
       <div class="livro-galeria" role="group" aria-label={`Fotos do livro ${tituloLivro}`}>
         {fotos.map((foto, i) => (
-          <img src={foto.src} alt={`Foto do livro ${tituloLivro}, ${i + 1}`} loading="lazy" />
+          <Image src={foto} alt={`Foto do livro ${tituloLivro}, ${i + 1}`} width={900} />
         ))}
       </div>
     )}
