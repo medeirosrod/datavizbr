@@ -1,98 +1,74 @@
 ---
-// "Em destaque": um palco grande e uma linha de abas com progresso.
-// Troca sozinho a cada 7 s, pausa com mouse, foco ou botão, e não troca
-// sozinho para quem pede menos movimento (DESIGN.md, "Motion").
+// "Em destaque": um texto principal e até dois secundários, todos visíveis, sem troca automática.
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import Selo from './Selo.astro';
+import Azulejo from './Azulejo.astro';
 import AutorNome from './AutorNome.astro';
 import { formatarMesAno, getSeriesCategoria, rotuloCategoria } from '../lib/data';
 import type { Secao } from '../lib/formas';
 
 interface Props {
+  /** O primeiro é o principal; os demais (até dois) são secundários. */
   posts: CollectionEntry<'posts'>[];
 }
 const { posts } = Astro.props;
+const [principal, ...outros] = posts;
 const categorias = await getSeriesCategoria();
 
-// Corpo do título por tamanho do texto: título longo desce de corpo em vez de empilhar linhas,
-// para a coluna de texto nunca ficar mais alta que a capa (e o palco não crescer por causa de um slide).
+// Corpo do título por tamanho do texto: título longo desce de corpo em vez de empilhar linhas.
 const porte = (titulo: string) => (titulo.length <= 30 ? 'g' : titulo.length <= 64 ? 'm' : 'p');
+
+// A descrição acompanha a imagem que de fato aparece.
+const capa = principal.data.capa_destaque ?? principal.data.capa;
+const altCapa = (principal.data.capa_destaque ? principal.data.capa_destaque_alt : principal.data.capa_alt) || principal.data.titulo;
 ---
 
-<section class="destaque" data-destaque aria-roledescription="carrossel" aria-label="Em destaque">
-  <div class="palco">
-    {posts.map((p, i) => (
-      <article
-        class:list={['slide', i === 0 && 'on']}
-        id={`slide-${i}`}
-        role="tabpanel"
-        aria-labelledby={`aba-${i}`}
-        inert={i !== 0}
-        data-slide
-      >
-        <div class="capa">
-          {(p.data.capa_destaque ?? p.data.capa) ? <img src={(p.data.capa_destaque ?? p.data.capa)!.src} alt={p.data.capa_alt || p.data.titulo} /> : <div class="capa-vazia"></div>}
-          <div class="veu" aria-hidden="true"></div>
-        </div>
-        <div class="texto">
-          <Selo secao={p.data.secao as Secao} nome={rotuloCategoria(p, categorias)} />
-          <h2 class={`porte-${porte(p.data.titulo)}`}><a href={`/posts/${p.id}`}>{p.data.titulo}</a></h2>
-          <p class="lead">{p.data.descricao || p.data.subtitulo}</p>
-          <div class="autor">
-            <span class="autor-nome"><AutorNome autorId={p.data.autores[0]?.id} /></span>
-            <span class="autor-data">{formatarMesAno(p.data.publicado_em)}</span>
-          </div>
-          <a class="btn btn-primary btn-cantos" href={`/posts/${p.id}`}>
-            Ler o texto<i></i><i></i><i></i><i></i>
-          </a>
-        </div>
-      </article>
-    ))}
-  </div>
-
-  <div class="abas" role="tablist" aria-label="Escolher destaque">
-    {posts.map((p, i) => (
-      <button
-        type="button"
-        role="tab"
-        id={`aba-${i}`}
-        class:list={['aba', i === 0 && 'on']}
-        aria-selected={i === 0 ? 'true' : 'false'}
-        aria-controls={`slide-${i}`}
-        tabindex={i === 0 ? 0 : -1}
-        data-aba
-      >
-        <span class="prog" aria-hidden="true"><i></i></span>
-        {p.data.capa ? <img src={p.data.capa.src} alt="" /> : <span class="miniatura-vazia"></span>}
-        <span class="aba-texto">
-          <Selo secao={p.data.secao as Secao} nome={rotuloCategoria(p, categorias)} />
-          <strong>{p.data.titulo}</strong>
-        </span>
-      </button>
-    ))}
-  </div>
-
-  {posts.length > 1 && (
-    <div class="ctrl">
-      <button type="button" class="pausa" data-pausa aria-pressed="false" aria-label="Pausar a troca automática">
-        <svg class="i-pausa" width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><rect width="3.2" height="12" fill="currentColor"/><rect x="6.8" width="3.2" height="12" fill="currentColor"/></svg>
-        <svg class="i-toca" width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z" fill="currentColor"/></svg>
-      </button>
-      <span class="mono" data-status aria-live="polite">1 de {posts.length}. Troca sozinho e pausa quando você passa o mouse.</span>
+<section class="destaque" aria-label="Em destaque">
+  <article class="principal">
+    <div class="capa">
+      {capa ? <Image src={capa} alt={altCapa} width={1000} widths={[640, 1000, 1400]} sizes="(max-width: 1100px) 100vw, 810px" loading="eager" /> : <div class="capa-vazia"></div>}
+      <div class="veu" aria-hidden="true"></div>
     </div>
+    <div class="texto">
+      <Selo secao={principal.data.secao as Secao} nome={rotuloCategoria(principal, categorias)} />
+      <h2 class={`porte-${porte(principal.data.titulo)}`}><a href={`/posts/${principal.id}`}>{principal.data.titulo}</a></h2>
+      <p class="lead">{principal.data.descricao || principal.data.subtitulo}</p>
+      <div class="autor">
+        <span class="autor-nome"><AutorNome autorId={principal.data.autores[0]?.id} /></span>
+        <span class="autor-data">{formatarMesAno(principal.data.publicado_em)}</span>
+      </div>
+      <a class="btn btn-primary btn-cantos" href={`/posts/${principal.id}`}>
+        Ler o texto<i></i><i></i><i></i><i></i>
+      </a>
+    </div>
+  </article>
+
+  {outros.length > 0 && (
+    <ul class="outros">
+      {outros.slice(0, 2).map((p) => (
+        <li>
+          <a class="outro" href={`/posts/${p.id}`}>
+            <span class="mini">
+              {p.data.capa
+                ? <Image src={p.data.capa} alt="" width={208} height={140} />
+                : <Azulejo secao={p.data.secao as Secao} colunas={3} linhas={2} />}
+            </span>
+            <span class="outro-texto">
+              <Selo secao={p.data.secao as Secao} nome={rotuloCategoria(p, categorias)} />
+              <strong>{p.data.titulo}</strong>
+              <span class="outro-data">{formatarMesAno(p.data.publicado_em)}</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
   )}
 </section>
 
 <style>
   .destaque { --u: 78px; }
-  .palco { display: grid; transition: height 420ms var(--ease-out); }
-  .slide {
-    grid-area: 1 / 1;
-    display: grid; grid-template-columns: minmax(0, 700px) minmax(0, 1fr); gap: 64px; align-items: center;
-    align-self: start; opacity: 0; visibility: hidden;
-    transition: opacity 420ms var(--ease-out), visibility 0s linear 420ms;
-  }
-  .slide.on { opacity: 1; visibility: visible; transition-delay: 0s; }
+  .principal { display: grid; grid-template-columns: minmax(0, 700px) minmax(0, 1fr); gap: 64px; align-items: center; }
 
   .capa { position: relative; height: calc(var(--u) * 6); overflow: hidden; border-radius: 3px; background: var(--lc-dusk); }
   .capa img { max-width: none; position: absolute; left: -60px; top: -40px; width: calc(100% + 110px); height: calc(100% + 80px); object-fit: cover; }
@@ -133,33 +109,19 @@ const porte = (titulo: string) => (titulo.length <= 30 ? 'g' : titulo.length <= 
   .btn-cantos:hover i:nth-of-type(4), .btn-cantos:focus-visible i:nth-of-type(4) { transform: translate(2px, 2px); }
   .btn-cantos:focus-visible { outline: none; }
 
-  /* Abas com progresso */
-  .abas { display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 28px; margin-top: 68px; }
-  .aba {
-    position: relative; display: grid; grid-template-columns: 104px 1fr; gap: 18px; align-items: center;
-    padding: 22px 0 0; text-align: left; background: none; border: 0; cursor: pointer; font: inherit; color: inherit;
-  }
-  .aba .prog { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--lc-hairline); }
-  .aba .prog i { display: block; height: 100%; width: 0; background: var(--lc-clay); }
-  .aba.on .prog i { animation: prog var(--dur, 7s) linear forwards; }
-  [data-pausado] .aba.on .prog i { animation-play-state: paused; }
-  .aba img, .miniatura-vazia { width: 104px; height: 70px; object-fit: cover; border-radius: 3px; border: 1px solid var(--lc-hairline); background: var(--lc-cal-shade); }
-  .aba-texto { display: flex; flex-direction: column; gap: 7px; }
-  .aba strong { font-family: var(--font-display); font-size: 20px; line-height: 1.12; letter-spacing: -.4px; color: var(--dvb-ink-2); transition: color 160ms; }
-  .aba.on strong, .aba:hover strong { color: var(--dvb-ink); }
-  .aba:focus-visible { outline: 2px solid var(--dvb-orange); outline-offset: 4px; }
-
-  .ctrl { display: flex; align-items: center; gap: 12px; margin-top: 26px; color: var(--dvb-ink-3); }
-  .pausa { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--lc-hairline); border-radius: 3px; background: #fff; color: var(--dvb-ink); cursor: pointer; }
-  .pausa .i-toca { display: none; }
-  .pausa[aria-pressed="true"] .i-toca { display: block; }
-  .pausa[aria-pressed="true"] .i-pausa { display: none; }
-
-  @keyframes prog { from { width: 0; } to { width: 100%; } }
+  /* Secundários */
+  .outros { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 44px; list-style: none; }
+  .outro { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 18px; align-items: center; height: 100%; padding-top: 22px; border-top: 1px solid var(--lc-hairline); border-bottom: 0; color: var(--dvb-ink-2); }
+  .mini { display: block; width: 104px; height: 70px; overflow: hidden; border-radius: 3px; border: 1px solid var(--lc-hairline); background: var(--lc-cal-shade); }
+  .mini img, .mini :global(svg) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .outro-texto { display: flex; flex-direction: column; gap: 6px; }
+  .outro strong { font-family: var(--font-display); font-size: 20px; line-height: 1.12; letter-spacing: -.4px; color: var(--dvb-ink); text-wrap: balance; }
+  .outro:hover strong { color: var(--lc-ink-orange); }
+  .outro:focus-visible { outline: 2px solid var(--dvb-orange); outline-offset: 4px; }
+  .outro-data { font-size: 13px; color: var(--dvb-ink-3); }
 
   @media (max-width: 1100px) {
-    .slide { grid-template-columns: minmax(0, 1fr); gap: 26px; }
-    /* Em coluna única o resumo mostra até 3 linhas, para os slides ficarem com alturas próximas */
+    .principal { grid-template-columns: minmax(0, 1fr); gap: 26px; }
     .lead { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .texto h2.porte-g { font-size: 46px; }
     .texto h2.porte-m { font-size: 38px; }
@@ -171,73 +133,10 @@ const porte = (titulo: string) => (titulo.length <= 30 ? 'g' : titulo.length <= 
     .texto h2.porte-m { font-size: 32px; }
     .texto h2.porte-p { font-size: 28px; }
     .capa img { left: -30px; top: -26px; width: calc(100% + 60px); height: calc(100% + 50px); }
-    .abas { grid-template-columns: 1fr; gap: 0; margin-top: 36px; }
-    .aba { padding: 18px 0 16px; grid-template-columns: 84px 1fr; gap: 14px; border-bottom: 1px solid var(--lc-hairline); }
-    .aba img, .miniatura-vazia { width: 84px; height: 58px; }
-    .aba strong { font-size: 18px; }
+    .outros { grid-template-columns: 1fr; gap: 0; margin-top: 32px; }
+    .outro { grid-template-columns: 84px minmax(0, 1fr); gap: 14px; padding-block: 16px; }
+    .mini { width: 84px; height: 58px; }
+    .outro strong { font-size: 18px; }
     .btn-cantos { width: 100%; justify-content: center; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .slide, .palco { transition: none; }
-    .aba.on .prog i { animation: none; width: 100%; }
-  }
 </style>
-
-<script>
-  const raiz = document.querySelector<HTMLElement>('[data-destaque]');
-  if (raiz) {
-    const slides = [...raiz.querySelectorAll<HTMLElement>('[data-slide]')];
-    const abas = [...raiz.querySelectorAll<HTMLButtonElement>('[data-aba]')];
-    const palco = raiz.querySelector<HTMLElement>('.palco')!;
-    const botao = raiz.querySelector<HTMLButtonElement>('[data-pausa]');
-    const status = raiz.querySelector<HTMLElement>('[data-status]');
-    const semMovimento = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    raiz.style.setProperty('--n', String(abas.length));
-    let atual = 0;
-    let manual = false; // pausa pedida pelo botão
-
-    // O palco tem a altura do slide à vista: sem sobra de espaço quando o texto é curto.
-    const ajustar = () => { palco.style.height = `${slides[atual].offsetHeight}px`; };
-    const olho = new ResizeObserver(ajustar);
-    slides.forEach((s) => olho.observe(s));
-
-    const pausar = () => raiz.toggleAttribute('data-pausado', manual || raiz.matches(':hover, :focus-within') || document.hidden);
-
-    function mostrar(i: number, foco = false) {
-      atual = (i + slides.length) % slides.length;
-      slides.forEach((s, k) => { s.classList.toggle('on', k === atual); s.inert = k !== atual; });
-      abas.forEach((a, k) => {
-        a.classList.toggle('on', k === atual);
-        a.setAttribute('aria-selected', String(k === atual));
-        a.tabIndex = k === atual ? 0 : -1;
-        // reinicia a linha de progresso da aba ativa
-        const p = a.querySelector<HTMLElement>('.prog i');
-        if (p) { p.style.animation = 'none'; void p.offsetWidth; p.style.animation = ''; }
-      });
-      if (status) status.textContent = `${atual + 1} de ${slides.length}. ${manual || semMovimento ? 'Troca só quando você escolhe.' : 'Troca sozinho e pausa quando você passa o mouse.'}`;
-      ajustar();
-      if (foco) abas[atual].focus();
-    }
-
-    abas.forEach((a, k) => a.addEventListener('click', () => mostrar(k)));
-    raiz.addEventListener('keydown', (e) => {
-      if (!(e.target as HTMLElement).matches('[data-aba]')) return;
-      if (e.key === 'ArrowRight') { e.preventDefault(); mostrar(atual + 1, true); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); mostrar(atual - 1, true); }
-    });
-    // a linha termina => passa para o próximo (mesma fonte de tempo da animação)
-    abas.forEach((a) => a.querySelector('.prog i')?.addEventListener('animationend', () => { if (a.classList.contains('on') && !semMovimento) mostrar(atual + 1); }));
-
-    ['mouseenter', 'mouseleave', 'focusin', 'focusout'].forEach((ev) => raiz.addEventListener(ev, pausar));
-    document.addEventListener('visibilitychange', pausar);
-    botao?.addEventListener('click', () => {
-      manual = !manual;
-      botao.setAttribute('aria-pressed', String(manual));
-      botao.setAttribute('aria-label', manual ? 'Retomar a troca automática' : 'Pausar a troca automática');
-      pausar();
-      if (status) status.textContent = `${atual + 1} de ${slides.length}. ${manual ? 'Troca só quando você escolhe.' : 'Troca sozinho e pausa quando você passa o mouse.'}`;
-    });
-    if (semMovimento && botao) { botao.hidden = true; }
-    mostrar(0);
-  }
-</script>

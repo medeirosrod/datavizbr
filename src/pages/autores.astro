@@ -1,5 +1,6 @@
 ---
 // Autores: um muro de retratos (uma abertura por pessoa), a curadoria em destaque e a lista de quem escreve.
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Selo from '../components/Selo.astro';
 import { getAutores, getPosts } from '../lib/data';
@@ -42,7 +43,7 @@ const iniciais = (nome: string) => nome.split(' ').filter(Boolean).slice(0, 2).m
         {porTextos.map((a, i) => (
           <li style={`--i:${Math.min(i, 40)}`}>
             <a class="av" href={`/autores/${a.id}`} title={a.data.nome} aria-label={a.data.nome}>
-              {a.data.foto ? <img src={a.data.foto.src} alt="" loading="lazy" /> : <span class="av-ini">{iniciais(a.data.nome)}</span>}
+              {a.data.foto ? <Image src={a.data.foto} alt="" width={180} height={180} /> : <span class="av-ini">{iniciais(a.data.nome)}</span>}
             </a>
           </li>
         ))}
@@ -58,7 +59,7 @@ const iniciais = (nome: string) => nome.split(' ').filter(Boolean).slice(0, 2).m
   <div class="container pagina">
     {curador && (
       <a class="curador" href={`/autores/${curador.id}`}>
-        {curador.data.foto && <img src={curador.data.foto.src} alt="" />}
+        {curador.data.foto && <Image src={curador.data.foto} alt="" width={320} height={320} loading="eager" />}
         <div>
           <span class="eyebrow">Curador e fundador</span>
           <h2>{curador.data.nome}</h2>
@@ -75,7 +76,7 @@ const iniciais = (nome: string) => nome.split(' ').filter(Boolean).slice(0, 2).m
         return (
           <li class="item">
             <a class="item-link" href={`/autores/${a.id}`}>
-              <span class="foto">{a.data.foto ? <img src={a.data.foto.src} alt="" loading="lazy" /> : <span>{iniciais(a.data.nome)}</span>}</span>
+              <span class="foto">{a.data.foto ? <Image src={a.data.foto} alt="" width={200} height={200} /> : <span>{iniciais(a.data.nome)}</span>}</span>
               <span class="item-txt">
                 <b>{a.data.nome}</b>
                 <small>{a.data.quem_e}</small>

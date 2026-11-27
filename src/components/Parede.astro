@@ -1,10 +1,11 @@
 ---
 // A parede do acervo (DESIGN.md, "A parede"): uma abertura por texto, em ordem
 // cronológica. A forma diz a seção; por trás das aberturas fica o céu do fim de
-// tarde (The Sunset Wall Rule: só aqui). 15 colunas no desktop, 8 no celular.
+// tarde (The Sunset Wall Rule: só aqui). 20 colunas no desktop, 8 no celular.
+import { getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { formaD, type Secao } from '../lib/formas';
-import { formatarMesAno, getSeriesCategoria, rotuloCategoria } from '../lib/data';
+import { ehDeSerieCategoria, formatarMesAno, getSeriesCategoria, rotuloCategoria } from '../lib/data';
 
 interface Props {
   /** Posts em ordem de publicação (mais antigo primeiro). */
@@ -20,16 +21,23 @@ const categorias = await getSeriesCategoria();
 const M = 80; // módulo
 const DX = 3.5, DY = 4.5; // espessura da aresta
 
+// O cartão de apoio mostra a capa em 84×64: gera a miniatura (2×) em vez de baixar o original.
+const miniaturas = await Promise.all(
+  posts.map(async (p) => (p.data.capa ? (await getImage({ src: p.data.capa, width: 168, height: 128 })).src : '')),
+);
+
 const itens = posts.map((p, i) => ({
   i,
   id: p.id,
   secao: p.data.secao as Secao,
   rotulo: rotuloCategoria(p, categorias),
+  // Chave do filtro: a série, quando ela é a categoria; senão, a seção.
+  filtro: ehDeSerieCategoria(p, categorias) ? p.data.serie!.id : p.data.secao,
   titulo: p.data.titulo,
   autor: p.data.autores.map((a) => autores[a.id] ?? a.id).join(' e '),
   data: formatarMesAno(p.data.publicado_em),
   ano: p.data.publicado_em.getUTCFullYear(),
-  capa: p.data.capa?.src ?? '',
+  capa: miniaturas[i],
 }));
 const total = itens.length + fechados;
 
@@ -44,7 +52,7 @@ function layout(cols: number, tag: string) {
   });
   return { cols, rows, W, H, celulas, tag };
 }
-const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
+const variantes = [layout(20, 'larga'), layout(8, 'estreita')];
 ---
 
 <div class="parede" data-parede>
@@ -64,7 +72,7 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
           <stop offset=".78" stop-color="#f6ab72" />
           <stop offset="1" stop-color="#e9772a" />
         </linearGradient>
-        <radialGradient id={`sol-${v.tag}`} gradientUnits="userSpaceOnUse" cx={v.tag === 'larga' ? 560 : v.W * 0.62} cy={v.H * 0.82} r={v.tag === 'larga' ? 250 : 260}>
+        <radialGradient id={`sol-${v.tag}`} gradientUnits="userSpaceOnUse" cx={v.tag === 'larga' ? v.W * 0.47 : v.W * 0.62} cy={v.H * 0.82} r={v.tag === 'larga' ? v.W * 0.2 : 260}>
           <stop offset="0" stop-color="#fff7de" />
           <stop offset=".43" stop-color="#ffe9b8" />
           <stop offset=".445" stop-color="#ffd08a" stop-opacity=".55" />
@@ -87,6 +95,8 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
             class="ab"
             href={`/posts/${c.item.id}`}
             data-s={c.item.secao}
+            data-f={c.item.filtro}
+            data-r={c.item.rotulo}
             data-t={c.item.titulo}
             data-a={c.item.autor}
             data-d={c.item.data}
@@ -147,7 +157,10 @@ const variantes = [layout(15, 'larga'), layout(8, 'estreita')];
   .ab.fora .lit { opacity: .09; }
   .ab .anel { fill: none; stroke: #fbf7ff; stroke-width: 2.5; opacity: 0; transition: opacity 160ms var(--ease-out); pointer-events: none; }
   .ab:hover .anel, .ab:focus-visible .anel, .ab.ativo .anel { opacity: 1; }
-  .ab .ano { font-family: var(--font-mono); font-size: 8.5px; fill: rgba(255,255,255,.62); pointer-events: none; }
+  .ab .ano { font-family: var(--font-mono); fill: rgba(255,255,255,.62); pointer-events: none; }
+  /* em unidades do viewBox: cada largura tem a sua escala */
+  .parede-larga .ano { font-size: 14px; }
+  .parede-estreita .ano { font-size: 17px; }
 
   .ab-fechado .bloco-fechado { fill: none; stroke: rgba(255,255,255,.3); stroke-dasharray: 3 5; }
   .ab-fechado path { fill: none; stroke: rgba(255,255,255,.5); stroke-width: 1.2; }

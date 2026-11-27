@@ -1,6 +1,7 @@
 ---
 // Página de texto: fundo claro com o mesmo topo escuro das outras páginas. Faixa de leitura que acende conforme a rolagem,
 // cabeçalho grande, índice e ficha ao lado do texto, capítulos da série e "Leia também".
+import { Image } from 'astro:assets';
 import { getEntry, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import AutorNome from '../components/AutorNome.astro';
@@ -67,7 +68,7 @@ const leiaTambem = todos
 
         <div class="assina">
           <div class="fotos">
-            {autores.map((a) => a?.data.foto && <img src={a.data.foto.src} alt="" width="48" height="48" />)}
+            {autores.map((a) => a?.data.foto && <Image src={a.data.foto} alt="" width={96} height={96} loading="eager" />)}
           </div>
           <div class="assina-nomes">
             <b>
@@ -86,7 +87,7 @@ const leiaTambem = todos
 
       {capa_destaque && (
         <div class="quadro">
-          <img src={capa_destaque.src} alt={capa_destaque_alt ?? ''} />
+          <Image src={capa_destaque} alt={capa_destaque_alt ?? ''} width={1200} widths={[640, 1200, 1600]} sizes="100vw" loading="eager" />
           <div class="veu" aria-hidden="true"></div>
         </div>
       )}
@@ -153,7 +154,7 @@ const leiaTambem = todos
   <section class="container leia">
     {bios.map(({ autor, total }) => (
       <div class="bio">
-        {autor.data.foto && <img src={autor.data.foto.src} alt="" width="84" height="84" />}
+        {autor.data.foto && <Image src={autor.data.foto} alt="" width={168} height={168} />}
         <div>
           <b>{autor.data.nome}</b>
           <p>{autor.data.quem_e}</p>

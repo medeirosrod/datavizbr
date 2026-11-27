@@ -1,6 +1,7 @@
 ---
-// Home (Luz Coada): a parede do acervo no topo, destaques, as quatro seções,
-// quem escreve, recentes e a faixa da série com a newsletter.
+// Home (Luz Coada): o texto mais novo e a parede do acervo no topo, destaques,
+// as quatro seções, quem escreve, recentes e a faixa da série com a newsletter.
+import { Image } from 'astro:assets';
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Parede from '../components/Parede.astro';
@@ -30,19 +31,30 @@ const muro = candidatos.filter((a) => fixosNoMuro.has(a.id) || porTextos.include
 const totalAutores = [...contagem.values()].filter((n) => n > 0).length;
 const curador = await getEntry('autores', SITE.autor_padrao);
 
-// Destaques: posts marcados com order_homepage: 1, do mais novo ao mais antigo
-const marcados = todos.filter((p) => p.data.order_homepage === 1).sort(porData);
-const destaques = marcados.length > 0 ? marcados : [...todos].sort(porData).slice(0, 1);
+const porNovidade = [...todos].sort(porData);
+// O texto mais novo aparece ao lado do título, na primeira tela.
+const maisNovo = porNovidade[0];
+
+// Destaques: posts marcados com order_homepage: 1, do mais novo ao mais antigo.
+// Mostra um principal e dois secundários, sem repetir o texto que já está no topo.
+const marcados = porNovidade.filter((p) => p.data.order_homepage === 1 && p.id !== maisNovo.id);
+const destaques = (marcados.length > 0 ? marcados : porNovidade.slice(1)).slice(0, 3);
 
 // Seções: contagem e texto mais recente
 const porSecao = Object.fromEntries(
   SECOES.map((s) => {
-    const lista = todos.filter((p) => p.data.secao === s && !ehDeSerieCategoria(p, categorias)).sort(porData);
+    const lista = porNovidade.filter((p) => p.data.secao === s && !ehDeSerieCategoria(p, categorias));
     return [s, { total: lista.length, recente: lista[0] }];
   }),
 ) as Record<Secao, { total: number; recente: (typeof todos)[number] }>;
 
-const recentes = [...todos].sort(porData).slice(0, 6);
+// Séries que são a própria categoria: contam à parte, para a soma das seções com elas fechar com o acervo.
+const seriesProprias = [...categorias].map(([id, titulo]) => {
+  const lista = porNovidade.filter((p) => p.data.serie?.id === id);
+  return { id, titulo, total: lista.length, recente: lista[0] };
+}).filter((s) => s.total > 0);
+
+const recentes = porNovidade.slice(0, 6);
 
 // Série em andamento mais nova
 const series = (await getSeries()).sort((a, b) => new Date(b.data.iniciada_em).getTime() - new Date(a.data.iniciada_em).getTime());
@@ -55,8 +67,24 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   <header class="topo grao">
     <div class="container">
       <div class="topo-grid">
-        <h1>Visualização de dados com <em>sotaque brasileiro.</em></h1>
-        <p class="apoio"><strong>{todos.length} textos de {totalAutores} autores,</strong> publicados desde 2016.</p>
+        <div class="topo-titulo">
+          <h1>Visualização de dados com <em>sotaque brasileiro.</em></h1>
+          <p class="apoio"><strong>{todos.length} textos de {totalAutores} autores,</strong> publicados desde 2016.</p>
+        </div>
+        <a class="novo" href={`/posts/${maisNovo.id}`}>
+          <span class="novo-capa">
+            {(maisNovo.data.capa ?? maisNovo.data.capa_destaque)
+              ? <Image src={(maisNovo.data.capa ?? maisNovo.data.capa_destaque)!} alt="" width={320} height={240} loading="eager" />
+              : <Azulejo secao={maisNovo.data.secao as Secao} colunas={4} linhas={3} />}
+          </span>
+          <span class="novo-corpo">
+            <strong>{maisNovo.data.titulo}</strong>
+            <span class="novo-meta">
+              <Selo secao={maisNovo.data.secao as Secao} semNome tamanho={14} cor="#f4b07a" />
+              <span>Texto mais novo · {rotuloCategoria(maisNovo, categorias)}<span class="novo-data"> · {formatarMesAno(maisNovo.data.publicado_em)}</span></span>
+            </span>
+          </span>
+        </a>
       </div>
 
       <p class="frase">
@@ -64,15 +92,26 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
         {SECOES.map((s, i) => (
           <>
           <span class="par">
-            <button type="button" class="pil" data-filtro={s} aria-pressed="false">
+            <button type="button" class="pil" data-filtro={s} data-nome={NOME_SECAO[s]} aria-pressed="false">
               <Selo secao={s} cor="#f4b07a" semNome />
               <span class="pil-nome">{NOME_SECAO[s]}</span>
               <span class="pil-n">{porSecao[s].total}</span>
-            </button>{i < 2 ? ',' : i === 2 ? ' ou' : ''}
+            </button><span class="pont">{seriesProprias.length > 0 || i < 2 ? ',' : i === 2 ? ' ou' : ''}</span>
           </span>{' '}
           </>
         ))}
-        <span class="par">em ordem de publicação.</span>
+        {seriesProprias.map((s) => (
+          <>
+          <span class="par"><span class="pont">ou da série </span>
+            <button type="button" class="pil" data-filtro={s.id} data-nome={s.titulo} data-serie aria-pressed="false">
+              <Selo secao={s.recente.data.secao as Secao} cor="#f4b07a" semNome />
+              <span class="pil-nome">{s.titulo}</span>
+              <span class="pil-n">{s.total}</span>
+            </button><span class="pont">,</span>
+          </span>{' '}
+          </>
+        ))}
+        <span class="par fim">em ordem de publicação.</span>
       </p>
       <p class="estado mono" data-estado aria-live="polite" hidden></p>
 
@@ -113,6 +152,13 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
           </a>
         ))}
       </div>
+      {seriesProprias.map((s) => (
+        <a class="serie-linha" href={`/series/${s.id}`}>
+          <Selo secao={s.recente.data.secao as Secao} nome={s.titulo} />
+          <span class="serie-linha-n">{s.total} {s.total === 1 ? 'capítulo' : 'capítulos'}, contados à parte das seções</span>
+          <span class="serie-linha-recente"><span class="mono">mais recente</span> <strong>{s.recente.data.titulo}</strong></span>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -124,7 +170,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
         <p class="apoio-escuro">Jornalistas, designers, cientistas de dados e pesquisadores que trabalham com visualização no Brasil. Cada texto nasce de projeto real.</p>
         {curador && (
           <a class="curador" href={`/autores/${curador.id}`}>
-            {curador.data.foto && <img src={curador.data.foto.src} alt="" width="52" height="52" />}
+            {curador.data.foto && <Image src={curador.data.foto} alt="" width={104} height={104} />}
             <span><strong>Curadoria de {curador.data.nome}</strong>Professor da UFRPE, doutor em Ciência da Computação pela UFPE.</span>
           </a>
         )}
@@ -133,7 +179,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
         {muro.map((a) => (
           <li>
             <a class="av" href={`/autores/${a.id}`} title={`${a.data.nome}, ${contagem.get(a.id)} ${contagem.get(a.id) === 1 ? 'texto' : 'textos'}`}>
-              <img src={a.data.foto!.src} alt={a.data.nome} loading="lazy" width="80" height="80" />
+              <Image src={a.data.foto!} alt={a.data.nome} width={160} height={160} />
             </a>
           </li>
         ))}
@@ -160,7 +206,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
               <span class="titulo">{p.data.titulo}</span>
               <span class="secao-nome">{rotuloCategoria(p, categorias)}</span>
               <span class="mini">
-                {p.data.capa ? <img src={p.data.capa.src} alt="" loading="lazy" /> : <Azulejo secao={p.data.secao as Secao} colunas={3} linhas={2} />}
+                {p.data.capa ? <Image src={p.data.capa} alt="" width={192} height={128} /> : <Azulejo secao={p.data.secao as Secao} colunas={3} linhas={2} />}
               </span>
             </a>
           </li>
@@ -174,10 +220,10 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
     <div class="container faixa-grid">
       {serie && (
         <a class="serie" href={`/series/${serie.id}`}>
-          {serie.data.capa && <img src={serie.data.capa.src} alt="" loading="lazy" />}
+          {serie.data.capa && <Image src={serie.data.capa} alt="" width={1200} />}
           <span class="serie-corpo">
             <strong>{serie.data.titulo}</strong>
-            <span>{serie.data.status === 'encerrada' ? 'Série encerrada' : 'Série em andamento'}, {partes} {partes === 1 ? 'parte' : 'partes'}.</span>
+            <span>{serie.data.status === 'encerrada' ? 'Série encerrada' : 'Série em andamento'}, {partes} {partes === 1 ? 'capítulo' : 'capítulos'}.</span>
           </span>
         </a>
       )}
@@ -207,13 +253,28 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   .grao > .container { position: relative; z-index: 1; }
 
   /* ── Topo escuro ── */
-  .topo { background: var(--lc-dusk); color: #fff; overflow: hidden; padding: 50px 0 0; }
-  .topo-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 60px; align-items: end; margin-bottom: 34px; }
-  .topo h1 { font-size: clamp(46px, 7vw, 96px); line-height: .93; letter-spacing: -.0114em; color: #fbf7ff; text-wrap: balance; }
+  .topo { background: var(--lc-dusk); color: #fff; overflow: hidden; padding: 36px 0 0; }
+  .topo-grid { display: grid; grid-template-columns: minmax(0, 1fr) 460px; gap: 48px; align-items: end; margin-bottom: 20px; }
+  .topo h1 { font-size: clamp(40px, 5vw, 64px); line-height: .95; letter-spacing: -.0114em; color: #fbf7ff; text-wrap: balance; }
   .topo h1 em { font-style: normal; color: var(--lc-peach); }
-  .apoio { font-family: var(--font-mono); font-size: 17px; line-height: 1.55; letter-spacing: -.2px; color: rgba(255,255,255,.72); margin-bottom: 10px; }
+  .apoio { font-family: var(--font-mono); font-size: 17px; line-height: 1.55; letter-spacing: -.2px; color: rgba(255,255,255,.72); margin-top: 16px; }
   .apoio strong { color: #fff; font-weight: 700; }
-  .frase { font-family: var(--font-mono); font-size: 17px; line-height: 2.5; letter-spacing: -.2px; color: rgba(255,255,255,.74); margin-bottom: 8px; }
+  .frase { font-family: var(--font-mono); font-size: 17px; line-height: 2.3; letter-spacing: -.2px; color: rgba(255,255,255,.74); margin-bottom: 8px; }
+
+  /* O texto mais novo, na primeira tela */
+  .novo {
+    display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 18px; align-items: center; padding: 12px;
+    border: 1px solid rgba(255,255,255,.16); border-radius: 3px; background: rgba(255,255,255,.04); color: #fbf7ff;
+    transition: background 160ms var(--ease-out), border-color 160ms var(--ease-out);
+  }
+  .novo:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.4); color: #fbf7ff; }
+  .novo:focus-visible { outline: 2px solid var(--dvb-orange); outline-offset: 2px; }
+  .novo-capa { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 3px; background: var(--lc-wall); }
+  .novo-capa img, .novo-capa :global(svg) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .novo-corpo { display: flex; flex-direction: column; gap: 12px; }
+  .novo-corpo strong { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.08; letter-spacing: -.4px; text-wrap: balance; }
+  .novo-meta { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.45; color: rgba(255,255,255,.72); }
+  .novo-meta :global(.selo) { padding-top: 2px; }
   .par { white-space: nowrap; }
   .pil {
     display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px 0 9px; margin: 0 3px;
@@ -259,6 +320,17 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   .painel-recente { padding-top: 14px; border-top: 1px solid var(--lc-hairline); font-size: 13.5px; line-height: 1.4; color: var(--dvb-ink-2); }
   .painel-recente .mono { display: block; font-size: 11px; color: var(--dvb-ink-3); margin-bottom: 3px; }
   .painel-recente strong { font-weight: 500; }
+  .serie-linha {
+    display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 8px 28px; align-items: center; margin-top: 20px; padding: 18px 24px;
+    background: var(--lc-cal); border-radius: 3px; border-bottom: 0; color: var(--dvb-ink-2);
+    box-shadow: 0 1px 0 var(--lc-hairline), 0 26px 40px -30px rgba(42,22,64,.4);
+    transition: transform 240ms var(--ease-out);
+  }
+  .serie-linha:hover { transform: translateY(-2px); color: var(--dvb-ink); }
+  .serie-linha-n { font-size: 13.5px; color: var(--dvb-ink-3); }
+  .serie-linha-recente { justify-self: end; font-size: 13.5px; line-height: 1.4; text-align: right; }
+  .serie-linha-recente .mono { font-size: 11px; color: var(--dvb-ink-3); margin-right: 8px; }
+  .serie-linha-recente strong { font-weight: 500; }
 
   /* ── Quem escreve ── */
   .gente { background: var(--lc-dusk); padding: 100px 0; overflow: hidden; }
@@ -316,6 +388,8 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
 
   /* ── Largura média ── */
   @media (max-width: 1100px) {
+    .topo-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .novo { max-width: 560px; }
     .paineis { grid-template-columns: 1fr 1fr; }
     .faixa-grid { grid-template-columns: 1fr; gap: 48px; }
     .gente-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -324,11 +398,22 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
   /* ── Celular ── */
   @media (max-width: 760px) {
     .bloco { padding-block: 52px; }
-    .topo { padding-top: 30px; }
-    .topo-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
-    .topo h1 { font-size: 45px; letter-spacing: -.51px; }
+    .topo { padding-top: 24px; }
+    .topo-grid { gap: 18px; margin-bottom: 18px; }
+    .topo h1 { font-size: 38px; letter-spacing: -.43px; }
     .apoio, .frase { font-size: 15px; }
-    .frase { line-height: 2.7; }
+    .apoio { margin-top: 10px; }
+    .novo { grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 10px; }
+    .novo-corpo { gap: 8px; }
+    .novo-corpo strong { font-size: 19px; }
+    .novo-data { display: none; }
+    .par.fim { display: none; }
+    /* No celular os filtros viram uma linha que quebra, sem a pontuação da frase */
+    .frase { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; line-height: 1.5; margin-bottom: 14px; }
+    .pont { display: none; }
+    .pil { margin: 0; height: 44px; }
+    .serie-linha { grid-template-columns: minmax(0, 1fr); padding: 16px; }
+    .serie-linha-recente { justify-self: start; text-align: left; }
     .parede-area { padding-bottom: 28px; }
     .convite { margin-top: 14px; }
     .destaque-bloco { padding-block: 52px; }
@@ -364,13 +449,17 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
     const dica = parede.querySelector<HTMLElement>('[data-dica]')!;
     const aberturas = [...parede.querySelectorAll<SVGAElement>('.ab:not([data-fechado])')];
     const pecas = (v: 'larga' | 'estreita') => [...parede.querySelectorAll<SVGAElement>(`.parede-${v} .ab:not([data-fechado])`)];
-    const ultimas = (['larga', 'estreita'] as const).map((v) => pecas(v).at(-1)!);
     const celular = matchMedia('(max-width: 760px)');
     const corSecao: Record<string, string> = { bastidores: '#9a4a0d', panorama: '#552b7b', praticas: '#7a3a08', ensaios: '#2a1640' };
-    const nomeSecao: Record<string, string> = { bastidores: 'Bastidores', panorama: 'Panorama', praticas: 'Práticas', ensaios: 'Ensaios' };
     let ativo: Element | null = null;
+    let tocado: Element | null = null; // no celular: abertura já escolhida pelo primeiro toque
 
-    const visivel = () => (celular.matches ? ultimas[1] : ultimas[0]);
+    // O cartão só aparece quando alguém escolhe uma abertura: o texto mais novo já está no topo.
+    function esconder() {
+      ativo?.classList.remove('ativo');
+      ativo = tocado = null;
+      dica.hidden = true;
+    }
 
     function mostrar(el: Element) {
       ativo?.classList.remove('ativo');
@@ -381,7 +470,7 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
       (dica.querySelector('.dica-capa') as HTMLImageElement).src = d.c || '';
       (dica.querySelector('.dica-capa') as HTMLElement).style.visibility = d.c ? 'visible' : 'hidden';
       const sec = dica.querySelector('.dica-secao') as HTMLElement;
-      sec.textContent = nomeSecao[d.s!] ?? '';
+      sec.textContent = d.r ?? '';
       sec.style.color = corSecao[d.s!] ?? '';
       dica.querySelector('.dica-titulo')!.textContent = d.t ?? '';
       dica.querySelector('.dica-meta')!.textContent = `${d.a}, ${d.d}`;
@@ -397,41 +486,52 @@ const partes = serie ? todos.filter((p) => p.data.serie?.id === serie.id).length
     }
 
     parede.addEventListener('pointerover', (e) => {
+      if (celular.matches) return;
       const el = (e.target as Element).closest('.ab:not([data-fechado])');
       if (el && el !== ativo) mostrar(el);
     });
-    parede.addEventListener('pointerleave', () => { if (!celular.matches) mostrar(visivel()); });
+    parede.addEventListener('pointerleave', () => { if (!celular.matches) esconder(); });
     parede.addEventListener('focusin', (e) => {
+      if (celular.matches) return;
       const el = (e.target as Element).closest('.ab:not([data-fechado])');
       if (el) mostrar(el);
+    });
+    parede.addEventListener('focusout', (e) => {
+      if (!celular.matches && !parede.contains(e.relatedTarget as Node | null)) esconder();
     });
     // No celular o primeiro toque escolhe a abertura; o segundo abre o texto
     parede.addEventListener('click', (e) => {
       if (!celular.matches) return;
       const el = (e.target as Element).closest('.ab:not([data-fechado])');
-      if (el && el !== ativo) { e.preventDefault(); mostrar(el); }
+      if (el && el !== tocado) { e.preventDefault(); tocado = el; mostrar(el); }
     });
-    celular.addEventListener('change', () => mostrar(visivel()));
-    mostrar(visivel());
+    celular.addEventListener('change', esconder);
 
-    // Filtro por seção
+    // Filtro por seção ou série
     const pilulas = [...document.querySelectorAll<HTMLButtonElement>('.pil')];
     const estado = document.querySelector<HTMLElement>('[data-estado]')!;
-    function filtrar(secao: string | null) {
-      pilulas.forEach((p) => p.setAttribute('aria-pressed', String(p.dataset.filtro === secao)));
-      let n = 0;
+    function filtrar(pilula: HTMLButtonElement | null) {
+      const chave = pilula?.dataset.filtro ?? null;
+      pilulas.forEach((p) => p.setAttribute('aria-pressed', String(p === pilula)));
       aberturas.forEach((a) => {
-        const fora = !!secao && (a as SVGAElement).dataset.s !== secao;
+        const fora = !!chave && (a as SVGAElement).dataset.f !== chave;
         a.classList.toggle('fora', fora);
         a.setAttribute('tabindex', fora ? '-1' : '0');
       });
-      n = pecas('larga').filter((a) => !a.classList.contains('fora')).length;
-      estado.hidden = !secao;
-      if (secao) {
-        estado.innerHTML = `Mostrando ${n} de ${pecas('larga').length} textos de ${nomeSecao[secao]}. <button type="button" data-limpar>limpar filtro</button>`;
-        estado.querySelector('[data-limpar]')!.addEventListener('click', () => filtrar(null));
+      esconder();
+      estado.hidden = !pilula;
+      if (pilula) {
+        const todas = pecas('larga');
+        const n = todas.filter((a) => !a.classList.contains('fora')).length;
+        const unidade = 'serie' in pilula.dataset ? (n === 1 ? 'capítulo' : 'capítulos') : (n === 1 ? 'texto' : 'textos');
+        estado.textContent = `Mostrando ${n} ${unidade} de ${pilula.dataset.nome}, de ${todas.length} textos no acervo.`;
+        const limpar = document.createElement('button');
+        limpar.type = 'button';
+        limpar.textContent = 'limpar filtro';
+        limpar.addEventListener('click', () => filtrar(null));
+        estado.append(' ', limpar);
       }
     }
-    pilulas.forEach((p) => p.addEventListener('click', () => filtrar(p.getAttribute('aria-pressed') === 'true' ? null : p.dataset.filtro!)));
+    pilulas.forEach((p) => p.addEventListener('click', () => filtrar(p.getAttribute('aria-pressed') === 'true' ? null : p)));
   }
 </script>

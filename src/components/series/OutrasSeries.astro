@@ -1,5 +1,6 @@
 ---
 // "Outras séries": cartões com a capa, o nome e o número de partes das demais séries.
+import { Image } from 'astro:assets';
 import { getPostsPorSerie, getSeries } from '../../lib/data';
 
 interface Props {
@@ -23,7 +24,7 @@ const series = await Promise.all(
     <div class="grade">
       {series.map(({ s, partes }) => (
         <a class="serie-cartao" href={`/series/${s.id}`}>
-          <span class="capa">{s.data.capa && <img src={s.data.capa.src} alt="" loading="lazy" />}</span>
+          <span class="capa">{s.data.capa && <Image src={s.data.capa} alt="" width={720} />}</span>
           <b>{s.data.titulo}</b>
           <small>{`${partes} ${partes === 1 ? 'parte' : 'partes'}`}</small>
         </a>

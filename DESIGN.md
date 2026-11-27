@@ -215,7 +215,7 @@ Cada seção tem um painel de azulejo em duas cores, usado como capa da seção 
 **Apoio e dado:** IBM Plex Mono, em dois papéis. Nos textos de apoio grandes (a frase logo abaixo de um título, o subtítulo de um texto) e nos rótulos de dado (datas, contagens, legendas de eixo, o ano gravado no bloco). É a única família mono do site e substitui a Source Code Pro.
 
 ### Hierarchy
-- **Display** (96px, entrelinha 0,93, espaçamento -3,6px): título do topo de página. Um por página.
+- **Display** (96px, entrelinha 0,93, espaçamento -3,6px): título do topo de página. Um por página. Na home ele vai até 64px, porque divide a primeira tela com o texto mais novo e a parede.
 - **Headline** (64px): título de destaque e de bloco grande.
 - **Title** (44px): título de seção da página.
 - **Card title** (24px): título de texto em cartão e em lista.
@@ -241,7 +241,7 @@ Largura de conteúdo de 1200px, com coluna de leitura de 720px nos textos. Espa�
 - **Alternância:** depois do topo, o conteúdo alterna cal e cal shade. Uma faixa escura pode voltar no meio da página para um bloco de destaque (autores, série, newsletter).
 
 ### A parede
-- **Desktop:** 15 colunas de 80px na home. Em outras páginas a parede aparece menor: 25 colunas de 48px no arquivo, uma faixa de uma linha na seção.
+- **Desktop:** 20 colunas na home (cerca de 60px cada). Em outras páginas a parede aparece menor: 25 colunas de 48px no arquivo, uma faixa de uma linha na seção.
 - **Celular:** 8 colunas, com rolagem vertical. Nunca rolagem lateral, que esconde a maior parte do acervo.
 - **Ordem:** sempre cronológica, da esquerda para a direita e de cima para baixo. O primeiro bloco de cada ano traz o ano gravado no canto.
 - **Blocos fechados:** os dois últimos blocos ficam fechados, com contorno tracejado, à espera do próximo texto. O mesmo desenho marca capítulo de série ainda não publicado.
@@ -261,7 +261,13 @@ Cantos de 3px em blocos, cartões, botões e campos. 6px só em janela modal. C�
 ## Components
 
 ### Parede
-Grade de blocos com uma abertura por texto. Estados de uma abertura: acesa (padrão), apagada (fora do filtro ou da busca), em foco (contorno claro de 2,5px no bloco) e fechada (tracejado com um sinal de mais). Passar o mouse ou focar mostra título, seção, autor e data. Clicar abre o texto. Toda abertura é alcançável por teclado.
+Grade de blocos com uma abertura por texto. Estados de uma abertura: acesa (padrão), apagada (fora do filtro ou da busca), em foco (contorno claro de 2,5px no bloco) e fechada (tracejado com um sinal de mais). Passar o mouse ou focar mostra título, seção (ou série), autor e data; o cartão só aparece nesse momento. No celular, o primeiro toque mostra o cartão e o segundo abre o texto. Toda abertura é alcançável por teclado.
+
+### Topo da home
+Título, contagem do acervo e, ao lado, o texto mais novo (capa, título, série ou seção e data). Abaixo, a frase com os filtros e a parede. Os filtros são as quatro seções mais cada série que é a própria categoria; a soma das contagens fecha com o total do acervo.
+
+### Em destaque
+Um texto principal, com capa e véu, e dois secundários, todos visíveis. Não há troca automática. O texto mais novo, que já está no topo, não se repete aqui.
 
 ### Selo de seção
 Forma de 18px seguida do nome da seção em Label. Cores na tabela de Section Palettes.
